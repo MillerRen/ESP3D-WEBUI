@@ -34,17 +34,21 @@ module.exports = {
     optimization: {
       splitChunks: false
     },
-    plugins: [
-        new HtmlWebpackInlineSourcePlugin(),
-        new CleanWebpackPlugin()
-    ]
+    plugins: process.env.NODE_ENV === 'production'
+      ? [
+          new HtmlWebpackInlineSourcePlugin(),
+          new CleanWebpackPlugin()
+        ]
+      : []
   },
   chainWebpack: config => {
-      config
-        .plugin('html')
-        .tap(args => {
-            args[0].inlineSource = '.(js|css)$'
-            return args
-        })
+    config.plugins.delete('prefetch')
+    config.plugins.delete('preload')
+    config
+      .plugin('html')
+      .tap(args => {
+        args[0].inlineSource = '.(js|css)$'
+        return args
+      })
   }
 }
