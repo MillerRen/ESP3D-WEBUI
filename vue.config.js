@@ -1,0 +1,50 @@
+const HtmlWebpackInlineSourcePlugin = require('html-webpack-inline-source-plugin')
+
+class CleanWebpackPlugin {
+  apply (compiler) {
+    compiler.plugin('emit', function (compilation, callback) {
+      Object.keys(compilation.assets)
+        .forEach(function (key) {
+          if (key != 'index.html.gz') {
+            delete compilation.assets[key]
+          }
+        })
+
+      callback()
+    })
+  }
+}
+
+module.exports = {
+  pluginOptions: {
+    compression: {
+      gzip: {
+        filename: '[file].gz[query]',
+        algorithm: 'gzip',
+        include: /\.(js|css|html|svg|json)(\?.*)?$/i,
+        minRatio: 0.8
+      }
+    }
+  },
+  productionSourceMap: false,
+  css: {
+    extract: false
+  },
+  configureWebpack: {
+    optimization: {
+      splitChunks: false
+    },
+    plugins: [
+        new HtmlWebpackInlineSourcePlugin(),
+        new CleanWebpackPlugin()
+    ]
+  },
+  chainWebpack: config => {
+      config
+        .plugin('html')
+        .tap(args => {
+            args[0].inlineSource = '.(js|css)$'
+            return args
+        })
+  }
+}
