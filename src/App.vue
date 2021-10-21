@@ -20,7 +20,7 @@ import Tabs from './components/Tabs.vue'
 import SettingsPanel from "./components/Settings.vue"
 import StatusModal from "./components/Status.vue"
 import ConfigPanel from "./components/Config.vue"
-import DashboardPanel from "./components/DashboardPanel.vue"
+import DashboardPanel from "./components/Dashboard"
 
 export default {
   name: "App",
