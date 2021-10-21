@@ -6,6 +6,7 @@
     <br>
     <ConfigPanel v-if="mainTab=='printer'" />
     <DashboardPanel v-if="mainTab=='dashboard'" />
+    <CameraPanel v-if="mainTab=='camera'" />
     <SettingsPanel v-if="mainTab=='esp3d'" v-model="settings" @updateSettings="updateSettings" />
     <StatusModal />
   </main>
@@ -18,6 +19,7 @@ import Navbar from "./components/Layout/Navbar.vue"
 import Tabs from './components/Layout/Tabs.vue'
 import SettingsPanel from "./components/Tabs/Settings.vue"
 import ConfigPanel from "./components/Tabs/Config.vue"
+import CameraPanel from "./components/Tabs/Camera.vue"
 import DashboardPanel from "./components/Tabs/Dashboard.vue"
 
 import StatusModal from "./components/Modals/StatusModal.vue"
@@ -30,6 +32,7 @@ export default {
     SettingsPanel,
     ConfigPanel,
     DashboardPanel,
+    CameraPanel,
     StatusModal
   },
   data() {
