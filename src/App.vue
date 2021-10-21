@@ -2,7 +2,7 @@
   <main id="app">
     <Navbar :fwData="fwData" />
     <Tabs v-model="mainTab" />
-    <ControlsPanel />
+    <ControlsPanel v-if="mainTab=='dashboard'" />
     <SettingsPanel v-model="settings" v-if="mainTab=='esp3d'" @updateSettings="updateSettings" />
   </main>
 </template>
