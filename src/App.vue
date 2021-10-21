@@ -18,7 +18,7 @@ import Navbar from "./components/Navbar.vue"
 import Tabs from './components/Tabs.vue'
 
 import SettingsPanel from "./components/Settings.vue"
-import StatusModal from "./components/Status.vue"
+import StatusModal from "./components/Modals/StatusModal.vue"
 import ConfigPanel from "./components/Config.vue"
 import DashboardPanel from "./components/Dashboard"
 
