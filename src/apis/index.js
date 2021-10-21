@@ -127,6 +127,10 @@ class API {
 
         return fwData
     }
+
+    getSettings () {
+        return this.command('[ESP400]')
+    }
 }
 
 export default API

@@ -1,17 +1,20 @@
 <template>
   <main id="app">
     <Navbar />
+    <Tabs />
   </main>
 </template>
 
 <script>
 import Navbar from "./components/Navbar.vue"
+import Tabs from './components/Tabs.vue'
 import API from "./apis"
 
 export default {
   name: "App",
   components: {
     Navbar,
+    Tabs
   },
   data() {
     return {
@@ -36,6 +39,7 @@ export default {
         .getFWData()
         .then((response) => {
           this.fwData = response
+          document.title = response.esp_hostname || 'ESP3D WebUI'
           this.connectionModal.close()
         })
         .catch((err) => {
