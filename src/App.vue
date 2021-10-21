@@ -17,10 +17,10 @@ import API from "./apis"
 import Navbar from "./components/Navbar.vue"
 import Tabs from './components/Tabs.vue'
 
-import SettingsPanel from "./components/Settings.vue"
+import SettingsPanel from "./components/Tabs/Settings.vue"
 import StatusModal from "./components/Modals/StatusModal.vue"
-import ConfigPanel from "./components/Config.vue"
-import DashboardPanel from "./components/Dashboard"
+import ConfigPanel from "./components/Tabs/Config.vue"
+import DashboardPanel from "./components/Tabs/Dashboard.vue"
 
 export default {
   name: "App",

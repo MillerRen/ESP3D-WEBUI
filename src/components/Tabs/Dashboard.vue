@@ -24,12 +24,12 @@
 </template>
 
 <script>
-import ControlsPanel from "./ControlsPanel.vue"
-import ConsolePanel from './ConsolePanel.vue'
-import GrblPanel from "./GrblPanel.vue"
-import SDPanel from "./SDPanel.vue"
-import TemperaturePanel from "./TemperaturePanel.vue"
-import ExtruderPanel from "./ExtruderPanel.vue"
+import ControlsPanel from "../Dashboard/ControlsPanel.vue"
+import ConsolePanel from '../Dashboard/ConsolePanel.vue'
+import GrblPanel from "../Dashboard/GrblPanel.vue"
+import SDPanel from "../Dashboard/SDPanel.vue"
+import TemperaturePanel from "../Dashboard/TemperaturePanel.vue"
+import ExtruderPanel from "../Dashboard/ExtruderPanel.vue"
 
 export default {
     components: {

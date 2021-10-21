@@ -169,7 +169,7 @@
 </template>
 
 <script>
-import getIcon from "../assets/icons";
+import getIcon from "../../assets/icons";
 
 export default {
   props: {
