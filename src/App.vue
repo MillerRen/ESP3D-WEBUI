@@ -2,7 +2,7 @@
   <main id="app">
     <Navbar :fwData="fwData" />
     <Tabs v-model="mainTab" />
-    
+    <Settings v-model="settings" v-if="mainTab=='esp3d'" @updateSettings="updateSettings" />
   </main>
 </template>
 
@@ -10,6 +10,7 @@
 import Navbar from "./components/Navbar.vue"
 import Tabs from './components/Tabs.vue'
 import API from "./apis"
+import Settings from "./components/Settings.vue"
 // import Settings from "./components/Settings.vue"
 // import ControlsPanel from "./components/ControlsPanel.vue"
 // import Perference from "./components/Perference.vue"
@@ -19,7 +20,7 @@ export default {
   components: {
     Navbar,
     Tabs,
-    // Settings,
+    Settings,
     // Perference,
     // ControlsPanel
   },
@@ -40,6 +41,7 @@ export default {
         target_firmware: '',
         grblaxis: ''
       },
+      settings: null
     }
   },
   methods: {
@@ -60,7 +62,7 @@ export default {
       return API.getInstance()
         .getSettings()
         .then(response => {
-          this.settings = response.data
+          this.settings = response
         })
         .catch(err => {
           this.$modal({
@@ -68,6 +70,10 @@ export default {
             message: err.message
           })
         })
+    },
+    updateSettings (val) {
+      return API.getInstance()
+        .updateSettings(val)
     }
   },
   mounted() {
