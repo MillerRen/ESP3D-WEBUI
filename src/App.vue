@@ -1,9 +1,11 @@
 <template>
   <main id="app">
     <Navbar :fwData="fwData" />
+    <br>
     <Tabs v-model="mainTab" />
-    <ControlsPanel v-if="mainTab=='dashboard'" />
+    <br>
     <ConfigPanel v-if="mainTab=='printer'" />
+    <DashboardPanel v-if="mainTab=='dashboard'" />
     <SettingsPanel v-if="mainTab=='esp3d'" v-model="settings" @updateSettings="updateSettings" />
     <StatusModal />
   </main>
@@ -17,8 +19,8 @@ import Tabs from './components/Tabs.vue'
 
 import SettingsPanel from "./components/Settings.vue"
 import StatusModal from "./components/Status.vue"
-import ControlsPanel from "./components/ControlsPanel.vue"
 import ConfigPanel from "./components/Config.vue"
+import DashboardPanel from "./components/DashboardPanel.vue"
 
 export default {
   name: "App",
@@ -27,7 +29,7 @@ export default {
     Tabs,
     SettingsPanel,
     ConfigPanel,
-    ControlsPanel,
+    DashboardPanel,
     StatusModal
   },
   data() {

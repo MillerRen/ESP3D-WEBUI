@@ -4,54 +4,14 @@
     class="panel panel-default panel-flex-col panel-min-width"
   >
     <div class="panel-heading">
-      <div class="row">
-        <div class="col-md-12">
-          <div class="pull-left">
-            <b><span translate>Controls</span></b>
-          </div>
-          <div class="pull-right">
-            <div id="auto_check_control" class="panel-flex-row">
-              <table class="checkbox">
-                <tr>
-                  <td>&nbsp;&nbsp;</td>
-                  <td>
-                    <label>
-                      <input
-                        type="checkbox"
-                        id="autocheck_position"
-                        onclick="on_autocheck_position()"
-                      />
-                      <span translate>auto-check position every:</span>
-                    </label>
-                  </td>
-                </tr>
-              </table>
-              <table class="input-group">
-                <tr>
-                  <td>
-                    <input
-                      class="form-control w4"
-                      type="number"
-                      min="1"
-                      max="99"
-                      id="posInterval_check"
-                      onchange="onPosIntervalChange()"
-                    />
-                    <span class="input-group-addon form_control" translate
-                      >sec</span
-                    >
-                  </td>
-                </tr>
-              </table>
-            </div>
-          </div>
-        </div>
-      </div>
+      <h3 class="panel-title">
+        Controls
+      </h3>
     </div>
     <div id="control-body" class="panel-body panel-flex-main">
       <div class="row">
         <div id="JogUI" class="col col-md-7 col-lg-7">
-            <Jog />
+          <Jog />
         </div>
         <div class="col col-lg-4">
           <div id="Macro_list" class="macro-container"></div>
@@ -124,11 +84,11 @@
 </template>
 
 <script>
-import Jog from './Jog.vue'
+import Jog from "./Jog.vue";
 
 export default {
-    components: {
-        Jog
-    }
-}
+  components: {
+    Jog,
+  },
+};
 </script>
