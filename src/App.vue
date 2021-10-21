@@ -53,7 +53,9 @@ export default {
         grblaxis: ''
       },
       settings: null,
-      perferences: null
+      perferences: null,
+      status: '',
+      wifiList: []
     }
   },
   methods: {
@@ -97,6 +99,16 @@ export default {
     getStatus () {
       return API.getInstance()
         .getStatus()
+        .then(response => {
+          this.status = response
+        })
+    },
+    scanWifi () {
+      return API.getInstance()
+        .scanWifi()
+        .then(response => {
+          this.wifiList = response
+        })
     }
   },
   mounted() {

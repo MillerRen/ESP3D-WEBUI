@@ -217,6 +217,10 @@ class API {
     getStatus () {
         return this.command('[ESP420]plain')
     }
+
+    scanWifi () {
+        return this.command('[ESP410]')
+    }
 }
 
 export default API
