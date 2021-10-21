@@ -9,6 +9,13 @@
     <CameraPanel v-if="mainTab=='camera'" />
     <SettingsPanel v-if="mainTab=='esp3d'" v-model="settings" @updateSettings="updateSettings" />
     <StatusModal />
+    <SetupModal />
+    <CreditsModal />
+    <LoginModal />
+    <PerferenceModal />
+    <SPIFFSModal />
+    <UpdateModal />
+    <WiFiModal />
   </main>
 </template>
 
@@ -23,6 +30,13 @@ import CameraPanel from "./components/Tabs/Camera.vue"
 import DashboardPanel from "./components/Tabs/Dashboard.vue"
 
 import StatusModal from "./components/Modals/StatusModal.vue"
+import SetupModal from "./components/Modals/SetupModal.vue"
+import CreditsModal from "./components/Modals/CreditsModal.vue"
+import LoginModal from "./components/Modals/LoginModal.vue"
+import PerferenceModal from "./components/Modals/PerferenceModal.vue"
+import SPIFFSModal from "./components/Modals/SPIFFSModal.vue"
+import UpdateModal from "./components/Modals/UpdateModal.vue"
+import WiFiModal from "./components/Modals/WiFiModal.vue"
 
 export default {
   name: "App",
@@ -33,7 +47,14 @@ export default {
     ConfigPanel,
     DashboardPanel,
     CameraPanel,
-    StatusModal
+    StatusModal,
+    SetupModal,
+    CreditsModal,
+    LoginModal,
+    PerferenceModal,
+    SPIFFSModal,
+    UpdateModal,
+    WiFiModal
   },
   data() {
     return {
