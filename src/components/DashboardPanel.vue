@@ -8,6 +8,9 @@
                 <GrblPanel />
             </div>
             <div class="col-sm-6">
+                <SDPanel />
+            </div>
+            <div class="col-sm-6">
                 <ConsolePanel />
             </div>
         </div>
@@ -18,12 +21,14 @@
 import ControlsPanel from "./ControlsPanel.vue"
 import ConsolePanel from './ConsolePanel.vue'
 import GrblPanel from "./GrblPanel.vue"
+import SDPanel from "./SDPanel.vue"
 
 export default {
     components: {
         ControlsPanel,
         ConsolePanel,
-        GrblPanel
+        GrblPanel,
+        SDPanel
     }
 }
 </script>
