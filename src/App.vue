@@ -3,6 +3,7 @@
     <Navbar :fwData="fwData" />
     <Tabs v-model="mainTab" />
     <ControlsPanel v-if="mainTab=='dashboard'" />
+    <Config v-if="mainTab=='printer'" />
     <SettingsPanel v-model="settings" v-if="mainTab=='esp3d'" @updateSettings="updateSettings" />
   </main>
 </template>
@@ -13,7 +14,7 @@ import Tabs from './components/Tabs.vue'
 import API from "./apis"
 import SettingsPanel from "./components/Settings.vue"
 import ControlsPanel from "./components/ControlsPanel.vue"
-// import Perference from "./components/Perference.vue"
+import Config from "./components/Config.vue"
 
 export default {
   name: "App",
@@ -21,7 +22,7 @@ export default {
     Navbar,
     Tabs,
     SettingsPanel,
-    // Perference,
+    Config,
     ControlsPanel
   },
   data() {
