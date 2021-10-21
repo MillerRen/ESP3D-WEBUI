@@ -2,7 +2,8 @@
   <main id="app">
     <Navbar :fwData="fwData" />
     <Tabs v-model="mainTab" />
-    <Settings v-model="settings" v-if="mainTab=='esp3d'" @updateSettings="updateSettings" />
+    <ControlsPanel />
+    <SettingsPanel v-model="settings" v-if="mainTab=='esp3d'" @updateSettings="updateSettings" />
   </main>
 </template>
 
@@ -10,9 +11,8 @@
 import Navbar from "./components/Navbar.vue"
 import Tabs from './components/Tabs.vue'
 import API from "./apis"
-import Settings from "./components/Settings.vue"
-// import Settings from "./components/Settings.vue"
-// import ControlsPanel from "./components/ControlsPanel.vue"
+import SettingsPanel from "./components/Settings.vue"
+import ControlsPanel from "./components/ControlsPanel.vue"
 // import Perference from "./components/Perference.vue"
 
 export default {
@@ -20,9 +20,9 @@ export default {
   components: {
     Navbar,
     Tabs,
-    Settings,
+    SettingsPanel,
     // Perference,
-    // ControlsPanel
+    ControlsPanel
   },
   data() {
     return {
@@ -41,7 +41,8 @@ export default {
         target_firmware: '',
         grblaxis: ''
       },
-      settings: null
+      settings: null,
+      perferences: null
     }
   },
   methods: {
@@ -74,6 +75,13 @@ export default {
     updateSettings (val) {
       return API.getInstance()
         .updateSettings(val)
+    },
+    getPerferences () {
+      return API.getInstance()
+        .getPerferences()
+        .then(response => {
+          this.perferences = response
+        })
     }
   },
   mounted() {
@@ -92,6 +100,9 @@ export default {
     this.getFWInfo()
       .then(() => {
         return this.getSettings()
+      })
+      .then(() => {
+        return this.getPerferences()
       })
   },
 }

@@ -208,6 +208,11 @@ class API {
         console.log(cmd)
         return this.command(cmd)
     }
+
+    getPerferences () {
+        var perference_name = '/perference.json'
+        return this.client.get(perference_name)
+    }
 }
 
 export default API
