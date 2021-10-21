@@ -11,6 +11,9 @@
                 <TemperaturePanel />
             </div>
             <div class="col-sm-6">
+                <ExtruderPanel />
+            </div>
+            <div class="col-sm-6">
                 <SDPanel />
             </div>
             <div class="col-sm-6">
@@ -26,6 +29,7 @@ import ConsolePanel from './ConsolePanel.vue'
 import GrblPanel from "./GrblPanel.vue"
 import SDPanel from "./SDPanel.vue"
 import TemperaturePanel from "./TemperaturePanel.vue"
+import ExtruderPanel from "./ExtruderPanel.vue"
 
 export default {
     components: {
@@ -33,7 +37,8 @@ export default {
         ConsolePanel,
         GrblPanel,
         SDPanel,
-        TemperaturePanel
+        TemperaturePanel,
+        ExtruderPanel
     }
 }
 </script>
