@@ -14,8 +14,8 @@
 <script>
 import API from "./apis"
 
-import Navbar from "./components/Navbar.vue"
-import Tabs from './components/Tabs/Tabs.vue'
+import Navbar from "./components/Layout/Navbar.vue"
+import Tabs from './components/Layout/Tabs.vue'
 import SettingsPanel from "./components/Tabs/Settings.vue"
 import ConfigPanel from "./components/Tabs/Config.vue"
 import DashboardPanel from "./components/Tabs/Dashboard.vue"
