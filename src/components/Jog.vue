@@ -8,7 +8,7 @@
   >
     <g
       id="HomeAll"
-      data-ng-click="motoVM.jogButtonClick('G28')"
+      @click="jogButtonClick('G28')"
       transform="translate(10, 10)"
     >
       <path
@@ -21,7 +21,7 @@
 
     <g
       id="HomeX"
-      data-ng-click="motoVM.jogButtonClick('G28 X0')"
+      @click="jogButtonClick('G28 X0')"
       transform="translate(10, 10)"
     >
       <path
@@ -34,7 +34,7 @@
     </g>
     <g
       id="HomeY"
-      data-ng-click="motoVM.jogButtonClick('G28 Y0')"
+      @click="jogButtonClick('G28 Y0')"
       transform="translate(10, 10)"
     >
       <path
@@ -48,7 +48,7 @@
 
     <g
       id="HomeZ"
-      data-ng-click="motoVM.jogButtonClick('G28 Z0')"
+      @click="jogButtonClick('G28 Z0')"
       transform="translate(10, 10)"
     >
       <path
@@ -63,7 +63,7 @@
     <g id="Jog100" fill="#c0c0c0" class="std" transform="translate(10, 10)">
       <g
         id="Y+100"
-        data-ng-click="motoVM.jogXYClick('Y100')"
+        @click="jogXYClick('Y100')"
         transform="translate(120 120)"
       >
         <path
@@ -73,7 +73,7 @@
       </g>
       <g
         id="X+100"
-        data-ng-click="motoVM.jogXYClick('X100')"
+        @click="jogXYClick('X100')"
         transform="translate(120 120)"
       >
         <path
@@ -83,7 +83,7 @@
       </g>
       <g
         id="Y-100"
-        data-ng-click="motoVM.jogXYClick('Y-100')"
+        @click="jogXYClick('Y-100')"
         transform="translate(120 120)"
       >
         <path
@@ -93,7 +93,7 @@
       </g>
       <g
         id="X-100"
-        data-ng-click="motoVM.jogXYClick('X-100')"
+        @click="jogXYClick('X-100')"
         transform="translate(120 120)"
       >
         <path
@@ -106,7 +106,7 @@
     <g id="Jog10" fill="#d0d0d0" transform="translate(10, 10)">
       <g
         id="Y+10"
-        data-ng-click="motoVM.jogXYClick('Y10')"
+        @click="jogXYClick('Y10')"
         transform="translate(120 120)"
       >
         <path
@@ -116,7 +116,7 @@
       </g>
       <g
         id="X+10"
-        data-ng-click="motoVM.jogXYClick('X10')"
+        @click="jogXYClick('X10')"
         transform="translate(120 120)"
       >
         <path
@@ -126,7 +126,7 @@
       </g>
       <g
         id="Y-10"
-        data-ng-click="motoVM.jogXYClick('Y-10')"
+        @click="jogXYClick('Y-10')"
         transform="translate(120 120)"
       >
         <path
@@ -136,7 +136,7 @@
       </g>
       <g
         id="X-10"
-        data-ng-click="motoVM.jogXYClick('X-10')"
+        @click="jogXYClick('X-10')"
         transform="translate(120 120)"
       >
         <path
@@ -149,7 +149,7 @@
     <g id="Jog1" fill="#e0e0e0" transform="translate(10, 10)">
       <g
         id="Y+1"
-        data-ng-click="motoVM.jogXYClick('Y1')"
+        @click="jogXYClick('Y1')"
         transform="translate(120 120)"
       >
         <path
@@ -159,7 +159,7 @@
       </g>
       <g
         id="X+1"
-        data-ng-click="motoVM.jogXYClick('X1')"
+        @click="jogXYClick('X1')"
         transform="translate(120 120)"
       >
         <path
@@ -169,7 +169,7 @@
       </g>
       <g
         id="Y-1"
-        data-ng-click="motoVM.jogXYClick('Y-1')"
+        @click="jogXYClick('Y-1')"
         transform="translate(120 120)"
       >
         <path
@@ -179,7 +179,7 @@
       </g>
       <g
         id="X-1"
-        data-ng-click="motoVM.jogXYClick('X-1')"
+        @click="jogXYClick('X-1')"
         transform="translate(120 120)"
       >
         <path
@@ -192,7 +192,7 @@
     <g id="Jog0_1" fill="#f0f0f0" transform="translate(10, 10)">
       <g
         id="Y+0.1"
-        data-ng-click="motoVM.jogXYClick('Y0.1')"
+        @click="jogXYClick('Y0.1')"
         transform="translate(120 120)"
       >
         <path
@@ -202,7 +202,7 @@
       </g>
       <g
         id="X+0.1"
-        data-ng-click="motoVM.jogXYClick('X0.1')"
+        @click="jogXYClick('X0.1')"
         transform="translate(120 120)"
       >
         <path
@@ -212,7 +212,7 @@
       </g>
       <g
         id="Y-0.1"
-        data-ng-click="motoVM.jogXYClick('Y-0.1')"
+        @click="jogXYClick('Y-0.1')"
         transform="translate(120 120)"
       >
         <path
@@ -222,7 +222,7 @@
       </g>
       <g
         id="X-0.1"
-        data-ng-click="motoVM.jogXYClick('X-0.1')"
+        @click="jogXYClick('X-0.1')"
         transform="translate(120 120)"
       >
         <path
@@ -268,7 +268,7 @@
     </g>
     <g
       id="Z+10"
-      data-ng-click="motoVM.jogZClick('Z10')"
+      @click="jogZClick('Z10')"
       fill="#d0d0d0"
       transform="translate(270, 10)"
     >
@@ -278,7 +278,7 @@
     </g>
     <g
       id="Z+1"
-      data-ng-click="motoVM.jogZClick('Z1')"
+      @click="jogZClick('Z1')"
       fill="#e0e0e0"
       transform="translate(270, 10)"
     >
@@ -288,7 +288,7 @@
     </g>
     <g
       id="Z+0.1"
-      data-ng-click="motoVM.jogZClick('Z0.1')"
+      @click="jogZClick('Z0.1')"
       fill="#f0f0f0"
       transform="translate(270, 10)"
     >
@@ -298,7 +298,7 @@
     </g>
     <g
       id="Z-10"
-      data-ng-click="motoVM.jogZClick('Z-10')"
+      @click="jogZClick('Z-10')"
       fill="#d0d0d0"
       transform="translate(270, 10)"
     >
@@ -306,7 +306,7 @@
     </g>
     <g
       id="Z-1"
-      data-ng-click="motoVM.jogZClick('Z-1')"
+      @click="jogZClick('Z-1')"
       fill="#e0e0e0"
       transform="translate(270, 10)"
     >
@@ -314,7 +314,7 @@
     </g>
     <g
       id="Z-0.1"
-      data-ng-click="motoVM.jogZClick('Z-0.1')"
+      @click="jogZClick('Z-0.1')"
       fill="#f0f0f0"
       transform="translate(270, 10)"
     >
@@ -412,6 +412,22 @@
     <use x="0" y="0" xlink:href="#PrinterCtl" />
   </svg>
 </template>
+
+<script>
+export default {
+    methods: {
+        jogButtonClick (cmd) {
+            console.log(cmd)
+        },
+        jogXYClick (cmd) {
+            console.log(cmd)
+        },
+        jogZClick (cmd) {
+            console.log(cmd)
+        }
+    }
+}
+</script>
 
 <style type="text/css">
 text {
