@@ -1,7 +1,7 @@
 <template>
   <main id="app">
     <Navbar :fwData="fwData" />
-    <Tabs />
+    <Tabs v-model="mainTab" />
     
   </main>
 </template>
@@ -25,6 +25,7 @@ export default {
   },
   data() {
     return {
+      mainTab: 'dashboard',
       fwData: {
         ui_version: '2.1b75',
         fw_version: '',
