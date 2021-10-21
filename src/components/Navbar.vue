@@ -10,7 +10,7 @@
 
      <ul class="nav navbar-nav navbar-right">
          <li class="dropdown">
-             <a href="#" class="nav-link">
+             <a href="#">
                  <i class="dropbtn">
                      <svg width='1.3em' height='1.2em' viewBox='0 0 1300 1200'>
                          <g transform='translate(50,1200) scale(1, -1)'>
@@ -19,13 +19,13 @@
                      </svg>
                  </i>
              </a>
-             <div class="dropdown-menu">
+             <div class="dropdown-content">
                  <div class="menu-title">
                      <center>
                          <span>UI: </span>
-                         <span id='UI_VERSION'></span>
+                         <span id='UI_VERSION'>{{fwData.ui_version}}</span>
                          <span> / FW: </span>
-                         <span id='FW_VERSION'></span>
+                         <span id='FW_VERSION'>{{fwData.fw_version}}</span>
                      </center>
                  </div>
                  <div class="menu-divider"></div>
@@ -170,3 +170,94 @@ export default {
     }
 }
 </script>
+
+<style>
+.dropbtn {
+    padding: 16px;
+    font-size: 14px;
+    border: none;
+    cursor: pointer;
+}
+
+.dropdown {
+    position: relative;
+    display: inline-block;
+    border-color: #000000;
+}
+
+.dropdownselect {
+    position: relative;
+    display: inline-block;
+    border-color: #000000;
+}
+
+.dropmenu-content,
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+    border: 1px solid #dddddd;
+    padding-top: 4px;
+    padding-bottom: 4px;
+}
+
+.dropmenu-content a,
+.dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+.dropmenu-content a:hover,
+.dropdown-content a:hover {
+    background-color: #e1e1e1
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+.dropdown:hover .dropbtn {
+    background-color: #e1e1e1;
+}
+
+.menu-title {
+    padding: 5px 10px;
+    font-size: 12px;
+}
+
+.menu-divider {
+    height: 1px;
+    margin: 2px 0;
+    overflow: hidden;
+    background-color: #e5e5e5;
+}
+
+.dropmenu-content-up {
+    bottom: 3em;
+    left: 0em
+}
+
+.dropmenu-content-down {
+    top: 3em;
+    left: 0em
+}
+
+@media (min-width: 768px) {
+    .dropdown-content {
+        top: 3em;
+        right: 1em;
+    }
+}
+
+@media screen and (max-width: 767px) {
+    .dropdown-content {
+        top: 3em;
+        left: 1.2em;
+    }
+}
+</style>

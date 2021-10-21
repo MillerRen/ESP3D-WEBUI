@@ -26,6 +26,7 @@ export default {
   data() {
     return {
       fwData: {
+        ui_version: '2.1b75',
         fw_version: '',
         direct_sd: '',
         primary_sd: '',
@@ -45,7 +46,7 @@ export default {
       return API.getInstance()
         .getFWData()
         .then((response) => {
-          this.fwData = response
+          Object.assign(this.fwData, response)
           document.title = response.esp_hostname || 'ESP3D WebUI'
           this.connectionModal.close()
         })
