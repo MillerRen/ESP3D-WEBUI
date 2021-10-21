@@ -4,7 +4,7 @@
     <Tabs v-model="mainTab" />
     <ControlsPanel v-if="mainTab=='dashboard'" />
     <ConfigPanel v-if="mainTab=='printer'" />
-    <SettingsPanel v-model="settings" v-if="mainTab=='esp3d'" @updateSettings="updateSettings" />
+    <SettingsPanel v-if="mainTab=='esp3d'" v-model="settings" @updateSettings="updateSettings" />
     <StatusModal />
   </main>
 </template>
