@@ -213,6 +213,10 @@ class API {
         var perference_name = '/perference.json'
         return this.client.get(perference_name)
     }
+
+    getStatus () {
+        return this.command('[ESP420]plain')
+    }
 }
 
 export default API

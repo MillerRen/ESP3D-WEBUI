@@ -93,6 +93,10 @@ export default {
         .then(response => {
           this.perferences = response
         })
+    },
+    getStatus () {
+      return API.getInstance()
+        .getStatus()
     }
   },
   mounted() {
