@@ -2,9 +2,9 @@
      <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0; padding-right:2em;">
      <div class="navbar-header">
          <span class="navbar-brand">
-             <span translate>ESP3D for</span>
-             <span id='fwName'>&nbsp;</span>
-             <span id='showSDused'>&nbsp;</span>
+             <span translate>ESP3D for </span>
+             <span id='fwName'> {{fws[fwData.target_firmware||'']}} </span>
+             <span id='showSDused' v-if="fwData.direct_sd"> SD </span>
          </span>
      </div>
 
@@ -142,3 +142,31 @@
      </ul>
  </nav>
 </template>
+
+<script>
+export default {
+    props: {
+        fwData: {
+            type: Object,
+            default () {
+                return {}
+            }
+        }
+    },
+    data () {
+        return {
+            fws: {
+                'repetier': 'Repetier',
+                'repetier4davinci': 'Repetier for Davinci',
+                'smoothieware': 'Smoothieware',
+                'grbl-embedded': 'GRBL ESP32',
+                'marlin-embedded': 'Marlin ESP32',
+                'marlin': 'Marlin',
+                'marlinkimbra': 'Marlin Kimbra',
+                'grbl': 'Grbl',
+                '': 'Unknown'
+            }
+        }
+    }
+}
+</script>

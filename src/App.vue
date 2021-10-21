@@ -1,10 +1,8 @@
 <template>
   <main id="app">
-    <Navbar />
+    <Navbar :fwData="fwData" />
     <Tabs />
-    <Settings />
-    <ControlsPanel />
-    <Perference />
+    
   </main>
 </template>
 
@@ -12,18 +10,18 @@
 import Navbar from "./components/Navbar.vue"
 import Tabs from './components/Tabs.vue'
 import API from "./apis"
-import Settings from "./components/Settings.vue"
-import ControlsPanel from "./components/ControlsPanel.vue"
-import Perference from "./components/Perference.vue"
+// import Settings from "./components/Settings.vue"
+// import ControlsPanel from "./components/ControlsPanel.vue"
+// import Perference from "./components/Perference.vue"
 
 export default {
   name: "App",
   components: {
     Navbar,
     Tabs,
-    Settings,
-    Perference,
-    ControlsPanel
+    // Settings,
+    // Perference,
+    // ControlsPanel
   },
   data() {
     return {
@@ -55,6 +53,19 @@ export default {
           this.connectionModal.message = err.message
           this.connectionModal.okText = "retry"
         })
+    },
+    getSettings () {
+      return API.getInstance()
+        .getSettings()
+        .then(response => {
+          this.settings = response.data
+        })
+        .catch(err => {
+          this.$modal({
+            title: 'Error',
+            message: err.message
+          })
+        })
     }
   },
   mounted() {
@@ -71,6 +82,9 @@ export default {
       this.connectionModal.message = "Connecting..."
     })
     this.getFWInfo()
+      .then(() => {
+        return this.getSettings()
+      })
   },
 }
 </script>
