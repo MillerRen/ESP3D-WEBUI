@@ -2,6 +2,7 @@
   <main id="app">
     <Navbar />
     <Tabs />
+    <Settings />
   </main>
 </template>
 
@@ -9,12 +10,14 @@
 import Navbar from "./components/Navbar.vue"
 import Tabs from './components/Tabs.vue'
 import API from "./apis"
+import Settings from "./components/Settings.vue"
 
 export default {
   name: "App",
   components: {
     Navbar,
-    Tabs
+    Tabs,
+    Settings
   },
   data() {
     return {
