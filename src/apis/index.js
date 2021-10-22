@@ -225,6 +225,20 @@ class API {
             })
     }
 
+    updatePreferences (preferenceslist) {
+        let preferences_file_name = 'preferences.json'
+        var blob = new Blob([JSON.stringify(preferenceslist, null, " ")], {
+            type: 'application/json'
+        });
+        var file = new File([blob], preferences_file_name);
+        var formData = new FormData();
+        var url = "/files";
+        formData.append('path', '/');
+        formData.append('myfile[]', file, preferences_file_name);
+        
+        return this.client.post(url, formData)
+    }
+
     getStatus () {
         return this.command('[ESP420]plain')
     }

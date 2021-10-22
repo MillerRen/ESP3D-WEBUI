@@ -111,6 +111,10 @@ export default {
           this.preferences = response[0];
         });
     },
+    updatePreferences(preferences) {
+      return API.getInstance()
+        .updatePreferences(preferences)
+    },
     getStatus() {
       return API.getInstance()
         .getStatus()
@@ -144,6 +148,7 @@ export default {
       );
     },
     showPreferenceModal() {
+      var that = this
       var modal = this.$modal(
         {
           title: "Perference",
@@ -155,6 +160,7 @@ export default {
           events: {
             save() {
               console.log('save');
+              that.updatePreferences(that.preferences)
             },
             cancel () {
               modal.close()
