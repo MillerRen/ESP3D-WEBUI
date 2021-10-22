@@ -122,16 +122,60 @@ export default {
         })
     },
     showModal (name) {
-      let modals = {
-        'Credits': CreditsModal,
-        'Setup': SetupModal,
-        'Perference': PerferenceModal,
-        'Login': LoginModal,
-        'Password': PasswordModal,
+      let method = `show${name}Modal`
+      if (!this[method]) {
+        throw new Error(`Unknown method: ${method}`)
       }
+      this[method].call(this, name)
+    },
+    showCreditsModal () {
       this.$modal({
-        title: name
-      }, modals[name])
+        title: 'Credits'
+      }, CreditsModal)
+    },
+    showPerferenceModal () {
+      console.log(this.perferences)
+      this.$modal({
+        title: 'Perference',
+        data: this.perferences,
+        events: {
+          update (data) {
+            console.log(data)
+          }
+        }
+      }, PerferenceModal)
+    },
+    showSetupModal () {
+      this.$modal({
+        title: 'Setup',
+        data: this.perferences,
+        events: {
+          update (data) {
+            console.log(data)
+          }
+        }
+      }, SetupModal)
+    },
+    showLoginModal () {
+      this.$modal({
+        title: 'Login',
+        events: {
+          update (data) {
+            console.log(data)
+          }
+        }
+      }, LoginModal)
+    },
+    showPasswordModal () {
+      this.$modal({
+        title: 'Change Password',
+        data: this.perferences,
+        events: {
+          update (data) {
+            console.log(data)
+          }
+        }
+      }, PasswordModal)
     }
   },
   mounted() {

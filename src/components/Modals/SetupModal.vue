@@ -1,5 +1,5 @@
 <template>
-        <div class="modal-body">
+        <div class="setup-modal">
             <div id="startstep" class="stepcontent">
                 <span translate>This wizard will help you to configure the basic settings.</span><br><br>
                 <center>

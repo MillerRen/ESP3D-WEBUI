@@ -212,6 +212,9 @@ class API {
     getPerferences () {
         var perference_name = '/perference.json'
         return this.client.get(perference_name)
+            .then(response => {
+                return response.data
+            })
     }
 
     getStatus () {
