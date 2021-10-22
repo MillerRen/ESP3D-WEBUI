@@ -23,10 +23,11 @@ import CameraPanel from "./components/Tabs/Camera.vue"
 import DashboardPanel from "./components/Tabs/Dashboard.vue"
 
 // import StatusModal from "./components/Modals/StatusModal.vue"
-// import SetupModal from "./components/Modals/SetupModal.vue"
+import SetupModal from "./components/Modals/SetupModal.vue"
 import CreditsModal from "./components/Modals/CreditsModal.vue"
-// import LoginModal from "./components/Modals/LoginModal.vue"
-// import PerferenceModal from "./components/Modals/PerferenceModal.vue"
+import LoginModal from "./components/Modals/LoginModal.vue"
+import PerferenceModal from "./components/Modals/PerferenceModal.vue"
+import PasswordModal from "./components/Modals/PasswordModal.vue"
 // import SPIFFSModal from "./components/Modals/SPIFFSModal.vue"
 // import UpdateModal from "./components/Modals/UpdateModal.vue"
 // import WiFiModal from "./components/Modals/WiFiModal.vue"
@@ -41,9 +42,6 @@ export default {
     DashboardPanel,
     CameraPanel,
     // StatusModal,
-    // SetupModal,
-    // LoginModal,
-    // PerferenceModal,
     // SPIFFSModal,
     // UpdateModal,
     // WiFiModal
@@ -125,9 +123,12 @@ export default {
     },
     showModal (name) {
       let modals = {
-        'credits': CreditsModal
+        'Credits': CreditsModal,
+        'Setup': SetupModal,
+        'Perference': PerferenceModal,
+        'Login': LoginModal,
+        'Password': PasswordModal,
       }
-      console.log(modals[name])
       this.$modal({
         title: name
       }, modals[name])

@@ -170,19 +170,19 @@ export default {
     },
     methods: {
         showpreferencesdlg () {
-            this.$emit('showModal', 'perference')
+            this.$emit('showModal', 'Perference')
         },
         setupdlg () {
-            this.$emit('showModal', 'setup')
+            this.$emit('showModal', 'Setup')
         },
         passworddlg () {
-            this.$emit('showModal', 'password')
+            this.$emit('showModal', 'Password')
         },
         creditsdlg () {
-            this.$emit('showModal', 'credits')
+            this.$emit('showModal', 'Credits')
         },
         logindlg () {
-            this.$emit('showModal', 'login')
+            this.$emit('showModal', 'Login')
         }
     }
 }
