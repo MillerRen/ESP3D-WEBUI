@@ -1,24 +1,24 @@
 <template>
   <div class="modal-body panel-scroll">
     <center>
-      <div id="preferences_langage_list"></div>
+      <div id="langage_list"></div>
     </center>
     <br />
     <div class="panel panel-default">
       <div class="panel-heading">
         <div class="checkbox">
           <label>
-            <input type="checkbox" id="enable_lock_UI" />
+            <input type="checkbox" v-model="preferences.enable_lock_UI" />
             <span translate>Enable lock interface</span>
           </label>
         </div>
       </div>
     </div>
-    <div class="panel panel-default hide_it">
+    <div class="panel panel-default">
       <div class="panel-heading">
         <div class="checkbox">
           <label>
-            <input type="checkbox" id="enable_ping" />
+            <input type="checkbox" v-model="preferences.enable_ping" />
             <span translate>Connection monitoring</span>
           </label>
         </div>
@@ -28,7 +28,7 @@
       <div class="panel-heading">
         <div class="checkbox">
           <label>
-            <input type="checkbox" id="enable_DHT" />
+            <input type="checkbox" v-model="preferences.enable_DHT" />
             <span translate>Show DHT output</span>
           </label>
         </div>
@@ -38,19 +38,18 @@
       <div class="panel-heading">
         <div class="checkbox">
           <label>
-            <input
-              type="checkbox"
-              id="show_camera_panel"
-              onclick="prefs_toggledisplay('show_camera_panel')"
-            />
+            <input type="checkbox" v-model="preferences.enable_camera_panel" />
             <span translate>Show camera panel</span>
           </label>
         </div>
       </div>
-      <div id="camera_preferences" class="panel-body">
+      <div v-if="preferences.enable_camera_panel" class="panel-body">
         <div class="checkbox">
           <label>
-            <input type="checkbox" id="autoload_camera_panel" />
+            <input
+              type="checkbox"
+              v-model="preferences.autoload_camera_panel"
+            />
             <span translate>Auto load camera</span>
           </label>
         </div>
@@ -60,7 +59,7 @@
             <input
               type="text"
               class="form-control w14"
-              id="preferences_camera_webaddress"
+              v-model="preferences.enable_camera_webaddress"
               translateph
               placeholder="Camera address"
             />
@@ -72,17 +71,13 @@
       <div class="panel-heading">
         <div class="checkbox">
           <label>
-            <input
-              type="checkbox"
-              id="show_control_panel"
-              onclick="prefs_toggledisplay('show_control_panel')"
-            />
+            <input type="checkbox" v-model="preferences.enable_control_panel" />
             <span translate>Show control panel</span>
           </label>
         </div>
       </div>
-      <div id="control_preferences" class="panel-body">
-        <div id="preferences_pos_Interval_check_group">
+      <div v-if="preferences.enable_control_panel" class="panel-body">
+        <div id="pos_Interval_check_group">
           <table>
             <tr>
               <td>
@@ -95,11 +90,11 @@
                     type="number"
                     min="1"
                     max="99"
-                    id="preferences_pos_Interval_check"
-                    onchange="Checkvalues('preferences_pos_Interval_check')"
+                    v-model="preferences.pos_Interval_check"
+                    onchange="Checkvalues('pos_Interval_check')"
                   />
                   <span
-                    id="preferences_pos_Interval_check_icon"
+                    id="pos_Interval_check_icon"
                     class="form-control-feedback ico_feedback"
                   ></span>
                 </div>
@@ -116,7 +111,7 @@
           </table>
         </div>
         <br />
-        <div id="preferences_control_xy_velocity_group">
+        <div id="control_xy_velocity_group">
           <table>
             <tr>
               <td>
@@ -128,11 +123,11 @@
                     class="form-control w8"
                     type="number"
                     min="1"
-                    id="preferences_control_xy_velocity"
-                    onchange="Checkvalues('preferences_control_xy_velocity')"
+                    v-model="preferences.control_xy_velocity"
+                    onchange="Checkvalues('control_xy_velocity')"
                   />
                   <span
-                    id="preferences_control_xy_velocity_icon"
+                    id="control_xy_velocity_icon"
                     class="form-control-feedback ico_feedback"
                   ></span>
                 </div>
@@ -151,7 +146,7 @@
 
         <br />
 
-        <div id="preferences_control_z_velocity_group">
+        <div id="control_z_velocity_group">
           <table>
             <tr>
               <td>
@@ -163,11 +158,11 @@
                     class="form-control w6"
                     type="number"
                     min="1"
-                    id="preferences_control_z_velocity"
-                    onchange="Checkvalues('preferences_control_z_velocity')"
+                    v-model="preferences.control_z_velocity"
+                    onchange="Checkvalues('control_z_velocity')"
                   />
                   <span
-                    id="preferences_control_z_velocity_icon"
+                    id="control_z_velocity_icon"
                     class="form-control-feedback ico_feedback"
                   ></span>
                 </div>
@@ -183,10 +178,7 @@
             </tr>
           </table>
         </div>
-        <div
-          id="preferences_control_a_velocity_group"
-          class="hide_it topmarginspace"
-        >
+        <div id="control_a_velocity_group" class="hide_it topmarginspace">
           <table>
             <tr>
               <td>
@@ -198,11 +190,11 @@
                     class="form-control w6"
                     type="number"
                     min="1"
-                    id="preferences_control_a_velocity"
-                    onchange="Checkvalues('preferences_control_a_velocity')"
+                    v-model="preferences.control_a_velocity"
+                    onchange="Checkvalues('control_a_velocity')"
                   />
                   <span
-                    id="preferences_control_a_velocity_icon"
+                    id="control_a_velocity_icon"
                     class="form-control-feedback ico_feedback"
                   ></span>
                 </div>
@@ -218,10 +210,7 @@
             </tr>
           </table>
         </div>
-        <div
-          id="preferences_control_b_velocity_group"
-          class="hide_it topmarginspace"
-        >
+        <div id="control_b_velocity_group" class="hide_it topmarginspace">
           <table>
             <tr>
               <td>
@@ -233,11 +222,11 @@
                     class="form-control w6"
                     type="number"
                     min="1"
-                    id="preferences_control_b_velocity"
-                    onchange="Checkvalues('preferences_control_b_velocity')"
+                    v-model="preferences.control_b_velocity"
+                    onchange="Checkvalues('control_b_velocity')"
                   />
                   <span
-                    id="preferences_control_b_velocity_icon"
+                    id="control_b_velocity_icon"
                     class="form-control-feedback ico_feedback"
                   ></span>
                 </div>
@@ -253,10 +242,7 @@
             </tr>
           </table>
         </div>
-        <div
-          id="preferences_control_c_velocity_group"
-          class="hide_it topmarginspace"
-        >
+        <div id="control_c_velocity_group" class="hide_it topmarginspace">
           <table>
             <tr>
               <td>
@@ -268,11 +254,11 @@
                     class="form-control w6"
                     type="number"
                     min="1"
-                    id="preferences_control_c_velocity"
-                    onchange="Checkvalues('preferences_control_c_velocity')"
+                    v-model="preferences.control_c_velocity"
+                    onchange="Checkvalues('control_c_velocity')"
                   />
                   <span
-                    id="preferences_control_c_velocity_icon"
+                    id="control_c_velocity_icon"
                     class="form-control-feedback ico_feedback"
                   ></span>
                 </div>
@@ -296,15 +282,14 @@
           <label>
             <input
               type="checkbox"
-              id="show_temperatures_panel"
-              onclick="prefs_toggledisplay('show_temperatures_panel')"
+              v-model="preferences.enable_temperatures_panel"
             />
             <span translate>Show temperatures panel</span>
           </label>
         </div>
       </div>
-      <div id="temperatures_preferences" class="panel-body">
-        <div id="preferences_tempInterval_check_group">
+      <div v-if="preferences.enable_temperatures_panel" class="panel-body">
+        <div id="tempInterval_check_group">
           <table>
             <tr>
               <td>
@@ -319,11 +304,11 @@
                     type="number"
                     min="1"
                     max="99"
-                    id="preferences_tempInterval_check"
-                    onchange="Checkvalues('preferences_tempInterval_check')"
+                    v-model="preferences.tempInterval_check"
+                    onchange="Checkvalues('tempInterval_check')"
                   />
                   <span
-                    id="preferences_tempInterval_check_icon"
+                    id="tempInterval_check_icon"
                     class="form-control-feedback ico_feedback"
                   ></span>
                 </div>
@@ -341,25 +326,34 @@
         </div>
         <div class="checkbox" id="redundant_controls_option">
           <label>
-            <input type="checkbox" id="enable_redundant_controls" />
+            <input
+              type="checkbox"
+              v-model="preferences.enable_redundant_controls"
+            />
             <span translate>Enable heater T0 redundant temperatures</span>
           </label>
         </div>
         <div class="checkbox" id="probe_controls_option">
           <label>
-            <input type="checkbox" id="enable_probe_controls" />
+            <input
+              type="checkbox"
+              v-model="preferences.enable_probe_controls"
+            />
             <span translate>Enable probe temperatures</span>
           </label>
         </div>
         <div class="checkbox" id="bed_controls_option">
           <label>
-            <input type="checkbox" id="enable_bed_controls" />
+            <input type="checkbox" v-model="preferences.enable_bed_controls" />
             <span translate>Enable bed controls</span>
           </label>
         </div>
         <div class="checkbox" id="chamber_controls_option">
           <label>
-            <input type="checkbox" id="enable_chamber_controls" />
+            <input
+              type="checkbox"
+              v-model="preferences.enable_chamber_controls"
+            />
             <span translate>Enable chamber controls</span>
           </label>
         </div>
@@ -371,15 +365,14 @@
           <label>
             <input
               type="checkbox"
-              id="show_extruder_panel"
-              onclick="prefs_toggledisplay('show_extruder_panel')"
+              v-model="preferences.enable_extruder_panel"
             />
             <span translate>Show extruder panel</span>
           </label>
         </div>
       </div>
-      <div class="panel-body" id="extruder_preferences">
-        <div id="preferences_filament_length_group">
+      <div v-if="preferences.enable_extruder_panel" class="panel-body">
+        <div id="filament_length_group">
           <table>
             <tr>
               <td>
@@ -392,11 +385,11 @@
                     type="number"
                     min="1"
                     max="9999"
-                    id="preferences_filament_length"
-                    onchange="Checkvalues('preferences_filament_length')"
+                    v-model="preferences.filament_length"
+                    onchange="Checkvalues('filament_length')"
                   />
                   <span
-                    id="preferences_filament_length_icon"
+                    id="filament_length_icon"
                     class="form-control-feedback ico_feedback"
                   ></span>
                 </div>
@@ -413,7 +406,7 @@
           </table>
         </div>
         <br />
-        <div id="preferences_e_velocity_group">
+        <div id="e_velocity_group">
           <table>
             <tr>
               <td>
@@ -426,11 +419,11 @@
                     type="number"
                     min="1"
                     max="9999"
-                    id="preferences_e_velocity"
-                    onchange="Checkvalues('preferences_e_velocity')"
+                    v-model="preferences.e_velocity"
+                    onchange="Checkvalues('e_velocity')"
                   />
                   <span
-                    id="preferences_e_velocity_icon"
+                    id="e_velocity_icon"
                     class="form-control-feedback ico_feedback"
                   ></span>
                 </div>
@@ -449,7 +442,7 @@
 
         <br />
 
-        <div id="preferences_control_nb_extruders_group">
+        <div id="control_nb_extruders_group">
           <table>
             <tr>
               <td>
@@ -458,7 +451,7 @@
               <td>
                 <select
                   class="form-control"
-                  id="preferences_control_nb_extruders"
+                  v-model="preferences.control_nb_extruders"
                 >
                   <option value="1">1</option>
                 </select>
@@ -470,15 +463,14 @@
           <label>
             <input
               type="checkbox"
-              id="enable_mixed_E_controls"
-              onclick="build_extruder_list()"
+              v-model="preferences.enable_mixed_E_controls"
             />
             <span translate>Mixed extruders</span>
           </label>
         </div>
         <div class="checkbox">
           <label>
-            <input type="checkbox" id="enable_fan_controls" />
+            <input type="checkbox" v-model="preferences.enable_fan_controls" />
             <span translate>Enable fan controls</span>
           </label>
         </div>
@@ -488,17 +480,13 @@
       <div class="panel-heading">
         <div class="checkbox">
           <label>
-            <input
-              type="checkbox"
-              id="show_grbl_panel"
-              onclick="prefs_toggledisplay('show_grbl_panel')"
-            />
+            <input type="checkbox" v-model="preferences.enable_grbl_panel" />
             <span translate>Show GRBL panel</span>
           </label>
         </div>
       </div>
-      <div id="grbl_preferences" class="panel-body">
-        <div id="preferences_status_Interval_check_group">
+      <div v-if="preferences.enable_grbl_panel" class="panel-body">
+        <div id="status_Interval_check_group">
           <table>
             <tr>
               <td>
@@ -511,11 +499,11 @@
                     type="number"
                     min="1"
                     max="99"
-                    id="preferences_status_Interval_check"
-                    onchange="Checkvalues('preferences_status_Interval_check')"
+                    v-model="preferences.status_Interval_check"
+                    onchange="Checkvalues('status_Interval_check')"
                   />
                   <span
-                    id="preferences_status_Interval_check_icon"
+                    id="status_Interval_check_icon"
                     class="form-control-feedback ico_feedback"
                   ></span>
                 </div>
@@ -538,15 +526,14 @@
               <label>
                 <input
                   type="checkbox"
-                  id="show_grbl_probe_tab"
-                  onclick="prefs_toggledisplay('show_grbl_probe_tab')"
+                  v-model="preferences.enable_grbl_probe_tab"
                 />
                 <span translate>Show probe panel</span>
               </label>
             </div>
           </div>
-          <div id="grbl_probe_preferences" class="panel-body">
-            <div id="preferences_probemaxtravel_group">
+          <div v-if="preferences.enable_grbl_probe_tab" class="panel-body">
+            <div id="probemaxtravel_group">
               <table>
                 <tr>
                   <td>
@@ -559,11 +546,11 @@
                         type="number"
                         min="1"
                         max="99999"
-                        id="preferences_probemaxtravel"
-                        onchange="Checkvalues('preferences_probemaxtravel')"
+                        v-model="preferences.probemaxtravel"
+                        onchange="Checkvalues('probemaxtravel')"
                       />
                       <span
-                        id="preferences_probemaxtravel_icon"
+                        id="probemaxtravel_icon"
                         class="form-control-feedback ico_feedback"
                       ></span>
                     </div>
@@ -580,7 +567,7 @@
               </table>
             </div>
             <br />
-            <div id="preferences_probefeedrate_group">
+            <div id="probefeedrate_group">
               <table>
                 <tr>
                   <td>
@@ -593,11 +580,11 @@
                         type="number"
                         min="1"
                         max="99999"
-                        id="preferences_probefeedrate"
-                        onchange="Checkvalues('preferences_probefeedrate')"
+                        v-model="preferences.probefeedrate"
+                        onchange="Checkvalues('probefeedrate')"
                       />
                       <span
-                        id="preferences_probefeedrate_icon"
+                        id="probefeedrate_icon"
                         class="form-control-feedback ico_feedback"
                       ></span>
                     </div>
@@ -614,7 +601,7 @@
               </table>
             </div>
             <br />
-            <div id="preferences_probetouchplatethickness_group">
+            <div id="probetouchplatethickness_group">
               <table>
                 <tr>
                   <td>
@@ -629,11 +616,11 @@
                         type="number"
                         min="0"
                         max="99999"
-                        id="preferences_probetouchplatethickness"
-                        onchange="Checkvalues('preferences_probetouchplatethickness')"
+                        v-model="preferences.probetouchplatethickness"
+                        onchange="Checkvalues('probetouchplatethickness')"
                       />
                       <span
-                        id="preferences_probetouchplatethickness_icon"
+                        id="probetouchplatethickness_icon"
                         class="form-control-feedback ico_feedback"
                       ></span>
                     </div>
@@ -658,15 +645,14 @@
               <label>
                 <input
                   type="checkbox"
-                  id="show_grbl_surface_tab"
-                  onclick="prefs_toggledisplay('show_grbl_surface_tab')"
+                  v-model="preferences.enable_grbl_surface_tab"
                 />
                 <span translate>Show surface panel</span>
               </label>
             </div>
           </div>
-          <div id="grbl_surface_preferences" class="panel-body">
-            <div id="preferences_surfacewidth_group">
+          <div v-if="preferences.enable_grbl_surface_tab" class="panel-body">
+            <div id="surfacewidth_group">
               <table>
                 <tr>
                   <td>
@@ -679,11 +665,11 @@
                         type="number"
                         min="1"
                         max="99999"
-                        id="preferences_surfacewidth"
-                        onchange="Checkvalues('preferences_surfacewidth')"
+                        v-model="preferences.surfacewidth"
+                        onchange="Checkvalues('surfacewidth')"
                       />
                       <span
-                        id="preferences_surfacewidth_icon"
+                        id="surfacewidth_icon"
                         class="form-control-feedback ico_feedback"
                       ></span>
                     </div>
@@ -700,7 +686,7 @@
               </table>
             </div>
             <br />
-            <div id="preferences_surfacelength_group">
+            <div id="surfacelength_group">
               <table>
                 <tr>
                   <td>
@@ -715,11 +701,11 @@
                         type="number"
                         min="1"
                         max="99999"
-                        id="preferences_surfacelength"
-                        onchange="Checkvalues('preferences_surfacelength')"
+                        v-model="preferences.surfacelength"
+                        onchange="Checkvalues('surfacelength')"
                       />
                       <span
-                        id="preferences_surfacelength_icon"
+                        id="surfacelength_icon"
                         class="form-control-feedback ico_feedback"
                       ></span>
                     </div>
@@ -736,7 +722,7 @@
               </table>
             </div>
             <br />
-            <div id="preferences_surfacezdepth_group">
+            <div id="surfacezdepth_group">
               <table>
                 <tr>
                   <td>
@@ -749,11 +735,11 @@
                         type="number"
                         min="0.1"
                         max="9999"
-                        id="preferences_surfacezdepth"
-                        onchange="Checkvalues('preferences_surfacezdepth')"
+                        v-model="preferences.surfacezdepth"
+                        onchange="Checkvalues('surfacezdepth')"
                       />
                       <span
-                        id="preferences_surfacezdepth_icon"
+                        id="surfacezdepth_icon"
                         class="form-control-feedback ico_feedback"
                       ></span>
                     </div>
@@ -770,7 +756,7 @@
               </table>
             </div>
             <br />
-            <div id="preferences_surfacebitdiam_group">
+            <div id="surfacebitdiam_group">
               <table>
                 <tr>
                   <td>
@@ -783,11 +769,11 @@
                         type="number"
                         min="0.1"
                         max="999"
-                        id="preferences_surfacebitdiam"
-                        onchange="Checkvalues('preferences_surfacebitdiam')"
+                        v-model="preferences.surfacebitdiam"
+                        onchange="Checkvalues('surfacebitdiam')"
                       />
                       <span
-                        id="preferences_surfacebitdiam_icon"
+                        id="surfacebitdiam_icon"
                         class="form-control-feedback ico_feedback"
                       ></span>
                     </div>
@@ -804,7 +790,7 @@
               </table>
             </div>
             <br />
-            <div id="preferences_surfacestepover_group">
+            <div id="surfacestepover_group">
               <table>
                 <tr>
                   <td>
@@ -819,11 +805,11 @@
                         type="number"
                         min="1"
                         max="100"
-                        id="preferences_surfacestepover"
-                        onchange="Checkvalues('preferences_surfacestepover')"
+                        v-model="preferences.surfacestepover"
+                        onchange="Checkvalues('surfacestepover')"
                       />
                       <span
-                        id="preferences_surfacestepover_icon"
+                        id="surfacestepover_icon"
                         class="form-control-feedback ico_feedback"
                       ></span>
                     </div>
@@ -840,7 +826,7 @@
               </table>
             </div>
             <br />
-            <div id="preferences_surfacefeedrate_group">
+            <div id="surfacefeedrate_group">
               <table>
                 <tr>
                   <td>
@@ -855,11 +841,11 @@
                         type="number"
                         min="1"
                         max="99999"
-                        id="preferences_surfacefeedrate"
-                        onchange="Checkvalues('preferences_surfacefeedrate')"
+                        v-model="preferences.surfacefeedrate"
+                        onchange="Checkvalues('surfacefeedrate')"
                       />
                       <span
-                        id="preferences_surfacefeedrate_icon"
+                        id="surfacefeedrate_icon"
                         class="form-control-feedback ico_feedback"
                       ></span>
                     </div>
@@ -876,7 +862,7 @@
               </table>
             </div>
             <br />
-            <div id="preferences_surfacespindle_group">
+            <div id="surfacespindle_group">
               <table>
                 <tr>
                   <td>
@@ -891,11 +877,11 @@
                         type="number"
                         min="0"
                         max="99999"
-                        id="preferences_surfacespindle"
-                        onchange="Checkvalues('preferences_surfacespindle')"
+                        v-model="preferences.surfacespindle"
+                        onchange="Checkvalues('surfacespindle')"
                       />
                       <span
-                        id="preferences_surfacespindle_icon"
+                        id="surfacespindle_icon"
                         class="form-control-feedback ico_feedback"
                       ></span>
                     </div>
@@ -919,23 +905,19 @@
       <div class="panel-heading">
         <div class="checkbox">
           <label>
-            <input
-              type="checkbox"
-              id="show_files_panel"
-              onclick="prefs_toggledisplay('show_files_panel')"
-            />
+            <input type="checkbox" v-model="preferences.enable_files_panel" />
             <span translate>Show files panel</span>
           </label>
         </div>
       </div>
-      <div class="panel-body" id="files_preferences">
-        <div id="preferences_filters_group">
+      <div v-if="preferences.enable_files_panel" class="panel-body">
+        <div id="filters_group">
           <table>
             <tr>
               <td colspan="2">
                 <div class="checkbox">
                   <label>
-                    <input type="checkbox" id="has_tft_sd" onclick="" />
+                    <input type="checkbox" v-model="preferences.has_TFT_SD" />
                     <span translate>TFT SD card</span>
                   </label>
                 </div>
@@ -945,7 +927,7 @@
               <td colspan="2">
                 <div class="checkbox">
                   <label>
-                    <input type="checkbox" id="has_tft_usb" onclick="" />
+                    <input type="checkbox" v-model="preferences.has_TFT_USB" />
                     <span translate>TFT USB disk</span>
                   </label>
                 </div>
@@ -963,11 +945,10 @@
                   <input
                     class="form-control w25"
                     type="text"
-                    id="preferences_filters"
-                    onchange="Checkvalues('preferences_filters')"
+                    v-model="preferences.f_filters"
                   />
                   <span
-                    id="preferences_filters_icon"
+                    id="filters_icon"
                     class="form-control-feedback ico_feedback"
                   ></span>
                 </div>
@@ -983,23 +964,22 @@
           <label>
             <input
               type="checkbox"
-              id="show_commands_panel"
-              onclick="prefs_toggledisplay('show_commands_panel')"
+              v-model="preferences.enable_commands_panel"
             />
             <span translate>Show commands panel</span>
           </label>
         </div>
       </div>
-      <div class="panel-body" id="cmd_preferences">
+      <div v-if="preferences.enable_commands_panel" class="panel-body">
         <div class="checkbox">
           <label>
-            <input type="checkbox" id="preferences_autoscroll" />
+            <input type="checkbox" v-model="preferences.enable_autoscroll" />
             <span translate>Autoscroll</span>
           </label>
         </div>
         <div id="verbose_mode_prefs_check" class="checkbox">
           <label>
-            <input type="checkbox" id="preferences_verbose_mode" />
+            <input type="checkbox" v-model="preferences.enable_verbose_mode" />
             <span translate>Verbose mode</span>
           </label>
         </div>
@@ -1007,3 +987,16 @@
     </div>
   </div>
 </template>
+
+<script>
+export default {
+  props: {
+    preferences: {
+      type: Object,
+      default() {
+        return {};
+      },
+    },
+  },
+};
+</script>

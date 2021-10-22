@@ -170,7 +170,7 @@ export default {
     },
     methods: {
         showpreferencesdlg () {
-            this.$emit('showModal', 'Perference')
+            this.$emit('showModal', 'Preference')
         },
         setupdlg () {
             this.$emit('showModal', 'Setup')

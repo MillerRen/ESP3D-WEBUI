@@ -29,7 +29,7 @@ import DashboardPanel from "./components/Tabs/Dashboard.vue";
 import SetupModal from "./components/Modals/SetupModal.vue";
 import CreditsModal from "./components/Modals/CreditsModal.vue";
 import LoginModal from "./components/Modals/LoginModal.vue";
-import PerferenceModal from "./components/Modals/PerferenceModal.vue";
+import PreferenceModal from "./components/Modals/PreferenceModal.vue";
 import PasswordModal from "./components/Modals/PasswordModal.vue";
 // import SPIFFSModal from "./components/Modals/SPIFFSModal.vue"
 // import UpdateModal from "./components/Modals/UpdateModal.vue"
@@ -67,7 +67,7 @@ export default {
         grblaxis: "",
       },
       settings: null,
-      perferences: null,
+      preferences: null,
       status: "",
       wifiList: [],
     };
@@ -92,6 +92,7 @@ export default {
         .getSettings()
         .then((response) => {
           this.settings = response;
+          return response
         })
         .catch((err) => {
           this.$modal({
@@ -103,11 +104,11 @@ export default {
     updateSettings(val) {
       return API.getInstance().updateSettings(val);
     },
-    getPerferences() {
+    getPreferences() {
       return API.getInstance()
-        .getPerferences()
+        .getPreferences()
         .then((response) => {
-          this.perferences = response;
+          this.preferences = response[0];
         });
     },
     getStatus() {
@@ -142,26 +143,29 @@ export default {
         CreditsModal
       );
     },
-    showPerferenceModal() {
-      console.log(this.perferences);
+    showPreferenceModal() {
       this.$modal(
         {
           title: "Perference",
-          data: this.perferences,
+          data: {
+            preferences: this.preferences
+          },
+          okText: '',
+          cancelText: '',
           events: {
             update(data) {
               console.log(data);
             },
           },
         },
-        PerferenceModal
+        PreferenceModal
       );
     },
     showSetupModal() {
       this.$modal(
         {
           title: "Setup",
-          data: this.perferences,
+          data: this.preferences,
           events: {
             update(data) {
               console.log(data);
@@ -201,7 +205,7 @@ export default {
       this.$modal(
         {
           title: "Change Password",
-          data: this.perferences,
+          data: this.preferences,
           events: {
             update(data) {
               console.log(data);
@@ -239,7 +243,7 @@ export default {
       })
       .then((settings) => {
         if (!settings) return;
-        return this.getPerferences();
+        return this.getPreferences();
       });
   },
 };

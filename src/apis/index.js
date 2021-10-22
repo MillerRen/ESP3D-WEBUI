@@ -9,6 +9,14 @@ let instance = null
 class API {
     constructor() {
         this.client = axios.create()
+        this.client.interceptors.response.use((response) => {
+            if (process.env.NODE_ENV !== 'production') {
+                console.log(response.config.url, response.config.params, response.data)
+            }
+            return response.data
+        }, (error) => {
+            return Promise.reject(error)
+        })
     }
 
     static getInstance(opts) {
@@ -31,7 +39,7 @@ class API {
     getFWData() {
         return this.command('[ESP800]')
             .then(response => {
-                var fw = this._parseFWData(response.data)
+                var fw = this._parseFWData(response)
                 if (!fw) throw new Error('unknown firmware')
                 return fw
             })
@@ -131,11 +139,10 @@ class API {
     getSettings () {
         return this.command('[ESP400]')
             .then(response => {
-                if (!response.data.EEPROM) {
+                if (!response.EEPROM) {
                     throw new Error('wrong data')
                 }
-                let settings = this._parseSettings(response.data.EEPROM)
-                console.log(settings)
+                let settings = this._parseSettings(response.EEPROM)
                 return settings
             })
     }
@@ -207,13 +214,14 @@ class API {
     updateSettings (cmd) {
         console.log(cmd)
         return this.command(cmd)
+            .then()
     }
 
-    getPerferences () {
-        var perference_name = '/perference.json'
-        return this.client.get(perference_name)
+    getPreferences () {
+        var preference_name = '/perference.json'
+        return this.client.get(preference_name)
             .then(response => {
-                return response.data
+                return response
             })
     }
 
@@ -233,7 +241,7 @@ class API {
 
     checkNeedLogin () {
         return this.client.get('/login')
-            .then(response => response.data)
+            .then(response => response)
     }
 }
 
