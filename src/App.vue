@@ -144,7 +144,7 @@ export default {
       );
     },
     showPreferenceModal() {
-      this.$modal(
+      var modal = this.$modal(
         {
           title: "Perference",
           data: {
@@ -153,9 +153,12 @@ export default {
           okText: '',
           cancelText: '',
           events: {
-            update(data) {
-              console.log(data);
+            save() {
+              console.log('save');
             },
+            cancel () {
+              modal.close()
+            }
           },
         },
         PreferenceModal
