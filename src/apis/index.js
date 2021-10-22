@@ -224,6 +224,17 @@ class API {
     scanWifi () {
         return this.command('[ESP410]')
     }
+
+    login (data) {
+        return this.client.get('/login', {
+            params: data
+        })
+    }
+
+    checkNeedLogin () {
+        return this.client.get('/login')
+            .then(response => response.data)
+    }
 }
 
 export default API
