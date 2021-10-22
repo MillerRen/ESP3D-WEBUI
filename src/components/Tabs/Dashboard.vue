@@ -4,7 +4,7 @@
             <div class="col-sm-6">
                 <ControlsPanel />
             </div>
-            <div class="col-sm-6">
+            <!-- <div class="col-sm-6">
                 <GrblPanel />
             </div>
             <div class="col-sm-6">
@@ -18,27 +18,27 @@
             </div>
             <div class="col-sm-6">
                 <ConsolePanel />
-            </div>
+            </div> -->
         </div>
     </div>
 </template>
 
 <script>
 import ControlsPanel from "../Dashboard/ControlsPanel.vue"
-import ConsolePanel from '../Dashboard/ConsolePanel.vue'
-import GrblPanel from "../Dashboard/GrblPanel.vue"
-import SDPanel from "../Dashboard/SDPanel.vue"
-import TemperaturePanel from "../Dashboard/TemperaturePanel.vue"
-import ExtruderPanel from "../Dashboard/ExtruderPanel.vue"
+// import ConsolePanel from '../Dashboard/ConsolePanel.vue'
+// import GrblPanel from "../Dashboard/GrblPanel.vue"
+// import SDPanel from "../Dashboard/SDPanel.vue"
+// import TemperaturePanel from "../Dashboard/TemperaturePanel.vue"
+// import ExtruderPanel from "../Dashboard/ExtruderPanel.vue"
 
 export default {
     components: {
         ControlsPanel,
-        ConsolePanel,
-        GrblPanel,
-        SDPanel,
-        TemperaturePanel,
-        ExtruderPanel
+        // ConsolePanel,
+        // GrblPanel,
+        // SDPanel,
+        // TemperaturePanel,
+        // ExtruderPanel
     }
 }
 </script>

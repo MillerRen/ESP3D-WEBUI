@@ -52,7 +52,7 @@
                      <span class="clearfix"></span>
                  </a>
                  <div class="menu-divider"></div>
-                 <a href="#" onclick="showpreferencesdlg ()">
+                 <a href="#" @click="showpreferencesdlg ()">
                      <span class="pull-right" translate>Preferences</span>
                      <span class="pull-left">
                          <svg width='1.3em' height='1.2em' viewBox='0 0 1300 1200'>
@@ -63,7 +63,7 @@
                      </span>
                      <span class="clearfix"></span>
                  </a>
-                 <a href="#" onclick="setupdlg ()">
+                 <a href="#" @click="setupdlg ()">
                      <span class="pull-right" translate>Setup</span>
                      <span class="pull-left">
                          <svg width='1.3em' height='1.2em' viewBox='0 0 1300 1200'>
@@ -75,7 +75,7 @@
                      <span class="clearfix"></span>
                  </a>
                  <div class="menu-divider"></div>
-                 <a href="#" onclick='creditsdlg()'>
+                 <a href="#" @click='creditsdlg()'>
                      <span class="pull-right" translate>Credits</span>
                      <span class="pull-left">
                          <svg width='1.3em' height='1.2em' viewBox='0 0 1300 1200'>
@@ -103,7 +103,7 @@
                  </i>
              </a>
              <div class="dropdown-menu">
-                 <a href="#" onclick="changepassworddlg()" id="password_menu" class="hide_it">
+                 <a href="#" @click="changepassworddlg()" id="password_menu" class="hide_it">
                      <span class="pull-right" translate>Password</span>
                      <span class="pull-left">
                          <svg width='1.3em' height='1.2em' viewBox='0 0 1300 1200'>
@@ -114,7 +114,7 @@
                      </span>
                      <span class="clearfix"></span>
                  </a>
-                 <a href="#" onclick="logindlg()">
+                 <a href="#" @click="logindlg()">
                      <span class="pull-right" translate>Login</span>
                      <span class="pull-left">
                          <svg width='1.3em' height='1.2em' viewBox='0 0 1300 1200'>
@@ -126,7 +126,7 @@
                      <span class="clearfix"></span>
                  </a>
                  <div class="menu-divider" id="logout_menu_divider" ></div>
-                 <a href="#" onclick="confirmdlg(translate_text_item('Disconnection requested'), translate_text_item('Please confirm disconnection.'), DisconnectLogin); " id="logout_menu" class="hide_it">
+                 <a href="#" @click="confirmdlg(translate_text_item('Disconnection requested'), translate_text_item('Please confirm disconnection.'), DisconnectLogin); " id="logout_menu" class="hide_it">
                      <span class="pull-right" translate>Log out</span>
                      <span class="pull-left">
                          <svg width='1.3em' height='1.2em' viewBox='0 0 1300 1200'>
@@ -166,6 +166,23 @@ export default {
                 'grbl': 'Grbl',
                 '': 'Unknown'
             }
+        }
+    },
+    methods: {
+        showpreferencesdlg () {
+            this.$emit('showModal', 'perference')
+        },
+        setupdlg () {
+            this.$emit('showModal', 'setup')
+        },
+        passworddlg () {
+            this.$emit('showModal', 'password')
+        },
+        creditsdlg () {
+            this.$emit('showModal', 'credits')
+        },
+        logindlg () {
+            this.$emit('showModal', 'login')
         }
     }
 }

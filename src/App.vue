@@ -1,6 +1,6 @@
 <template>
   <main id="app">
-    <Navbar :fwData="fwData" />
+    <Navbar :fwData="fwData" @showModal="showModal" />
     <br>
     <Tabs v-model="mainTab" />
     <br>
@@ -8,14 +8,7 @@
     <DashboardPanel v-if="mainTab=='dashboard'" />
     <CameraPanel v-if="mainTab=='camera'" />
     <SettingsPanel v-if="mainTab=='esp3d'" v-model="settings" @updateSettings="updateSettings" />
-    <StatusModal />
-    <SetupModal />
-    <CreditsModal />
-    <LoginModal />
-    <PerferenceModal />
-    <SPIFFSModal />
-    <UpdateModal />
-    <WiFiModal />
+    
   </main>
 </template>
 
@@ -29,14 +22,14 @@ import ConfigPanel from "./components/Tabs/Config.vue"
 import CameraPanel from "./components/Tabs/Camera.vue"
 import DashboardPanel from "./components/Tabs/Dashboard.vue"
 
-import StatusModal from "./components/Modals/StatusModal.vue"
-import SetupModal from "./components/Modals/SetupModal.vue"
+// import StatusModal from "./components/Modals/StatusModal.vue"
+// import SetupModal from "./components/Modals/SetupModal.vue"
 import CreditsModal from "./components/Modals/CreditsModal.vue"
-import LoginModal from "./components/Modals/LoginModal.vue"
-import PerferenceModal from "./components/Modals/PerferenceModal.vue"
-import SPIFFSModal from "./components/Modals/SPIFFSModal.vue"
-import UpdateModal from "./components/Modals/UpdateModal.vue"
-import WiFiModal from "./components/Modals/WiFiModal.vue"
+// import LoginModal from "./components/Modals/LoginModal.vue"
+// import PerferenceModal from "./components/Modals/PerferenceModal.vue"
+// import SPIFFSModal from "./components/Modals/SPIFFSModal.vue"
+// import UpdateModal from "./components/Modals/UpdateModal.vue"
+// import WiFiModal from "./components/Modals/WiFiModal.vue"
 
 export default {
   name: "App",
@@ -47,14 +40,13 @@ export default {
     ConfigPanel,
     DashboardPanel,
     CameraPanel,
-    StatusModal,
-    SetupModal,
-    CreditsModal,
-    LoginModal,
-    PerferenceModal,
-    SPIFFSModal,
-    UpdateModal,
-    WiFiModal
+    // StatusModal,
+    // SetupModal,
+    // LoginModal,
+    // PerferenceModal,
+    // SPIFFSModal,
+    // UpdateModal,
+    // WiFiModal
   },
   data() {
     return {
@@ -130,6 +122,15 @@ export default {
         .then(response => {
           this.wifiList = response
         })
+    },
+    showModal (name) {
+      let modals = {
+        'credits': CreditsModal
+      }
+      console.log(modals[name])
+      this.$modal({
+        title: name
+      }, modals[name])
     }
   },
   mounted() {
