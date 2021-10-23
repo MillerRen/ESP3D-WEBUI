@@ -62,8 +62,15 @@ class API {
             })
     }
 
-    spiffsDelete(name) {
+    spiffsDeleteFile(name) {
         return this.files('delete', name)
+            .then(response => {
+                console.log(response)
+            })
+    }
+
+    spiffsDeleteDir(name) {
+        return this.files('deletedir', name)
             .then(response => {
                 console.log(response)
             })

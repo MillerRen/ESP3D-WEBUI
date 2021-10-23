@@ -169,7 +169,17 @@ export default {
             })
             modal.$on('postive', () => {
                 API.getInstance()
-                .spiffsDelete(file.name)
+                .spiffsDeleteFile(file.name)
+            })
+        },
+        deleteDir(file) {
+            var modal = this.$modal({
+                title: 'Please Confirm',
+                message: 'Confirm deletion of directory: ' + file.name
+            })
+            modal.$on('postive', () => {
+                API.getInstance()
+                .spiffsDeleteDir(file.name)
             })
         },
         createDir() {
