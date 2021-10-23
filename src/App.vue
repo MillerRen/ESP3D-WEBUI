@@ -108,7 +108,7 @@ export default {
       return API.getInstance()
         .getPreferences()
         .then((response) => {
-          this.preferences = response[0];
+          this.preferences = response;
         });
     },
     updatePreferences(preferences) {

@@ -1,5 +1,5 @@
 import axios from "axios"
-import defaultPreferenceList  from "./default_preferences"
+import defaultPreferenceList from "./default_preferences"
 
 if (process.env.NODE_ENV === 'development') {
     require('../mocks')
@@ -14,7 +14,7 @@ class API {
         this.client = axios.create()
         this.client.interceptors.response.use((response) => {
             if (process.env.NODE_ENV !== 'production') {
-                console.log(response.config.url, response.config.params, response.data)
+                console.log(response.config.url, response)
             }
             return response.data
         }, (error) => {
@@ -48,7 +48,7 @@ class API {
             })
     }
 
-    
+
 
     _parseFWData(response) {
         var fwData = {}
@@ -139,7 +139,7 @@ class API {
         return fwData
     }
 
-    getSettings () {
+    getSettings() {
         return this.command('[ESP400]')
             .then(response => {
                 if (!response.EEPROM) {
@@ -150,9 +150,9 @@ class API {
             })
     }
 
-    _parseSettings (settings) {
+    _parseSettings(settings) {
         var setting_configList = []
-        for(var vindex in settings) {
+        for (var vindex in settings) {
             var sentry = settings[vindex]
             var slabel = sentry.H;
             var svalue = sentry.V;
@@ -210,31 +210,31 @@ class API {
             };
             setting_configList.push(config_entry);
         }
-        
+
         return setting_configList
     }
 
-    updateSettings (cmd) {
+    updateSettings(cmd) {
         console.log(cmd)
         return this.command(cmd)
     }
 
-    getPreferences () {
+    getPreferences() {
         return this.client.get(PREFERENCES_FILE_NAME)
             .then(response => {
-                if (response.indexOf("<HTML>") != -1) {
+                if (typeof response == 'string' && response.indexOf("<HTML>") != -1) {
                     throw new Error('Not found ' + PREFERENCES_FILE_NAME)
                 }
-                return response
+                return response[0]
             })
             .catch((err) => {
                 console.log(err)
-                return defaultPreferenceList
+                return defaultPreferenceList[0]
             })
     }
 
-    updatePreferences (preferenceslist) {
-        var blob = new Blob([JSON.stringify(preferenceslist, null, " ")], {
+    updatePreferences(preferenceslist) {
+        var blob = new Blob([JSON.stringify([preferenceslist], null, " ")], {
             type: 'application/json'
         });
         var file = new File([blob], PREFERENCES_FILE_NAME);
@@ -242,25 +242,25 @@ class API {
         var url = "/files";
         formData.append('path', '/');
         formData.append('myfile[]', file, PREFERENCES_FILE_NAME);
-        
+
         return this.client.post(url, formData)
     }
 
-    getStatus () {
+    getStatus() {
         return this.command('[ESP420]plain')
     }
 
-    scanWifi () {
+    scanWifi() {
         return this.command('[ESP410]')
     }
 
-    login (data) {
+    login(data) {
         return this.client.get('/login', {
             params: data
         })
     }
 
-    checkNeedLogin () {
+    checkNeedLogin() {
         return this.client.get('/login')
             .then(response => response)
     }
