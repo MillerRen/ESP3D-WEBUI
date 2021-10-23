@@ -7,12 +7,14 @@
     <ConfigPanel v-if="mainTab == 'printer'" :fwData="fwData" />
     <DashboardPanel v-if="mainTab == 'dashboard'" :fwData="fwData" :preferences="preferences" />
     <CameraPanel v-if="mainTab == 'camera'" :fwData="fwData" />
-    <SettingsPanel
+    <FirmwarePanel
       v-if="mainTab == 'esp3d'"
       v-model="settings"
       @updateSettings="updateSettings"
       :fwData="fwData"
     />
+    <NetworkPanel v-if="mainTab == 'network'" v-model="settings" />
+    <WebUIPanel v-if="mainTab=='webui'" />
   </main>
 </template>
 
@@ -21,7 +23,7 @@ import API from "./apis";
 
 import Navbar from "./components/Layout/Navbar.vue";
 import Tabs from "./components/Layout/Tabs.vue";
-import SettingsPanel from "./components/Tabs/Settings.vue";
+import FirmwarePanel from "./components/Tabs/Firmware.vue";
 import ConfigPanel from "./components/Tabs/Config.vue";
 import CameraPanel from "./components/Tabs/Camera.vue";
 import DashboardPanel from "./components/Tabs/Dashboard.vue";
@@ -32,7 +34,8 @@ import CreditsModal from "./components/Modals/CreditsModal.vue";
 import LoginModal from "./components/Modals/LoginModal.vue";
 import PreferenceModal from "./components/Modals/PreferenceModal.vue";
 import PasswordModal from "./components/Modals/PasswordModal.vue";
-// import SPIFFSModal from "./components/Modals/SPIFFSModal.vue"
+import NetworkPanel from "./components/Tabs/Network.vue";
+import WebUIPanel from "./components/Tabs/WebUI.vue";
 // import UpdateModal from "./components/Modals/UpdateModal.vue"
 // import WiFiModal from "./components/Modals/WiFiModal.vue"
 
@@ -41,12 +44,12 @@ export default {
   components: {
     Navbar,
     Tabs,
-    SettingsPanel,
+    FirmwarePanel,
     ConfigPanel,
     DashboardPanel,
     CameraPanel,
-    // StatusModal,
-    // SPIFFSModal,
+    NetworkPanel,
+    WebUIPanel,
     // UpdateModal,
     // WiFiModal
   },
