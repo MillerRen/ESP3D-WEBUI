@@ -59,7 +59,7 @@
             <div class="panel">
                 <div class="panel-body">
                     <div class="panel-flex-row">
-                        <button @click="createdir()" class="btn btn-info btn-svg-no_pad">
+                        <button @click="createDir()" class="btn btn-info btn-svg-no_pad">
                             <svg width="35px" height="25px" viewBox="0 0 40 30">
                                 <rect
                                     x="5"
@@ -157,7 +157,14 @@ export default {
             })
         },
         createDir() {
-
+            this.$modal({
+                title: 'Please enter directory name',
+                prompt: true,
+                callback (value) {
+                    API.getInstance()
+                        .spiffsCreateDir(value)
+                }
+            })
         },
         checkFiles() {
             this.uploads = this.$refs.fileinput.files

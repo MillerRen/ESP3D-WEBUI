@@ -80,6 +80,10 @@ class API {
         return this.client.post(url, formData)
     }
 
+    spiffsCreateDir(name) {
+        return this.files('createdir', name)
+    }
+
     getFWData() {
         return this.command('[ESP800]')
             .then(response => {
