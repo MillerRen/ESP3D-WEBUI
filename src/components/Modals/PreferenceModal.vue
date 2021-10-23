@@ -398,7 +398,7 @@
               </td>
               <td>
                 <select class="form-control" v-model="preferences.number_extruders">
-                  <option :value="v" v-for="v in numer_extruders" :key="v">{{v}}</option>
+                  <option :value="v" v-for="v in number_extruders" :key="v">{{v}}</option>
                 </select>
               </td>
             </tr>
