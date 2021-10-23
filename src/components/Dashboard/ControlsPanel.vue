@@ -13,7 +13,7 @@
         </div>
         <div class="col">&nbsp;</div>
       </div>
-      <div>
+      <div class="position-container" v-if="fwData.target_firmware=='grbl'||fwData.target_firmware=='grbl-embeded'">
         <button
           class="btn btn-xs btn-default"
           id="zero_xyz_btn"
@@ -24,62 +24,26 @@
         </button>
       </div>
       <br />
-      <div class="position-container" id="positions_labels">
-        <div class="position_text">
+      <div class="position-container" v-if="fwData.target_firmware=='grbl'||fwData.target_firmware=='grbl-embeded'">
+        <div class="position_text" v-for="axes in axis" :key="axes">
           <table>
             <tr>
               <td>
                 <button
                   class="btn btn-xs btn-default"
-                  id="zero_x_btn"
                   onclick="SendZerocommand('X0')"
                 >&Oslash;</button>
               </td>
               <td>
                 <span class="label label-default" style="padding: 5px 5px 3px 5px;">
-                  <span id="control_x_position_label">{{fwData.target_firmware=='grbl'||fwData.target_firmware=='grbl-embeded'?'Xw':'X'}}</span>:
-                  <span id="control_x_position">&nbsp;</span>
+                  <span
+                  >{{ fwData.target_firmware == 'grbl' || fwData.target_firmware == 'grbl-embeded' ? axes+'w': axes }}</span>:
+                  <span >&nbsp;</span>
                 </span>
               </td>
               <td></td>
             </tr>
-            <tr id="control_xm_position_row">
-              <td></td>
-              <td>
-                <table>
-                  <tr style="height: 5px;"></tr>
-                  <tr>
-                    <td>
-                      <span class="label label-default" style="padding: 5px 5px 3px 5px;">
-                        <span id="control_xm_position_label">Xm</span>:
-                        <span id="control_xm_position">&nbsp;</span>
-                      </span>
-                    </td>
-                  </tr>
-                </table>
-              </td>
-            </tr>
-          </table>
-        </div>
-        <div class="position_text">
-          <table>
             <tr>
-              <td>
-                <button
-                  class="btn btn-xs btn-default"
-                  id="zero_y_btn"
-                  onclick="SendZerocommand('Y0')"
-                >&Oslash;</button>
-              </td>
-              <td>
-                <span class="label label-default" style="padding: 5px 5px 3px 5px;">
-                  <span id="control_y_position_label">{{fwData.target_firmware=='grbl'||fwData.target_firmware=='grbl-embeded'?'Yw':'Y'}}</span>:
-                  <span id="control_y_position">&nbsp;</span>
-                </span>
-              </td>
-              <td></td>
-            </tr>
-            <tr id="control_ym_position_row">
               <td></td>
               <td>
                 <table>
@@ -87,43 +51,8 @@
                   <tr>
                     <td>
                       <span class="label label-default" style="padding: 5px 5px 3px 5px;">
-                        <span id="control_yt_position_label">Ym</span>:
-                        <span id="control_ym_position">&nbsp;</span>
-                      </span>
-                    </td>
-                  </tr>
-                </table>
-              </td>
-            </tr>
-          </table>
-        </div>
-        <div class="position_text" id="control_z_position_display">
-          <table>
-            <tr>
-              <td>
-                <button
-                  class="btn btn-xs btn-default"
-                  id="zero_z_btn"
-                  onclick="SendZerocommand('Z0')"
-                >&Oslash;</button>
-              </td>
-              <td>
-                <span class="label label-default" style="padding: 5px 5px 3px 5px;">
-                  <span id="control_z_position_label">{{fwData.target_firmware=='grbl'||fwData.target_firmware=='grbl-embeded'?'Zw':'Z'}}</span>:
-                  <span id="control_z_position">&nbsp;</span>
-                </span>
-              </td>
-            </tr>
-            <tr id="control_zm_position_row">
-              <td></td>
-              <td>
-                <table>
-                  <tr style="height: 5px;"></tr>
-                  <tr>
-                    <td>
-                      <span class="label label-default" style="padding: 5px 5px 3px 5px;">
-                        <span id="control_zm_position_label">Zm</span>:
-                        <span id="control_zm_position">&nbsp;</span>
+                        <span>{{axes}}m</span>:
+                        <span>&nbsp;</span>
                       </span>
                     </td>
                   </tr>
@@ -134,115 +63,6 @@
         </div>
       </div>
       <br />
-      <div class="position-container hide_it" id="positions_labels2">
-        <div class="position_text hide_it" id="control_a_position_display">
-          <table>
-            <tr>
-              <td>
-                <button
-                  class="btn btn-xs btn-default"
-                  id="zero_a_btn"
-                  onclick="SendZerocommand('A0')"
-                >&Oslash;</button>
-              </td>
-              <td>
-                <span class="label label-default" style="padding: 5px 5px 3px 5px;">
-                  <span id="control_a_position_label">Aw</span>:
-                  <span id="control_a_position">&nbsp;</span>
-                </span>
-              </td>
-              <td></td>
-            </tr>
-            <tr id="control_am_position_row">
-              <td></td>
-              <td>
-                <table>
-                  <tr style="height: 5px;"></tr>
-                  <tr>
-                    <td>
-                      <span class="label label-default" style="padding: 5px 5px 3px 5px;">
-                        <span id="control_am_position_label">Am</span>:
-                        <span id="control_am_position">&nbsp;</span>
-                      </span>
-                    </td>
-                  </tr>
-                </table>
-              </td>
-            </tr>
-          </table>
-        </div>
-        <div class="position_text hide_it" id="control_b_position_display">
-          <table>
-            <tr>
-              <td>
-                <button
-                  class="btn btn-xs btn-default"
-                  id="zero_b_btn"
-                  onclick="SendZerocommand('B0')"
-                >&Oslash;</button>
-              </td>
-              <td>
-                <span class="label label-default" style="padding: 5px 5px 3px 5px;">
-                  <span id="control_b_position_label">Bw</span>:
-                  <span id="control_b_position">&nbsp;</span>
-                </span>
-              </td>
-              <td></td>
-            </tr>
-            <tr id="control_bm_position_row">
-              <td></td>
-              <td>
-                <table>
-                  <tr style="height: 5px;"></tr>
-                  <tr>
-                    <td>
-                      <span class="label label-default" style="padding: 5px 5px 3px 5px;">
-                        <span id="control_bt_position_label">Bm</span>:
-                        <span id="control_bm_position">&nbsp;</span>
-                      </span>
-                    </td>
-                  </tr>
-                </table>
-              </td>
-            </tr>
-          </table>
-        </div>
-        <div class="position_text hide_it" id="control_c_position_display">
-          <table>
-            <tr>
-              <td>
-                <button
-                  class="btn btn-xs btn-default"
-                  id="zero_c_btn"
-                  onclick="SendZerocommand('C0')"
-                >&Oslash;</button>
-              </td>
-              <td>
-                <span class="label label-default" style="padding: 5px 5px 3px 5px;">
-                  <span id="control_c_position_label">Cw</span>:
-                  <span id="control_c_position">&nbsp;</span>
-                </span>
-              </td>
-            </tr>
-            <tr id="control_zm_position_row">
-              <td></td>
-              <td>
-                <table>
-                  <tr style="height: 5px;"></tr>
-                  <tr>
-                    <td>
-                      <span class="label label-default" style="padding: 5px 5px 3px 5px;">
-                        <span id="control_cm_position_label">Cm</span>:
-                        <span id="control_cm_position">&nbsp;</span>
-                      </span>
-                    </td>
-                  </tr>
-                </table>
-              </td>
-            </tr>
-          </table>
-        </div>
-      </div>
     </div>
     <div class="panel-footer">
       <div class="panel-flex-row">
@@ -309,6 +129,11 @@ export default {
       default() {
         return {}
       }
+    }
+  },
+  data () {
+    return {
+      axis: 'XYZABCDE'
     }
   }
 };

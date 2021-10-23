@@ -18,6 +18,7 @@
         <span translate>Dashboard</span>
       </button>
       <button
+        v-if="preferences.enable_camera == 'true'"
         class="tablinks"
         :class="{ active: value == 'camera' }"
         @click="opentab('camera')"
@@ -34,7 +35,7 @@
         <span translate>Camera</span>
       </button>
       <button
-        class="tablinks hide_it"
+        class="tablinks"
         :class="{ active: value == 'printer' }"
         @click="opentab('printer')"
         id="configtablink"
@@ -48,7 +49,7 @@
           </g>
         </svg>
         <span id="tab_printer_configuration"
-          ><span translate>Printer</span></span
+          ><span translate>Machine</span></span
         >
       </button>
       <button
@@ -77,6 +78,12 @@ export default {
       type: String,
       default: "dashboard",
     },
+    preferences: {
+      type: Object,
+      default () {
+        return {}
+      }
+    }
   },
   methods: {
     opentab(tab) {

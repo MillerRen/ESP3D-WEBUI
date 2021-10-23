@@ -4,7 +4,7 @@
             <div class="col-sm-6">
                 <ControlsPanel />
             </div>
-            <div class="col-sm-6">
+            <div v-if="fwData.target_firmware=='grbl'||fwData.target_firmware=='grbl-embeded'" class="col-sm-6">
                 <GrblPanel />
             </div>
             <!-- <div class="col-sm-6">

@@ -2,7 +2,7 @@
   <main id="app">
     <Navbar :fwData="fwData" @showModal="showModal" />
     <br />
-    <Tabs v-model="mainTab" />
+    <Tabs v-model="mainTab" :preferences="preferences" />
     <br />
     <ConfigPanel v-if="mainTab == 'printer'" :fwData="fwData" />
     <DashboardPanel v-if="mainTab == 'dashboard'" :fwData="fwData" />
@@ -65,7 +65,7 @@ export default {
         websocket_ip: "",
         esp_hostname: "",
         target_firmware: "",
-        grblaxis: "",
+        grblaxis: "3",
       },
       settings: null,
       preferences: {},
