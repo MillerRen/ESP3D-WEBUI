@@ -67,9 +67,9 @@
                             <button class="btn btn-xs btn-primary"  onclick="current_source = tft_usb ;files_refreshFiles(files_currentPath)">TFT USB</button>
                             &nbsp;
                         </span>
-                        <button id="progress_btn" class="btn btn-xs btn-primary" onclick="files_progress()" translate>Progress</button>
+                        <button v-if="fwData.target_firmware=='grbl'||fwData.target_firmware=='grbl-embeded'" id="progress_btn" class="btn btn-xs btn-primary" onclick="files_progress()" translate>Progress</button>
                         &nbsp;
-                        <button id="abort_btn" class="btn btn-xs btn-primary" onclick="files_abort()" translate>Abort</button>
+                        <button v-if="fwData.target_firmware=='grbl'||fwData.target_firmware=='grbl-embeded'" id="abort_btn" class="btn btn-xs btn-primary" onclick="files_abort()" translate>Abort</button>
                         &nbsp;
                         <button id="print_upload_btn" class="btn btn-xs btn-primary" onclick="files_select_upload()" translate>Upload</button>
                         <input type="file" id="files_input_file" onchange="files_check_if_upload()" accept=" .g, .gco, .gcode, .G, .GCO, .GCODE" style="display:none" />
@@ -113,3 +113,16 @@
 </div>
 
 </template>
+
+<script>
+export default {
+    props: {
+        fwData: {
+            type:Object,
+            default () {
+                return {}
+            }
+        }
+    }
+}
+</script>

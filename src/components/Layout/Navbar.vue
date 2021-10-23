@@ -1,5 +1,5 @@
 <template>
-     <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0; padding-right:2em;">
+     <nav class="navbar navbar-default navbar-static-top" role="navigation">
      <div class="navbar-header">
          <span class="navbar-brand">
              <span translate>ESP3D for </span>

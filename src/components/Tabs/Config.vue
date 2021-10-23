@@ -24,7 +24,7 @@
       <hr />
       <div class="loader hide_it" id="config_loader"></div>
       <div class="hide_it" id="config_list_content">
-        <div id="config_smoothie_nav" class="hide_it">
+        <div id="config_smoothie_nav" v-if="fwData.target_firmware=='smoothieware'">
           <center>
             <table>
               <tr>
@@ -141,3 +141,16 @@
     </center>
   </div>
 </template>
+
+<script>
+export default {
+  props: {
+    fwData: {
+      type: Object,
+      default () {
+        return {}
+      }
+    }
+  }
+}
+</script>

@@ -4,13 +4,14 @@
     <br />
     <Tabs v-model="mainTab" />
     <br />
-    <ConfigPanel v-if="mainTab == 'printer'" />
-    <DashboardPanel v-if="mainTab == 'dashboard'" />
-    <CameraPanel v-if="mainTab == 'camera'" />
+    <ConfigPanel v-if="mainTab == 'printer'" :fwData="fwData" />
+    <DashboardPanel v-if="mainTab == 'dashboard'" :fwData="fwData" />
+    <CameraPanel v-if="mainTab == 'camera'" :fwData="fwData" />
     <SettingsPanel
       v-if="mainTab == 'esp3d'"
       v-model="settings"
       @updateSettings="updateSettings"
+      :fwData="fwData"
     />
   </main>
 </template>
@@ -162,7 +163,7 @@ export default {
               console.log('save');
               that.updatePreferences(that.preferences)
             },
-            cancel () {
+            cancel() {
               modal.close()
             }
           },
@@ -191,9 +192,9 @@ export default {
           {
             title: "Login",
             size: 'sm',
-            okText:'',
-            cancelText:'',
-            closeable:false,
+            okText: '',
+            cancelText: '',
+            closeable: false,
             events: {
               update(data) {
                 that.login(data)
