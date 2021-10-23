@@ -88,7 +88,7 @@
                                 >+</text>
                             </svg>
                         </button>
-                        <div id="SPIFFS_loader" class="loader" style="width:2em;height:2em;"></div>
+                        <div id="SPIFFS_loader" class="loader" style="width:2em;height:2em;" v-if="loading"></div>
                         <div id="SPIFFS_path" class="info">
                             <!-- <table>
                                 <tr>
@@ -141,13 +141,20 @@ export default {
         return {
             files: [],
             uploads: [],
-            currentPath: '/'
+            currentPath: '/',
+            loading: false
         }
     },
     methods: {
         deleteFile(file) {
-            return API.getInstance()
+            var modal = this.$modal({
+                title: 'Please Confirm',
+                message: 'Confirm deletion of file: ' + file.name
+            })
+            modal.$on('postive', () => {
+                API.getInstance()
                 .spiffsDelete(file.name)
+            })
         },
         createDir() {
 
@@ -158,14 +165,19 @@ export default {
         uploadFile() {
             return API.getInstance()
                 .spiffsUpload(this.uploads)
+        },
+        getFiles () {
+            this.loading = true
+           return API.getInstance()
+            .spiffsList()
+            .then(response => {
+                this.loading = false
+                this.files = response
+            })
         }
     },
     mounted() {
-        API.getInstance()
-            .spiffsList()
-            .then(response => {
-                this.files = response
-            })
+        this.getFiles()
     }
 }
 </script>
