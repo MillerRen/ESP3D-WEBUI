@@ -222,9 +222,13 @@ class API {
     getPreferences () {
         return this.client.get(PREFERENCES_FILE_NAME)
             .then(response => {
+                if (response.indexOf("<HTML>") != -1) {
+                    throw new Error('Not found ' + PREFERENCES_FILE_NAME)
+                }
                 return response
             })
-            .catch(() => {
+            .catch((err) => {
+                console.log(err)
                 return defaultPreferenceList
             })
     }
