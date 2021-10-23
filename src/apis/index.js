@@ -1,4 +1,5 @@
 import axios from "axios"
+import defaultPreferenceList  from "./default_preferences"
 
 if (process.env.NODE_ENV === 'development') {
     require('../mocks')
@@ -222,6 +223,9 @@ class API {
         return this.client.get(PREFERENCES_FILE_NAME)
             .then(response => {
                 return response
+            })
+            .catch(() => {
+                return defaultPreferenceList
             })
     }
 

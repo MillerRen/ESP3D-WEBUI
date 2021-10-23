@@ -67,7 +67,7 @@ export default {
         grblaxis: "",
       },
       settings: null,
-      preferences: null,
+      preferences: {},
       status: "",
       wifiList: [],
     };

@@ -398,7 +398,7 @@
               </td>
               <td>
                 <select class="form-control" v-model="preferences.number_extruders">
-                  <option value="1">1</option>
+                  <option :value="v" v-for="v in numer_extruders" :key="v">{{v}}</option>
                 </select>
               </td>
             </tr>
@@ -879,5 +879,10 @@ export default {
       },
     },
   },
+  computed: {
+    number_extruders () {
+      return this.preferences.is_mixed_extruder ? 9 : 2
+    }
+  }
 };
 </script>
