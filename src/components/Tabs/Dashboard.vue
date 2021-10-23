@@ -2,7 +2,7 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-sm-6">
-                <ControlsPanel />
+                <ControlsPanel :preferences="preferences" />
             </div>
             <div v-if="fwData.target_firmware=='grbl'||fwData.target_firmware=='grbl-embeded'" class="col-sm-6">
                 <GrblPanel />
@@ -42,6 +42,12 @@ export default {
     },
     props: {
         fwData: {
+            type: Object,
+            default () {
+                return {}
+            }
+        },
+        preferences: {
             type: Object,
             default () {
                 return {}

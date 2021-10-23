@@ -5,7 +5,7 @@
     <Tabs v-model="mainTab" :preferences="preferences" />
     <br />
     <ConfigPanel v-if="mainTab == 'printer'" :fwData="fwData" />
-    <DashboardPanel v-if="mainTab == 'dashboard'" :fwData="fwData" />
+    <DashboardPanel v-if="mainTab == 'dashboard'" :fwData="fwData" :preferences="preferences" />
     <CameraPanel v-if="mainTab == 'camera'" :fwData="fwData" />
     <SettingsPanel
       v-if="mainTab == 'esp3d'"

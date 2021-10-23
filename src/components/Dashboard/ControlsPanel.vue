@@ -78,8 +78,7 @@
                 class="form-control w8"
                 type="number"
                 min="1"
-                id="control_xy_velocity"
-                onchange="onXYvelocityChange()"
+                :value="preferences.xy_feedrate"
               />
               <span class="input-group-addon form_control" translate>mm/min</span>
             </td>
@@ -98,7 +97,7 @@
                 class="form-control w5"
                 type="number"
                 min="1"
-                id="control_z_velocity"
+                :value="preferences.z_feedrate"
                 onchange="onZvelocityChange()"
               />
               <span class="input-group-addon form_control" translate>mm/min</span>
@@ -127,6 +126,12 @@ export default {
     fwData: {
       type: Object,
       default() {
+        return {}
+      }
+    },
+    preferences: {
+      type: Object,
+      default () {
         return {}
       }
     }
