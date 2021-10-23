@@ -51,7 +51,7 @@
                     <button
                       class="btn btn-default btn-svg"
                       type="button"
-                      v-html="getIcon('repeat')"
+                      v-html="$options.filters.icon('repeat')"
                     ></button>
                   </span>
                   <input
@@ -75,7 +75,6 @@
 </template>
 
 <script>
-import getIcon from "../../assets/icons";
 
 export default {
   props: {
@@ -92,9 +91,6 @@ export default {
     };
   },
   methods: {
-    getIcon(name) {
-      return getIcon(name);
-    },
     setValue (setting) {
         this.$emit('updateSettings', setting.cmd + setting.defaultvalue)
     }

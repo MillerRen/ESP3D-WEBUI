@@ -39,6 +39,22 @@ class API {
         })
     }
 
+    files(command) {
+        var url = '/files'
+        return this.client.get(url, {
+            params: {
+                action: command
+            }
+        })
+    }
+
+    spiffsList () {
+        return this.files('list')
+            .then(response => {
+                return response.files
+            })
+    }
+
     getFWData() {
         return this.command('[ESP800]')
             .then(response => {
