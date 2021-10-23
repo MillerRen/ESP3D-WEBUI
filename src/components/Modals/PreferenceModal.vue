@@ -91,7 +91,7 @@
                     type="number"
                     min="1"
                     max="99"
-                    v-model="preferences.pos_Interval_check"
+                    v-model="preferences.interval_positions"
                   />
                   <span class="form-control-feedback ico_feedback"></span>
                 </div>
@@ -120,7 +120,7 @@
                     class="form-control w8"
                     type="number"
                     min="1"
-                    v-model="preferences.control_xy_velocity"
+                    v-model="preferences.xy_feedrate"
                   />
                   <span class="form-control-feedback ico_feedback"></span>
                 </div>
@@ -151,7 +151,7 @@
                     class="form-control w6"
                     type="number"
                     min="1"
-                    v-model="preferences.control_z_velocity"
+                    v-model="preferences.z_feedrate"
                   />
                   <span class="form-control-feedback ico_feedback"></span>
                 </div>
@@ -179,7 +179,7 @@
                     class="form-control w6"
                     type="number"
                     min="1"
-                    v-model="preferences.control_a_velocity"
+                    v-model="preferences.a_feedrate"
                   />
                   <span class="form-control-feedback ico_feedback"></span>
                 </div>
@@ -207,7 +207,7 @@
                     class="form-control w6"
                     type="number"
                     min="1"
-                    v-model="preferences.control_b_velocity"
+                    v-model="preferences.b_feedrate"
                   />
                   <span class="form-control-feedback ico_feedback"></span>
                 </div>
@@ -235,7 +235,7 @@
                     class="form-control w6"
                     type="number"
                     min="1"
-                    v-model="preferences.control_c_velocity"
+                    v-model="preferences.c_feedrate"
                   />
                   <span class="form-control-feedback ico_feedback"></span>
                 </div>
@@ -276,7 +276,7 @@
                     type="number"
                     min="1"
                     max="99"
-                    v-model="preferences.tempInterval_check"
+                    v-model="preferences.interval_temperatures"
                   />
                   <span class="form-control-feedback ico_feedback"></span>
                 </div>
@@ -292,7 +292,7 @@
         </div>
         <div class="checkbox">
           <label>
-            <input type="checkbox" v-model="preferences.enable_redundant_controls" />
+            <input type="checkbox" v-model="preferences.enable_redundant" />
             <span translate>Enable heater T0 redundant temperatures</span>
           </label>
         </div>
@@ -304,13 +304,13 @@
         </div>
         <div class="checkbox">
           <label>
-            <input type="checkbox" v-model="preferences.enable_bed_controls" />
+            <input type="checkbox" v-model="preferences.enable_bed" />
             <span translate>Enable bed controls</span>
           </label>
         </div>
         <div class="checkbox">
           <label>
-            <input type="checkbox" v-model="preferences.enable_chamber_controls" />
+            <input type="checkbox" v-model="preferences.enable_chamber" />
             <span translate>Enable chamber controls</span>
           </label>
         </div>
@@ -341,7 +341,7 @@
                     type="number"
                     min="1"
                     max="9999"
-                    v-model="preferences.filament_length"
+                    v-model="preferences.e_distance"
                   />
                   <span class="form-control-feedback ico_feedback"></span>
                 </div>
@@ -371,7 +371,7 @@
                     type="number"
                     min="1"
                     max="9999"
-                    v-model="preferences.e_velocity"
+                    v-model="preferences.e_feedrate"
                   />
                   <span class="form-control-feedback ico_feedback"></span>
                 </div>
@@ -397,7 +397,7 @@
                 </span>
               </td>
               <td>
-                <select class="form-control" v-model="preferences.control_nb_extruders">
+                <select class="form-control" v-model="preferences.number_extruders">
                   <option value="1">1</option>
                 </select>
               </td>
@@ -406,13 +406,13 @@
         </div>
         <div class="checkbox">
           <label>
-            <input type="checkbox" v-model="preferences.enable_mixed_E_controls" />
+            <input type="checkbox" v-model="preferences.is_mixed_extruder" />
             <span translate>Mixed extruders</span>
           </label>
         </div>
         <div class="checkbox">
           <label>
-            <input type="checkbox" v-model="preferences.enable_fan_controls" />
+            <input type="checkbox" v-model="preferences.enable_fan" />
             <span translate>Enable fan controls</span>
           </label>
         </div>
@@ -443,7 +443,7 @@
                     type="number"
                     min="1"
                     max="99"
-                    v-model="preferences.status_Interval_check"
+                    v-model="preferences.interval_status"
                   />
                   <span class="form-control-feedback ico_feedback"></span>
                 </div>
@@ -462,12 +462,12 @@
           <div class="panel-heading">
             <div class="checkbox">
               <label>
-                <input type="checkbox" v-model="preferences.enable_grbl_probe_tab" />
+                <input type="checkbox" v-model="preferences.enable_grbl_probe_panel" />
                 <span translate>Show probe panel</span>
               </label>
             </div>
           </div>
-          <div v-if="preferences.enable_grbl_probe_tab" class="panel-body">
+          <div v-if="preferences.enable_grbl_probe_panel" class="panel-body">
             <div>
               <table>
                 <tr>
@@ -564,12 +564,12 @@
           <div class="panel-heading">
             <div class="checkbox">
               <label>
-                <input type="checkbox" v-model="preferences.enable_grbl_surface_tab" />
+                <input type="checkbox" v-model="preferences.enable_grbl_surface_panel" />
                 <span translate>Show surface panel</span>
               </label>
             </div>
           </div>
-          <div v-if="preferences.enable_grbl_surface_tab" class="panel-body">
+          <div v-if="preferences.enable_grbl_surface_panel" class="panel-body">
             <div>
               <table>
                 <tr>
