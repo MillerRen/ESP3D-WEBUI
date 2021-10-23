@@ -3,12 +3,13 @@
         <div class="panel-body">
             <div class="panel-flex-row">
                 <input
+                    ref="fileinput"
                     type="file"
                     style="display:none"
                     id="SPIFFS-select"
                     name="myfiles[]"
                     multiple
-                    onchange="checkSPIFFSfiles()"
+                    @change="checkFiles()"
                 />
                 <table id="SPIFFS-select_form">
                     <tr>
@@ -17,16 +18,15 @@
                                 class="btn btn-info"
                                 type="button"
                                 id="SPIFFS_select_files"
-                                onclick="document.getElementById('SPIFFS-select').click();"
+                                @click="$refs.fileinput.click();"
                                 translate
                             >Select files</button>
                         </td>
                         <td>
-                            <div
-                                class="filetext no_overflow"
-                                id="SPIFFS_file_name"
-                                onmouseup="document.getElementById('SPIFFS_select_files').click();"
-                            ></div>
+                            <div class="filetext no_overflow" id="SPIFFS_file_name">
+                                <span v-if="uploads && uploads.length == 1">{{ uploads[0].name }}</span>
+                                <span v-if="uploads && uploads.length > 1">{{ uploads.length }} files</span>
+                            </div>
                         </td>
                     </tr>
                 </table>&nbsp;
@@ -34,7 +34,7 @@
                     class="btn btn-primary btn-svg"
                     type="button"
                     id="SPIFFS_uploadbtn"
-                    onclick="SPIFFS_UploadFile();"
+                    @click="uploadFile();"
                 >
                     <svg width="1.3em" height="1.2em" viewBox="0 0 1300 1200">
                         <g transform="translate(0,1200) scale(1, -1)">
@@ -59,7 +59,7 @@
             <div class="panel">
                 <div class="panel-body">
                     <div class="panel-flex-row">
-                        <button onclick="SPIFFS_Createdir()" class="btn btn-info btn-svg-no_pad">
+                        <button @click="createdir()" class="btn btn-info btn-svg-no_pad">
                             <svg width="35px" height="25px" viewBox="0 0 40 30">
                                 <rect
                                     x="5"
@@ -89,7 +89,16 @@
                             </svg>
                         </button>
                         <div id="SPIFFS_loader" class="loader" style="width:2em;height:2em;"></div>
-                        <div id="SPIFFS_path" class="info">&nbsp;</div>
+                        <div id="SPIFFS_path" class="info">
+                            <!-- <table>
+                                <tr>
+                                    <td>
+                                        <button class="btn btn-primary">/</button>
+                                    </td>
+                                    <td v-for="p in currentPath.split('/')" :key="p">{{ p }}</td>
+                                </tr>
+                            </table> -->
+                        </div>
                     </div>
                     <table
                         class="table table-striped"
@@ -130,13 +139,25 @@ import API from "../../apis"
 export default {
     data() {
         return {
-            files: []
+            files: [],
+            uploads: [],
+            currentPath: '/'
         }
     },
     methods: {
-        deleteFile (file) {
+        deleteFile(file) {
             return API.getInstance()
                 .spiffsDelete(file.name)
+        },
+        createDir() {
+
+        },
+        checkFiles() {
+            this.uploads = this.$refs.fileinput.files
+        },
+        uploadFile() {
+            return API.getInstance()
+                .spiffsUpload(this.uploads)
         }
     },
     mounted() {

@@ -52,18 +52,32 @@ class API {
         })
     }
 
-    spiffsList () {
+    spiffsList() {
         return this.files('list')
             .then(response => {
                 return response.files
             })
     }
 
-    spiffsDelete (name) {
+    spiffsDelete(name) {
         return this.files('delete', name)
             .then(response => {
                 console.log(response)
             })
+    }
+
+    spiffsUpload(files, path) {
+        var formData = new FormData();
+        var url = "/files";
+        formData.append('path', path);
+        for (var i = 0; i < files.length; i++) {
+            var file = files[i];
+            var arg = path + file.name + "S";
+            //append file size first to check updload is complete
+            formData.append(arg, file.size);
+            formData.append('myfile[]', file, path + file.name);
+        }
+        return this.client.post(url, formData)
     }
 
     getFWData() {
