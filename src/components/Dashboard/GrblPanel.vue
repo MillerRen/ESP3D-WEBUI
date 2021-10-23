@@ -603,7 +603,7 @@
                                                     class="form-control w6"
                                                     type="number"
                                                     min="1"
-                                                    id="probemaxtravel"
+                                                    v-model="preferences.probemaxtravel"
                                                     onchange="onprobemaxtravelChange()"
                                                 />
                                                 <span class="input-group-addon hide_it"></span>
@@ -638,7 +638,7 @@
                                                     class="form-control w6"
                                                     type="number"
                                                     min="1"
-                                                    id="probefeedrate"
+                                                    v-model="preferences.probefeedrate"
                                                     onchange="onprobefeedrateChange()"
                                                 />
                                                 <span class="input-group-addon hide_it"></span>
@@ -673,7 +673,7 @@
                                                     class="form-control w5"
                                                     type="number"
                                                     min="0"
-                                                    id="probetouchplatethickness"
+                                                    v-model="preferences.probetouchplatethickness"
                                                     onchange="onprobetouchplatethicknessChange()"
                                                 />
                                                 <span class="input-group-addon hide_it"></span>
@@ -744,7 +744,7 @@
                                                     type="number"
                                                     min="1"
                                                     max="9999"
-                                                    id="surfacewidth"
+                                                    v-model="preferences.surfacewidth"
                                                 />
                                                 <span
                                                     style="width:80px;"
@@ -769,7 +769,7 @@
                                                     type="number"
                                                     min="1"
                                                     max="9999"
-                                                    id="surfacelength"
+                                                    v-model="preferences.surfacelength"
                                                 />
                                                 <span
                                                     style="width:80px;"
@@ -794,7 +794,7 @@
                                                     type="number"
                                                     min="0.1"
                                                     max="999"
-                                                    id="surfacezdepth"
+                                                    v-model="preferences.surfacezdepth"
                                                 />
                                                 <span
                                                     style="width:80px;"
@@ -819,7 +819,7 @@
                                                     type="number"
                                                     min="0.1"
                                                     max="999"
-                                                    id="surfacebitdiam"
+                                                    v-model="preferences.surfacebitdiam"
                                                 />
                                                 <span
                                                     style="width:80px;"
@@ -844,7 +844,7 @@
                                                     type="number"
                                                     min="0"
                                                     max="99"
-                                                    id="surfacestepover"
+                                                    v-model="preferences.surfacestepover"
                                                 />
                                                 <span
                                                     style="width:80px;"
@@ -869,7 +869,7 @@
                                                     type="number"
                                                     min="500"
                                                     max="10000"
-                                                    id="surfacefeedrate"
+                                                    v-model="preferences.surfacefeedrate"
                                                 />
                                                 <span
                                                     style="width:80px;"
@@ -894,7 +894,7 @@
                                                     type="number"
                                                     min="500"
                                                     max="50000"
-                                                    id="surfacespindle"
+                                                    v-model="preferences.surfacespindle"
                                                 />
                                                 <span
                                                     style="width:80px;"
@@ -926,7 +926,6 @@
                                             </span>
                                             <button
                                                 class="btn btn-primary"
-                                                id="surfacebtn"
                                                 onclick="StartSurfaceProcess();"
                                                 translate
                                             >Start Surfacing</button>
@@ -960,3 +959,16 @@
         </div>
     </div>
 </template>
+
+<script>
+export default {
+    props: {
+        preferences: {
+            type: Object,
+            default () {
+                return {}
+            }
+        }
+    }
+}
+</script>

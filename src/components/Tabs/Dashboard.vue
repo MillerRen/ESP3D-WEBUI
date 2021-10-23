@@ -4,15 +4,15 @@
             <div class="col-sm-6">
                 <ControlsPanel :preferences="preferences" />
             </div>
-            <div v-if="fwData.target_firmware=='grbl'||fwData.target_firmware=='grbl-embeded'" class="col-sm-6">
-                <GrblPanel />
+            <div v-if="isGrbl" class="col-sm-6">
+                <GrblPanel :preferences="preferences" />
             </div>
-            <!-- <div class="col-sm-6">
+            <div v-if="!isGrbl" class="col-sm-6">
                 <TemperaturePanel />
-            </div> -->
-            <!-- <div class="col-sm-6">
-                <ExtruderPanel />
-            </div> -->
+            </div>
+            <div v-if="!isGrbl" class="col-sm-6">
+                <ExtruderPanel :preferences="preferences" />
+            </div>
             <div class="col-sm-6">
                 <SDPanel :fwData="fwData" />
             </div>
@@ -28,8 +28,8 @@ import ControlsPanel from "../Dashboard/ControlsPanel.vue"
 // import ConsolePanel from '../Dashboard/ConsolePanel.vue'
 import GrblPanel from "../Dashboard/GrblPanel.vue"
 import SDPanel from "../Dashboard/SDPanel.vue"
-// import TemperaturePanel from "../Dashboard/TemperaturePanel.vue"
-// import ExtruderPanel from "../Dashboard/ExtruderPanel.vue"
+import TemperaturePanel from "../Dashboard/TemperaturePanel.vue"
+import ExtruderPanel from "../Dashboard/ExtruderPanel.vue"
 
 export default {
     components: {
@@ -37,8 +37,8 @@ export default {
         // ConsolePanel,
         GrblPanel,
         SDPanel,
-        // TemperaturePanel,
-        // ExtruderPanel
+        TemperaturePanel,
+        ExtruderPanel
     },
     props: {
         fwData: {
@@ -52,6 +52,11 @@ export default {
             default () {
                 return {}
             }
+        }
+    },
+    computed: {
+        isGrbl () {
+            return this.fwData.target_firmware=='grbl'||this.fwData.target_firmware=='grbl-embeded'
         }
     }
 }
