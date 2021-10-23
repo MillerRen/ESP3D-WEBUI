@@ -4,6 +4,8 @@ if (process.env.NODE_ENV === 'development') {
     require('../mocks')
 }
 
+const PREFERENCES_FILE_NAME = '/preferences.json'
+
 let instance = null
 
 class API {
@@ -214,27 +216,24 @@ class API {
     updateSettings (cmd) {
         console.log(cmd)
         return this.command(cmd)
-            .then()
     }
 
     getPreferences () {
-        var preference_name = '/perference.json'
-        return this.client.get(preference_name)
+        return this.client.get(PREFERENCES_FILE_NAME)
             .then(response => {
                 return response
             })
     }
 
     updatePreferences (preferenceslist) {
-        let preferences_file_name = 'preferences.json'
         var blob = new Blob([JSON.stringify(preferenceslist, null, " ")], {
             type: 'application/json'
         });
-        var file = new File([blob], preferences_file_name);
+        var file = new File([blob], PREFERENCES_FILE_NAME);
         var formData = new FormData();
         var url = "/files";
         formData.append('path', '/');
-        formData.append('myfile[]', file, preferences_file_name);
+        formData.append('myfile[]', file, PREFERENCES_FILE_NAME);
         
         return this.client.post(url, formData)
     }
