@@ -106,9 +106,15 @@
                         <tbody id="SPIFFS_file_list">
                             <tr v-for="(file, index) in files" :key="index">
                                 <td v-html="$options.filters.icon('file')"></td>
-                                <td>{{file.path}}{{file.name}}</td>
-                                <td>{{file.size}}</td>
-                                <td></td>
+                                <td>{{ file.path }}{{ file.name }}</td>
+                                <td>{{ file.size }}</td>
+                                <td>
+                                    <button
+                                        class="btn btn-danger btn-sm"
+                                        v-html="$options.filters.icon('trash')"
+                                        @click="deleteFile(file)"
+                                    ></button>
+                                </td>
                             </tr>
                         </tbody>
                     </table>
@@ -122,12 +128,18 @@
 <script>
 import API from "../../apis"
 export default {
-    data () {
+    data() {
         return {
             files: []
         }
     },
-    mounted () {
+    methods: {
+        deleteFile (file) {
+            return API.getInstance()
+                .spiffsDelete(file.name)
+        }
+    },
+    mounted() {
         API.getInstance()
             .spiffsList()
             .then(response => {

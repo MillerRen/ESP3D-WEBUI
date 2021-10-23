@@ -39,12 +39,16 @@ class API {
         })
     }
 
-    files(command) {
+    files(command, fileName) {
         var url = '/files'
+        var params = {
+            action: command
+        }
+        if (fileName) {
+            params.filename = fileName
+        }
         return this.client.get(url, {
-            params: {
-                action: command
-            }
+            params: params
         })
     }
 
@@ -52,6 +56,13 @@ class API {
         return this.files('list')
             .then(response => {
                 return response.files
+            })
+    }
+
+    spiffsDelete (name) {
+        return this.files('delete', name)
+            .then(response => {
+                console.log(response)
             })
     }
 
