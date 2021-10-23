@@ -113,9 +113,24 @@
                             </tr>
                         </thead>
                         <tbody id="SPIFFS_file_list">
-                            <tr v-for="(file, index) in files" :key="index">
+                            <tr v-for="file in dirs" :key="file.name">
+                                <td v-html="$options.filters.icon('folder-close')"></td>
+                                <td>
+                                    <button class="btn btn-link" @click="selectDir(file)">{{ file.name }}</button>
+                                    
+                                </td>
+                                <td></td>
+                                <td>
+                                    <button
+                                        class="btn btn-danger btn-sm"
+                                        v-html="$options.filters.icon('trash')"
+                                        @click="deleteDir(file)"
+                                    ></button>
+                                </td>
+                            </tr>
+                            <tr v-for="file in files" :key="file.name">
                                 <td v-html="$options.filters.icon('file')"></td>
-                                <td>{{ file.path }}{{ file.name }}</td>
+                                <td>{{ file.name }}</td>
                                 <td>{{ file.size }}</td>
                                 <td>
                                     <button
@@ -140,6 +155,7 @@ export default {
     data() {
         return {
             files: [],
+            dirs: [],
             uploads: [],
             currentPath: '/',
             loading: false
@@ -166,6 +182,12 @@ export default {
                 }
             })
         },
+        selectDir(dir) {
+            this.loading = true
+            var path = this.currentPath + dir.name + '/'
+            this.currentPath = path
+            this.getFiles('all', path)
+        },
         checkFiles() {
             this.uploads = this.$refs.fileinput.files
         },
@@ -173,13 +195,14 @@ export default {
             return API.getInstance()
                 .spiffsUpload(this.uploads)
         },
-        getFiles () {
+        getFiles (name, path) {
             this.loading = true
            return API.getInstance()
-            .spiffsList()
+            .spiffsList(name, path)
             .then(response => {
                 this.loading = false
-                this.files = response
+                this.dirs = response.filter(item=>item.size==-1)
+                this.files = response.filter(item=>item.size!=-1)
             })
         }
     },

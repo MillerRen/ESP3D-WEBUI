@@ -39,7 +39,7 @@ class API {
         })
     }
 
-    files(command, fileName) {
+    files(command, fileName, path) {
         var url = '/files'
         var params = {
             action: command
@@ -47,13 +47,16 @@ class API {
         if (fileName) {
             params.filename = fileName
         }
+        if (path) {
+            params.path = path
+        }
         return this.client.get(url, {
             params: params
         })
     }
 
-    spiffsList() {
-        return this.files('list')
+    spiffsList(name, path) {
+        return this.files('list', name, path)
             .then(response => {
                 return response.files
             })
