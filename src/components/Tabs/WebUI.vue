@@ -152,8 +152,8 @@
                     </table>
                 </div>
                 <div class="panel-footer panel-footer1" id="status">
-                    &nbsp;&nbsp;Status: {{spiffs.status}}&nbsp;&nbsp;|&nbsp;&nbsp;Total space: {{spiffs.total}}&nbsp;&nbsp;|&nbsp;&nbsp;Used space: {{spiffs.used}}&nbsp;&nbsp;|&nbsp;&nbsp;Occupation:
-                    <meter min="0" max="100" high="90" :value="spiffs.occupation"></meter>&nbsp;{{spiffs.occupation}}%
+                    &nbsp;&nbsp;Status: {{stats.status}}&nbsp;&nbsp;|&nbsp;&nbsp;Total space: {{stats.total}}&nbsp;&nbsp;|&nbsp;&nbsp;Used space: {{spiffs.used}}&nbsp;&nbsp;|&nbsp;&nbsp;Occupation:
+                    <meter min="0" max="100" high="90" :value="stats.occupation"></meter>&nbsp;{{stats.occupation}}%
                 </div>
             </div>
         </div>
@@ -166,12 +166,26 @@ import spiffs from "../../models/spiffs"
 export default {
     data() {
         return {
-            files: [],
-            dirs: [],
             uploads: [],
             currentPath: '/',
             loading: false,
             spiffs: {}
+        }
+    },
+    computed: {
+        files () {
+            return this.spiffs.files.filter(item=>item.size!=-1)
+        },
+        dirs () {
+            return this.spiffs.files.filter(item=>item.size==-1)
+        },
+        stats () {
+            return {
+                status: this.spiffs.status,
+                total: this.spiffs.total,
+                used: this.spiffs.used,
+                occupation: this.spiffs.occupation
+            }
         }
     },
     methods: {
@@ -184,7 +198,9 @@ export default {
             modal.$on('postive', () => {
                 spiffs
                     .deleteFile(file.name, this.currentPath)
-                    .then(that.refreshFiles)
+                    .then(response => {
+                            that.spiffs = response
+                        })
                     .catch(that.spiffsFailed)
 
             })
@@ -198,7 +214,9 @@ export default {
             modal.$on('postive', () => {
                 spiffs
                     .deleteDir(file.name, that.currentPath)
-                    .then(that.refreshFiles)
+                    .then(response => {
+                            that.spiffs = response
+                        })
                     .catch(that.spiffsFailed)
 
             })
@@ -211,7 +229,9 @@ export default {
                 callback(value) {
                     spiffs
                         .createDir(value)
-                        .then(that.refreshFiles)
+                        .then(response => {
+                            that.spiffs = response
+                        })
                         .catch(that.spiffsFailed)
 
                 }
@@ -242,8 +262,6 @@ export default {
                 .then(response => {
                     this.loading = false
                     this.spiffs = response
-                    this.dirs = response.files.filter(item => item.size == -1)
-                    this.files = response.files.filter(item => item.size != -1)
                 })
                 .catch(this.spiffsFailed)
 
