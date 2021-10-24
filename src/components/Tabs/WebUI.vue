@@ -61,7 +61,7 @@
             <div class="panel panel-default">
                 <div class="panel-body">
                     <div class="panel-flex-row">
-                        <button class="btn btn-primary" type="button" @click="getFiles('list','all');">Refresh</button>
+                        <button class="btn btn-primary" type="button" @click="refreshFiles">Refresh</button>
                         &nbsp;
                         <button @click="createDir()" class="btn btn-info btn-svg-no_pad">
                             <svg width="35px" height="25px" viewBox="0 0 40 30">
@@ -239,6 +239,9 @@ export default {
                 })
                 .catch(this.spiffsFailed)
 
+        },
+        refreshFiles () {
+            return this.getFiles('all', this.currentPath)
         },
         spiffsFailed(err) {
             this.$modal({
