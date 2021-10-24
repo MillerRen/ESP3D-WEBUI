@@ -1,10 +1,9 @@
-import axios from "axios";
-const http = axios.create({
-    baseURL: '/files'
-})
+import http from "../../lib/http";
+
+const baseURL = '/files'
 
 export function list () {
-    return axios.get({
+    return http.get(baseURL, {
         params: {
             action: 'list'
         }
@@ -12,7 +11,7 @@ export function list () {
 }
 
 export function create (fd) {
-    return axios.post({
+    return http.post(baseURL, {
         data: fd
     })
 }

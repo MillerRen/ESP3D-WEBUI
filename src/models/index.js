@@ -2,7 +2,7 @@ import axios from "axios"
 import defaultPreferenceList from "./default_preferences"
 
 if (process.env.NODE_ENV === 'development') {
-    require('../mocks')
+    require('../../mocks')
 }
 
 const PREFERENCES_FILE_NAME = '/preferences.json'
