@@ -104,8 +104,7 @@
                         <div id="SPIFFS_path" class="info">
                             <table>
                                 <tr>
-                                    <td>
-                                       / <button class="btn btn-link"  @click="selectDir('/')">home</button>/
+                                    <td><button class="btn btn-link"  @click="selectDir('/')">/</button>
                                     </td>
                                     <td v-for="p in paths" :key="p">
                                         <button class="btn btn-link" @click="gotoDir(p)">{{p}}</button>/
