@@ -63,7 +63,10 @@
                     <div class="panel-flex-row">
                         <button class="btn btn-primary" type="button" @click="refreshFiles">Refresh</button>
                         &nbsp;
-                        <button @click="createDir()" class="btn btn-info btn-svg-no_pad">
+                        <button
+                            @click="createDir()"
+                            class="btn btn-info btn-svg-no_pad"
+                        >
                             <svg width="35px" height="25px" viewBox="0 0 40 30">
                                 <rect
                                     x="5"
@@ -99,14 +102,16 @@
                             v-if="loading"
                         ></div>
                         <div id="SPIFFS_path" class="info">
-                            <!-- <table>
+                            <table>
                                 <tr>
                                     <td>
-                                        <button class="btn btn-primary">/</button>
+                                       / <button class="btn btn-link"  @click="selectDir('/')">home</button>/
                                     </td>
-                                    <td v-for="p in currentPath.split('/')" :key="p">{{ p }}</td>
+                                    <td v-for="p in paths" :key="p">
+                                        <button class="btn btn-link" @click="gotoDir(p)">{{p}}</button>/
+                                    </td>
                                 </tr>
-                            </table>-->
+                            </table>
                         </div>
                     </div>
                     <table class="table table-striped" style="margin-bottom:20px;">
@@ -124,7 +129,7 @@
                                 <td>
                                     <button
                                         class="btn btn-link"
-                                        @click="selectDir(file)"
+                                        @click="selectDir(currentPath+file.name+'/')"
                                     >{{ file.name }}</button>
                                 </td>
                                 <td></td>
@@ -152,8 +157,14 @@
                     </table>
                 </div>
                 <div class="panel-footer panel-footer1" id="status">
-                    &nbsp;&nbsp;Status: {{stats.status}}&nbsp;&nbsp;|&nbsp;&nbsp;Total space: {{stats.total}}&nbsp;&nbsp;|&nbsp;&nbsp;Used space: {{spiffs.used}}&nbsp;&nbsp;|&nbsp;&nbsp;Occupation:
-                    <meter min="0" max="100" high="90" :value="stats.occupation"></meter>&nbsp;{{stats.occupation}}%
+                    &nbsp;&nbsp;Status: {{ stats.status }}&nbsp;&nbsp;|&nbsp;&nbsp;Total space: {{ stats.total }}&nbsp;&nbsp;|&nbsp;&nbsp;Used space: {{ spiffs.used }}&nbsp;&nbsp;|&nbsp;&nbsp;Occupation:
+                    <meter
+                        min="0"
+                        max="100"
+                        high="90"
+                        :value="stats.occupation"
+                    ></meter>
+                    &nbsp;{{ stats.occupation }}%
                 </div>
             </div>
         </div>
@@ -169,23 +180,29 @@ export default {
             uploads: [],
             currentPath: '/',
             loading: false,
-            spiffs: {}
+            spiffs: {
+                files: []
+            }
         }
     },
     computed: {
-        files () {
-            return this.spiffs.files.filter(item=>item.size!=-1)
+        files() {
+            return this.spiffs.files.filter(item => item.size != -1)
         },
-        dirs () {
-            return this.spiffs.files.filter(item=>item.size==-1)
+        dirs() {
+            return this.spiffs.files.filter(item => item.size == -1)
         },
-        stats () {
+        stats() {
             return {
                 status: this.spiffs.status,
                 total: this.spiffs.total,
                 used: this.spiffs.used,
                 occupation: this.spiffs.occupation
             }
+        },
+        paths () {
+            let paths = this.currentPath.split('/')
+            return paths.slice(1, paths.length - 1)
         }
     },
     methods: {
@@ -199,8 +216,8 @@ export default {
                 spiffs
                     .deleteFile(file.name, this.currentPath)
                     .then(response => {
-                            that.spiffs = response
-                        })
+                        that.spiffs = response
+                    })
                     .catch(that.spiffsFailed)
 
             })
@@ -215,8 +232,8 @@ export default {
                 spiffs
                     .deleteDir(file.name, that.currentPath)
                     .then(response => {
-                            that.spiffs = response
-                        })
+                        that.spiffs = response
+                    })
                     .catch(that.spiffsFailed)
 
             })
@@ -228,7 +245,7 @@ export default {
                 prompt: true,
                 callback(value) {
                     spiffs
-                        .createDir(value)
+                        .createDir(value, that.currentPath)
                         .then(response => {
                             that.spiffs = response
                         })
@@ -237,13 +254,16 @@ export default {
                 }
             })
         },
-        selectDir(dir) {
+        selectDir(path) {
             this.loading = true
-            var path = this.currentPath + dir.name + '/'
             this.currentPath = path
             this.getFiles(path)
                 .catch(this.spiffsFailed)
 
+        },
+        gotoDir (path) {
+            let index = this.paths.indexOf(path)
+            this.selectDir('/'+this.paths.slice(0, index+1).join('/')+'/')
         },
         checkFiles() {
             this.uploads = this.$refs.fileinput.files
@@ -266,10 +286,11 @@ export default {
                 .catch(this.spiffsFailed)
 
         },
-        refreshFiles () {
+        refreshFiles() {
             return this.getFiles(this.currentPath)
         },
         spiffsFailed(err) {
+            this.loading = false
             this.$modal({
                 title: 'Error',
                 message: err

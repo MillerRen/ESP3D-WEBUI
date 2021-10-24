@@ -42,8 +42,8 @@ function deleteFile(name, path) {
         })
 }
 
-function createDir (dir) {
-    return command('createdir', dir)
+function createDir (dir, path) {
+    return command('createdir', dir, path)
 }
 
 function deleteDir(name) {
