@@ -2,7 +2,7 @@ import http from "../../lib/http";
 
 const baseURL = '/files'
 
-function command (action, path, filename) {
+function command (action, filename, path) {
     let params  = {
         action: action
     }
@@ -18,8 +18,8 @@ function command (action, path, filename) {
     })
 }
 
-function list () {
-    return command(list)
+function list (path) {
+    return command('list', 'all', path)
 }
 
 function createFile (files, path) {

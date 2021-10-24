@@ -218,7 +218,7 @@ export default {
             this.loading = true
             var path = this.currentPath + dir.name + '/'
             this.currentPath = path
-            this.getFiles('all', path)
+            this.getFiles(path)
                 .catch(this.spiffsFailed)
 
         },
@@ -232,10 +232,10 @@ export default {
                 .catch(this.spiffsFailed)
 
         },
-        getFiles(name, path) {
+        getFiles(path) {
             this.loading = true
             return spiffs
-                .list(name, path)
+                .list(path)
                 .then(response => {
                     this.loading = false
                     this.spiffs = response
@@ -256,7 +256,7 @@ export default {
         }
     },
     mounted() {
-        this.getFiles()
+        this.getFiles(this.currentPath)
     }
 }
 </script>
