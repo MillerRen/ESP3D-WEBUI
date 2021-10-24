@@ -1,6 +1,6 @@
 <template>
-    <div class="panel" id="SPIFFS">
-        <div class="panel-body">
+    <div class="container-fluid" id="SPIFFS">
+        <div class="">
             <div class="panel-flex-row">
                 <input
                     ref="fileinput"
