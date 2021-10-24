@@ -19,7 +19,7 @@
 </template>
 
 <script>
-import API from "./apis";
+import API from "./models";
 
 import Navbar from "./components/Layout/Navbar.vue";
 import Tabs from "./components/Layout/Tabs.vue";

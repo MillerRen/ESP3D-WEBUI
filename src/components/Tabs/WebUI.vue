@@ -161,7 +161,7 @@
 </template>
 
 <script>
-import API from "../../apis"
+import API from "../../models/"
 export default {
     data() {
         return {
