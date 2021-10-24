@@ -1,4 +1,9 @@
-var defaultPreferenceList = [{
+import http from '../../lib/http'
+
+const PREFERENCES_FILE_NAME = 'preferences.json'
+const baseURL = '/' + PREFERENCES_FILE_NAME
+
+const DEAULT_PREFERENCES = [{
     "language": "en",
     "enable_lock_UI": "false",
     "enable_ping": "true",
@@ -47,5 +52,33 @@ var defaultPreferenceList = [{
     "surfacefeedrate": "1000",
     "surfacespindle": "10000"
   }]
-  
-export default defaultPreferenceList
+
+function getPreferences () {
+    return http.get(baseURL)
+        .then((response) => {
+            if (typeof response == 'string' && response.indexOf("<HTML>") != -1) {
+                throw new Error('Not found ' + PREFERENCES_FILE_NAME)
+            }
+            return response[0]
+        })
+        .catch((err) => {
+            console.log(err)
+            return DEAULT_PREFERENCES[0]
+        })
+}
+
+function updatePreferences (preferences) {
+    var blob = new Blob([JSON.stringify([preferences], null, " ")], {
+        type: 'application/json'
+    });
+    var file = new File([blob], PREFERENCES_FILE_NAME);
+    var formData = new FormData();
+    formData.append('path', '/');
+    formData.append('myfile[]', file, PREFERENCES_FILE_NAME);
+    return http.post(baseURL, formData)
+}
+
+export default {
+    getPreferences,
+    updatePreferences
+}

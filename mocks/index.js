@@ -1,2 +1,2 @@
 import './commands'
-import './spiffs/files'
+import './spiffs'

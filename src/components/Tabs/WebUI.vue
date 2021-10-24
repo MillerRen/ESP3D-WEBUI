@@ -183,6 +183,7 @@ export default {
             modal.$on('postive', () => {
                 spiffs
                     .spiffsDeleteFile(file.name)
+                    .then(this.refreshFiles)
                     .catch(this.spiffsFailed)
 
             })
@@ -195,6 +196,7 @@ export default {
             modal.$on('postive', () => {
                 spiffs
                     .spiffsDeleteDir(file.name)
+                    .then(this.refreshFiles)
                     .catch(this.spiffsFailed)
 
             })
@@ -205,7 +207,8 @@ export default {
                 prompt: true,
                 callback(value) {
                     spiffs
-                        .spiffsCreateDir(value)
+                        .createDir(value)
+                        .then(this.refreshFiles)
                         .catch(this.spiffsFailed)
 
                 }
@@ -225,6 +228,7 @@ export default {
         uploadFile() {
             return spiffs
                 .spiffsUpload(this.uploads)
+                .then(this.refreshFiles)
                 .catch(this.spiffsFailed)
 
         },

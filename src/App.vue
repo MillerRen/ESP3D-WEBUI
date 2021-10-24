@@ -19,7 +19,8 @@
 </template>
 
 <script>
-import API from "./models";
+import preferences from "./models/preferences";
+import commands from "./models/commands";
 
 import Navbar from "./components/Layout/Navbar.vue";
 import Tabs from "./components/Layout/Tabs.vue";
@@ -78,7 +79,7 @@ export default {
   },
   methods: {
     getFWInfo() {
-      return API.getInstance()
+      return commands
         .getFWData()
         .then((response) => {
           Object.assign(this.fwData, response);
@@ -92,7 +93,7 @@ export default {
         });
     },
     getSettings() {
-      return API.getInstance()
+      return commands
         .getSettings()
         .then((response) => {
           this.settings = response;
@@ -106,35 +107,35 @@ export default {
         });
     },
     updateSettings(val) {
-      return API.getInstance().updateSettings(val);
+      return commands.updateSettings(val);
     },
     getPreferences() {
-      return API.getInstance()
+      return preferences
         .getPreferences()
         .then((response) => {
           this.preferences = response;
         });
     },
     updatePreferences(preferences) {
-      return API.getInstance()
+      return preferences
         .updatePreferences(preferences)
     },
     getStatus() {
-      return API.getInstance()
+      return commands
         .getStatus()
         .then((response) => {
           this.status = response;
         });
     },
     scanWifi() {
-      return API.getInstance()
+      return commands
         .scanWifi()
         .then((response) => {
           this.wifiList = response;
         });
     },
     login(data) {
-      return API.getInstance().login(data);
+      return commands.login(data);
     },
     showModal(name) {
       let method = `show${name}Modal`;
