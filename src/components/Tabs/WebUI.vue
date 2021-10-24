@@ -24,7 +24,7 @@
                         </td>
                         <td>
                             <div class="filetext no_overflow" id="SPIFFS_file_name">
-                                <span v-if="!uploads||!uploads.length">No file chosen</span>
+                                <span v-if="!uploads || !uploads.length">No file chosen</span>
                                 <span v-if="uploads && uploads.length == 1">{{ uploads[0].name }}</span>
                                 <span
                                     v-if="uploads && uploads.length > 1"
@@ -48,13 +48,9 @@
                         </g>
                     </svg>
                 </button>
-                <progress style="display:none;" name="prg" id="SPIFFS_prg" max="100"></progress>
+                <progress v-if="uploading" name="prg" id="SPIFFS_prg" max="100"></progress>
                 &nbsp;
-                <span
-                    id="uploadSPIFFSmsg"
-                    style="display:none;"
-                    translate
-                >Uploading</span>
+                <span v-if="uploading" id="uploadSPIFFSmsg" translate>Uploading</span>
             </div>
 
             <br />
@@ -105,10 +101,11 @@
                         <div id="SPIFFS_path" class="info">
                             <table>
                                 <tr>
-                                    <td><button class="btn btn-link"  @click="selectDir('/')">/</button>
+                                    <td>
+                                        <button class="btn btn-link" @click="selectDir('/')">/</button>
                                     </td>
                                     <td v-for="p in paths" :key="p">
-                                        <button class="btn btn-link" @click="gotoDir(p)">{{p}}</button>/
+                                        <button class="btn btn-link" @click="gotoDir(p)">{{ p }}</button>/
                                     </td>
                                 </tr>
                             </table>
@@ -129,7 +126,7 @@
                                 <td>
                                     <button
                                         class="btn btn-link"
-                                        @click="selectDir(currentPath+file.name+'/')"
+                                        @click="selectDir(currentPath + file.name + '/')"
                                     >{{ file.name }}</button>
                                 </td>
                                 <td></td>
@@ -177,6 +174,7 @@ import spiffs from "../../models/spiffs"
 export default {
     data() {
         return {
+            uploading: 0,
             uploads: [],
             currentPath: '/',
             loading: false,
@@ -200,7 +198,7 @@ export default {
                 occupation: this.spiffs.occupation
             }
         },
-        paths () {
+        paths() {
             let paths = this.currentPath.split('/')
             return paths.slice(1, paths.length - 1)
         }
@@ -261,9 +259,9 @@ export default {
                 .catch(this.spiffsFailed)
 
         },
-        gotoDir (path) {
+        gotoDir(path) {
             let index = this.paths.indexOf(path)
-            this.selectDir('/'+this.paths.slice(0, index+1).join('/')+'/')
+            this.selectDir('/' + this.paths.slice(0, index + 1).join('/') + '/')
         },
         checkFiles() {
             this.uploads = this.$refs.fileinput.files
