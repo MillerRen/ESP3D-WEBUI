@@ -1,5 +1,5 @@
-import mock from './mock'
-import response from './data/files.json'
+import mock from '../lib/mock'
+import response from '../data/files.json'
 
 mock.onGet('/files', {
     params: {

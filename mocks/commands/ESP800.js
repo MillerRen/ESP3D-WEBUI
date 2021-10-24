@@ -1,4 +1,4 @@
-import mock from './mock'
+import mock from '../lib/mock'
 
 const response = 'FW version:0.9.200 # FW target:smoothieware # FW HW:Direct SD # primary sd:/ext/ # secondary sd:/sd/ # authentication: no'
 

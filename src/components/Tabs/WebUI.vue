@@ -161,7 +161,8 @@
 </template>
 
 <script>
-import API from "../../models/"
+import spiffs from "../../models/spiffs"
+
 export default {
     data() {
         return {
@@ -180,7 +181,7 @@ export default {
                 message: 'Confirm deletion of file: ' + file.name
             })
             modal.$on('postive', () => {
-                API.getInstance()
+                spiffs
                     .spiffsDeleteFile(file.name)
                     .catch(this.spiffsFailed)
 
@@ -192,7 +193,7 @@ export default {
                 message: 'Confirm deletion of directory: ' + file.name
             })
             modal.$on('postive', () => {
-                API.getInstance()
+                spiffs
                     .spiffsDeleteDir(file.name)
                     .catch(this.spiffsFailed)
 
@@ -203,7 +204,7 @@ export default {
                 title: 'Please enter directory name',
                 prompt: true,
                 callback(value) {
-                    API.getInstance()
+                    spiffs
                         .spiffsCreateDir(value)
                         .catch(this.spiffsFailed)
 
@@ -222,15 +223,15 @@ export default {
             this.uploads = this.$refs.fileinput.files
         },
         uploadFile() {
-            return API.getInstance()
+            return spiffs
                 .spiffsUpload(this.uploads)
                 .catch(this.spiffsFailed)
 
         },
         getFiles(name, path) {
             this.loading = true
-            return API.getInstance()
-                .spiffsList(name, path)
+            return spiffs
+                .list(name, path)
                 .then(response => {
                     this.loading = false
                     this.spiffs = response
