@@ -24,6 +24,7 @@
                         </td>
                         <td>
                             <div class="filetext no_overflow" id="SPIFFS_file_name">
+                                <span v-if="!uploads||!uploads.length">No file chosen</span>
                                 <span v-if="uploads && uploads.length == 1">{{ uploads[0].name }}</span>
                                 <span
                                     v-if="uploads && uploads.length > 1"
