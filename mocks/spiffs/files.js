@@ -26,6 +26,7 @@ mock.onGet('/files', {
 mock.onGet('/files', {
     params: {
         action: 'delete',
+        path: '/',
         filename: 'index.html.gz'
     }
 }).reply(200, {})

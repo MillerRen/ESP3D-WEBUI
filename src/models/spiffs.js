@@ -12,7 +12,7 @@ function command (action, filename, path) {
     if (filename) {
         params.filename = filename
     }
-    if (path)
+    
     return http.get(baseURL, {
         params
     })
@@ -22,7 +22,7 @@ function list (path) {
     return command('list', 'all', path)
 }
 
-function createFile (files, path) {
+function upload (files, path) {
     var formData = new FormData();
         formData.append('path', path);
         for (var i = 0; i < files.length; i++) {
@@ -35,8 +35,8 @@ function createFile (files, path) {
         return http.post(baseURL, formData)
 }
 
-function deleteFile(name) {
-    return this.command('delete', name)
+function deleteFile(name, path) {
+    return command('delete', name, path)
         .then(response => {
             console.log(response)
         })
@@ -49,7 +49,7 @@ function createDir (fd) {
 }
 
 function deleteDir(name) {
-    return this.command('deletedir', name)
+    return command('deletedir', name)
         .then(response => {
             console.log(response)
         })
@@ -57,7 +57,7 @@ function deleteDir(name) {
 
 export default {
     list,
-    createFile,
+    upload,
     deleteFile,
     createDir,
     deleteDir

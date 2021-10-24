@@ -176,40 +176,43 @@ export default {
     },
     methods: {
         deleteFile(file) {
+            var that = this
             var modal = this.$modal({
                 title: 'Please Confirm',
                 message: 'Confirm deletion of file: ' + file.name
             })
             modal.$on('postive', () => {
                 spiffs
-                    .spiffsDeleteFile(file.name)
-                    .then(this.refreshFiles)
-                    .catch(this.spiffsFailed)
+                    .deleteFile(file.name, this.currentPath)
+                    .then(that.refreshFiles)
+                    .catch(that.spiffsFailed)
 
             })
         },
         deleteDir(file) {
+            var that = this
             var modal = this.$modal({
                 title: 'Please Confirm',
                 message: 'Confirm deletion of directory: ' + file.name
             })
             modal.$on('postive', () => {
                 spiffs
-                    .spiffsDeleteDir(file.name)
-                    .then(this.refreshFiles)
-                    .catch(this.spiffsFailed)
+                    .deleteDir(file.name, that.currentPath)
+                    .then(that.refreshFiles)
+                    .catch(that.spiffsFailed)
 
             })
         },
         createDir() {
+            var that = this
             this.$modal({
                 title: 'Please enter directory name',
                 prompt: true,
                 callback(value) {
                     spiffs
                         .createDir(value)
-                        .then(this.refreshFiles)
-                        .catch(this.spiffsFailed)
+                        .then(that.refreshFiles)
+                        .catch(that.spiffsFailed)
 
                 }
             })
@@ -227,7 +230,7 @@ export default {
         },
         uploadFile() {
             return spiffs
-                .spiffsUpload(this.uploads)
+                .upload(this.uploads, this.currentPath)
                 .then(this.refreshFiles)
                 .catch(this.spiffsFailed)
 
@@ -246,7 +249,7 @@ export default {
 
         },
         refreshFiles () {
-            return this.getFiles('all', this.currentPath)
+            return this.getFiles(this.currentPath)
         },
         spiffsFailed(err) {
             this.$modal({
