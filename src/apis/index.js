@@ -58,7 +58,7 @@ class API {
     spiffsList(name, path) {
         return this.files('list', name, path)
             .then(response => {
-                return response.files
+                return response
             })
     }
 

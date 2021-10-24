@@ -25,7 +25,9 @@
                         <td>
                             <div class="filetext no_overflow" id="SPIFFS_file_name">
                                 <span v-if="uploads && uploads.length == 1">{{ uploads[0].name }}</span>
-                                <span v-if="uploads && uploads.length > 1">{{ uploads.length }} files</span>
+                                <span
+                                    v-if="uploads && uploads.length > 1"
+                                >{{ uploads.length }} files</span>
                             </div>
                         </td>
                     </tr>
@@ -56,9 +58,11 @@
 
             <br />
             <br />
-            <div class="panel">
+            <div class="panel panel-default">
                 <div class="panel-body">
                     <div class="panel-flex-row">
+                        <button class="btn btn-primary" type="button" @click="getFiles('list','all');">Refresh</button>
+                        &nbsp;
                         <button @click="createDir()" class="btn btn-info btn-svg-no_pad">
                             <svg width="35px" height="25px" viewBox="0 0 40 30">
                                 <rect
@@ -88,7 +92,12 @@
                                 >+</text>
                             </svg>
                         </button>
-                        <div id="SPIFFS_loader" class="loader" style="width:2em;height:2em;" v-if="loading"></div>
+                        <div
+                            id="SPIFFS_loader"
+                            class="loader"
+                            style="width:2em;height:2em;"
+                            v-if="loading"
+                        ></div>
                         <div id="SPIFFS_path" class="info">
                             <!-- <table>
                                 <tr>
@@ -97,13 +106,10 @@
                                     </td>
                                     <td v-for="p in currentPath.split('/')" :key="p">{{ p }}</td>
                                 </tr>
-                            </table> -->
+                            </table>-->
                         </div>
                     </div>
-                    <table
-                        class="table table-striped"
-                        style="border:1px solid #dddddd;margin-bottom:20px;"
-                    >
+                    <table class="table table-striped" style="margin-bottom:20px;">
                         <thead>
                             <tr>
                                 <th width="0%" translate>Type</th>
@@ -116,8 +122,10 @@
                             <tr v-for="file in dirs" :key="file.name">
                                 <td v-html="$options.filters.icon('folder-close')"></td>
                                 <td>
-                                    <button class="btn btn-link" @click="selectDir(file)">{{ file.name }}</button>
-                                    
+                                    <button
+                                        class="btn btn-link"
+                                        @click="selectDir(file)"
+                                    >{{ file.name }}</button>
                                 </td>
                                 <td></td>
                                 <td>
@@ -143,7 +151,10 @@
                         </tbody>
                     </table>
                 </div>
-                <div class="panel-footer" id="SPIFFS_status"></div>
+                <div class="panel-footer panel-footer1" id="status">
+                    &nbsp;&nbsp;Status: {{spiffs.status}}&nbsp;&nbsp;|&nbsp;&nbsp;Total space: {{spiffs.total}}&nbsp;&nbsp;|&nbsp;&nbsp;Used space: {{spiffs.used}}&nbsp;&nbsp;|&nbsp;&nbsp;Occupation:
+                    <meter min="0" max="100" high="90" :value="spiffs.occupation"></meter>&nbsp;{{spiffs.occupation}}%
+                </div>
             </div>
         </div>
     </div>
@@ -158,7 +169,8 @@ export default {
             dirs: [],
             uploads: [],
             currentPath: '/',
-            loading: false
+            loading: false,
+            spiffs: {}
         }
     },
     methods: {
@@ -169,7 +181,9 @@ export default {
             })
             modal.$on('postive', () => {
                 API.getInstance()
-                .spiffsDeleteFile(file.name)
+                    .spiffsDeleteFile(file.name)
+                    .catch(this.spiffsFailed)
+
             })
         },
         deleteDir(file) {
@@ -179,16 +193,20 @@ export default {
             })
             modal.$on('postive', () => {
                 API.getInstance()
-                .spiffsDeleteDir(file.name)
+                    .spiffsDeleteDir(file.name)
+                    .catch(this.spiffsFailed)
+
             })
         },
         createDir() {
             this.$modal({
                 title: 'Please enter directory name',
                 prompt: true,
-                callback (value) {
+                callback(value) {
                     API.getInstance()
                         .spiffsCreateDir(value)
+                        .catch(this.spiffsFailed)
+
                 }
             })
         },
@@ -197,6 +215,8 @@ export default {
             var path = this.currentPath + dir.name + '/'
             this.currentPath = path
             this.getFiles('all', path)
+                .catch(this.spiffsFailed)
+
         },
         checkFiles() {
             this.uploads = this.$refs.fileinput.files
@@ -204,15 +224,26 @@ export default {
         uploadFile() {
             return API.getInstance()
                 .spiffsUpload(this.uploads)
+                .catch(this.spiffsFailed)
+
         },
-        getFiles (name, path) {
+        getFiles(name, path) {
             this.loading = true
-           return API.getInstance()
-            .spiffsList(name, path)
-            .then(response => {
-                this.loading = false
-                this.dirs = response.filter(item=>item.size==-1)
-                this.files = response.filter(item=>item.size!=-1)
+            return API.getInstance()
+                .spiffsList(name, path)
+                .then(response => {
+                    this.loading = false
+                    this.spiffs = response
+                    this.dirs = response.files.filter(item => item.size == -1)
+                    this.files = response.files.filter(item => item.size != -1)
+                })
+                .catch(this.spiffsFailed)
+
+        },
+        spiffsFailed(err) {
+            this.$modal({
+                title: 'Error',
+                message: err
             })
         }
     },
