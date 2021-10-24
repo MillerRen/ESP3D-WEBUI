@@ -42,10 +42,8 @@ function deleteFile(name, path) {
         })
 }
 
-function createDir (fd) {
-    return http.post(baseURL, {
-        data: fd
-    })
+function createDir (dir) {
+    return command('createdir', dir)
 }
 
 function deleteDir(name) {
