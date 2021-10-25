@@ -41,26 +41,37 @@
           <tr v-for="(setting, index) in value" :key="index" v-show="setting.F == settingsType">
             <td>{{ setting.label }}</td>
             <td>
-              <div class="input-group">
-                <span class="input-group-btn">
-                  <button
-                    class="btn btn-default btn-svg"
-                    type="button"
-                    v-html="$options.filters.icon('repeat')"
-                    @click="revertToDefaultValue(setting)"
-                  ></button>
-                </span>
-                <input type="text" class="form-control" v-model="setting.value" v-if="setting.type!='F'&&!(setting.Options&&setting.Options.length)" />
-                <select v-model="setting.value" v-if="setting.type == 'F'" class="form-control">
-                  <option value="1">Enable</option>
-                  <option value="0">Disable</option>
-                </select>
-                <select v-model="setting.value" v-if="setting.Options&&setting.Options.length" class="form-control">
-                  <option v-for="o in setting.Options" :key="o.id" :value="o.id">{{o.display}}</option>
-                </select>
-                <span class="input-group-btn">
-                  <button class="btn btn-default" type="button" @click="setValue(setting)">set</button>
-                </span>
+              <div class="form-group has-feedback" :class="{'has-warning':setting.value!=setting.defaultvalue}">
+                <div class="input-group">
+                  <span class="input-group-btn">
+                    <button
+                      class="btn btn-default btn-svg"
+                      type="button"
+                      v-html="$options.filters.icon('repeat')"
+                      @click="revertToDefaultValue(setting)"
+                    ></button>
+                  </span>
+                  <input
+                    type="text"
+                    class="form-control"
+                    v-model="setting.value"
+                    :min="setting.min_val"
+                    :max="setting.max_val"
+                    :minlength="setting.min_val"
+                    :maxlength="setting.max_val"
+                    v-if="!setting.Options.length"
+                  />
+                  <select
+                    v-model="setting.value"
+                    v-if="setting.Options.length"
+                    class="form-control"
+                  >
+                    <option v-for="o in setting.Options" :key="o.id" :value="o.id">{{ o.display }}</option>
+                  </select>
+                  <span class="input-group-btn">
+                    <button class="btn btn-default" type="button" @click="setValue(setting)">set</button>
+                  </span>
+                </div>
               </div>
             </td>
           </tr>
