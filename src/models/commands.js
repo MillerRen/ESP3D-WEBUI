@@ -174,6 +174,7 @@ function _parseSettings(settings) {
             F: sentry.F,
             label: slabel,
             defaultvalue: svalue,
+            value: svalue,
             cmd: scmd,
             Options: options,
             min_val: min,

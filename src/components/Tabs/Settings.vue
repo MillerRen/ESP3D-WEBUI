@@ -47,15 +47,15 @@
                     class="btn btn-default btn-svg"
                     type="button"
                     v-html="$options.filters.icon('repeat')"
-                    @click="revertToDefaultValue(setting, index)"
+                    @click="revertToDefaultValue(setting)"
                   ></button>
                 </span>
-                <input type="text" class="form-control" :value="setting.defaultvalue" v-if="setting.type!='F'&&!(setting.Options&&setting.Options.length)" />
-                <select v-model="setting.defaultvalue" v-if="setting.type == 'F'" class="form-control">
+                <input type="text" class="form-control" v-model="setting.value" v-if="setting.type!='F'&&!(setting.Options&&setting.Options.length)" />
+                <select v-model="setting.value" v-if="setting.type == 'F'" class="form-control">
                   <option value="1">Enable</option>
                   <option value="0">Disable</option>
                 </select>
-                <select v-model="setting.defaultvalue" v-if="setting.Options&&setting.Options.length" class="form-control">
+                <select v-model="setting.value" v-if="setting.Options&&setting.Options.length" class="form-control">
                   <option v-for="o in setting.Options" :key="o.id" :value="o.id">{{o.display}}</option>
                 </select>
                 <span class="input-group-btn">
@@ -88,10 +88,10 @@ export default {
   },
   methods: {
     setValue(setting) {
-      commands.updateSettings(setting.cmd + setting.defaultvalue)
+      commands.updateSettings(setting.cmd + setting.value)
     },
     revertToDefaultValue(setting) {
-      console.log(setting)
+      setting.value = setting.defaultvalue
     }
   },
 };
