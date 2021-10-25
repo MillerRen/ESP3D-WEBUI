@@ -191,8 +191,24 @@ function updateSettings(cmd) {
     return command(cmd)
 }
 
+function getConfig (fw) {
+    console.log(fw)
+    let cmd = ''
+    if (fw == "smoothieware") {
+        cmd = "cat " + "/sd/config";
+    }
+    if (fw.indexOf('grbl')!=-1) {
+        cmd = '$$'
+    }
+    if (fw.indexOf('marlin')!=-1) {
+        cmd = 'M503'
+    }
+    return command(cmd)
+}
+
 export default {
     getFWData,
     getSettings,
-    updateSettings
+    updateSettings,
+    getConfig
 }

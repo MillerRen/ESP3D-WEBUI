@@ -1,0 +1,95 @@
+import http from "../../lib/http";
+
+const baseURL = '/command'
+
+function command(command) {
+    return http.get(baseURL, {
+        params: {
+            plain: command
+        }
+    })
+}
+
+function getSettings() {
+    return command('[ESP400]')
+        .then(response => {
+            if (!response.EEPROM) {
+                throw new Error('wrong data')
+            }
+            let settings = _parseSettings(response.EEPROM)
+            return settings
+        })
+}
+
+function _parseSettings(settings) {
+    var setting_configList = []
+    for (var vindex in settings) {
+        var sentry = settings[vindex]
+        var slabel = sentry.H;
+        var svalue = sentry.V;
+        var scmd = "[ESP401]P=" + sentry.P + " T=" + sentry.T + " V=";
+        var options = [];
+        var min;
+        var max;
+        if (typeof sentry.M !== 'undefined') {
+            min = sentry.M;
+        } else { //add limit according the type
+            if (sentry.T == "B") min = -127
+            else if (sentry.T == "S") min = 0
+            else if (sentry.T == "A") min = 7
+            else if (sentry.T == "I") min = 0
+        }
+        if (typeof sentry.S !== 'undefined') {
+            max = sentry.S;
+        } else { //add limit according the type
+            if (sentry.T == "B") max = 255;
+            else if (sentry.T == "S") max = 255;
+            else if (sentry.T == "A") max = 15;
+            else if (sentry.T == "I") max = 2147483647;
+        }
+        //list possible options if defined
+        if (typeof sentry.O !== 'undefined') {
+            for (var i in sentry.O) {
+                var val = sentry.O[i];
+                for (var j in val) {
+                    var sub_key = j;
+                    var sub_val = val[j];
+                    sub_val = sub_val.trim();
+                    sub_key = sub_key.trim();
+                    var option = {
+                        id: sub_val,
+                        display: sub_key
+                    };
+                    options.push(option);
+                    //console.log("*" + sub_key + "* and *" + sub_val + "*");
+                }
+            }
+        }
+        svalue = svalue.trim();
+        //create entry in list
+        var config_entry = {
+            index: vindex,
+            F: sentry.F,
+            label: slabel,
+            defaultvalue: svalue,
+            cmd: scmd,
+            Options: options,
+            min_val: min,
+            max_val: max,
+            type: sentry.T,
+            pos: sentry.P
+        };
+        setting_configList.push(config_entry);
+    }
+
+    return setting_configList
+}
+
+function updateSettings(cmd) {
+    return command(cmd)
+}
+
+export default {
+    getSettings,
+    updateSettings
+}

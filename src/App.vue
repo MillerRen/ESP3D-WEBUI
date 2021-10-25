@@ -21,6 +21,7 @@
 <script>
 import preferences from "./models/preferences";
 import commands from "./models/commands";
+import websocket from './models/websocket'
 
 import Navbar from "./components/Layout/Navbar.vue";
 import Tabs from "./components/Layout/Tabs.vue";
@@ -66,7 +67,7 @@ export default {
         ESP3D_authentication: "",
         async_webcommunication: "",
         websocket_port: "",
-        websocket_ip: "",
+        websocket_ip: document.location.hostname,
         esp_hostname: "",
         target_firmware: "",
         grblaxis: "3",
@@ -85,6 +86,7 @@ export default {
           Object.assign(this.fwData, response);
           document.title = response.esp_hostname || "ESP3D WebUI";
           this.connectionModal.close();
+          this.startWebsocket()
           return response;
         })
         .catch((err) => {
@@ -136,6 +138,11 @@ export default {
     },
     login(data) {
       return commands.login(data);
+    },
+    startWebsocket () {
+      websocket.startsocket(this.fwData, (msg) => {
+        console.log(msg)
+      })
     },
     showModal(name) {
       let method = `show${name}Modal`;

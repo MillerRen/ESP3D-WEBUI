@@ -8,7 +8,7 @@
         type="button"
         id="config_refresh_btn"
         class="btn btn-primary"
-        onclick="refreshconfig();"
+        @click="refreshConfig();"
       >
         <svg width="1.3em" height="1.2em" viewBox="0 0 1300 1200">
           <g transform="translate(50,1200) scale(1, -1)">
@@ -143,6 +143,8 @@
 </template>
 
 <script>
+import commands from "../../models/commands"
+
 export default {
   props: {
     fwData: {
@@ -150,6 +152,11 @@ export default {
       default () {
         return {}
       }
+    }
+  },
+  methods: {
+    refreshConfig () {
+      return commands.getConfig(this.fwData.target_firmware)
     }
   }
 }
