@@ -48,9 +48,6 @@ function createDir (dir, path) {
 
 function deleteDir(name) {
     return command('deletedir', name)
-        .then(response => {
-            console.log(response)
-        })
 }
 
 export default {
