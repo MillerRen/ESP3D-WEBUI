@@ -10,7 +10,6 @@
     <UpdatePanel
       v-if="mainTab == 'update'"
       v-model="settings"
-      @updateSettings="updateSettings"
       :fwData="fwData"
     />
     <SettingsPanel v-if="mainTab == 'settings'" v-model="settings" />
@@ -103,9 +102,6 @@ export default {
             message: err.message,
           });
         });
-    },
-    updateSettings(val) {
-      return commands.updateSettings(val);
     },
     getPreferences() {
       return preferences
