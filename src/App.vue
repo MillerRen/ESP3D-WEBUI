@@ -7,14 +7,13 @@
     <ConfigPanel v-if="mainTab == 'printer'" :fwData="fwData" />
     <DashboardPanel v-if="mainTab == 'dashboard'" :fwData="fwData" :preferences="preferences" />
     <CameraPanel v-if="mainTab == 'camera'" :fwData="fwData" />
-    <FirmwarePanel
-      v-if="mainTab == 'esp3d'"
+    <UpdatePanel
+      v-if="mainTab == 'update'"
       v-model="settings"
       @updateSettings="updateSettings"
       :fwData="fwData"
     />
-    <NetworkPanel v-if="mainTab == 'network'" v-model="settings" />
-    <WebUIPanel v-if="mainTab=='webui'" />
+    <SettingsPanel v-if="mainTab == 'settings'" v-model="settings" />
   </main>
 </template>
 
@@ -25,10 +24,11 @@ import websocket from './models/websocket'
 
 import Navbar from "./components/Layout/Navbar.vue";
 import Tabs from "./components/Layout/Tabs.vue";
-import FirmwarePanel from "./components/Tabs/Firmware.vue";
+import SettingsPanel from "./components/Tabs/Settings.vue";
 import ConfigPanel from "./components/Tabs/Config.vue";
 import CameraPanel from "./components/Tabs/Camera.vue";
 import DashboardPanel from "./components/Tabs/Dashboard.vue";
+import UpdatePanel from "./components/Tabs/Update.vue";
 
 // import StatusModal from "./components/Modals/StatusModal.vue"
 import SetupModal from "./components/Modals/SetupModal.vue";
@@ -36,9 +36,6 @@ import CreditsModal from "./components/Modals/CreditsModal.vue";
 import LoginModal from "./components/Modals/LoginModal.vue";
 import PreferenceModal from "./components/Modals/PreferenceModal.vue";
 import PasswordModal from "./components/Modals/PasswordModal.vue";
-import NetworkPanel from "./components/Tabs/Network.vue";
-import WebUIPanel from "./components/Tabs/WebUI.vue";
-// import UpdateModal from "./components/Modals/UpdateModal.vue"
 // import WiFiModal from "./components/Modals/WiFiModal.vue"
 
 export default {
@@ -46,13 +43,11 @@ export default {
   components: {
     Navbar,
     Tabs,
-    FirmwarePanel,
+    UpdatePanel,
     ConfigPanel,
     DashboardPanel,
     CameraPanel,
-    NetworkPanel,
-    WebUIPanel,
-    // UpdateModal,
+    SettingsPanel,
     // WiFiModal
   },
   data() {
