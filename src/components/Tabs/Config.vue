@@ -143,7 +143,7 @@
 </template>
 
 <script>
-import commands from "../../models/commands"
+import config from "../../models/config"
 
 export default {
   props: {
@@ -156,7 +156,7 @@ export default {
   },
   methods: {
     refreshConfig () {
-      return commands.getConfig(this.fwData.target_firmware)
+      return config.getConfig(this.fwData.target_firmware)
     }
   }
 }

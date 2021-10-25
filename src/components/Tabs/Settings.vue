@@ -82,7 +82,7 @@
 </template>
 
 <script>
-import commands from "../../models/commands";
+import settings from "../../models/settings";
 export default {
   props: {
     value: {
@@ -99,7 +99,7 @@ export default {
   },
   methods: {
     setValue(setting) {
-      commands.updateSettings(setting.cmd + setting.value)
+      settings.updateSettings(setting.cmd + setting.value)
     },
     revertToDefaultValue(setting) {
       setting.value = setting.defaultvalue

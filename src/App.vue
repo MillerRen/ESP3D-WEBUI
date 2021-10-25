@@ -18,7 +18,9 @@
 
 <script>
 import preferences from "./models/preferences";
-import commands from "./models/commands";
+import firmware from "./models/firmware";
+import settings from "./models/settings";
+import auth from './models/auth'
 import websocket from './models/websocket'
 
 import Navbar from "./components/Layout/Navbar.vue";
@@ -74,8 +76,8 @@ export default {
   },
   methods: {
     getFWInfo() {
-      return commands
-        .getFWData()
+      return firmware
+        .getFW()
         .then((response) => {
           Object.assign(this.fwData, response);
           this.startWebsocket()
@@ -90,7 +92,7 @@ export default {
         });
     },
     getSettings() {
-      return commands
+      return settings
         .getSettings()
         .then((response) => {
           this.settings = response;
@@ -114,22 +116,15 @@ export default {
       return preferences
         .updatePreferences(preferences)
     },
-    getStatus() {
-      return commands
-        .getStatus()
-        .then((response) => {
-          this.status = response;
-        });
-    },
     scanWifi() {
-      return commands
-        .scanWifi()
-        .then((response) => {
-          this.wifiList = response;
-        });
+      // return commands
+      //   .scanWifi()
+      //   .then((response) => {
+      //     this.wifiList = response;
+      //   });
     },
     login(data) {
-      return commands.login(data);
+      return auth.login(data);
     },
     startWebsocket () {
       websocket.startSocket(this.fwData, (msg) => {
