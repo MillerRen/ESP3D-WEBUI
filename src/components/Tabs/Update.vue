@@ -1,7 +1,10 @@
 <template>
     <div class="container-fluid" id="SPIFFS">
-        <div class="">
-            <div class="panel-flex-row">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3 class="panel-title">ESP3D Firmware Update</h3>
+            </div>
+            <div class="panel-body panel-flex-row">
                 <input
                     ref="fileinput"
                     type="file"
@@ -52,10 +55,12 @@
                 &nbsp;
                 <span v-if="uploading" id="uploadSPIFFSmsg" translate>Uploading</span>
             </div>
-
-            <br />
+        </div>
             <br />
             <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">ESP3D Filesystem</h3>
+                </div>
                 <div class="panel-body">
                     <div class="panel-flex-row">
                         <button class="btn btn-primary" type="button" @click="refreshFiles">Refresh</button>
@@ -164,7 +169,6 @@
                     &nbsp;{{ stats.occupation }}%
                 </div>
             </div>
-        </div>
     </div>
 </template>
 

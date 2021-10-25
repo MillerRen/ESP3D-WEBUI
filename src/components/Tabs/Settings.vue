@@ -1,5 +1,5 @@
 <template>
-  <div class="container" id="settings_list_content">
+  <div class="container-fluid" id="settings_list_content">
     <center>
       <span id="settings_filters">
         <div class="radio-inline">
