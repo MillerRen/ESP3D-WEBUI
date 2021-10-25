@@ -84,9 +84,10 @@ export default {
         .getFWData()
         .then((response) => {
           Object.assign(this.fwData, response);
+          this.startWebsocket()
           document.title = response.esp_hostname || "ESP3D WebUI";
           this.connectionModal.close();
-          this.startWebsocket()
+          
           return response;
         })
         .catch((err) => {
@@ -140,7 +141,7 @@ export default {
       return commands.login(data);
     },
     startWebsocket () {
-      websocket.startsocket(this.fwData, (msg) => {
+      websocket.startSocket(this.fwData, (msg) => {
         console.log(msg)
       })
     },

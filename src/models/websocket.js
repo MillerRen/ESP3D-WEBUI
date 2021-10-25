@@ -13,6 +13,7 @@ function startSocket(fwData, onmessage) {
     } catch (exception) {
         console.error(exception);
     }
+    console.log(ws_source)
     ws_source.binaryType = "arraybuffer";
     ws_source.onopen = function () {
         console.log("Connected");
@@ -88,6 +89,7 @@ function startSocket(fwData, onmessage) {
 
         }
         //console.log(msg);
+        onmessage(msg)
 
     };
 }
