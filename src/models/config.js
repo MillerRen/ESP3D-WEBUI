@@ -1,24 +1,21 @@
-import http from '../../lib/http'
+import grbl from "./grbl";
 
-const baseURL = '/command'
 
-function getConfig (fw) {
+function getConfig(fw) {
     console.log(fw)
-    let cmd = ''
-    if (fw == "smoothieware") {
-        cmd = "cat " + "/sd/config";
+    switch (fw) {
+        case 'smoothieware':
+            break;
+        case 'grbl':
+            return grbl.getConfig()
+        case 'marlin':
+            break;
+        case 'grbl-embedded':
+            return grbl.getConfig()
+        case 'marlin-embeded':
+            break;
     }
-    if (fw.indexOf('grbl')!=-1) {
-        cmd = '$$'
-    }
-    if (fw.indexOf('marlin')!=-1) {
-        cmd = 'M503'
-    }
-    return http.get(baseURL, {
-        params: {
-            plain: cmd
-        }
-    })
+    
 }
 
 export default {
