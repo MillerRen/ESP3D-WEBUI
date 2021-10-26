@@ -114,7 +114,6 @@
                                           class="form-control"
                                           style="width:auto"
                                           v-model="item.value"
-                                          onkeyup="config_checkchange(0,false)"
                                         />
                                         <span
                                           id="icon_config_0"
@@ -234,6 +233,12 @@ export default {
         .then((response) => {
           this.config = response
         })
+        .catch(err => {
+          this.$modal({
+            title: 'Get Config failed',
+            message: 'Error' + err.message
+          })
+        })
         .finally(() => {
           this.loading = false
         })
@@ -241,6 +246,12 @@ export default {
     updateConfig(item) {
       this.loading = true
       return config.updateConfig(this.fwData.target_firmware, item)
+        .catch((err) => {
+          this.$modal({
+            title: 'Set failed',
+            message: 'Error' + err.message
+          })
+        })
         .finally(() => {
           this.loading = false
         })
