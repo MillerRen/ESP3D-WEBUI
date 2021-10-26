@@ -22,7 +22,7 @@
       <br />
       <span id="config_status"></span>
       <hr />
-      <div class="loader hide_it" id="config_loader"></div>
+      <div class="loader" v-show="loading"></div>
       <div id="config_list_content">
         <div id="config_smoothie_nav" v-if="fwData.target_firmware == 'smoothieware'">
           <center>
@@ -132,7 +132,7 @@
                                   <button
                                     id="btn_config_0"
                                     class="btn btn-default"
-                                    onclick="configGetvalue(0,false)"
+                                    @click="updateConfig(item)"
                                     translate
                                     english_content="Set"
                                   >Set</button>&nbsp;
@@ -223,14 +223,26 @@ export default {
   },
   data() {
     return {
-      config: []
+      config: [],
+      loading: false
     }
   },
   methods: {
     refreshConfig() {
+      this.loading = true
       return config.getConfig(this.fwData.target_firmware)
         .then((response) => {
           this.config = response
+        })
+        .finally(() => {
+          this.loading = false
+        })
+    },
+    updateConfig(item) {
+      this.loading = true
+      return config.updateConfig(this.fwData.target_firmware, item)
+        .finally(() => {
+          this.loading = false
         })
     }
   },

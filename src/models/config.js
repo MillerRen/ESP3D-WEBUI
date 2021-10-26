@@ -1,4 +1,16 @@
+
 import grbl from "./grbl";
+import http from '../../lib/http'
+
+const baseURL = '/command'
+
+function command(command) {
+    return http.get(baseURL, {
+        params: {
+            plain: command
+        }
+    })
+}
 
 
 function getConfig(fw) {
@@ -18,6 +30,11 @@ function getConfig(fw) {
     
 }
 
+function updateConfig(fw, item) {
+    return command(item.cmd+item.value)
+}
+
 export default {
-    getConfig
+    getConfig,
+    updateConfig
 }
