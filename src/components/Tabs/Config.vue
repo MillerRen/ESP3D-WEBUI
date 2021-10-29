@@ -209,7 +209,6 @@
 </template>
 
 <script>
-import config from "../../models/config"
 
 export default {
   props: {
@@ -229,7 +228,7 @@ export default {
   methods: {
     refreshConfig() {
       this.loading = true
-      return config.getConfig(this.fwData.target_firmware)
+      return this.$store.getConfig(this.fwData.target_firmware)
         .then((response) => {
           this.config = response
         })
@@ -245,7 +244,7 @@ export default {
     },
     updateConfig(item) {
       this.loading = true
-      return config.updateConfig(this.fwData.target_firmware, item)
+      return this.$store.updateConfig(this.fwData.target_firmware, item)
         .catch((err) => {
           this.$modal({
             title: 'Set failed',

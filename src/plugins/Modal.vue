@@ -1,26 +1,32 @@
 <template>
-<div class="component-modal modal fade in ">
-  <div class="modal-backdrop fade in"></div>
-  <div class="modal-dialog" :class="'modal-'+size">
-    <button class="close" @click="close" v-if="closeable">
-      <span aria-hidden="true">×</span>
-    </button>
-    <div class="modal-content">
-      <header class="modal-header" v-if="title" ref="header">{{title}}</header>
-      <content class="modal-body" v-if="message||prompt">
-        <div class="message-content">
-          <p v-if="message">{{message}}</p>
-          <input type="text" class="form-control" v-model="inputValue" v-if="prompt">
-        </div>
-      </content>
-      <modal-body  v-if="$options.components.ModalBody" v-bind="data" v-on="events" ref="body"></modal-body>
-      <footer class="modal-footer" v-if="okText||cancelText" ref="footer">
-        <button class="btn btn-primary" v-if="okText" @click="postive">{{okText}}</button>
-        <button class="btn btn-default" v-if="cancelText" @click="negative">{{cancelText}}</button>
-      </footer>
+  <div class="component-modal modal fade in">
+    <div class="modal-backdrop fade in"></div>
+    <div class="modal-dialog" :class="'modal-' + size">
+      <button class="close" @click="close" v-if="closeable">
+        <span aria-hidden="true">×</span>
+      </button>
+      <div class="modal-content">
+        <header class="modal-header" v-if="title" ref="header">{{ title }}</header>
+        <content class="modal-body" v-if="message || prompt">
+          <div class="message-content">
+            <p v-if="message">{{ message }}</p>
+            <input type="text" class="form-control" v-model="inputValue" v-if="prompt" />
+          </div>
+        </content>
+        <modal-body
+          v-if="$options.components.ModalBody"
+          v-bind="data"
+          v-on="events"
+          ref="body"
+          class="modal-body"
+        ></modal-body>
+        <footer class="modal-footer" v-if="okText || cancelText" ref="footer">
+          <button class="btn btn-primary" v-if="okText" @click="postive">{{ okText }}</button>
+          <button class="btn btn-default" v-if="cancelText" @click="negative">{{ cancelText }}</button>
+        </footer>
+      </div>
     </div>
   </div>
-</div>
 </template>
 
 <script>
@@ -29,13 +35,13 @@ export default {
   props: {
     data: {
       type: Object,
-      default () {
+      default() {
         return {}
       }
     },
     events: {
       type: Object,
-      default () {
+      default() {
         return {}
       }
     },
@@ -49,11 +55,11 @@ export default {
     },
     okText: {
       type: String,
-      default: '确定'
+      default: ''
     },
     cancelText: {
       type: String,
-      default: '取消'
+      default: ''
     },
     message: {
       type: String,
@@ -71,8 +77,8 @@ export default {
     },
     callback: {
       type: Function,
-      default () {
-        return function () {}
+      default() {
+        return function () { }
       }
     },
     closeable: {
@@ -81,28 +87,25 @@ export default {
     }
   },
   methods: {
-    close () {
-      this.callback(this.inputValue, 'close', this.$refs.body)
+    close() {
       this.$destroy()
     },
-    postive () {
-      this.callback(this.inputValue, 'postive', this.$refs.body)
-      this.$emit('postive', this.inputValue)
+    postive() {
+      this.callback(true, this.inputValue)
       this.autoClose && this.$destroy()
     },
-    negative () {
-      this.callback(this.inputValue, 'negative', this.$refs.body)
-      this.$emit('negative', this.inputValue)
+    negative() {
+      this.callback(false)
       this.autoClose && this.$destroy()
     }
   },
-  mounted () {
+  mounted() {
     document.body.classList.add('modal-open')
   },
-  beforeDestroy () {
+  beforeDestroy() {
     this.$el.parentNode.removeChild(this.$el)
   },
-  destroyed () {
+  destroyed() {
     document.body.classList.remove('modal-open')
   }
 }
@@ -112,12 +115,16 @@ export default {
 .component-modal.modal {
   display: block;
   opacity: 0;
-  animation: a-opacity 0.6s ease-in-out 0s ;
+  animation: a-opacity 0.6s ease-in-out 0s;
   animation-fill-mode: forwards;
 }
 @keyframes a-opacity {
-  0%{opacity: 0;}
-  100%{opacity: 1}
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
 }
 .modal .modal-backdrop {
   z-index: 0;
@@ -140,14 +147,18 @@ export default {
   border: none;
   border-radius: 0;
 }
-.modal .modal-content{
+.modal .modal-content {
   transform: scale(0);
-  animation: a-modal-content 0.3s ease-in-out 0.3s ;
+  animation: a-modal-content 0.3s ease-in-out 0.3s;
   animation-fill-mode: forwards;
 }
 @keyframes a-modal-content {
-  0%{transform: scale(0);}
-  100%{transform: scale(1);}
+  0% {
+    transform: scale(0);
+  }
+  100% {
+    transform: scale(1);
+  }
 }
 .modal .modal-body {
   display: block;

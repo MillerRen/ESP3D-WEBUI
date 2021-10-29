@@ -56,7 +56,7 @@ export default {
     },
     computed: {
         isGrbl () {
-            return this.fwData.target_firmware=='grbl'||this.fwData.target_firmware=='grbl-embeded'
+            return this.fwData.target_firmware=='grbl'||this.fwData.target_firmware=='grbl-embedded'
         }
     }
 }

@@ -3,14 +3,17 @@
     <form class="form" @submit.prevent="submit">
       <div class="form-group">
         <label for="" class="form-control-label">User:</label>
-        <input type="text" class="form-control" v-model="user.USER" />
+        <input type="text" class="form-control" required v-model="user.user" />
       </div>
       <div class="form-group">
         <label for="" class="form-control-label">Password:</label>
-        <input type="password" class="form-control" v-model="user.PASSWORD" />
+        <input type="password" class="form-control" required v-model="user.password" />
+      </div>
+      <div class="form-grou">
+        <p class="control-static text-danger">{{msg}}</p>
       </div>
       <div class="form-group">
-        <button id="login_submit_btn" class="btn btn-primary" translate>
+        <button type="submit" class="btn btn-primary" translate>
           Submit
         </button>
       </div>
@@ -23,15 +26,21 @@ export default {
   data() {
     return {
       user: {
-        USER: "",
-        PASSWORD: "",
-        SUBMIT: "yes",
+        user: "",
+        password: ""
       },
+      msg: ''
     };
   },
   methods: {
     submit() {
-      this.$emit("update", this.user);
+      this.$store.login(this.user)
+        .then(() => {
+          this.$emit('success')
+        })
+        .catch(err => {
+          this.msg = err.message
+        })
     },
   },
 };

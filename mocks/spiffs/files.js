@@ -29,7 +29,29 @@ mock.onGet('/files', {
         path: '/',
         filename: 'index.html.gz'
     }
-}).reply(200, {})
+}).reply(200, Object.assign({}, response, {
+    files: response.files.filter(item=>item.name!='index.html.gz')
+}))
+
+mock.onGet('/files', {
+    params: {
+        action: 'deletedir',
+        path: '/',
+        filename: 'Testname'
+    }
+}).reply(200, Object.assign({}, response, {
+    files: response.files.filter(item=>item.name!='Testname')
+}))
+
+mock.onGet('/files', {
+    params: {
+        action: 'createdir',
+        path: '/',
+        filename: 'test'
+    }
+}).reply(200, Object.assign({}, response, {
+    files: response.files.concat([{name: 'test', size: -1}])
+}))
 
 mock.onPost('/files', {
 }).reply(200, {})

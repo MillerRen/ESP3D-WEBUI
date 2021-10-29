@@ -53,128 +53,125 @@
                 </button>
                 <progress v-if="uploading" name="prg" id="SPIFFS_prg" max="100"></progress>
                 &nbsp;
-                <span v-if="uploading" id="uploadSPIFFSmsg" translate>Uploading</span>
+                <span
+                    v-if="uploading"
+                    id="uploadSPIFFSmsg"
+                    translate
+                >Uploading</span>
             </div>
         </div>
-            <br />
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    <h3 class="panel-title">ESP3D Filesystem</h3>
-                </div>
-                <div class="panel-body">
-                    <div class="panel-flex-row">
-                        <button class="btn btn-primary" type="button" @click="refreshFiles">Refresh</button>
-                        &nbsp;
-                        <button
-                            @click="createDir()"
-                            class="btn btn-info btn-svg-no_pad"
-                        >
-                            <svg width="35px" height="25px" viewBox="0 0 40 30">
-                                <rect
-                                    x="5"
-                                    y="10"
-                                    width="30"
-                                    height="20"
-                                    rx="2"
-                                    ry="2"
-                                    fill="currentColor"
-                                />
-                                <rect
-                                    x="20"
-                                    y="5"
-                                    width="15"
-                                    height="15"
-                                    rx="2"
-                                    ry="2"
-                                    fill="currentColor"
-                                />
-                                <text
-                                    x="15"
-                                    y="25"
-                                    font-size="18"
-                                    font-weight="800"
-                                    fill="#5BC0DE"
-                                >+</text>
-                            </svg>
-                        </button>
-                        <div
-                            id="SPIFFS_loader"
-                            class="loader"
-                            style="width:2em;height:2em;"
-                            v-if="loading"
-                        ></div>
-                        <div id="SPIFFS_path" class="info">
-                            <table>
-                                <tr>
-                                    <td>
-                                        <button class="btn btn-link" @click="selectDir('/')">/</button>
-                                    </td>
-                                    <td v-for="p in paths" :key="p">
-                                        <button class="btn btn-link" @click="gotoDir(p)">{{ p }}</button>/
-                                    </td>
-                                </tr>
-                            </table>
-                        </div>
-                    </div>
-                    <table class="table table-striped" style="margin-bottom:20px;">
-                        <thead>
-                            <tr>
-                                <th width="0%" translate>Type</th>
-                                <th width="auto" translate>Name</th>
-                                <th translate>Size</th>
-                                <th width="0%"></th>
-                            </tr>
-                        </thead>
-                        <tbody id="SPIFFS_file_list">
-                            <tr v-for="file in dirs" :key="file.name">
-                                <td v-html="$options.filters.icon('folder-close')"></td>
-                                <td>
-                                    <button
-                                        class="btn btn-link"
-                                        @click="selectDir(currentPath + file.name + '/')"
-                                    >{{ file.name }}</button>
-                                </td>
-                                <td></td>
-                                <td>
-                                    <button
-                                        class="btn btn-danger btn-sm"
-                                        v-html="$options.filters.icon('trash')"
-                                        @click="deleteDir(file)"
-                                    ></button>
-                                </td>
-                            </tr>
-                            <tr v-for="file in files" :key="file.name">
-                                <td v-html="$options.filters.icon('file')"></td>
-                                <td>{{ file.name }}</td>
-                                <td>{{ file.size }}</td>
-                                <td>
-                                    <button
-                                        class="btn btn-danger btn-sm"
-                                        v-html="$options.filters.icon('trash')"
-                                        @click="deleteFile(file)"
-                                    ></button>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-                <div class="panel-footer panel-footer1" id="status">
-                    &nbsp;&nbsp;Status: {{ stats.status }}&nbsp;&nbsp;|&nbsp;&nbsp;Total space: {{ stats.total }}&nbsp;&nbsp;|&nbsp;&nbsp;Used space: {{ spiffs.used }}&nbsp;&nbsp;|&nbsp;&nbsp;Occupation:
-                    <meter
-                        min="0"
-                        max="100"
-                        high="90"
-                        :value="stats.occupation"
-                    ></meter>
-                    &nbsp;{{ stats.occupation }}%
-                </div>
+        <br />
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3 class="panel-title">ESP3D Filesystem</h3>
             </div>
+            <div class="panel-body">
+                <div class="panel-flex-row">
+                    <button class="btn btn-primary" type="button" @click="refreshFiles">Refresh</button>
+                    &nbsp;
+                    <button
+                        @click="createDir()"
+                        class="btn btn-info btn-svg-no_pad"
+                    >
+                        <svg width="35px" height="25px" viewBox="0 0 40 30">
+                            <rect
+                                x="5"
+                                y="10"
+                                width="30"
+                                height="20"
+                                rx="2"
+                                ry="2"
+                                fill="currentColor"
+                            />
+                            <rect
+                                x="20"
+                                y="5"
+                                width="15"
+                                height="15"
+                                rx="2"
+                                ry="2"
+                                fill="currentColor"
+                            />
+                            <text x="15" y="25" font-size="18" font-weight="800" fill="#5BC0DE">+</text>
+                        </svg>
+                    </button>
+                    <div
+                        id="SPIFFS_loader"
+                        class="loader"
+                        style="width:2em;height:2em;"
+                        v-if="loading"
+                    ></div>
+                    <div id="SPIFFS_path" class="info">
+                        <table>
+                            <tr>
+                                <td>
+                                    <button class="btn btn-link" @click="selectDir('/')">/</button>
+                                </td>
+                                <td v-for="p in paths" :key="p">
+                                    <button class="btn btn-link" @click="gotoDir(p)">{{ p }}</button>/
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+                <table class="table table-striped" style="margin-bottom:20px;">
+                    <thead>
+                        <tr>
+                            <th width="0%" translate>Type</th>
+                            <th width="auto" translate>Name</th>
+                            <th translate>Size</th>
+                            <th width="0%"></th>
+                        </tr>
+                    </thead>
+                    <tbody id="SPIFFS_file_list">
+                        <tr v-for="file in dirs" :key="file.name">
+                            <td v-html="$options.filters.icon('folder-close')"></td>
+                            <td>
+                                <button
+                                    class="btn btn-link"
+                                    @click="selectDir(currentPath + file.name + '/')"
+                                >{{ file.name }}</button>
+                            </td>
+                            <td></td>
+                            <td>
+                                <button
+                                    class="btn btn-danger btn-sm"
+                                    v-html="$options.filters.icon('trash')"
+                                    @click="deleteDir(file)"
+                                ></button>
+                            </td>
+                        </tr>
+                        <tr v-for="file in files" :key="file.name">
+                            <td v-html="$options.filters.icon('file')"></td>
+                            <td>{{ file.name }}</td>
+                            <td>{{ file.size }}</td>
+                            <td>
+                                <button
+                                    class="btn btn-danger btn-sm"
+                                    v-html="$options.filters.icon('trash')"
+                                    @click="deleteFile(file)"
+                                ></button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="panel-footer panel-footer1" id="status">
+                &nbsp;&nbsp;Status: {{ stats.status }}&nbsp;&nbsp;|&nbsp;&nbsp;Total space: {{ stats.total }}&nbsp;&nbsp;|&nbsp;&nbsp;Used space: {{ spiffs.used }}&nbsp;&nbsp;|&nbsp;&nbsp;Occupation:
+                <meter
+                    min="0"
+                    max="100"
+                    high="90"
+                    :value="stats.occupation"
+                ></meter>
+                &nbsp;{{ stats.occupation }}%
+            </div>
+        </div>
     </div>
 </template>
 
 <script>
-import spiffs from "../../models/spiffs"
-
+import { SPIFFS_URL } from "../../constants"
 export default {
     data() {
         return {
@@ -210,34 +207,44 @@ export default {
     methods: {
         deleteFile(file) {
             var that = this
-            var modal = this.$modal({
+            this.$modal({
                 title: 'Please Confirm',
-                message: 'Confirm deletion of file: ' + file.name
-            })
-            modal.$on('postive', () => {
-                spiffs
-                    .deleteFile(file.name, this.currentPath)
-                    .then(response => {
-                        that.spiffs = response
-                    })
-                    .catch(that.spiffsFailed)
-
+                message: 'Confirm deletion of file: ' + file.name,
+                okText: 'Confirm',
+                callback() {
+                    that.loading = true
+                    that.$store
+                        .deleteFile(SPIFFS_URL, {
+                            filename: file.name,
+                            path: that.currentPath
+                        })
+                        .then(response => {
+                            that.loading = false
+                            that.spiffs = response
+                        })
+                        .catch(that.spiffsFailed)
+                }
             })
         },
         deleteDir(file) {
             var that = this
-            var modal = this.$modal({
+            this.$modal({
                 title: 'Please Confirm',
-                message: 'Confirm deletion of directory: ' + file.name
-            })
-            modal.$on('postive', () => {
-                spiffs
-                    .deleteDir(file.name, that.currentPath)
-                    .then(response => {
-                        that.spiffs = response
-                    })
-                    .catch(that.spiffsFailed)
-
+                message: 'Confirm deletion of directory: ' + file.name,
+                okText: 'Confirm',
+                callback() {
+                    that.loading = true
+                    that.$store
+                        .deleteDir(SPIFFS_URL, {
+                            filename: file.name,
+                            path: that.currentPath
+                        })
+                        .then(response => {
+                            that.loading = false
+                            that.spiffs = response
+                        })
+                        .catch(that.spiffsFailed)
+                }
             })
         },
         createDir() {
@@ -245,10 +252,17 @@ export default {
             this.$modal({
                 title: 'Please enter directory name',
                 prompt: true,
-                callback(value) {
-                    spiffs
-                        .createDir(value, that.currentPath)
+                okText: 'OK',
+                callback(confirm, value) {
+                    if (!confirm) return
+                    that.loading = true
+                    this.$store
+                        .createDir(SPIFFS_URL, {
+                            filename: value,
+                            path: that.currentPath
+                        })
                         .then(response => {
+                            that.loading = false
                             that.spiffs = response
                         })
                         .catch(that.spiffsFailed)
@@ -271,7 +285,8 @@ export default {
             this.uploads = this.$refs.fileinput.files
         },
         uploadFile() {
-            return spiffs
+            this.loading = true
+            return this.$store
                 .upload(this.uploads, this.currentPath)
                 .then(this.refreshFiles)
                 .catch(this.spiffsFailed)
@@ -279,8 +294,10 @@ export default {
         },
         getFiles(path) {
             this.loading = true
-            return spiffs
-                .list(path)
+            return this.$store
+                .listFiles(SPIFFS_URL, {
+                    path
+                })
                 .then(response => {
                     this.loading = false
                     this.spiffs = response
@@ -295,7 +312,7 @@ export default {
             this.loading = false
             this.$modal({
                 title: 'Error',
-                message: err
+                message: err.message
             })
         }
     },

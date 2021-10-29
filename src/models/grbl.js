@@ -1,176 +1,226 @@
-import http from '../../lib/http'
+import Base from './base'
+import { ESP_HOST_NAME, PREFERENCES_FILE_NAME } from '../constants'
 
-const baseURL = '/command'
+const DEFAULT_PREFERENCES = [{ "language": "en", "enable_lock_UI": "false", "enable_ping": "true", "enable_DHT": "false", "enable_camera": "false", "auto_load_camera": "false", "camera_address": "", "number_extruders": "1", "is_mixed_extruder": "false", "enable_bed": "false", "enable_fan": "false", "enable_control_panel": "true", "enable_grbl_panel": "true", "interval_positions": "3", "interval_temperatures": "3", "interval_status": "3", "xy_feedrate": "1000", "z_feedrate": "100", "a_feedrate": "100", "b_feedrate": "100", "c_feedrate": "100", "e_feedrate": "400", "e_distance": "5", "enable_temperatures_panel": "false", "enable_extruder_panel": "false", "enable_files_panel": "true", "f_filters": "g;G;gco;GCO;gcode;GCODE;nc;NC;ngc;NCG;tap;TAP;txt;TXT", "enable_commands_panel": "true", "enable_autoscroll": "true", "enable_verbose_mode": "true", "enable_grbl_probe_panel": "false", "probemaxtravel": "40", "probefeedrate": "100", "probetouchplatethickness": "0.5" }]
 
-const grbl_help = {
-    "$0": "Step pulse, microseconds",
-    "$1": "Step idle delay, milliseconds",
-    "$2": "Step port invert, mask",
-    "$3": "Direction port invert, mask",
-    "$4": "Step enable invert, boolean",
-    "$5": "Limit pins invert, boolean",
-    "$6": "Probe pin invert, boolean",
-    "$10": "Status report, mask",
-    "$11": "Junction deviation, mm",
-    "$12": "Arc tolerance, mm",
-    "$13": "Report inches, boolean",
-    "$20": "Soft limits, boolean",
-    "$21": "Hard limits, boolean",
-    "$22": "Homing cycle, boolean",
-    "$23": "Homing dir invert, mask",
-    "$24": "Homing feed, mm/min",
-    "$25": "Homing seek, mm/min",
-    "$26": "Homing debounce, milliseconds",
-    "$27": "Homing pull-off, mm",
-    "$30": "Max spindle speed, RPM",
-    "$31": "Min spindle speed, RPM",
-    "$32": "Laser mode, boolean",
-    "$100": "X steps/mm",
-    "$101": "Y steps/mm",
-    "$102": "Z steps/mm",
-    "$103": "A steps/mm",
-    "$104": "B steps/mm",
-    "$105": "C steps/mm",
-    "$110": "X Max rate, mm/min",
-    "$111": "Y Max rate, mm/min",
-    "$112": "Z Max rate, mm/min",
-    "$113": "A Max rate, mm/min",
-    "$114": "B Max rate, mm/min",
-    "$115": "C Max rate, mm/min",
-    "$120": "X Acceleration, mm/sec^2",
-    "$121": "Y Acceleration, mm/sec^2",
-    "$122": "Z Acceleration, mm/sec^2",
-    "$123": "A Acceleration, mm/sec^2",
-    "$124": "B Acceleration, mm/sec^2",
-    "$125": "C Acceleration, mm/sec^2",
-    "$130": "X Max travel, mm",
-    "$131": "Y Max travel, mm",
-    "$132": "Z Max travel, mm",
-    "$133": "A Max travel, mm",
-    "$134": "B Max travel, mm",
-    "$135": "C Max travel, mm"
-
-};
-
-function create_config_entry(sentry, vindex) {
-    var iscomment;
-    var ssentry = sentry;
-    var config_entry = {}
-    if (!is_config_entry(ssentry)) return vindex;
-    while (ssentry.indexOf("\t") > -1) {
-        ssentry = ssentry.replace("\t", " ");
-    }
-    while (ssentry.indexOf("  ") > -1) {
-        ssentry = ssentry.replace("  ", " ");
-    }
-    while (ssentry.indexOf("##") > -1) {
-        ssentry = ssentry.replace("##", "#");
+export default class Grbl extends Base {
+    constructor() {
+        super()
+        this.fwData = null
+        this.settings = null
+        this.preferences = null
+        this.config = null
+        this.user = null
     }
 
-    iscomment = is_config_commented(ssentry);
-    if (iscomment) {
-        while (ssentry.indexOf("<") != -1) {
-            var m = ssentry.replace("<", "&lt;");
-            ssentry = m.replace(">", "&gt;");
+    checkLogin() {
+        return super.checkLogin()
+            .then(user => {
+                this.user = user
+                return user
+            })
+    }
+
+    login(data) {
+        return super.login({
+            USER: data.user,
+            PASSWORD: data.password,
+            SUBMIT: 'yes'
+        })
+    }
+
+    getFWData() {
+        return this.sendCommand('[ESP800]')
+            .then(response => {
+                var fwData = this.parseFWData(response)
+                this.fwData = fwData
+                return fwData
+            })
+    }
+
+    parseFWData(response) {
+        var fwData = {
+            grblaxis: 3,
+            esp_hostname: ESP_HOST_NAME
         }
-        config_entry = {
-            comment: ssentry,
-            showcomment: true,
-            index: vindex,
-            label: "",
-            help: "",
-            defaultvalue: "",
-            cmd: ""
-        };
-    } else {
-        var slabel = get_config_label(ssentry);
-        var svalue = get_config_value(ssentry);
-        var shelp = get_config_help(ssentry);
-        var scmd = get_config_command(ssentry)
-        config_entry = {
-            comment: ssentry,
-            showcomment: false,
-            index: vindex,
-            label: slabel,
-            help: shelp,
-            defaultvalue: svalue,
-            value: svalue,
-            cmd: scmd
+        var tlist = response.split("#")
+        if (tlist.length < 3) {
+            return false
         }
+        //FW version
+        var sublist = tlist[0].split(":")
+        if (sublist.length != 2) {
+            return false
+        }
+        fwData.fw_version = sublist[1].toLowerCase().trim()
+        //FW target
+        sublist = tlist[1].split(":")
+        if (sublist.length != 2) {
+            return false
+        }
+        fwData.target_firmware = sublist[1].toLowerCase().trim()
+        //FW HW
+        sublist = tlist[2].split(":")
+        if (sublist.length != 2) {
+            return false
+        }
+        var sddirect = sublist[1].toLowerCase().trim()
+        if (sddirect == "direct sd") fwData.direct_sd = true
+        else fwData.direct_sd = false
+        //primary sd
+        sublist = tlist[3].split(":")
+        if (sublist.length != 2) {
+            return false
+        }
+        if (!fwData.direct_sd && fwData.target_firmware == "smoothieware") {
+            fwData.primary_sd = "sd/"
+        } else {
+            fwData.primary_sd = sublist[1].toLowerCase().trim()
+        }
+        //secondary sd
+        sublist = tlist[4].split(":")
+        if (sublist.length != 2) {
+            return false
+        }
+        if (!fwData.direct_sd && fwData.target_firmware == "smoothieware") {
+            fwData.secondary_sd = "ext/"
+        } else {
+            fwData.secondary_sd = sublist[1].toLowerCase().trim()
+        }
+        //authentication
+        sublist = tlist[5].split(":")
+        if (sublist.length != 2) {
+            return false
+        }
+        if (sublist[0].trim() == "authentication" && sublist[1].trim() == "yes")
+            fwData.ESP3D_authentication = true
+        else fwData.ESP3D_authentication = false
+        //async communications
+        if (tlist.length > 6) {
+            sublist = tlist[6].split(":")
+            if (
+                sublist[0].trim() == "webcommunication" &&
+                sublist[1].trim() == "Async"
+            )
+                fwData.async_webcommunication = true
+            else {
+                fwData.async_webcommunication = false
+                fwData.websocket_port = sublist[2].trim()
+                if (sublist.length > 3) {
+                    fwData.websocket_ip = sublist[3].trim()
+                } else {
+                    console.log("No IP for websocket, use default")
+                    fwData.websocket_ip = document.location.hostname
+                }
+            }
+        }
+        if (tlist.length > 7) {
+            sublist = tlist[7].split(":")
+            if (sublist[0].trim() == "hostname") fwData.esp_hostname = sublist[1].trim()
+        }
+
+        if (fwData.target_firmware == "grbl-embedded" && tlist.length > 8) {
+            sublist = tlist[8].split(":")
+            if (sublist[0].trim() == "axis") {
+                fwData.grblaxis = parseInt(sublist[1].trim())
+            }
+        }
+
+        return fwData
     }
 
-    return config_entry
-}
-//check it is valid entry
-function is_config_entry(sline) {
-    var line = sline.trim();
-    if (line.length == 0) return false;
-    if ((line.indexOf("$") == 0) && (line.indexOf("=") != -1)) return true;
-    else return false
-
-}
-
-function get_config_label(sline) {
-
-    var tline2 = sline.trim().split("=");
-    return tline2[0];
-
-}
-
-function get_config_value(sline) {
-
-    var tline2 = sline.trim().split("=");
-    if (tline2.length > 1) return tline2[1];
-    else return "???";
-}
-
-function get_config_help(sline) {
-
-    return inline_help(get_config_label(sline))
-
-}
-
-function inline_help(label) {
-    var shelp = "";
-    shelp = grbl_help[label];
-    if (typeof shelp === 'undefined') shelp = "";
-    return shelp;
-}
-
-
-function get_config_command(sline) {
-
-    return get_config_label(sline) + "=";
-
-}
-
-function is_config_commented() {
-    return false;
-}
-
-function parseConfig(str) {
-    var config = []
-    var lines = str.split('\n')
-    for (var i = 0; i < lines.length; i++) {
-        var line = lines[i]
-        config.push(create_config_entry(line, i))
+    getSettings() {
+        return this.sendCommand('[ESP400]')
+            .then(response => {
+                if (!response.EEPROM) {
+                    throw new Error('wrong data')
+                }
+                let settings = this.parseSettings(response.EEPROM)
+                return settings
+            })
     }
 
-    return config
-}
-
-function getConfig() {
-    return http.get(baseURL, {
-        params: {
-            plain: '$$'
+    parseSettings(settings) {
+        var setting_configList = []
+        for (var vindex in settings) {
+            var sentry = settings[vindex]
+            var slabel = sentry.H;
+            var svalue = sentry.V;
+            var scmd = "[ESP401]P=" + sentry.P + " T=" + sentry.T + " V=";
+            var options = [];
+            var min;
+            var max;
+            if (typeof sentry.M !== 'undefined') {
+                min = sentry.M;
+            } else { //add limit according the type
+                if (sentry.T == "B") min = -127
+                else if (sentry.T == "S") min = 0
+                else if (sentry.T == "A") min = 7
+                else if (sentry.T == "I") min = 0
+            }
+            if (typeof sentry.S !== 'undefined') {
+                max = sentry.S;
+            } else { //add limit according the type
+                if (sentry.T == "B") max = 255;
+                else if (sentry.T == "S") max = 255;
+                else if (sentry.T == "A") max = 15;
+                else if (sentry.T == "I") max = 2147483647;
+            }
+            //list possible options if defined
+            if (typeof sentry.O !== 'undefined') {
+                for (var i in sentry.O) {
+                    var val = sentry.O[i];
+                    for (var j in val) {
+                        var sub_key = j;
+                        var sub_val = val[j];
+                        sub_val = sub_val.trim();
+                        sub_key = sub_key.trim();
+                        var option = {
+                            id: sub_val,
+                            display: sub_key
+                        };
+                        options.push(option);
+                        //console.log("*" + sub_key + "* and *" + sub_val + "*");
+                    }
+                }
+            }
+            svalue = svalue.trim();
+            //create entry in list
+            var config_entry = {
+                index: vindex,
+                F: sentry.F,
+                label: slabel,
+                defaultvalue: svalue,
+                value: svalue,
+                cmd: scmd,
+                Options: options,
+                min_val: min,
+                max_val: max,
+                type: sentry.T,
+                pos: sentry.P
+            };
+            setting_configList.push(config_entry);
         }
-    }).then(response => {
-        response = parseConfig(response)
-        return response
-    })
-}
 
-export default {
-    getConfig
-}
+        return setting_configList
+    }
 
+    getPreferences() {
+        return this.sendGetHttp(PREFERENCES_FILE_NAME)
+            .then((response) => {
+                var preferences
+                if (typeof response == 'string' && response.indexOf("<HTML>") != -1) {
+                    preferences = DEFAULT_PREFERENCES[0]
+                } else {
+                    preferences = response[0]
+                }
+                this.preferences = preferences
+                return preferences
+            })
+            .catch((err) => {
+                console.log(err)
+            })
+    }
+
+    
+}

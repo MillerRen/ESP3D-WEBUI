@@ -33,7 +33,7 @@
                 &nbsp;
                 <progress name='prg' id='macrodlg_prg' max='100'></progress>
                 &nbsp;
-                <span id="macrodlg_upload_percent">0</span>%</td>
+                <span id="macrodlg_upload_percent">0</span>%
             </div>
             <span class="pull-right">
                 <button class="btn btn-warning" onclick="closeMacroDialog()" translate>Cancel</button>

@@ -1,32 +1,15 @@
-import http from '../../lib/http'
+import commands from './commands'
 
-const baseURL = '/updatefw'
-
-function command(command) {
-    return http.get('/command', {
-        params: {
-            plain: command
-        }
-    })
+function getFWData () {
+    return commands.sendCommand('[ESP800]')
+        .then(res => parseFWData(res))
 }
 
-function getFW() {
-    return command('[ESP800]')
-        .then(response => {
-            var fw = _parseFWData(response)
-            if (!fw) throw new Error('unknown firmware')
-            return fw
-        })
-}
-
-
-
-function _parseFWData(response) {
+function parseFWData(response) {
     var fwData = {
         grblaxis: 3
     }
     var tlist = response.split("#")
-    //FW version:0.9.200 # FW target:smoothieware # FW HW:Direct SD # primary sd:/ext/ # secondary sd:/sd/ # authentication: yes
     if (tlist.length < 3) {
         return false
     }
@@ -112,19 +95,6 @@ function _parseFWData(response) {
     return fwData
 }
 
-function updateFW (files) {
-    var formData = new FormData();
-    for (var i = 0; i < files.length; i++) {
-        var file = files[i];
-        var arg = "/" + file.name + "S";
-        //append file size first to check updload is complete
-        formData.append(arg, file.size);
-        formData.append('myfile[]', file, "/" + file.name);
-    }
-    return http.post(baseURL, formData)
-}
-
 export default {
-    getFW,
-    updateFW
+    getFWData
 }

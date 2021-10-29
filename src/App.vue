@@ -1,26 +1,18 @@
 <template>
-  <main id="app">
-    <Navbar :fwData="fwData" @showModal="showModal" />
+  <main id="app" v-if="initialized">
+    <Navbar :fwData="fwData" />
     <br />
-    <Tabs v-model="mainTab" :preferences="preferences" />
+    <Tabs v-model="mainTab"  :fwData="fwData" />
     <br />
-    <ConfigPanel v-if="mainTab == 'printer'" :fwData="fwData" />
-    <DashboardPanel v-if="mainTab == 'dashboard'" :fwData="fwData" :preferences="preferences" />
-    <CameraPanel v-if="mainTab == 'camera'" :fwData="fwData" />
-    <UpdatePanel
-      v-if="mainTab == 'update'"
-      v-model="settings"
-      :fwData="fwData"
-    />
-    <SettingsPanel v-if="mainTab == 'settings'" v-model="settings" />
+    <ConfigPanel v-if="mainTab == 'printer'"  :fwData="fwData" />
+    <DashboardPanel v-if="mainTab == 'dashboard'"  :fwData="fwData" />
+    <CameraPanel v-if="mainTab == 'camera'"  :fwData="fwData" />
+    <UpdatePanel v-if="mainTab == 'update'"  :fwData="fwData" />
+    <SettingsPanel v-if="mainTab == 'settings'"  :fwData="fwData" />
   </main>
 </template>
 
 <script>
-// import preferences from "./models/preferences";
-// import auth from './models/auth'
-// import websocket from './models/websocket'
-import store from "./store";
 
 import Navbar from "./components/Layout/Navbar.vue";
 import Tabs from "./components/Layout/Tabs.vue";
@@ -29,14 +21,6 @@ import ConfigPanel from "./components/Tabs/Config.vue";
 import CameraPanel from "./components/Tabs/Camera.vue";
 import DashboardPanel from "./components/Tabs/Dashboard.vue";
 import UpdatePanel from "./components/Tabs/Update.vue";
-
-// import StatusModal from "./components/Modals/StatusModal.vue"
-import SetupModal from "./components/Modals/SetupModal.vue";
-import CreditsModal from "./components/Modals/CreditsModal.vue";
-import LoginModal from "./components/Modals/LoginModal.vue";
-import PreferenceModal from "./components/Modals/PreferenceModal.vue";
-import PasswordModal from "./components/Modals/PasswordModal.vue";
-// import WiFiModal from "./components/Modals/WiFiModal.vue"
 
 export default {
   name: "App",
@@ -47,209 +31,107 @@ export default {
     ConfigPanel,
     DashboardPanel,
     CameraPanel,
-    SettingsPanel,
-    // WiFiModal
+    SettingsPanel
   },
   data() {
     return {
       mainTab: "dashboard",
-    }
-  },
-  computed: {
-    fwData () {
-      return store.fwData
-    },
-    settings () {
-      return store.settings
+      initialized: false,
+      fwData: {}
     }
   },
   methods: {
-    getFWInfo() {
-      return firmware
-        .getFW()
-        .then(response => {
-          // replace specific firmware
-          // firmware = TargetFirmware.createFirmware(response.target_firmware)
-        })
-        .then((response) => {
-          Object.assign(this.fwData, response);
-          this.startWebsocket()
-          document.title = response.esp_hostname || "ESP3D WebUI";
-          this.connectionModal.close();
-          
-          return response;
-        })
-        .catch((err) => {
-          this.connectionModal.message = err.message;
-          this.connectionModal.okText = "retry";
-        });
-    },
-    getSettings() {
-      return store
-        .getSettings()
-        .then((response) => {
-          this.settings = response;
-          return response
+    // boot step 1
+    getFWData() {
+      this.connectModal.data.bootStep = 1
+      this.connectModal.data.error = false
+      this.connectModal.okText = ''
+
+      return this.$store.getFWData()
+        .then((fwData) => {
+          console.log("Fw identification:", fwData)
+          this.fwData = fwData
+          document.title = fwData.esp_hostname
+          if (fwData.ESP3D_authentication) {
+            this.checkLogin()
+            return
+          }
+          this.getSettings()
         })
         .catch((err) => {
-          this.$modal({
-            title: "Error",
-            message: err.message,
-          });
-        });
+          this.connectModal.data.error = true
+          this.connectModal.okText = 'Retry'
+          console.log(err)
+        })
     },
-    getPreferences() {
-      return store
-        .getPreferences()
-        .then((response) => {
-          this.preferences = response;
-        });
+    checkLogin() {
+      return this.$store.checkLogin()
+        .then(user => {
+          if (user.need_auth) {
+            this.connectModal.close()
+            this.login()
+            return
+          }
+          this.getSettings()
+        })
+        .catch(err => {
+          console.log(err)
+          this.login()
+        })
     },
-    updatePreferences(preferences) {
-      return store
-        .updatePreferences(preferences)
-    },
-    scanWifi() {
-      // return commands
-      //   .scanWifi()
-      //   .then((response) => {
-      //     this.wifiList = response;
-      //   });
-    },
-    login(data) {
-      return auth.login(data);
-    },
-    startWebsocket () {
-      store.startSocket(this.fwData, (msg) => {
-        console.log(msg)
-      })
-    },
-    showModal(name) {
-      let method = `show${name}Modal`;
-      if (!this[method]) {
-        throw new Error(`Unknown method: ${method}`);
-      }
-      this[method].call(this, name);
-    },
-    showCreditsModal() {
-      this.$modal(
-        {
-          title: "Credits",
-        },
-        CreditsModal
-      );
-    },
-    showPreferenceModal() {
+    login() {
       var that = this
-      var modal = this.$modal(
-        {
-          title: "Perference",
-          data: {
-            preferences: this.preferences
-          },
-          okText: '',
-          cancelText: '',
-          events: {
-            save() {
-              console.log('save');
-              that.updatePreferences(that.preferences)
-            },
-            cancel() {
-              modal.close()
-            }
-          },
-        },
-        PreferenceModal
-      );
-    },
-    showSetupModal() {
-      this.$modal(
-        {
-          title: "Setup",
-          data: this.preferences,
-          events: {
-            update(data) {
-              console.log(data);
-            },
-          },
-        },
-        SetupModal
-      );
-    },
-    showLoginModal() {
-      let that = this
-      return new Promise((resolve, reject) => {
-        this.$modal(
-          {
-            title: "Login",
-            size: 'sm',
-            okText: '',
-            cancelText: '',
-            closeable: false,
-            events: {
-              update(data) {
-                that.login(data)
-                  .then(() => {
-                    resolve(data);
-                  })
-                  .catch((err) => {
-                    reject(err);
-                  });
-              },
-            },
-          },
-          LoginModal
-        );
-      });
-    },
-    showPasswordModal() {
-      this.$modal(
-        {
-          title: "Change Password",
-          data: this.preferences,
-          events: {
-            update(data) {
-              console.log(data);
-            },
-          },
-        },
-        PasswordModal
-      );
-    },
-    boot () {
-      this.connectionModal = this.$modal({
-      title: "Connecting",
-      message: "Connecting...",
-      closeable: false,
-      autoClose: false,
-      okText: "",
-      cancelText: "",
-    });
-    this.connectionModal.$on("postive", () => {
-      this.getFWInfo();
-      this.connectionModal.message = "Connecting...";
-    });
-    this.getFWInfo()
-      .then((fwData) => {
-        if (!fwData) return;
-        if (fwData.ESP3D_authentication) {
-          return this.showLoginModal(); // should return new promise
+      that.loginModal = this.$modal({
+        title: 'Identification requested',
+        events: {
+          success () {
+            that.loginModal.close()
+            that.boot()
+          }
         }
-        return fwData;
-      })
-      .then((fwData) => {
-        if (!fwData) return;
-        return this.getSettings();
-      })
-      .then((settings) => {
-        if (!settings) return;
-        return this.getPreferences();
-      });
+      }, 'LoginModal')
+    },
+    // boot step 2
+    getSettings() {
+      this.connectModal.data.bootStep = 2
+      return this.$store.getSettings()
+        .then(() => {
+          this.getPreferences()
+        })
+        .catch(err => {
+          this.connectModal.message = err.message
+        })
+    },
+    // boot step 3
+    getPreferences () {
+      this.connectModal.data.bootStep = 3
+      return this.$store.getPreferences()
+        .then(() => {
+          this.connectModal.data.bootStep = 4
+          this.connectModal.close()
+          this.initialized = true
+        })
+    },
+    boot() {
+      var that = this
+      this.connectModal = this.$modal({
+        title: 'Connecting ESP3D...',
+        closeable: false,
+        autoClose: false,
+        data: {
+          bootStep: 0,
+          error: false
+        },
+        callback() {
+          that.getFWData()
+        }
+      }, 'ConnectModal')
+      this.getFWData()
     }
   },
   mounted() {
-    store.bootstrap()
-  },
+    this.boot()
+  }
 };
 </script>
 

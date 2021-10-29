@@ -14,8 +14,9 @@
                                 <td>&nbsp;&nbsp;</td>
                                 <td>
                                     <button
+                                        v-if="fwData.target_firmware != 'smoothieware' && fwData.target_firmware != 'grbl'"
                                         @click="createDir()"
-                                        class="btn btn-info btn-xs hide_it"
+                                        class="btn btn-info btn-xs"
                                         style="padding: -2px 2px 0x 0px;"
                                     >
                                         <svg width="1.5em" height="1.2em" viewBox="5 10 30 10">
@@ -53,11 +54,7 @@
                                 </td>
                                 <td>&nbsp;&nbsp;</td>
                                 <td>
-                                    <div
-                                        v-if="loading"
-                                        style="width:1em;height:1em"
-                                        class="loader"
-                                    ></div>
+                                    <div v-if="loading" style="width:1em;height:1em" class="loader"></div>
                                 </td>
                             </tr>
                         </table>
@@ -101,51 +98,47 @@
                             </button>
                             &nbsp;
                             <button
+                                v-if="fwData.target_firmware != 'smoothieware' && fwData.target_firmware != 'grbl'"
+                                v-show="!preferences.has_TFT_SD=='true'&&!preferences.has_TFT_USB=='true'"
                                 class="btn btn-xs btn-primary"
                                 @click="getFiles(currentPath)"
                                 translate
                             >Refresh</button>
                             <button
-                                class="btn btn-xs btn-primary hide_it"
-                                id="files_refresh_primary_sd_btn"
-                                onclick="files_refreshFiles(primary_sd)"
+                                class="btn btn-xs btn-primary"
+                                v-if="fwData.target_firmware == 'smoothieware' && fwData.primary_sd.toLowerCase() != 'none'"
+                                @click="refreshSD1()"
                             >SD 1</button>
                             &nbsp;
                             <button
-                                class="btn btn-xs btn-primary hide_it"
-                                id="files_refresh_secondary_sd_btn"
-                                onclick="files_refreshFiles(secondary_sd)"
+                                class="btn btn-xs btn-primary"
+                                v-if="fwData.target_firmware == 'smoothieware' && fwData.primary_sd.toLowerCase() != 'none'"
+                                @click="refreshSD2()"
                             >SD 2</button>
                             &nbsp;
-                            <span
-                                class="hide_it"
-                                id="files_refresh_printer_sd_btn"
-                            >
-                                <button
-                                    class="btn btn-xs btn-primary"
-                                    onclick="current_source = printer_sd ;files_refreshFiles(files_currentPath)"
-                                >SD</button>
-                                &nbsp;
-                            </span>
-                            <span class="hide_it" id="files_refresh_tft_sd_btn">
-                                <button
-                                    class="btn btn-xs btn-primary"
-                                    onclick="current_source = tft_sd ;files_refreshFiles(files_currentPath)"
-                                >TFT SD</button>
-                                &nbsp;
-                            </span>
-                            <span class="hide_it" id="files_refresh_tft_usb_btn">
-                                <button
-                                    class="btn btn-xs btn-primary"
-                                    onclick="current_source = tft_usb ;files_refreshFiles(files_currentPath)"
-                                >TFT USB</button>
-                                &nbsp;
-                            </span>
+                            <button
+                                class="btn btn-xs btn-primary"
+                                @click="refreshPrinterSD()"
+                                v-show="preferences.has_TFT_SD=='true'||preferences.has_TFT_USB=='true'"
+                                v-if="fwData.target_firmware!='grbl'"
+                            >SD</button>
+                            &nbsp;
+                            <button
+                                class="btn btn-xs btn-primary"
+                                @click="refreshTFTSD"
+                                v-if="preferences.has_TFT_SD=='true'"
+                            >TFT SD</button>
+                            &nbsp;
+                            <button
+                                class="btn btn-xs btn-primary"
+                                @click="refreshTFTUSB"
+                                v-if="preferences.has_TFT_USB=='true'"
+                            >TFT USB</button>
+                            &nbsp;
                             <button
                                 v-if="fwData.target_firmware == 'grbl' || fwData.target_firmware == 'grbl-embeded'"
                                 id="progress_btn"
                                 class="btn btn-xs btn-primary"
-                                onclick="files_progress()"
                                 translate
                             >Progress</button>
                             &nbsp;
@@ -158,7 +151,7 @@
                             >Abort</button>
                             &nbsp;
                             <button
-                                id="print_upload_btn"
+                                v-if="fwData.target_firmware != 'grbl'"
                                 class="btn btn-xs btn-primary"
                                 onclick="files_select_upload()"
                                 translate
@@ -258,13 +251,16 @@
 </template>
 
 <script>
-import files from "../../models/files"
+import { UPLOAD_URL } from "../../constants"
 export default {
     props: {
         fwData: {
             type: Object,
             default() {
-                return {}
+                return {
+                    primary_sd: '',
+                    secondary_sd: ''
+                }
             }
         }
     },
@@ -278,63 +274,139 @@ export default {
         }
     },
     computed: {
+        baseURL() {
+            return UPLOAD_URL
+        },
         files() {
             return this.sdfs.files.filter(item => !item.isdir)
         },
         dirs() {
             return this.sdfs.files.filter(item => item.isdir)
+        },
+        preferences() {
+            return this.$store.preferences
         }
     },
     methods: {
-        getFiles(path) {
-            this.loading = true
-            return files.getFiles(path)
-                .then(response => {
-                    this.sdfs = response
-                    this.loading = false
-                })
-                .catch(err => {
-                    this.loading = false
-                    this.$modal({
-                        title: 'Error',
-                        message: err.message
-                    })
-                })
-        },
         deleteFile(file) {
-            let modal = this.$modal({
-                title: 'Please Confirm'
-            })
-            modal.$on('postive', () => {
-                file.isdir ? files.deleteDir(file.name) : files.deleteFile(file.name)
+            var that = this
+            this.$modal({
+                title: 'Please Confirm',
+                message: 'Confirm deletion of file: ' + file.name,
+                okText: 'Confirm',
+                callback() {
+                    that.loading = true
+                    that.$store
+                        .deleteFile(that.baseURL, {
+                            filename: file.name,
+                            path: that.currentPath
+                        })
+                        .then(response => {
+                            that.loading = false
+                            that.sdfs = response
+                        })
+                        .catch(that.sdfsFailed)
+                }
             })
         },
-        printFile(file) {
-            this.loading = true
-            files.printFile(file)
-                .then(() => {
-                    this.loading = false
-                })
-                .catch(err => {
-                    this.loading = false
-                    this.$modal({
-                        title: 'Error',
-                        message: err.message
-                    })
-                })
+        deleteDir(file) {
+            var that = this
+            this.$modal({
+                title: 'Please Confirm',
+                message: 'Confirm deletion of directory: ' + file.name,
+                okText: 'Confirm',
+                callback() {
+                    that.loading = true
+                    that.$store
+                        .deleteDir(that.baseURL, {
+                            filename: file.name,
+                            path: that.currentPath
+                        })
+                        .then(response => {
+                            that.loading = false
+                            that.sdfs = response
+                        })
+                        .catch(that.sdfsFailed)
+                }
+            })
         },
         createDir() {
+            var that = this
             this.$modal({
                 title: 'Please enter directory name',
                 prompt: true,
-                callback(value) {
-                    files.createDir(value)
+                okText: 'OK',
+                callback(confirm, value) {
+                    if (!confirm) return
+                    that.loading = true
+                    this.$store
+                        .createDir(that.baseURL, {
+                            filename: value,
+                            path: that.currentPath
+                        })
+                        .then(response => {
+                            that.loading = false
+                            that.sdfs = response
+                        })
+                        .catch(that.sdfsFailed)
+
                 }
+            })
+        },
+        selectDir(path) {
+            this.loading = true
+            this.currentPath = path
+            this.getFiles(path)
+                .catch(this.sdfsFailed)
+
+        },
+        gotoDir(path) {
+            let index = this.paths.indexOf(path)
+            this.selectDir('/' + this.paths.slice(0, index + 1).join('/') + '/')
+        },
+        checkFiles() {
+            this.uploads = this.$refs.fileinput.files
+        },
+        uploadFile() {
+            this.loading = true
+            return this.$store
+                .upload(this.uploads, this.currentPath)
+                .then(this.refreshFiles)
+                .catch(this.sdfsFailed)
+
+        },
+        getFiles(path) {
+            this.loading = true
+            return this.$store
+                .listFiles(this.baseURL, {
+                    path
+                })
+                .then(response => {
+                    this.loading = false
+                    this.sdfs = response
+                })
+                .catch(this.sdfsFailed)
+
+        },
+        refreshFiles() {
+            return this.getFiles(this.currentPath)
+        },
+        refreshSD() { },
+        refreshSD1() { },
+        refreshSD2() { },
+        refreshTFTSD() { },
+        refreshTFTUSB() { },
+        refreshPrinterSD() { },
+        sdfsFailed(err) {
+            this.loading = false
+            this.$modal({
+                title: 'Error',
+                message: err.message
             })
         }
     },
     mounted() {
-        this.getFiles(this.currentPath)
+        this.fwData.direct_sd && this.getFiles(this.currentPath)
     }
 }
 </script>

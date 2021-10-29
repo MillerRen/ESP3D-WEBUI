@@ -1,32 +1,14 @@
 import Vue from 'vue'
-import firmware from './models/firmware'
-import grbl from './models/grbl'
+const TargetFirmware = require('./models/' + process.env.VUE_APP_TARGET_ENV).default
 
-var fw = null
-
-const store = Vue.observable({
-    fwData: null
-})
-
-function createTargetFirmware(target){
-    switch (target) {
-        case 'grbl':
-            return grbl
-    }
+if(process.env.NODE_ENV == 'development') {
+    console.log('target:' + process.env.VUE_APP_TARGET_ENV)
 }
 
-function bootstrap (callback) {
-    var step = 1
-    return firmware.getFWData()
-        .then(fwData => {
-            fw = createTargetFirmware(fwData.target_firmware)
-            store.fwData = fwData
-            callback&&callback(step++)`1`
-        })
-        .then(fw.getSettings)
-}
+const fw = new TargetFirmware()
 
-export default {
-    store,
-    bootstrap
-}
+const store = Vue.observable(fw)
+
+Vue.prototype.$store = store
+
+export default store

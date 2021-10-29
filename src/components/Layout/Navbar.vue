@@ -3,7 +3,7 @@
      <div class="navbar-header">
          <span class="navbar-brand">
              <span translate>ESP3D for </span>
-             <span id='fwName'> {{fws[fwData.target_firmware||'']}} </span>
+             <span> {{fwName}} </span>
              <span id='showSDused' v-if="fwData.direct_sd"> SD </span>
          </span>
      </div>
@@ -144,45 +144,41 @@
 </template>
 
 <script>
+import {FIRMWARE_NAMES} from '../../constants'
 export default {
-    props: {
-        fwData: {
-            type: Object,
-            default () {
-                return {}
-            }
-        }
-    },
-    data () {
-        return {
-            fws: {
-                'repetier': 'Repetier',
-                'repetier4davinci': 'Repetier for Davinci',
-                'smoothieware': 'Smoothieware',
-                'grbl-embedded': 'GRBL ESP32',
-                'marlin-embedded': 'Marlin ESP32',
-                'marlin': 'Marlin',
-                'marlinkimbra': 'Marlin Kimbra',
-                'grbl': 'Grbl',
-                '': 'Unknown'
-            }
+    computed: {
+        fwName () {
+            return FIRMWARE_NAMES[this.$store.fwData.target_firmware]
+        },
+        fwData () {
+            return this.$store.fwData
         }
     },
     methods: {
         showpreferencesdlg () {
-            this.$emit('showModal', 'Preference')
+            this.$modal({
+                title: 'Preferences'
+            }, 'PreferencesModal')
         },
         setupdlg () {
-            this.$emit('showModal', 'Setup')
+            this.$modal({
+                title: 'Setup'
+            }, 'SetupModal')
         },
         passworddlg () {
-            this.$emit('showModal', 'Password')
+            this.$modal({
+                title: 'Change Password'
+            }, 'PasswordModal')
         },
         creditsdlg () {
-            this.$emit('showModal', 'Credits')
+            this.$modal({
+                title: 'Credits'
+            }, 'CreditsModal')
         },
         logindlg () {
-            this.$emit('showModal', 'Login')
+            this.$modal({
+                title: 'Login'
+            }, 'LoginModal')
         }
     }
 }
