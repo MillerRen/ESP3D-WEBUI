@@ -17,11 +17,10 @@
 </template>
 
 <script>
-import preferences from "./models/preferences";
-import firmware from "./models/firmware";
-import settings from "./models/settings";
-import auth from './models/auth'
-import websocket from './models/websocket'
+// import preferences from "./models/preferences";
+// import auth from './models/auth'
+// import websocket from './models/websocket'
+import store from "./store";
 
 import Navbar from "./components/Layout/Navbar.vue";
 import Tabs from "./components/Layout/Tabs.vue";
@@ -54,30 +53,24 @@ export default {
   data() {
     return {
       mainTab: "dashboard",
-      fwData: {
-        ui_version: "2.1b75",
-        fw_version: "",
-        direct_sd: "",
-        primary_sd: "",
-        secondary_sd: "",
-        ESP3D_authentication: "",
-        async_webcommunication: "",
-        websocket_port: "",
-        websocket_ip: document.location.hostname,
-        esp_hostname: "",
-        target_firmware: "",
-        grblaxis: "3",
-      },
-      settings: null,
-      preferences: {},
-      status: "",
-      wifiList: [],
-    };
+    }
+  },
+  computed: {
+    fwData () {
+      return store.fwData
+    },
+    settings () {
+      return store.settings
+    }
   },
   methods: {
     getFWInfo() {
       return firmware
         .getFW()
+        .then(response => {
+          // replace specific firmware
+          // firmware = TargetFirmware.createFirmware(response.target_firmware)
+        })
         .then((response) => {
           Object.assign(this.fwData, response);
           this.startWebsocket()
@@ -92,7 +85,7 @@ export default {
         });
     },
     getSettings() {
-      return settings
+      return store
         .getSettings()
         .then((response) => {
           this.settings = response;
@@ -106,14 +99,14 @@ export default {
         });
     },
     getPreferences() {
-      return preferences
+      return store
         .getPreferences()
         .then((response) => {
           this.preferences = response;
         });
     },
     updatePreferences(preferences) {
-      return preferences
+      return store
         .updatePreferences(preferences)
     },
     scanWifi() {
@@ -127,7 +120,7 @@ export default {
       return auth.login(data);
     },
     startWebsocket () {
-      websocket.startSocket(this.fwData, (msg) => {
+      store.startSocket(this.fwData, (msg) => {
         console.log(msg)
       })
     },
@@ -223,9 +216,8 @@ export default {
         PasswordModal
       );
     },
-  },
-  mounted() {
-    this.connectionModal = this.$modal({
+    boot () {
+      this.connectionModal = this.$modal({
       title: "Connecting",
       message: "Connecting...",
       closeable: false,
@@ -253,6 +245,10 @@ export default {
         if (!settings) return;
         return this.getPreferences();
       });
+    }
+  },
+  mounted() {
+    store.bootstrap()
   },
 };
 </script>
