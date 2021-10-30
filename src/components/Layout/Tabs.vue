@@ -67,23 +67,7 @@
             />
           </g>
         </svg>
-        <span translate>Settings</span>
-      </button>
-      <button
-        class="tablinks"
-        :class="{ active: value == 'update' }"
-        @click="opentab('update')"
-        id="settingtablink"
-      >
-        <svg width="1.3em" height="1.2em" viewBox="0 0 1300 1200">
-          <g transform="translate(50,1200) scale(1, -1)">
-            <path
-              fill="currentColor"
-              d="M212 1198h780q86 0 147 -61t61 -147v-416q0 -51 -18 -142.5t-36 -157.5l-18 -66q-29 -87 -93.5 -146.5t-146.5 -59.5h-572q-82 0 -147 59t-93 147q-8 28 -20 73t-32 143.5t-20 149.5v416q0 86 61 147t147 61zM600 1045q-70 0 -132.5 -11.5t-105.5 -30.5t-78.5 -41.5 t-57 -45t-36 -41t-20.5 -30.5l-6 -12l156 -243h560l156 243q-2 5 -6 12.5t-20 29.5t-36.5 42t-57 44.5t-79 42t-105 29.5t-132.5 12zM762 703h-157l195 261z"
-            />
-          </g>
-        </svg>
-        <span translate>Update</span>
+        <span translate>ESP3D</span>
       </button>
     </div>
   </div>

@@ -20,14 +20,12 @@ import SettingsPanel from "./components/Tabs/Settings.vue";
 import ConfigPanel from "./components/Tabs/Config.vue";
 import CameraPanel from "./components/Tabs/Camera.vue";
 import DashboardPanel from "./components/Tabs/Dashboard.vue";
-import UpdatePanel from "./components/Tabs/Update.vue";
 
 export default {
   name: "App",
   components: {
     Navbar,
     Tabs,
-    UpdatePanel,
     ConfigPanel,
     DashboardPanel,
     CameraPanel,

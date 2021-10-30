@@ -1,11 +1,6 @@
 <template>
     <div class="container-fluid" id="SPIFFS">
-        <div class="panel panel-default">
-            <div class="panel-heading">
-                <h3 class="panel-title">ESP3D Firmware Update</h3>
-            </div>
-            
-        </div>
+        
         <br />
         <div class="panel panel-default">
             <div class="panel-heading">
