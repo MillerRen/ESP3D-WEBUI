@@ -78,7 +78,7 @@
                 class="form-control w8"
                 type="number"
                 min="1"
-                :value="preferences.xy_feedrate"
+                v-model="preferences.xy_feedrate"
               />
               <span class="input-group-addon form_control" translate>mm/min</span>
             </td>
@@ -97,7 +97,7 @@
                 class="form-control w5"
                 type="number"
                 min="1"
-                :value="preferences.z_feedrate"
+                v-model="preferences.z_feedrate"
                 onchange="onZvelocityChange()"
               />
               <span class="input-group-addon form_control" translate>mm/min</span>

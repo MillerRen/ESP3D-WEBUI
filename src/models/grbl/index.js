@@ -106,6 +106,11 @@ export default class Grbl extends Base {
     homeZ () {
         return this.sendCommandText('$HZ')
     }
+
+    jog (cmd, feedrate) {
+        let command = "$J=G91 G21 F" + feedrate + " " + cmd
+        return this.sendCommandText(command)
+    }
     
 }
 
