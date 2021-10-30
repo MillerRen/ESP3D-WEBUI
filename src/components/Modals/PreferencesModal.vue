@@ -856,14 +856,21 @@
         </div>
       </div>
     </div>
-    <div class="row">
+    <div class="clearfix">
+      <div class="pull-left" v-if="uploading">
+                <span translate>Saving</span>
+                &nbsp;
+                <progress name="prg" id="preferencesdlg_prg" max="100"></progress>
+                &nbsp;
+                <!-- <span id="preferencesdlg_upload_percent">0</span>% -->
+            </div>
       <span class="pull-right">&nbsp;&nbsp;</span>
       <span class="pull-right">
         <button class="btn btn-warning" @click="$emit('cancel')" translate>Cancel</button>
       </span>
       <span class="pull-right">&nbsp;&nbsp;</span>
       <span class="pull-right">
-        <button class="btn btn-primary" @click="$emit('save')" translate>Save</button>
+        <button class="btn btn-primary" @click="save" translate>Save</button>
       </span>
     </div>
   </div>
@@ -879,9 +886,28 @@ export default {
       },
     },
   },
+  data () {
+    return {
+      uploading: false
+    }
+  },
   computed: {
     number_extruders () {
       return this.preferences.is_mixed_extruder ? 9 : 2
+    }
+  },
+  methods: {
+    save () {
+      this.uploading = true
+      this.$store.updatePreferences(this.preferences)
+        .then(() => {
+          this.uploading = false
+          this.$emit('success')
+        })
+        .catch(err => {
+          this.uploading = false
+          console.log(err)
+        })
     }
   }
 };

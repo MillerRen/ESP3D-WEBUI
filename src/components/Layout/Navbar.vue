@@ -156,8 +156,19 @@ export default {
     },
     methods: {
         showpreferencesdlg () {
-            this.$modal({
-                title: 'Preferences'
+            var modal = this.$modal({
+                title: 'Preferences',
+                data: {
+                    preferences: this.$store.preferences
+                },
+                events: {
+                    success () {
+                        modal.close()
+                    },
+                    cancel () {
+                        modal.close()
+                    }
+                }
             }, 'PreferencesModal')
         },
         setupdlg () {

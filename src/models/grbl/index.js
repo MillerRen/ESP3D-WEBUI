@@ -70,6 +70,18 @@ export default class Grbl extends Base {
             })
     }
 
+    updatePreferences (preferences) {
+        var blob = new Blob([JSON.stringify([preferences], null, " ")], {
+            type: 'application/json'
+        });
+        var file = new File([blob], PREFERENCES_FILE_NAME);
+        var formData = new FormData();
+        formData.append('path', '/');
+        formData.append('myfile[]', file, PREFERENCES_FILE_NAME);
+
+        return this.sendFileHttp(PREFERENCES_FILE_NAME, formData)
+    }
+
     getConfig () {
         return this.sendCommand('$$')
             .then(response => Config.parseConfig(response))
