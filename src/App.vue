@@ -116,7 +116,15 @@ export default {
           this.connectModal.data.bootStep = 4
           this.connectModal.close()
           this.initialized = true
+          if (this.fwData.target_firmware=='???') {
+            this.setup()
+          }
         })
+    },
+    setup () {
+      this.$modal({
+        closeable: false
+      }, 'SetupModal')
     },
     boot() {
       var that = this
