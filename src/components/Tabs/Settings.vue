@@ -56,9 +56,9 @@
         <br>
         <span id="settings_status"></span>
         <hr>
-        <Settings v-if="tab=='settings'" />
+        <Settings v-if="tab=='settings'" ref="settings" />
         <SPIFFS v-if="tab=='spiffs'" />
-        <Update v-if="tab==update" />
+        <Update v-if="tab=='update'" />
     </center>
 </div>
 </template>
@@ -76,6 +76,11 @@ export default {
   data () {
     return {
       tab: 'settings'
+    }
+  },
+  methods: {
+    refreshSettings() {
+      this.$refs.settings.refreshSettings()
     }
   }
 }

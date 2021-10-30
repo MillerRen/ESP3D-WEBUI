@@ -1,8 +1,8 @@
 <template>
     <!-- update Modal -->
-<div id="updatedlg.html" class="modal">
+<div id="updatedlg.html" class="modal-update">
     <!-- update content -->
-    <div class="modal-content">
+    <div class="modal-update-content">
         <div class="modal-header">
             <span class="close" onclick="closeUpdateDialog('cancel')"><b>&times;</b></span>
             <h3>
@@ -33,11 +33,6 @@
                     <td><span id='updatemsg' style='display:none;' translate>Restarting, please wait....</span><span id='counter'></span></td>
                 </tr>
             </table>
-        </div>
-        <div class="modal-footer">
-            <span class="pull-right">
-                <button class="btn btn-warning" onclick="closeUpdateDialog('cancel')" translate>Close</button>
-            </span>
         </div>
     </div>
     <!-- /update content -->

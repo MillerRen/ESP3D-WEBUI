@@ -70,6 +70,10 @@ export default class Grbl extends Base {
             })
     }
 
+    updateSettings (cmd) {
+        return this.sendCommand(cmd)
+    }
+
     updatePreferences (preferences) {
         var blob = new Blob([JSON.stringify([preferences], null, " ")], {
             type: 'application/json'

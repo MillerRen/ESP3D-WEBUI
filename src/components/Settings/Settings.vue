@@ -27,6 +27,8 @@
           </label>
         </div>
       </span>
+      <div class="settings-status" v-if="errmsg">{{errmsg}}</div>
+      <div class="loader" v-if="loading"></div>
       <table
         class="table table-bordered table-striped table-hover table-responsive"
         style="width: auto"
@@ -86,6 +88,8 @@ export default {
   data() {
     return {
       settingsType: "network",
+      loading: false,
+      errmsg: ''
     };
   },
   computed: {
@@ -95,7 +99,25 @@ export default {
   },
   methods: {
     setValue(setting) {
+        this.loading = true
       this.$store.updateSettings(setting.cmd + setting.value)
+        .then(() => {
+            this.loading = false
+        })
+        .catch((err) => {
+            this.loading = false
+            this.errmsg = err
+        })
+    },
+    refreshSettings() {
+        this.loading = true
+        this.$store.getSettings()
+        .catch((err)=> {
+            this.errmsg = err
+        })
+        .finally(()=> {
+            this.loading = false
+        })
     },
     revertToDefaultValue(setting) {
       setting.value = setting.defaultvalue
