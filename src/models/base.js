@@ -93,7 +93,7 @@ export default class {
         })
     }
     
-    sendCustomCommand (cmd) {
+    sendCommandText (cmd) {
     
         return this.sendGetHttp(COMMAND_URL, {
             commandText: cmd

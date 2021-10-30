@@ -7,8 +7,8 @@
     xmlns:xlink="http://www.w3.org/1999/xlink"
   >
     <g
-      id="HomeAll"
-      @click="jogButtonClick('G28')"
+      
+      @click="homeAll"
       transform="translate(10, 10)"
     >
       <path
@@ -20,8 +20,7 @@
     </g>
 
     <g
-      id="HomeX"
-      @click="jogButtonClick('G28 X0')"
+      @click="homeX"
       transform="translate(10, 10)"
     >
       <path
@@ -33,8 +32,7 @@
       <text x="25" y="20" class="home">X</text>
     </g>
     <g
-      id="HomeY"
-      @click="jogButtonClick('G28 Y0')"
+      @click="homeY"
       transform="translate(10, 10)"
     >
       <path
@@ -47,8 +45,7 @@
     </g>
 
     <g
-      id="HomeZ"
-      @click="jogButtonClick('G28 Z0')"
+      @click="homeZ"
       transform="translate(10, 10)"
     >
       <path
@@ -416,8 +413,17 @@
 <script>
 export default {
     methods: {
-        jogButtonClick (cmd) {
-            console.log(cmd)
+        homeAll () {
+          return this.$store.homeAll()
+        },
+        homeX () {
+          return this.$store.homeX()
+        },
+        homeY () {
+          return this.$store.homeY()
+        },
+        homeZ () {
+          return this.$store.homeZ()
         },
         jogXYClick (cmd) {
             console.log(cmd)

@@ -90,6 +90,22 @@ export default class Grbl extends Base {
         return this.sendCommand('$$')
             .then(response => Config.parseConfig(response))
     }
+
+    homeAll () {
+        return this.sendCommandText('$H')
+    }
+
+    homeX () {
+        return this.sendCommandText('$HX')
+    }
+
+    homeY () {
+        return this.sendCommandText('$HY')
+    }
+
+    homeZ () {
+        return this.sendCommandText('$HZ')
+    }
     
 }
 
