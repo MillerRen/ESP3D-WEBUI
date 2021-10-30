@@ -20,7 +20,11 @@ export default class {
         })
     }
 
-    upload (path, files) {
+    sendFileHttp (url, fd) {
+        return http.post(url, fd)
+    }
+
+    upload (space, files, path) {
         var fd = new FormData()
         fd.append('path', path)
         for (var i = 0; i < files.length; i++) {
@@ -30,7 +34,8 @@ export default class {
             fd.append(arg, file.size)
             fd.append('myfile[]', file, fileName)
         }
-        return this.sendPostHttp(path, fd)
+        return this.sendFileHttp(space, fd)
+            .then(response => response.data)
     }
 
     listFiles (path, params) {

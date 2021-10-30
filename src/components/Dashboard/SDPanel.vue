@@ -59,7 +59,7 @@
                             </tr>
                         </table>
                     </div>
-                    <div class="hide_it pull-right" id="files_uploading_msg">
+                    <div class=" pull-right" v-if="uploading">
                         <table>
                             <tr>
                                 <td>
@@ -79,7 +79,7 @@
                             </tr>
                         </table>
                     </div>
-                    <div class="pull-right" id="files_navigation_buttons">
+                    <div class="pull-right" id="files_navigation_buttons" v-if="!uploading">
                         <div class="item-flex-row-wrap">
                             <button
                                 class="btn btn-xs btn-primary"
@@ -99,7 +99,7 @@
                             &nbsp;
                             <button
                                 v-if="fwData.target_firmware != 'smoothieware' && fwData.target_firmware != 'grbl'"
-                                v-show="!preferences.has_TFT_SD=='true'&&!preferences.has_TFT_USB=='true'"
+                                v-show="preferences.has_TFT_SD != 'true' && preferences.has_TFT_USB != 'true'"
                                 class="btn btn-xs btn-primary"
                                 @click="getFiles(currentPath)"
                                 translate
@@ -119,20 +119,20 @@
                             <button
                                 class="btn btn-xs btn-primary"
                                 @click="refreshPrinterSD()"
-                                v-show="preferences.has_TFT_SD=='true'||preferences.has_TFT_USB=='true'"
-                                v-if="fwData.target_firmware!='grbl'"
+                                v-show="preferences.has_TFT_SD == 'true' || preferences.has_TFT_USB == 'true'"
+                                v-if="fwData.target_firmware != 'grbl'"
                             >SD</button>
                             &nbsp;
                             <button
                                 class="btn btn-xs btn-primary"
                                 @click="refreshTFTSD"
-                                v-if="preferences.has_TFT_SD=='true'"
+                                v-if="preferences.has_TFT_SD == 'true'"
                             >TFT SD</button>
                             &nbsp;
                             <button
                                 class="btn btn-xs btn-primary"
                                 @click="refreshTFTUSB"
-                                v-if="preferences.has_TFT_USB=='true'"
+                                v-if="preferences.has_TFT_USB == 'true'"
                             >TFT USB</button>
                             &nbsp;
                             <button
@@ -153,13 +153,13 @@
                             <button
                                 v-if="fwData.target_firmware != 'grbl'"
                                 class="btn btn-xs btn-primary"
-                                onclick="files_select_upload()"
+                                @click="$refs.files_input_file.click()"
                                 translate
                             >Upload</button>
                             <input
                                 type="file"
-                                id="files_input_file"
-                                onchange="files_check_if_upload()"
+                                ref="files_input_file"
+                                @change="checkFiles"
                                 accept=".g, .gco, .gcode, .G, .GCO, .GCODE"
                                 style="display:none"
                             />
@@ -172,7 +172,7 @@
             id="file-body"
             class="panel-body panel-height panel-max-height panel-scroll panel-flex-main"
         >
-            <div id="files_list_loader" class="loader hide_it" style="margin:auto"></div>
+            <div v-if="loading" id="files_list_loader" class="loader " style="margin:auto"></div>
             <ul class="list-group" id="files_fileList">
                 <li class="list-group-item list-group-hover" v-for="file in files" :key="file.name">
                     <div class="row">
@@ -180,7 +180,7 @@
                             <table>
                                 <tr>
                                     <td>
-                                        <span style="color:DeepSkyBlue;">{{ file.name }}</span>
+                                        <a href="###" @click="selectDir(file.name)" class="btn btn-xs btn-link">{{file.name}}</a>
                                     </td>
                                 </tr>
                             </table>
@@ -191,6 +191,7 @@
                             <button
                                 class="btn btn-xs btn-success"
                                 v-html="$options.filters.icon('play')"
+                                v-if="file.size!=-1"
                                 @click="printFile(file)"
                             ></button>
                             &nbsp;
@@ -205,18 +206,18 @@
             </ul>
         </div>
         <div class="panel-footer panel-footer-height">
-            <div class="row hide_it" id="files_space_sd_status">
+            <div class="row " v-if="sdfs.status&&sdfs.status.toLowerCase()=='ok'">
                 <div class="col-md-12">
                     <div class="form-inline">
                         <div class="form-group">
                             <span>
                                 <span translate>Total:</span>&nbsp;
-                                <span id="files_sd_status_total"></span>
+                                <span id="files_sd_status_total">{{sdfs.total}}</span>
                             </span>
                             <span>&nbsp;|&nbsp;</span>
                             <span>
                                 <span translate>Used:</span>&nbsp;
-                                <span id="files_sd_status_used"></span>
+                                <span id="files_sd_status_used">{{sdfs.used}}</span>
                             </span>
                             <span>&nbsp;</span>
                             <span class="noshowonlowres">| &nbsp;</span>
@@ -230,10 +231,10 @@
                                             min="0"
                                             max="100"
                                             high="90"
-                                            value="50"
+                                            :value="sdfs.occupation"
                                         ></meter>
                                     </span>
-                                    <span id="files_sd_status_percent"></span>
+                                    <span id="files_sd_status_percent">{{sdfs.occupation}}</span>
                                     <span>%</span>
                                 </div>
                             </span>
@@ -241,9 +242,9 @@
                     </div>
                 </div>
             </div>
-            <div class="row hide_it" id="files_status_sd_status">
+            <div class="row " v-if="sdfs.status&&sdfs.status.toLowerCase()!='ok'">
                 <div class="col-md-12">
-                    <span id="files_sd_status_msg">Ok</span>
+                    <span id="files_sd_status_msg">{{sdfs.status}}</span>
                 </div>
             </div>
         </div>
@@ -270,18 +271,17 @@ export default {
                 files: []
             },
             loading: false,
+            uploading: false,
+            uploads: [],
             currentPath: '/'
         }
     },
     computed: {
         baseURL() {
-            return UPLOAD_URL
+            return this.fwData.target_firmware == 'smoothieware' ? this.fwData.primary_sd : UPLOAD_URL
         },
         files() {
-            return this.sdfs.files.filter(item => !item.isdir)
-        },
-        dirs() {
-            return this.sdfs.files.filter(item => item.isdir)
+            return this.sdfs.files.filter(item => item.size == -1).concat(this.sdfs.files.filter(item => item.size!=-1))
         },
         preferences() {
             return this.$store.preferences
@@ -365,14 +365,21 @@ export default {
             this.selectDir('/' + this.paths.slice(0, index + 1).join('/') + '/')
         },
         checkFiles() {
-            this.uploads = this.$refs.fileinput.files
+            this.uploads = this.$refs.files_input_file.files
+            this.uploadFile()
         },
         uploadFile() {
-            this.loading = true
+            this.uploading = true
             return this.$store
-                .upload(this.uploads, this.currentPath)
-                .then(this.refreshFiles)
+                .upload(UPLOAD_URL, this.uploads, this.currentPath)
+                .then(() => {
+                    this.uploads = []
+                    return this.refreshFiles()
+                })
                 .catch(this.sdfsFailed)
+                .finally(() => {
+                    this.uploding = false
+                })
 
         },
         getFiles(path) {

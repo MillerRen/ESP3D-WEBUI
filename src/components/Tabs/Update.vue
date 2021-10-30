@@ -4,8 +4,63 @@
             <div class="panel-heading">
                 <h3 class="panel-title">ESP3D Firmware Update</h3>
             </div>
-            <div class="panel-body panel-flex-row">
-                <input
+            
+        </div>
+        <br />
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3 class="panel-title">ESP3D Filesystem</h3>
+            </div>
+            <div class="panel-body">
+            <br>
+                <div class="panel-flex-row">
+                    <button class="btn btn-primary" type="button" @click="refreshFiles">Refresh</button>
+                    &nbsp;
+                    <button
+                        @click="createDir()"
+                        class="btn btn-info btn-svg-no_pad"
+                    >
+                        <svg width="35px" height="25px" viewBox="0 0 40 30">
+                            <rect
+                                x="5"
+                                y="10"
+                                width="30"
+                                height="20"
+                                rx="2"
+                                ry="2"
+                                fill="currentColor"
+                            />
+                            <rect
+                                x="20"
+                                y="5"
+                                width="15"
+                                height="15"
+                                rx="2"
+                                ry="2"
+                                fill="currentColor"
+                            />
+                            <text x="15" y="25" font-size="18" font-weight="800" fill="#5BC0DE">+</text>
+                        </svg>
+                    </button>
+                    <div
+                        id="SPIFFS_loader"
+                        class="loader"
+                        style="width:2em;height:2em;"
+                        v-if="loading"
+                    ></div>
+                    <div id="SPIFFS_path" class="info">
+                        <table>
+                            <tr>
+                                <td>
+                                    <button class="btn btn-link" @click="selectDir('/')">/</button>
+                                </td>
+                                <td v-for="p in paths" :key="p">
+                                    <button class="btn btn-link" @click="gotoDir(p)">{{ p }}</button>/
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                    <input
                     ref="fileinput"
                     type="file"
                     style="display:none"
@@ -58,61 +113,6 @@
                     id="uploadSPIFFSmsg"
                     translate
                 >Uploading</span>
-            </div>
-        </div>
-        <br />
-        <div class="panel panel-default">
-            <div class="panel-heading">
-                <h3 class="panel-title">ESP3D Filesystem</h3>
-            </div>
-            <div class="panel-body">
-                <div class="panel-flex-row">
-                    <button class="btn btn-primary" type="button" @click="refreshFiles">Refresh</button>
-                    &nbsp;
-                    <button
-                        @click="createDir()"
-                        class="btn btn-info btn-svg-no_pad"
-                    >
-                        <svg width="35px" height="25px" viewBox="0 0 40 30">
-                            <rect
-                                x="5"
-                                y="10"
-                                width="30"
-                                height="20"
-                                rx="2"
-                                ry="2"
-                                fill="currentColor"
-                            />
-                            <rect
-                                x="20"
-                                y="5"
-                                width="15"
-                                height="15"
-                                rx="2"
-                                ry="2"
-                                fill="currentColor"
-                            />
-                            <text x="15" y="25" font-size="18" font-weight="800" fill="#5BC0DE">+</text>
-                        </svg>
-                    </button>
-                    <div
-                        id="SPIFFS_loader"
-                        class="loader"
-                        style="width:2em;height:2em;"
-                        v-if="loading"
-                    ></div>
-                    <div id="SPIFFS_path" class="info">
-                        <table>
-                            <tr>
-                                <td>
-                                    <button class="btn btn-link" @click="selectDir('/')">/</button>
-                                </td>
-                                <td v-for="p in paths" :key="p">
-                                    <button class="btn btn-link" @click="gotoDir(p)">{{ p }}</button>/
-                                </td>
-                            </tr>
-                        </table>
-                    </div>
                 </div>
                 <table class="table table-striped" style="margin-bottom:20px;">
                     <thead>
@@ -287,7 +287,7 @@ export default {
         uploadFile() {
             this.loading = true
             return this.$store
-                .upload(this.uploads, this.currentPath)
+                .upload(SPIFFS_URL, this.uploads, this.currentPath)
                 .then(this.refreshFiles)
                 .catch(this.spiffsFailed)
 
