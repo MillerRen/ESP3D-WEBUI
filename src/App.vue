@@ -5,7 +5,7 @@
     <Tabs v-model="mainTab"  :fwData="fwData" />
     <br />
     <ConfigPanel v-if="mainTab == 'printer'"  :fwData="fwData" />
-    <DashboardPanel v-if="mainTab == 'dashboard'"  :fwData="fwData" />
+    <DashboardPanel v-if="mainTab == 'dashboard'"  :fwData="fwData" :preferences="preferences" />
     <CameraPanel v-if="mainTab == 'camera'"  :fwData="fwData" />
     <UpdatePanel v-if="mainTab == 'update'"  :fwData="fwData" />
     <SettingsPanel v-if="mainTab == 'settings'"  :fwData="fwData" />
@@ -36,8 +36,15 @@ export default {
   data() {
     return {
       mainTab: "dashboard",
-      initialized: false,
-      fwData: {}
+      initialized: false
+    }
+  },
+  computed: {
+    fwData () {
+      return this.$store.fwData
+    },
+    preferences () {
+      return this.$store.preferences
     }
   },
   methods: {
@@ -50,7 +57,6 @@ export default {
       return this.$store.getFWData()
         .then((fwData) => {
           console.log("Fw identification:", fwData)
-          this.fwData = fwData
           document.title = fwData.esp_hostname
           if (fwData.ESP3D_authentication) {
             this.checkLogin()

@@ -2,12 +2,12 @@
     <div class="container-fluid">
         <div class="panel-flex-col">
             <div class="grid-container">
-                <ControlsPanel :preferences="preferences" />
-                <GrblPanel v-if="isGrbl" :preferences="preferences" />
-                <TemperaturePanel v-if="!isGrbl" />
-                <ExtruderPanel v-if="!isGrbl" :preferences="preferences" />
-                <SDPanel :fwData="fwData" />
-                <ConsolePanel />
+                <ControlsPanel v-if="preferences.enable_control_panel=='true'" :preferences="preferences" />
+                <GrblPanel v-if="preferences.enable_grbl_panel=='true'" :preferences="preferences" />
+                <TemperaturePanel v-if="preferences.enable_temperature_panel=='true'" />
+                <ExtruderPanel v-if="preferences.enable_extruder_panel=='true'" :preferences="preferences" />
+                <SDPanel v-if="preferences.enable_files_panel=='true'" :fwData="fwData" />
+                <ConsolePanel v-if="preferences.enable_commands_panel=='true'" :fwData="fwData" />
             </div>
         </div>
     </div>
@@ -15,7 +15,7 @@
 
 <script>
 import ControlsPanel from "../Dashboard/ControlsPanel.vue"
-// import ConsolePanel from '../Dashboard/ConsolePanel.vue'
+import ConsolePanel from '../Dashboard/ConsolePanel.vue'
 import GrblPanel from "../Dashboard/GrblPanel.vue"
 import SDPanel from "../Dashboard/SDPanel.vue"
 import TemperaturePanel from "../Dashboard/TemperaturePanel.vue"
@@ -24,7 +24,7 @@ import ExtruderPanel from "../Dashboard/ExtruderPanel.vue"
 export default {
     components: {
         ControlsPanel,
-        // ConsolePanel,
+        ConsolePanel,
         GrblPanel,
         SDPanel,
         TemperaturePanel,
