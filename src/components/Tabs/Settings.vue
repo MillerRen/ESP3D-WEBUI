@@ -1,5 +1,5 @@
 <template>
-  <div class="container-fluid" id="settings_list_content">
+  <div class="container-fluid">
     <center>
       <span id="settings_filters">
         <div class="radio-inline">
@@ -37,8 +37,8 @@
             <th translate>Value</th>
           </tr>
         </thead>
-        <tbody id="settings_list_data">
-          <tr v-for="(setting, index) in value" :key="index" v-show="setting.F == settingsType">
+        <tbody v-if="settings">
+          <tr v-for="(setting, index) in settings" :key="index" v-show="setting.F == settingsType">
             <td>{{ setting.label }}</td>
             <td>
               <div class="form-group has-feedback" :class="{'has-warning':setting.value!=setting.defaultvalue}">
@@ -83,18 +83,15 @@
 
 <script>
 export default {
-  props: {
-    value: {
-      type: Array,
-      default() {
-        return [];
-      },
-    },
-  },
   data() {
     return {
       settingsType: "network",
     };
+  },
+  computed: {
+    settings () {
+      return this.$store.settings
+    }
   },
   methods: {
     setValue(setting) {
