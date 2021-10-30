@@ -1,24 +1,14 @@
 <template>
     <div class="container-fluid">
-        <div class="row">
-            <div class="col-sm-6">
+        <div class="panel-flex-col">
+            <div class="grid-container">
                 <ControlsPanel :preferences="preferences" />
-            </div>
-            <div v-if="isGrbl" class="col-sm-6">
-                <GrblPanel :preferences="preferences" />
-            </div>
-            <div v-if="!isGrbl" class="col-sm-6">
-                <TemperaturePanel />
-            </div>
-            <div v-if="!isGrbl" class="col-sm-6">
-                <ExtruderPanel :preferences="preferences" />
-            </div>
-            <div class="col-sm-6">
+                <GrblPanel v-if="isGrbl" :preferences="preferences" />
+                <TemperaturePanel v-if="!isGrbl" />
+                <ExtruderPanel v-if="!isGrbl" :preferences="preferences" />
                 <SDPanel :fwData="fwData" />
-            </div>
-            <!-- <div class="col-sm-6">
                 <ConsolePanel />
-            </div> -->
+            </div>
         </div>
     </div>
 </template>
@@ -43,20 +33,20 @@ export default {
     props: {
         fwData: {
             type: Object,
-            default () {
+            default() {
                 return {}
             }
         },
         preferences: {
             type: Object,
-            default () {
+            default() {
                 return {}
             }
         }
     },
     computed: {
-        isGrbl () {
-            return this.fwData.target_firmware=='grbl'||this.fwData.target_firmware=='grbl-embedded'
+        isGrbl() {
+            return this.fwData.target_firmware == 'grbl' || this.fwData.target_firmware == 'grbl-embedded'
         }
     }
 }

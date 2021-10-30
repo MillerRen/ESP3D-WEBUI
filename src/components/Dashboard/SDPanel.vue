@@ -50,7 +50,7 @@
                                 </td>
                                 <td>&nbsp;&nbsp;</td>
                                 <td>
-                                    <span id="files_currentPath"></span>
+                                    <span id="files_currentPath">{{currentPath}}</span>
                                 </td>
                                 <td>&nbsp;&nbsp;</td>
                                 <td>
