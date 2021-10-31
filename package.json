@@ -14,7 +14,8 @@
     "bootstrap": "^3.4.1",
     "core-js": "^3.6.5",
     "postcss": "^8.3.11",
-    "vue": "^2.6.11"
+    "vue": "^2.6.11",
+    "vue-feather-icons": "^5.1.0"
   },
   "devDependencies": {
     "@fullhuman/postcss-purgecss": "^3.0.0",

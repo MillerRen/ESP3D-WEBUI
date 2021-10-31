@@ -1,2 +1,2 @@
 import './files'
-import './perference.json'
+import './preferences'
