@@ -111,6 +111,10 @@ export default class Grbl extends Base {
         let command = "$J=G91 G21 F" + feedrate + " " + cmd
         return this.sendCommandText(command)
     }
+
+    restartESP () {
+        return this.sendCommandText('[ESP444]RESTART')
+    }
     
 }
 
