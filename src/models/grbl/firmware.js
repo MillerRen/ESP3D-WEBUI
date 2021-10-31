@@ -1,9 +1,10 @@
-import {ESP_HOST_NAME} from '../../constants'
+import { ESP_HOST_NAME, UI_VERSION } from '../../constants'
 
 function parseFWData(response) {
     var fwData = {
         grblaxis: 3,
-        esp_hostname: ESP_HOST_NAME
+        esp_hostname: ESP_HOST_NAME,
+        ui_version: UI_VERSION
     }
     var tlist = response.split("#")
     if (tlist.length < 3) {

@@ -1,5 +1,7 @@
 const HtmlWebpackInlineSourcePlugin = require('html-webpack-inline-source-plugin')
 
+process.env.VUE_APP_UI_VERSION = process.env.npm_package_version
+
 class CleanWebpackPlugin {
   apply (compiler) {
     compiler.plugin('emit', function (compilation, callback) {

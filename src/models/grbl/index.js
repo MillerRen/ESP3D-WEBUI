@@ -3,6 +3,7 @@ import { PREFERENCES_FILE_NAME } from '../../constants'
 import Config from './config'
 import Settings from './settings'
 import Firmware from './firmware'
+import Status from './status'
 
 const DEFAULT_PREFERENCES = [{ "language": "en", "enable_lock_UI": "false", "enable_ping": "true", "enable_DHT": "false", "enable_camera": "false", "auto_load_camera": "false", "camera_address": "", "number_extruders": "1", "is_mixed_extruder": "false", "enable_bed": "false", "enable_fan": "false", "enable_control_panel": "true", "enable_grbl_panel": "true", "interval_positions": "3", "interval_temperatures": "3", "interval_status": "3", "xy_feedrate": "1000", "z_feedrate": "100", "a_feedrate": "100", "b_feedrate": "100", "c_feedrate": "100", "e_feedrate": "400", "e_distance": "5", "enable_temperatures_panel": "false", "enable_extruder_panel": "false", "enable_files_panel": "true", "f_filters": "g;G;gco;GCO;gcode;GCODE;nc;NC;ngc;NCG;tap;TAP;txt;TXT", "enable_commands_panel": "true", "enable_autoscroll": "true", "enable_verbose_mode": "true", "enable_grbl_probe_panel": "false", "probemaxtravel": "40", "probefeedrate": "100", "probetouchplatethickness": "0.5" }]
 
@@ -14,6 +15,7 @@ export default class Grbl extends Base {
         this.preferences = null
         this.config = null
         this.user = null
+        this.status = null
     }
 
     checkLogin() {
@@ -89,6 +91,15 @@ export default class Grbl extends Base {
     getConfig () {
         return this.sendCommand('$$')
             .then(response => Config.parseConfig(response))
+    }
+
+    getESPStatus () {
+        return this.sendCommand('[ESP420]plain')
+            .then(response => {
+                let status = Status.parseStatus(response)
+                this.status = status
+                return status
+            })
     }
 
     homeAll () {

@@ -6,7 +6,8 @@ export const UPLOAD_URL = '/upload'
 export const PRIMARY_SD_URL = '/ext/'
 export const SECONDARY_SD_URL = '/sd/'
 
-export const UI_VERSION = process.env.version
+export const UI_VERSION = process.env.VUE_APP_UI_VERSION
+
 export const TOTAL_BOOT_STEPS = 4
 export const ESP_HOST_NAME = "ESP3D WebUI"
 

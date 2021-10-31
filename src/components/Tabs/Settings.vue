@@ -7,7 +7,7 @@
             <table>
                 <tr>
                     <td style="padding:10px">
-                        <button type="button" class="btn btn-info" @click="tab = 'settings'">
+                        <button type="button" class="btn btn-info" @click="showStatusModal">
                             <svg width="1.3em" height="1.2em" viewBox="0 0 1300 1200">
                                 <g transform="translate(50,1200) scale(1, -1)">
                                     <path
@@ -86,7 +86,7 @@
             <br />
             <span id="settings_status"></span>
             <hr />
-            <Settings v-if="tab == 'settings'" ref="settings" />
+            <Settings ref="settings" />
             <SPIFFS v-if="tab == 'spiffs'" />
             <Update v-if="tab == 'update'" />
         </center>
@@ -97,6 +97,7 @@
 import Settings from "../Settings/Settings.vue"
 import SPIFFS from "../Settings/SPIFFS.vue"
 import Update from "../Settings/Update.vue"
+import StatusModal from "../Settings/StatusModal.vue"
 export default {
     components: {
         Settings,
@@ -132,6 +133,16 @@ export default {
                 title: 'Restarting ESP3D',
                 closeable: false,
             }, 'RestartModal')
+        },
+        showStatusModal () {
+            let modal = this.$modal({
+                title: 'ESP3D Status',
+                events: {
+                    cancel () {
+                        modal.close()
+                    }
+                }
+            }, StatusModal)
         }
     }
 }

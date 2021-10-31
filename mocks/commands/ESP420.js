@@ -4,7 +4,7 @@ var response = "Chip ID: 13874112\nCPU Frequency: 160Mhz\nFree memory: 24.23 KB\
 
 mock.onGet('/command', {
     params: {
-        plain: '[ESP401]P=0 T=B V=2'
+        plain: '[ESP420]plain'
     }
 })
 .reply(200, response)
