@@ -11,6 +11,8 @@ export const UI_VERSION = process.env.VUE_APP_UI_VERSION
 export const TOTAL_BOOT_STEPS = 4
 export const ESP_HOST_NAME = "ESP3D WebUI"
 
+export const TOTAL_WAITING_TIMES = 40
+
 export const FIRMWARE_NAMES = {
     'repetier': 'Repetier',
     'repetier4davinci': 'Repetier for Davinci',

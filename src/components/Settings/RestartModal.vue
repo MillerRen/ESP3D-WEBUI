@@ -21,35 +21,21 @@
 </template>
 
 <script>
-const TOTAL_WAITING_TIMES = 40
 export default {
     data() {
         return {
-            process: 0,
             errmsg: ''
         }
     },
     computed: {
         percent() {
-            return Math.round(this.process * 100 / TOTAL_WAITING_TIMES)
+            return this.$store.restartingProgress
         }
     },
     methods: {
-        count() {
-            this.process = 1
-            var timer = setInterval(() => {
-                this.process++
-                if (this.process > TOTAL_WAITING_TIMES) {
-                    location.reload()
-                    clearInterval(timer)
-                    this.$emit('success')
-                }
-            }, 1000)
-        },
         restartESP() {
             this.errmsg = ''
             this.$store.restartESP()
-                .then(this.count)
                 .catch(err => {
                     this.errmsg = err
                 })

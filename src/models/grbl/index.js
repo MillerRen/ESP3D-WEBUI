@@ -1,5 +1,5 @@
 import Base from '../base'
-import { PREFERENCES_FILE_NAME } from '../../constants'
+import { PREFERENCES_FILE_NAME, TOTAL_WAITING_TIMES } from '../../constants'
 import Config from './config'
 import Settings from './settings'
 import Firmware from './firmware'
@@ -16,6 +16,17 @@ export default class Grbl extends Base {
         this.config = null
         this.user = null
         this.status = null
+        this.restartingProgress = 0
+        this.uploadingProgress = 0
+    }
+
+    uploadFile(url, fd, path) {
+        return this.sendFileHttp(url, fd, path, (e) => {
+            this.uploadingProgress = Math.round(e.loaded * 100 / e.total)
+        })
+        .finally(() => {
+            this.uploadingProgress = 0
+        })
     }
 
     checkLogin() {
@@ -72,28 +83,25 @@ export default class Grbl extends Base {
             })
     }
 
-    updateSettings (cmd) {
+    updateSettings(cmd) {
         return this.sendCommand(cmd)
     }
 
-    updatePreferences (preferences) {
+    updatePreferences(preferences) {
         var blob = new Blob([JSON.stringify([preferences], null, " ")], {
             type: 'application/json'
         });
         var file = new File([blob], PREFERENCES_FILE_NAME);
-        var formData = new FormData();
-        formData.append('path', '/');
-        formData.append('myfile[]', file, PREFERENCES_FILE_NAME);
 
-        return this.sendFileHttp(PREFERENCES_FILE_NAME, formData)
+        return this.uploadFile(PREFERENCES_FILE_NAME, [file])
     }
 
-    getConfig () {
+    getConfig() {
         return this.sendCommand('$$')
             .then(response => Config.parseConfig(response))
     }
 
-    getESPStatus () {
+    getESPStatus() {
         return this.sendCommand('[ESP420]plain')
             .then(response => {
                 let status = Status.parseStatus(response)
@@ -102,31 +110,57 @@ export default class Grbl extends Base {
             })
     }
 
-    homeAll () {
+    restartESP() {
+        return this.sendCommandText('[ESP444]RESTART')
+            .then(() => {
+                this.waitRestarting()
+            })
+    }
+
+    updateFirmware(files) {
+        return this.uploadFile('/updatefw', files, '/')
+            .then(() => {
+                this.waitRestarting()
+            })
+    }
+
+    waitRestarting() {
+        this.restartingProgress = 0
+        var process = 1
+        var timer = setInterval(() => {
+            process++
+            this.restartingProgress = Math.round(process * 100 / TOTAL_WAITING_TIMES)
+            if (process > TOTAL_WAITING_TIMES) {
+                process = 0
+                clearInterval(timer)
+                location.reload()
+            }
+        }, 1000)
+    }
+
+    homeAll() {
         return this.sendCommandText('$H')
     }
 
-    homeX () {
+    homeX() {
         return this.sendCommandText('$HX')
     }
 
-    homeY () {
+    homeY() {
         return this.sendCommandText('$HY')
     }
 
-    homeZ () {
+    homeZ() {
         return this.sendCommandText('$HZ')
     }
 
-    jog (cmd, feedrate) {
+    jog(cmd, feedrate) {
         let command = "$J=G91 G21 F" + feedrate + " " + cmd
         return this.sendCommandText(command)
     }
 
-    restartESP () {
-        return this.sendCommandText('[ESP444]RESTART')
-    }
-    
+
+
 }
 
 

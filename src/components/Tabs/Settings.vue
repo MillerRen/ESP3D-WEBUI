@@ -35,7 +35,7 @@
                             id="settings_update_fw_btn"
                             type="button"
                             class="btn btn-warning"
-                            @click="tab = 'update'"
+                            @click="showUpdateModal"
                         >
                             <svg width="1.3em" height="1.2em" viewBox="0 0 1300 1200">
                                 <g transform="translate(50,1200) scale(1, -1)">
@@ -87,8 +87,6 @@
             <span id="settings_status"></span>
             <hr />
             <Settings ref="settings" />
-            <!-- <SPIFFS v-if="tab == 'spiffs'" /> -->
-            <Update v-if="tab == 'update'" />
         </center>
     </div>
 </template>
@@ -96,12 +94,13 @@
 <script>
 import Settings from "../Settings/Settings.vue"
 import SPIFFSModal from "../Settings/SPIFFSModal.vue"
-import Update from "../Settings/Update.vue"
+import UpdateModal from "../Settings/UpdateModal.vue"
 import StatusModal from "../Settings/StatusModal.vue"
+import RestartModal from "../Settings/RestartModal.vue"
+
 export default {
     components: {
-        Settings,
-        Update
+        Settings
     },
     data() {
         return {
@@ -131,7 +130,7 @@ export default {
             this.$modal({
                 title: 'Restarting ESP3D',
                 closeable: false,
-            }, 'RestartModal')
+            }, RestartModal)
         },
         showStatusModal () {
             let modal = this.$modal({
@@ -145,8 +144,13 @@ export default {
         },
         showSPIFFSModal () {
             this.$modal({
-                
+                title: 'ESP3D FileSystem'
             }, SPIFFSModal)
+        },
+        showUpdateModal () {
+            this.$modal({
+                title: 'ESP3D Firmware Update'
+            }, UpdateModal)
         }
     }
 }
