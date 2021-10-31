@@ -860,7 +860,7 @@
       <div class="pull-left" v-if="uploading">
                 <span translate>Saving</span>
                 &nbsp;
-                <progress name="prg" id="preferencesdlg_prg" max="100"></progress>
+                <progress name="prg" v-if="uploading" :value="uploadingProgress" max="100"></progress>
                 &nbsp;
                 <!-- <span id="preferencesdlg_upload_percent">0</span>% -->
             </div>
@@ -894,6 +894,9 @@ export default {
   computed: {
     number_extruders () {
       return this.preferences.is_mixed_extruder ? 9 : 2
+    },
+    uploadingProgress () {
+      return this.$store.uploadingProgress
     }
   },
   methods: {
