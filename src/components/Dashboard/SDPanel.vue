@@ -71,7 +71,7 @@
                                 </td>
                                 <td>&nbsp;</td>
                                 <td width="100px">
-                                    <progress name="prg" id="files_prg" max="100"></progress>
+                                    <progress name="prg" :value="uploadingProgress" max="100"></progress>
                                 </td>
                                 <td>
                                     <span id="files_percent_upload"></span>%
@@ -185,7 +185,7 @@
                                 </tr>
                             </table>
                         </div>
-                        <div class="col-md-2 col-sm2">{{ file.size }}</div>
+                        <div class="col-md-2 col-sm2">{{ file.size!=-1?file.size:'' }}</div>
                         <div class="col-md-3 col-sm-3">{{ file.datetime }}</div>
                         <div class="col-md-2 col-sm2">
                             <button
@@ -285,6 +285,9 @@ export default {
         },
         preferences() {
             return this.$store.preferences
+        },
+        uploadingProgress () {
+            return this.$store.uploadingProgress
         }
     },
     methods: {
@@ -371,9 +374,10 @@ export default {
         uploadFile() {
             this.uploading = true
             return this.$store
-                .upload(UPLOAD_URL, this.uploads, this.currentPath)
+                .uploadFile(UPLOAD_URL, this.uploads, this.currentPath)
                 .then(() => {
                     this.uploads = []
+                    this.uploading = false
                     return this.refreshFiles()
                 })
                 .catch(this.sdfsFailed)
