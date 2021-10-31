@@ -19,7 +19,7 @@
                         </button>
                     </td>
                     <td style="padding:10px">
-                        <button type="button" class="btn btn-success" @click="tab = 'spiffs'">
+                        <button type="button" class="btn btn-success" @click="showSPIFFSModal">
                             <svg width="1.3em" height="1.2em" viewBox="0 0 1300 1200">
                                 <g transform="translate(50,1200) scale(1, -1)">
                                     <path
@@ -87,7 +87,7 @@
             <span id="settings_status"></span>
             <hr />
             <Settings ref="settings" />
-            <SPIFFS v-if="tab == 'spiffs'" />
+            <!-- <SPIFFS v-if="tab == 'spiffs'" /> -->
             <Update v-if="tab == 'update'" />
         </center>
     </div>
@@ -95,13 +95,12 @@
 
 <script>
 import Settings from "../Settings/Settings.vue"
-import SPIFFS from "../Settings/SPIFFS.vue"
+import SPIFFSModal from "../Settings/SPIFFSModal.vue"
 import Update from "../Settings/Update.vue"
 import StatusModal from "../Settings/StatusModal.vue"
 export default {
     components: {
         Settings,
-        SPIFFS,
         Update
     },
     data() {
@@ -143,6 +142,11 @@ export default {
                     }
                 }
             }, StatusModal)
+        },
+        showSPIFFSModal () {
+            this.$modal({
+                
+            }, SPIFFSModal)
         }
     }
 }
