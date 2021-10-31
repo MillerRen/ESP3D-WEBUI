@@ -1,9 +1,6 @@
 <template>
     <div class="panel panel-spiffs">
-        <div class="panel-heading">
-            <h3 class="panel-title">ESP3D Filesystem</h3>
-        </div>
-        <div class="panel-body">
+        <div class="panel-heading row">
             <div class="panel-flex-row">
                 <table id="SPIFFS-select_form">
                     <tr>
@@ -30,7 +27,7 @@
                 <button
                     class="btn btn-primary btn-svg"
                     type="button"
-                    id="SPIFFS_uploadbtn"
+                    :disabled="uploads.length < 1"
                     @click="uploadFile();"
                 >
                     <svg width="1.3em" height="1.2em" viewBox="0 0 1300 1200">
@@ -42,7 +39,8 @@
                         </g>
                     </svg>
                 </button>
-                <progress v-if="uploading" name="prg" id="SPIFFS_prg" max="100"></progress>
+                &nbsp;
+                <progress v-if="uploading" :value="uploadingProgress" name="prg" max="100"></progress>
                 &nbsp;
                 <span
                     v-if="uploading"
@@ -50,7 +48,8 @@
                     translate
                 >Uploading</span>
             </div>
-            <br />
+        </div>
+        <div class="panel-body row">
             <div class="panel-flex-row">
                 <button class="btn btn-primary" type="button" @click="refreshFiles">Refresh</button>
                 &nbsp;
@@ -145,7 +144,7 @@
                 </tbody>
             </table>
         </div>
-        <div class="panel-footer panel-footer1" v-if="stats.status=='Ok'">
+        <div class="panel-footer panel-footer1" v-if="stats.status == 'Ok'">
             Total: {{ stats.total }}&nbsp;&nbsp;|&nbsp;&nbsp;Used: {{ spiffs.used }}&nbsp;&nbsp;|&nbsp;&nbsp;Occupation:
             <meter
                 min="0"
@@ -155,9 +154,7 @@
             ></meter>
             &nbsp;{{ stats.occupation }}%
         </div>
-        <div class="panel-footer panel-footer1" v-if="stats.status!='Ok'">
-            {{stats.status}}
-        </div>
+        <div class="panel-footer panel-footer1" v-if="stats.status != 'Ok'">{{ stats.status }}</div>
     </div>
 </template>
 
@@ -193,6 +190,9 @@ export default {
         paths() {
             let paths = this.currentPath.split('/')
             return paths.slice(1, paths.length - 1)
+        },
+        uploadingProgress() {
+            return this.$store.uploadingProgress
         }
     },
     methods: {
@@ -276,10 +276,14 @@ export default {
             this.uploads = this.$refs.fileinput.files
         },
         uploadFile() {
-            this.loading = true
+            this.uploading = true
             return this.$store
-                .upload(SPIFFS_URL, this.uploads, this.currentPath)
-                .then(this.refreshFiles)
+                .uploadFile(SPIFFS_URL, this.uploads, this.currentPath)
+                .then(() => {
+                    this.uploading = false
+                    this.uploads = []
+                    this.refreshFiles()
+                })
                 .catch(this.spiffsFailed)
 
         },
@@ -301,6 +305,7 @@ export default {
         },
         spiffsFailed(err) {
             this.loading = false
+            this.uploading = false
             this.$modal({
                 title: 'Error',
                 message: err.message

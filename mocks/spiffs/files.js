@@ -1,5 +1,6 @@
 import mock from '../../lib/mock'
 import response from '../data/files.json'
+import progress from '../progress'
 
 mock.onGet('/files', {
     params: {
@@ -53,5 +54,4 @@ mock.onGet('/files', {
     files: response.files.concat([{name: 'test', size: -1}])
 }))
 
-mock.onPost('/files', {
-}).reply(200, {})
+mock.onPost('/files').reply(progress)
