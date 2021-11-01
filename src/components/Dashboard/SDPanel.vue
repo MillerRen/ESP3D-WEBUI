@@ -204,7 +204,7 @@
                             <button
                                 class="btn btn-xs btn-success"
                                 v-html="$options.filters.icon('play')"
-                                v-if="file.size != -1"
+                                v-if="file.isprintable"
                                 @click="printFile(file)"
                             ></button>
                             &nbsp;
@@ -402,7 +402,7 @@ export default {
         getFiles(path) {
             this.loading = true
             return this.$store
-                .listFiles(this.baseURL, {
+                .listSD(this.baseURL, {
                     path
                 })
                 .then(response => {
@@ -423,8 +423,8 @@ export default {
                 path += tlist[nb] + "/";
                 nb++;
             }
-            this.currentPath = path
-            this.refreshFiles()
+            
+            this.getFiles(path)
         },
         refreshSD() { },
         refreshSD1() { },
