@@ -13,7 +13,7 @@
         </div>
         <div class="col">&nbsp;</div>
       </div>
-      <div class="position-container" v-if="fwData.target_firmware=='grbl'||fwData.target_firmware=='grbl-embeded'">
+      <div class="position-container" v-if="fwData.target_firmware=='grbl'||fwData.target_firmware=='grbl-embedded'">
         <button
           class="btn btn-xs btn-default"
           id="zero_xyz_btn"
@@ -24,7 +24,7 @@
         </button>
       </div>
       <br />
-      <div class="position-container" v-if="fwData.target_firmware=='grbl'||fwData.target_firmware=='grbl-embeded'">
+      <div class="position-container" v-if="fwData.target_firmware=='grbl'||fwData.target_firmware=='grbl-embedded'">
         <div class="position_text" v-for="axes in axis" :key="axes">
           <table>
             <tr>
@@ -37,7 +37,7 @@
               <td>
                 <span class="label label-default" style="padding: 5px 5px 3px 5px;">
                   <span
-                  >{{ fwData.target_firmware == 'grbl' || fwData.target_firmware == 'grbl-embeded' ? axes+'w': axes }}</span>:
+                  >{{ fwData.target_firmware == 'grbl' || fwData.target_firmware == 'grbl-embedded' ? axes+'w': axes }}</span>:
                   <span >&nbsp;</span>
                 </span>
               </td>
