@@ -5,6 +5,7 @@ import Settings from './settings'
 import Firmware from './firmware'
 import Status from './status'
 import Files from './files'
+import Websocket from './websocket'
 
 const DEFAULT_PREFERENCES = [{ "language": "en", "enable_lock_UI": "false", "enable_ping": "true", "enable_DHT": "false", "enable_camera": "false", "auto_load_camera": "false", "camera_address": "", "number_extruders": "1", "is_mixed_extruder": "false", "enable_bed": "false", "enable_fan": "false", "enable_control_panel": "true", "enable_grbl_panel": "true", "interval_positions": "3", "interval_temperatures": "3", "interval_status": "3", "xy_feedrate": "1000", "z_feedrate": "100", "a_feedrate": "100", "b_feedrate": "100", "c_feedrate": "100", "e_feedrate": "400", "e_distance": "5", "enable_temperatures_panel": "false", "enable_extruder_panel": "false", "enable_files_panel": "true", "f_filters": "g;G;gco;GCO;gcode;GCODE;nc;NC;ngc;NCG;tap;TAP;txt;TXT", "enable_commands_panel": "true", "enable_autoscroll": "true", "enable_verbose_mode": "true", "enable_grbl_probe_panel": "false", "probemaxtravel": "40", "probefeedrate": "100", "probetouchplatethickness": "0.5" }]
 
@@ -19,22 +20,67 @@ export default class Grbl extends Base {
         this.status = null
         this.restartingProgress = 0
         this.uploadingProgress = 0
+        this.messages = []
+    }
+
+    startSocket() {
+        var ws_source
+        var that = this
+        try {
+            if (this.fwData.async_webcommunication) {
+                ws_source = new WebSocket('ws://' + document.location.host + '/ws', ['arduino']);
+            } else {
+                console.log("Socket is " + this.fwData.websocket_ip + ":" + this.fwData.websocket_port);
+                ws_source = new WebSocket('ws://' + this.fwData.websocket_ip + ':' + this.fwData.websocket_port, ['arduino']);
+            }
+        } catch (exception) {
+            console.error(exception);
+        }
+
+        ws_source.binaryType = "arraybuffer";
+        ws_source.onopen = function () {
+            console.log("Connected");
+        };
+        ws_source.onclose = function (e) {
+            console.log("Disconnected", e);
+            //seems sometimes it disconnect so wait 3s and reconnect
+            //if it is not a log off
+            setTimeout(() => {
+                that.startSocket()
+            }, 3000);
+        };
+        ws_source.onerror = function (e) {
+            //Monitor_output_Update("[#]Error "+ e.code +" " + e.reason + "\n");
+            console.log("ws error", e);
+        };
+        ws_source.onmessage = function (e) {
+            that.messages.push(Websocket.parseMessage(e))
+            console.log(e)
+        }
+    }
+
+    clearMessages () {
+        this.messages  = []
+    }
+
+    sendCustomCommand(cmd) {
+        return this.sendCommandText(cmd)
     }
 
     uploadFile(url, fd, path) {
         return this.sendFileHttp(url, fd, path, (e) => {
             this.uploadingProgress = Math.round(e.loaded * 100 / e.total)
         })
-        .finally(() => {
-            this.uploadingProgress = 0
-        })
+            .finally(() => {
+                this.uploadingProgress = 0
+            })
     }
 
-    listSPIFFS (url, params) {
+    listSPIFFS(url, params) {
         return this.listFiles(url, params)
     }
 
-    listSD (url, params) {
+    listSD(url, params) {
         return this.listFiles(url, params)
             .then(response => Files.parseFiles(response, this.preferences))
     }

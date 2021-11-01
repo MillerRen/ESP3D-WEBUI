@@ -60,6 +60,7 @@ export default {
             this.checkLogin()
             return
           }
+          
           this.getSettings()
         })
         .catch((err) => {
@@ -97,6 +98,7 @@ export default {
     },
     // boot step 2
     getSettings() {
+      this.$store.startSocket()
       this.connectModal.data.bootStep = 2
       return this.$store.getSettings()
         .then(() => {

@@ -1,26 +1,27 @@
 import http from "../../lib/http"
+import Sockette from "sockette"
 
-import { 
+import {
     COMMAND_URL,
     LOGIN_URL
 } from "../constants"
 
 export default class {
-    
-    sendGetHttp (url, params) {
+
+    sendGetHttp(url, params) {
         return http.get(url, {
             params
         })
     }
 
-    sendPostHttp (url, data, params) {
+    sendPostHttp(url, data, params) {
         return http.post(url, {
             data,
             params
         })
     }
 
-    sendFileHttp (space, files, path, onUploadProgress) {
+    sendFileHttp(space, files, path, onUploadProgress) {
         var fd = new FormData()
         fd.append('path', path)
         for (var i = 0; i < files.length; i++) {
@@ -36,7 +37,20 @@ export default class {
             .then(response => response.data)
     }
 
-    listFiles (path, params) {
+    startSocket(url, onMessage) {
+        this.ws = new Sockette(url, {
+            timeout: 5e3,
+            maxAttempts: 10,
+            onopen: e => console.log('Connected!', e),
+            onmessage: (e) => onMessage(e),
+            onreconnect: e => console.log('Reconnecting...', e),
+            onmaximum: e => console.log('Stop Attempting!', e),
+            onclose: e => console.log('Closed!', e),
+            onerror: e => console.log('Error:', e)
+        })
+    }
+
+    listFiles(path, params) {
         return this.sendGetHttp(path, {
             action: 'list',
             filename: 'all',
@@ -44,39 +58,39 @@ export default class {
         })
     }
 
-    deleteFile (path, params) {
+    deleteFile(path, params) {
         return this.sendGetHttp(path, {
             action: 'delete',
             ...params
         })
     }
 
-    deleteDir (path, params) {
+    deleteDir(path, params) {
         return this.sendGetHttp(path, {
             action: 'deletedir',
             ...params
         })
     }
 
-    createDir (path, params) {
+    createDir(path, params) {
         return this.sendGetHttp(path, {
             action: 'createdir',
             ...params
         })
     }
 
-    login (params) {
+    login(params) {
         return this.sendGetHttp(LOGIN_URL, params)
     }
 
-    checkLogin () {
+    checkLogin() {
         return this.sendGetHttp(LOGIN_URL)
             .then(response => {
                 var user = Object.assign({}, response)
-                if (typeof(response.authentication_lvl) !== 'undefined') {
+                if (typeof (response.authentication_lvl) !== 'undefined') {
                     if (response.authentication_lvl != "guest") {
                         user.need_auth = false
-                    } else user.need_auth = true 
+                    } else user.need_auth = true
                 } else {
                     user.need_auth = true
                 }
@@ -85,17 +99,17 @@ export default class {
             })
     }
 
-    sendCommand (cmd) {
+    sendCommand(cmd) {
         return this.sendGetHttp(COMMAND_URL, {
             plain: cmd
         })
     }
-    
-    sendCommandText (cmd) {
-    
+
+    sendCommandText(cmd) {
+
         return this.sendGetHttp(COMMAND_URL, {
             commandText: cmd
         })
-    }    
-    
+    }
+
 }
