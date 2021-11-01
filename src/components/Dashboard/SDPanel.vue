@@ -50,7 +50,7 @@
                                 </td>
                                 <td>&nbsp;&nbsp;</td>
                                 <td>
-                                    <span id="files_currentPath">{{currentPath}}</span>
+                                    <span id="files_currentPath">{{ currentPath }}</span>
                                 </td>
                                 <td>&nbsp;&nbsp;</td>
                                 <td>
@@ -59,7 +59,7 @@
                             </tr>
                         </table>
                     </div>
-                    <div class=" pull-right" v-if="uploading">
+                    <div class="pull-right" v-if="uploading">
                         <table>
                             <tr>
                                 <td>
@@ -74,7 +74,7 @@
                                     <progress name="prg" :value="uploadingProgress" max="100"></progress>
                                 </td>
                                 <td>
-                                    <span id="files_percent_upload"></span>%
+                                    <span id="files_percent_upload">{{ uploadingProgress }}</span>%
                                 </td>
                             </tr>
                         </table>
@@ -172,26 +172,39 @@
             id="file-body"
             class="panel-body panel-height panel-max-height panel-scroll panel-flex-main"
         >
-            <div v-if="loading" id="files_list_loader" class="loader " style="margin:auto"></div>
+            <div v-if="loading" id="files_list_loader" class="loader" style="margin:auto"></div>
             <ul class="list-group" id="files_fileList">
+                <li
+                    v-if="currentPath != '/'"
+                    class="list-group-item list-group-hover"
+                    style="cursor:pointer"
+                    @click="levelup()"
+                >
+                    <span v-html="$options.filters.icon('level-up')"></span>&nbsp;&nbsp;
+                    <span translate>Up...</span>
+                </li>
                 <li class="list-group-item list-group-hover" v-for="file in files" :key="file.name">
                     <div class="row">
                         <div class="col-md-5 col-sm-5 no_overflow">
                             <table>
                                 <tr>
                                     <td>
-                                        <a href="###" @click="selectDir(file.name)" class="btn btn-xs btn-link">{{file.name}}</a>
+                                        <a
+                                            href="###"
+                                            @click="selectDir(file.name)"
+                                            class="btn btn-xs btn-link"
+                                        >{{ file.name }}</a>
                                     </td>
                                 </tr>
                             </table>
                         </div>
-                        <div class="col-md-2 col-sm2">{{ file.size!=-1?file.size:'' }}</div>
+                        <div class="col-md-2 col-sm2">{{ file.size != -1 ? file.size : '' }}</div>
                         <div class="col-md-3 col-sm-3">{{ file.datetime }}</div>
                         <div class="col-md-2 col-sm2">
                             <button
                                 class="btn btn-xs btn-success"
                                 v-html="$options.filters.icon('play')"
-                                v-if="file.size!=-1"
+                                v-if="file.size != -1"
                                 @click="printFile(file)"
                             ></button>
                             &nbsp;
@@ -206,18 +219,18 @@
             </ul>
         </div>
         <div class="panel-footer panel-footer-height">
-            <div class="row " v-if="sdfs.status&&sdfs.status.toLowerCase()=='ok'">
+            <div class="row" v-if="sdfs.status && sdfs.status.toLowerCase() == 'ok'">
                 <div class="col-md-12">
                     <div class="form-inline">
                         <div class="form-group">
                             <span>
                                 <span translate>Total:</span>&nbsp;
-                                <span id="files_sd_status_total">{{sdfs.total}}</span>
+                                <span id="files_sd_status_total">{{ sdfs.total }}</span>
                             </span>
                             <span>&nbsp;|&nbsp;</span>
                             <span>
                                 <span translate>Used:</span>&nbsp;
-                                <span id="files_sd_status_used">{{sdfs.used}}</span>
+                                <span id="files_sd_status_used">{{ sdfs.used }}</span>
                             </span>
                             <span>&nbsp;</span>
                             <span class="noshowonlowres">| &nbsp;</span>
@@ -234,7 +247,7 @@
                                             :value="sdfs.occupation"
                                         ></meter>
                                     </span>
-                                    <span id="files_sd_status_percent">{{sdfs.occupation}}</span>
+                                    <span id="files_sd_status_percent">{{ sdfs.occupation }}</span>
                                     <span>%</span>
                                 </div>
                             </span>
@@ -242,9 +255,9 @@
                     </div>
                 </div>
             </div>
-            <div class="row " v-if="sdfs.status&&sdfs.status.toLowerCase()!='ok'">
+            <div class="row" v-if="sdfs.status && sdfs.status.toLowerCase() != 'ok'">
                 <div class="col-md-12">
-                    <span id="files_sd_status_msg">{{sdfs.status}}</span>
+                    <span id="files_sd_status_msg">{{ sdfs.status }}</span>
                 </div>
             </div>
         </div>
@@ -281,12 +294,12 @@ export default {
             return this.fwData.target_firmware == 'smoothieware' ? this.fwData.primary_sd : UPLOAD_URL
         },
         files() {
-            return this.sdfs.files.filter(item => item.size == -1).concat(this.sdfs.files.filter(item => item.size!=-1))
+            return this.sdfs.files.filter(item => item.size == -1).concat(this.sdfs.files.filter(item => item.size != -1))
         },
         preferences() {
             return this.$store.preferences
         },
-        uploadingProgress () {
+        uploadingProgress() {
             return this.$store.uploadingProgress
         }
     },
@@ -401,6 +414,17 @@ export default {
         },
         refreshFiles() {
             return this.getFiles(this.currentPath)
+        },
+        levelup() {
+            var tlist = this.currentPath.split("/");
+            var path = "/";
+            var nb = 1;
+            while (nb < (tlist.length - 2)) {
+                path += tlist[nb] + "/";
+                nb++;
+            }
+            this.currentPath = path
+            this.refreshFiles()
         },
         refreshSD() { },
         refreshSD1() { },
