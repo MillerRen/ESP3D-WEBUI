@@ -39,6 +39,11 @@ export default class Grbl extends Base {
             .then(response => Files.parseFiles(response, this.preferences))
     }
 
+    printFile(filename) {
+        let cmd = `[ESP220]${filename}`
+        return this.sendCommandText(cmd)
+    }
+
     checkLogin() {
         return super.checkLogin()
             .then(user => {

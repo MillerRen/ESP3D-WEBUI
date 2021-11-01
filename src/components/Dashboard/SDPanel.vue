@@ -136,17 +136,16 @@
                             >TFT USB</button>
                             &nbsp;
                             <button
-                                v-if="fwData.target_firmware == 'grbl' || fwData.target_firmware == 'grbl-embeded'"
-                                id="progress_btn"
+                                v-if="fwData.target_firmware != 'grbl' && fwData.target_firmware != 'grbl-embedded'"
+                                @click="checkPrintingProgress"
                                 class="btn btn-xs btn-primary"
                                 translate
                             >Progress</button>
                             &nbsp;
                             <button
-                                v-if="fwData.target_firmware == 'grbl' || fwData.target_firmware == 'grbl-embeded'"
-                                id="abort_btn"
+                                v-if="fwData.target_firmware != 'grbl' && fwData.target_firmware != 'grbl-embedded'"
+                                @click="abortPrinting"
                                 class="btn btn-xs btn-primary"
-                                onclick="files_abort()"
                                 translate
                             >Abort</button>
                             &nbsp;
@@ -426,6 +425,11 @@ export default {
             
             this.getFiles(path)
         },
+        printFile (file) {
+            return this.$store.printFile(file.name)
+        },
+        abortPrinting () {},
+        checkPrintingProgress () {},
         refreshSD() { },
         refreshSD1() { },
         refreshSD2() { },
