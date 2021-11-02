@@ -50,6 +50,12 @@ function sendFileHttp(space, files, path, onUploadProgress) {
         onUploadProgress
     })
         .then(response => response.data)
+        .then(response => {
+            if (!response.files) {
+                response.files = []
+            }
+            return response
+        })
 }
 
 function listFiles(path, params) {

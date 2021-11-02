@@ -293,7 +293,7 @@ export default {
             return this.fwData.target_firmware == 'smoothieware' ? this.fwData.primary_sd : UPLOAD_URL
         },
         files() {
-            return this.sdfs.files.filter(item => item.size == -1).concat(this.sdfs.files.filter(item => item.size != -1))
+            return this.sdfs.files
         },
         preferences() {
             return this.$store.preferences

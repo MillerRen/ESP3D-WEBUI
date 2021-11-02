@@ -5,6 +5,14 @@
                 <table id="SPIFFS-select_form">
                     <tr>
                         <td>
+                            <input
+                                ref="fileinput"
+                                type="file"
+                                style="display: none;"
+                                name="myfiles[]"
+                                multiple
+                                @change="checkFiles()"
+                            />
                             <button
                                 class="btn btn-info"
                                 type="button"
@@ -40,7 +48,12 @@
                     </svg>
                 </button>
                 &nbsp;
-                <progress v-if="uploading" :value="uploadingProgress" name="prg" max="100"></progress>
+                <progress
+                    v-if="uploading"
+                    :value="uploadingProgress"
+                    name="prg"
+                    max="100"
+                ></progress>
                 &nbsp;
                 <span
                     v-if="uploading"
@@ -79,7 +92,6 @@
                         <text x="15" y="25" font-size="18" font-weight="800" fill="#5BC0DE">+</text>
                     </svg>
                 </button>
-                <div id="SPIFFS_loader" class="loader" style="width:2em;height:2em;" v-if="loading"></div>
                 <div id="SPIFFS_path" class="info">
                     <table>
                         <tr>
@@ -92,15 +104,8 @@
                         </tr>
                     </table>
                 </div>
-                <input
-                    ref="fileinput"
-                    type="file"
-                    style="display:none"
-                    id="SPIFFS-select"
-                    name="myfiles[]"
-                    multiple
-                    @change="checkFiles()"
-                />
+
+                <div id="SPIFFS_loader" class="loader" style="width:2em;height:2em;" v-if="loading"></div>
             </div>
             <table class="table table-striped" style="margin-bottom:20px;">
                 <thead>
@@ -112,32 +117,20 @@
                     </tr>
                 </thead>
                 <tbody id="SPIFFS_file_list">
-                    <tr v-for="file in dirs" :key="file.name">
-                        <td v-html="$options.filters.icon('folder-close')"></td>
+                    <tr v-for="file in files" :key="file.name">
+                        <td v-html="$options.filters.icon(file.isdir ? 'folder-close' : 'file')"></td>
                         <td>
                             <button
                                 class="btn btn-link"
-                                @click="selectDir(currentPath + file.name + '/')"
-                            >{{ file.name }}</button>
+                                @click="file.isdir && selectDir(currentPath + file.name + '/')"
+                            >{{ file.name }}{{ file.isdir ? '/' : '' }}</button>
                         </td>
-                        <td></td>
+                        <td>{{ !file.isdir ? file.size : '' }}</td>
                         <td>
                             <button
                                 class="btn btn-danger btn-sm"
                                 v-html="$options.filters.icon('trash')"
-                                @click="deleteDir(file)"
-                            ></button>
-                        </td>
-                    </tr>
-                    <tr v-for="file in files" :key="file.name">
-                        <td v-html="$options.filters.icon('file')"></td>
-                        <td>{{ file.name }}</td>
-                        <td>{{ file.size }}</td>
-                        <td>
-                            <button
-                                class="btn btn-danger btn-sm"
-                                v-html="$options.filters.icon('trash')"
-                                @click="deleteFile(file)"
+                                @click="remove(file)"
                             ></button>
                         </td>
                     </tr>
@@ -174,10 +167,7 @@ export default {
     },
     computed: {
         files() {
-            return this.spiffs.files.filter(item => item.size != -1)
-        },
-        dirs() {
-            return this.spiffs.files.filter(item => item.size == -1)
+            return this.spiffs.files
         },
         stats() {
             return {
@@ -196,6 +186,9 @@ export default {
         }
     },
     methods: {
+        remove(file) {
+            return file.isdir ? this.deleteDir(file) : this.deleteFile(file)
+        },
         deleteFile(file) {
             var that = this
             this.$modal({

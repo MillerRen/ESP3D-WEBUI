@@ -1,4 +1,4 @@
-function parseFiles(response, preferences) {
+function parseFiles(response, filters) {
     let files_file_list = [];
     if (typeof response.files != 'undefined') {
         for (var i = 0; i < response.files.length; i++) {
@@ -9,11 +9,13 @@ function parseFiles(response, preferences) {
                 size: file.size,
                 isdir: file.size == "-1",
                 datetime: file.datetime,
-                isprintable: files_showprintbutton(file.name, preferences.f_filters||'')
+                isprintable: files_showprintbutton(file.name, filters||'')
             };
             files_file_list.push(file_entry);
         }
-        response.files = files_file_list
+        response.files = files_file_list.sort((a,b)=>b.isdir-a.isdir)
+    } else {
+        response.files = []
     }
     return response
 }

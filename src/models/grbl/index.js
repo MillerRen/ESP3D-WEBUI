@@ -60,11 +60,30 @@ export default class Grbl {
 
     listSPIFFS(url, params) {
         return http.listFiles(url, params)
+            .then(response=>Files.parseFiles(response, ''))
     }
 
     listSD(url, params) {
         return http.listFiles(url, params)
-            .then(response => Files.parseFiles(response, this.preferences))
+            .then(response => Files.parseFiles(response, this.preferences.f_filters))
+    }
+
+    createDir(url, params) {
+        params.action = 'createdir'
+        return http.sendGetHttp(url, params)
+        .then(response => Files.parseFiles(response, this.preferences.f_filters))
+    }
+
+    deleteDir(url, params) {
+        params.action = 'deletedir'
+        return http.sendGetHttp(url, params)
+        .then(response => Files.parseFiles(response, this.preferences.f_filters))
+    }
+
+    deleteFile(url, params) {
+        params.action = 'delete'
+        return http.sendGetHttp(url, params)
+        .then(response => Files.parseFiles(response, this.preferences.f_filters))
     }
 
     printFile(filename) {
@@ -136,7 +155,7 @@ export default class Grbl {
         });
         var file = new File([blob], PREFERENCES_FILE_NAME);
 
-        return http.uploadFile(PREFERENCES_FILE_NAME, [file])
+        return this.uploadFile(PREFERENCES_FILE_NAME, [file])
     }
 
     getConfig() {
@@ -165,7 +184,7 @@ export default class Grbl {
     }
 
     updateFirmware(files) {
-        return http.uploadFile('/updatefw', files, '/')
+        return this.uploadFile('/updatefw', files, '/')
             .then(() => {
                 this.waitRestarting()
             })
