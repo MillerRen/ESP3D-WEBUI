@@ -25,20 +25,20 @@ export default class Grbl {
 
     startSocket() {
         var that = this
-        var url = this.fwData.async_webcommunication ? 'ws://' + document.location.host + '/ws':'ws://' + this.fwData.websocket_ip + ':' + this.fwData.websocket_port
+        var url = this.fwData.async_webcommunication ? 'ws://' + document.location.host + '/ws' : 'ws://' + this.fwData.websocket_ip + ':' + this.fwData.websocket_port
         console.log("Socket is: " + url);
-        this.ws = new WS(url,  {
+        this.ws = new WS(url, {
             protocols: ['arduino'],
-            onmessage (e) {
+            onmessage(e) {
                 var msg = Websocket.parseMessage(e)
-                msg.type=='stream'?that.messages.push(msg):console.log(msg.msg)
+                msg.type == 'stream' ? that.messages.push(msg) : console.log(msg.msg)
             }
         });
 
     }
 
-    clearMessages () {
-        this.messages  = []
+    clearMessages() {
+        this.messages = []
     }
 
     sendCustomCommand(cmd) {
@@ -142,6 +142,10 @@ export default class Grbl {
     getConfig() {
         return http.sendCommand('$$')
             .then(response => Config.parseConfig(response))
+    }
+
+    updateConfig(cmd) {
+        return http.sendCommand(cmd)
     }
 
     getESPStatus() {
