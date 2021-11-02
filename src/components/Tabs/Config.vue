@@ -244,7 +244,7 @@ export default {
     },
     updateConfig(item) {
       this.loading = true
-      return this.$store.updateConfig(this.fwData.target_firmware, item)
+      return this.$store.updateConfig(item.cmd + item.value)
         .catch((err) => {
           this.$modal({
             title: 'Set failed',
