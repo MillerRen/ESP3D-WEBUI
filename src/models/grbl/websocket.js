@@ -12,7 +12,7 @@ function parseMessage(e) {
                 wsmsg += msg;
                 // Monitor_output_Update(wsmsg);
                 // process_socket_response(wsmsg);
-                // if (!((wsmsg.startsWith("ok T:") || wsmsg.startsWith("X:") || wsmsg.startsWith("FR:") || wsmsg.startsWith("echo:E0 Flow")))) console.log(wsmsg);
+                if (!((wsmsg.startsWith("ok T:") || wsmsg.startsWith("X:") || wsmsg.startsWith("FR:") || wsmsg.startsWith("echo:E0 Flow")))) console.log(wsmsg);
                 // wsmsg = "";
                 // msg = "";
             }

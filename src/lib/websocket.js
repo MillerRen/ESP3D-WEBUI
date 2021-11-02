@@ -1,47 +1,45 @@
-if (process.env.NODE_ENV != 'production ') {
+if (process.env.NODE_ENV == 'development') {
     require('../../mocks/websocket')
-} 
-
-// inspired from socktte
-function noop(e) {
-    console.log(e)
 }
 
-export default function (url, protocols) {
-	$ = $ || {};
+function noop() {}
+
+module.exports = function (url, opts) {
+	opts = opts || {};
 
 	var ws, num=0, timer=1, $={};
-	var max = $.maxAttempts || Infinity;
+	var max = opts.maxAttempts || Infinity;
 
 	$.open = function () {
+		ws = new WebSocket(url, opts.protocols || []);
 
-		ws = new WebSocket(url, protocols || []);
+        ws.binaryType = opts.binaryType || 'arraybuffer'
 
-		ws.onmessage = $.onmessage || noop;
+		ws.onmessage = opts.onmessage || noop;
 
 		ws.onopen = function (e) {
-			($.onopen || noop)(e);
+			(opts.onopen || noop)(e);
 			num = 0;
 		};
 
 		ws.onclose = function (e) {
 			e.code === 1e3 || e.code === 1001 || e.code === 1005 || $.reconnect(e);
-			($.onclose || noop)(e);
+			(opts.onclose || noop)(e);
 		};
 
 		ws.onerror = function (e) {
-			(e && e.code==='ECONNREFUSED') ? $.reconnect(e) : ($.onerror || noop)(e);
+			(e && e.code==='ECONNREFUSED') ? $.reconnect(e) : (opts.onerror || noop)(e);
 		};
 	};
 
 	$.reconnect = function (e) {
 		if (timer && num++ < max) {
 			timer = setTimeout(function () {
-				($.onreconnect || noop)(e);
+				(opts.onreconnect || noop)(e);
 				$.open();
-			}, $.timeout || 1e3);
+			}, opts.timeout || 1e3);
 		} else {
-			($.onmaximum || noop)(e);
+			(opts.onmaximum || noop)(e);
 		}
 	};
 
@@ -62,3 +60,4 @@ export default function (url, protocols) {
 
 	return $;
 }
+

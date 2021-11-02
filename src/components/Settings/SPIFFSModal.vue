@@ -290,7 +290,7 @@ export default {
         getFiles(path) {
             this.loading = true
             return this.$store
-                .listFiles(SPIFFS_URL, {
+                .listSPIFFS(SPIFFS_URL, {
                     path
                 })
                 .then(response => {
