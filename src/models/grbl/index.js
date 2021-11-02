@@ -1,4 +1,5 @@
-import Base from '../base'
+import http from '../../lib/http'
+import WS from '../../lib/websocket'
 import { PREFERENCES_FILE_NAME, TOTAL_WAITING_TIMES } from '../../constants'
 import Config from './config'
 import Settings from './settings'
@@ -9,9 +10,8 @@ import Websocket from './websocket'
 
 const DEFAULT_PREFERENCES = [{ "language": "en", "enable_lock_UI": "false", "enable_ping": "true", "enable_DHT": "false", "enable_camera": "false", "auto_load_camera": "false", "camera_address": "", "number_extruders": "1", "is_mixed_extruder": "false", "enable_bed": "false", "enable_fan": "false", "enable_control_panel": "true", "enable_grbl_panel": "true", "interval_positions": "3", "interval_temperatures": "3", "interval_status": "3", "xy_feedrate": "1000", "z_feedrate": "100", "a_feedrate": "100", "b_feedrate": "100", "c_feedrate": "100", "e_feedrate": "400", "e_distance": "5", "enable_temperatures_panel": "false", "enable_extruder_panel": "false", "enable_files_panel": "true", "f_filters": "g;G;gco;GCO;gcode;GCODE;nc;NC;ngc;NCG;tap;TAP;txt;TXT", "enable_commands_panel": "true", "enable_autoscroll": "true", "enable_verbose_mode": "true", "enable_grbl_probe_panel": "false", "probemaxtravel": "40", "probefeedrate": "100", "probetouchplatethickness": "0.5" }]
 
-export default class Grbl extends Base {
+export default class Grbl {
     constructor() {
-        super()
         this.fwData = null
         this.settings = null
         this.preferences = null
@@ -24,39 +24,14 @@ export default class Grbl extends Base {
     }
 
     startSocket() {
-        var ws_source
-        var that = this
-        try {
-            if (this.fwData.async_webcommunication) {
-                ws_source = new WebSocket('ws://' + document.location.host + '/ws', ['arduino']);
-            } else {
-                console.log("Socket is " + this.fwData.websocket_ip + ":" + this.fwData.websocket_port);
-                ws_source = new WebSocket('ws://' + this.fwData.websocket_ip + ':' + this.fwData.websocket_port, ['arduino']);
-            }
-        } catch (exception) {
-            console.error(exception);
+        // var that = this
+        var url = this.fwData.async_webcommunication ? 'ws://' + document.location.host + '/ws':'ws://' + this.fwData.websocket_ip + ':' + this.fwData.websocket_port
+        console.log("Socket is: " + url);
+        this.ws = new WS(url,  ['arduino']);
+        this.ws.onMessage = (e) => {
+            this.messages.push(Websocket.parseMessage(e))
         }
 
-        ws_source.binaryType = "arraybuffer";
-        ws_source.onopen = function () {
-            console.log("Connected");
-        };
-        ws_source.onclose = function (e) {
-            console.log("Disconnected", e);
-            //seems sometimes it disconnect so wait 3s and reconnect
-            //if it is not a log off
-            setTimeout(() => {
-                that.startSocket()
-            }, 3000);
-        };
-        ws_source.onerror = function (e) {
-            //Monitor_output_Update("[#]Error "+ e.code +" " + e.reason + "\n");
-            console.log("ws error", e);
-        };
-        ws_source.onmessage = function (e) {
-            that.messages.push(Websocket.parseMessage(e))
-            console.log(e)
-        }
     }
 
     clearMessages () {
@@ -64,11 +39,11 @@ export default class Grbl extends Base {
     }
 
     sendCustomCommand(cmd) {
-        return this.sendCommandText(cmd)
+        return http.sendCommandText(cmd)
     }
 
     uploadFile(url, fd, path) {
-        return this.sendFileHttp(url, fd, path, (e) => {
+        return http.sendFileHttp(url, fd, path, (e) => {
             this.uploadingProgress = Math.round(e.loaded * 100 / e.total)
         })
             .finally(() => {
@@ -77,17 +52,17 @@ export default class Grbl extends Base {
     }
 
     listSPIFFS(url, params) {
-        return this.listFiles(url, params)
+        return http.listFiles(url, params)
     }
 
     listSD(url, params) {
-        return this.listFiles(url, params)
+        return http.listFiles(url, params)
             .then(response => Files.parseFiles(response, this.preferences))
     }
 
     printFile(filename) {
         let cmd = `[ESP220]${filename}`
-        return this.sendCommandText(cmd)
+        return http.sendCommandText(cmd)
     }
 
     checkLogin() {
@@ -107,7 +82,7 @@ export default class Grbl extends Base {
     }
 
     getFWData() {
-        return this.sendCommand('[ESP800]')
+        return http.sendCommand('[ESP800]')
             .then(response => {
                 var fwData = Firmware.parseFWData(response)
                 this.fwData = fwData
@@ -116,7 +91,7 @@ export default class Grbl extends Base {
     }
 
     getSettings() {
-        return this.sendCommand('[ESP400]')
+        return http.sendCommand('[ESP400]')
             .then(response => {
                 if (!response.EEPROM) {
                     throw new Error('wrong data')
@@ -128,7 +103,7 @@ export default class Grbl extends Base {
     }
 
     getPreferences() {
-        return this.sendGetHttp(PREFERENCES_FILE_NAME)
+        return http.sendGetHttp(PREFERENCES_FILE_NAME)
             .then((response) => {
                 var preferences
                 if (typeof response == 'string' && response.indexOf("<HTML>") != -1) {
@@ -145,7 +120,7 @@ export default class Grbl extends Base {
     }
 
     updateSettings(cmd) {
-        return this.sendCommand(cmd)
+        return http.sendCommand(cmd)
     }
 
     updatePreferences(preferences) {
@@ -154,16 +129,16 @@ export default class Grbl extends Base {
         });
         var file = new File([blob], PREFERENCES_FILE_NAME);
 
-        return this.uploadFile(PREFERENCES_FILE_NAME, [file])
+        return http.uploadFile(PREFERENCES_FILE_NAME, [file])
     }
 
     getConfig() {
-        return this.sendCommand('$$')
+        return http.sendCommand('$$')
             .then(response => Config.parseConfig(response))
     }
 
     getESPStatus() {
-        return this.sendCommand('[ESP420]plain')
+        return http.sendCommand('[ESP420]plain')
             .then(response => {
                 let status = Status.parseStatus(response)
                 this.status = status
@@ -172,14 +147,14 @@ export default class Grbl extends Base {
     }
 
     restartESP() {
-        return this.sendCommandText('[ESP444]RESTART')
+        return http.sendCommandText('[ESP444]RESTART')
             .then(() => {
                 this.waitRestarting()
             })
     }
 
     updateFirmware(files) {
-        return this.uploadFile('/updatefw', files, '/')
+        return http.uploadFile('/updatefw', files, '/')
             .then(() => {
                 this.waitRestarting()
             })
@@ -200,24 +175,24 @@ export default class Grbl extends Base {
     }
 
     homeAll() {
-        return this.sendCommandText('$H')
+        return http.sendCommandText('$H')
     }
 
     homeX() {
-        return this.sendCommandText('$HX')
+        return http.sendCommandText('$HX')
     }
 
     homeY() {
-        return this.sendCommandText('$HY')
+        return http.sendCommandText('$HY')
     }
 
     homeZ() {
-        return this.sendCommandText('$HZ')
+        return http.sendCommandText('$HZ')
     }
 
     jog(cmd, feedrate) {
         let command = "$J=G91 G21 F" + feedrate + " " + cmd
-        return this.sendCommandText(command)
+        return http.sendCommandText(command)
     }
 
 

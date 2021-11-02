@@ -12,7 +12,7 @@
             >Clear</button>
         </div>
         <div id="command-body" class="panel-body panel-flex-main">
-            <pre id="cmd_content" style="min-height: 350px; max-height: 350px;">{{messages.join('\n')}}</pre>
+            <pre id="cmd_content" style="height: 350px;" :style="{scrollTop:scrollTop}">{{messages.join('\n')}}</pre>
         </div>
         <div class="panel-footer">
             <div class="panel-flex-row">
@@ -92,7 +92,13 @@ export default {
         clearConsole() {
             this.$store.clearMessages()
         },
-        onKeyup () {}
+        onKeyup () {},
+        scrollTop () {
+            console.log(this.messages)
+        }
+    },
+    mounted () {
+        this.$watch('message', this.scrollTop)
     }
 }
 </script>
