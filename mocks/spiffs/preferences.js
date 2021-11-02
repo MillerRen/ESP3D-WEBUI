@@ -1,4 +1,4 @@
-import mock from '../../lib/mock'
+import mock from '../mock'
 import progress from '../progress'
 
 const response = require(`../data/preferences.${process.env.VUE_APP_TARGET_ENV}.json`)

@@ -30,11 +30,18 @@ export default class Grbl {
         this.ws = new WS(url, {
             protocols: ['arduino'],
             onmessage(e) {
-                var msg = Websocket.parseMessage(e)
-                msg.type == 'stream' ? that.messages.push(msg) : console.log(msg.msg)
+                that.processMessage(Websocket.parseMessage(e))
             }
         });
 
+    }
+
+    processMessage(msg) {
+        msg.type == 'stream' ? this.messages.push(msg) : console.log(msg.msg)
+        if (msg.startWith('$=0')) {
+            this.config = Config.parseConfig(msg)
+            console.log(this.config)
+        }
     }
 
     clearMessages() {
@@ -53,6 +60,7 @@ export default class Grbl {
         return http.sendFileHttp(url, fd, path, (e) => {
             this.uploadingProgress = Math.round(e.loaded * 100 / e.total)
         })
+            .then(response => Files.parseFiles(response, ''))
             .finally(() => {
                 this.uploadingProgress = 0
             })
@@ -60,7 +68,7 @@ export default class Grbl {
 
     listSPIFFS(url, params) {
         return http.listFiles(url, params)
-            .then(response=>Files.parseFiles(response, ''))
+            .then(response => Files.parseFiles(response, ''))
     }
 
     listSD(url, params) {
@@ -71,19 +79,19 @@ export default class Grbl {
     createDir(url, params) {
         params.action = 'createdir'
         return http.sendGetHttp(url, params)
-        .then(response => Files.parseFiles(response, this.preferences.f_filters))
+            .then(response => Files.parseFiles(response, this.preferences.f_filters))
     }
 
     deleteDir(url, params) {
         params.action = 'deletedir'
         return http.sendGetHttp(url, params)
-        .then(response => Files.parseFiles(response, this.preferences.f_filters))
+            .then(response => Files.parseFiles(response, this.preferences.f_filters))
     }
 
     deleteFile(url, params) {
         params.action = 'delete'
         return http.sendGetHttp(url, params)
-        .then(response => Files.parseFiles(response, this.preferences.f_filters))
+            .then(response => Files.parseFiles(response, this.preferences.f_filters))
     }
 
     printFile(filename) {

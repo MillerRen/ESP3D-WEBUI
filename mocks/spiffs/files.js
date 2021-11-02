@@ -1,4 +1,4 @@
-import mock from '../../lib/mock'
+import mock from '../mock'
 import response from '../data/files.json'
 import progress from '../progress'
 

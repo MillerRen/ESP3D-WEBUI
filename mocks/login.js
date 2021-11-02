@@ -1,4 +1,4 @@
-import mock from "../lib/mock";
+import mock from "./mock"
 
 mock.onGet('/login').reply(200, {
     authentication_lvl: 'admin',
