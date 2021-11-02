@@ -30,8 +30,8 @@ export default class Grbl {
         this.ws = new WS(url,  {
             protocols: ['arduino'],
             onmessage (e) {
-                console.log(e)
-                that.messages.push(Websocket.parseMessage(e))
+                var msg = Websocket.parseMessage(e)
+                msg.type=='stream'?that.messages.push(msg):console.log(msg.msg)
             }
         });
 
@@ -42,6 +42,10 @@ export default class Grbl {
     }
 
     sendCustomCommand(cmd) {
+        this.messages.push({
+            type: 'input',
+            msg: cmd
+        })
         return http.sendCommandText(cmd)
     }
 

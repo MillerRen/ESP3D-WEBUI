@@ -12,7 +12,7 @@
             >Clear</button>
         </div>
         <div id="command-body" class="panel-body panel-flex-main">
-            <pre id="cmd_content" style="height: 350px;" :style="{scrollTop:scrollTop}">{{messages.join('\n')}}</pre>
+            <pre id="cmd_content" style="height: 350px;" :style="{scrollTop:scrollTop}">{{messages}}</pre>
         </div>
         <div class="panel-footer">
             <div class="panel-flex-row">
@@ -79,7 +79,7 @@ export default {
     },
     computed: {
         messages () {
-            return this.$store.messages
+            return this.$store.messages.map(item=>item.msg).join('\n')
         }
     },
     methods: {
@@ -98,7 +98,7 @@ export default {
         }
     },
     mounted () {
-        this.$watch('message', this.scrollTop)
+        this.$watch('messages', this.scrollTop)
     }
 }
 </script>
