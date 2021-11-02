@@ -275,7 +275,6 @@ export default {
                 .then(() => {
                     this.uploading = false
                     this.uploads = []
-                    this.refreshFiles()
                 })
                 .catch(this.spiffsFailed)
 
