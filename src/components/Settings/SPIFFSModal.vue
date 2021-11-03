@@ -275,8 +275,12 @@ export default {
                 .then(() => {
                     this.uploading = false
                     this.uploads = []
+                    return this.refreshFiles()
                 })
                 .catch(this.spiffsFailed)
+                .finally(() => {
+                    this.uploads = []
+                })
 
         },
         getFiles(path) {

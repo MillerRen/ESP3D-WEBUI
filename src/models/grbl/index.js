@@ -21,6 +21,8 @@ export default class Grbl {
         this.restartingProgress = 0
         this.uploadingProgress = 0
         this.messages = []
+        this.spiffs = {}
+        this.sdfs = {}
     }
 
     startSocket() {
@@ -30,16 +32,17 @@ export default class Grbl {
         this.ws = new WS(url, {
             protocols: ['arduino'],
             onmessage(e) {
-                that.processMessage(Websocket.parseMessage(e))
+                var msg = Websocket.parseMessage(e)
+                msg.type == 'stream' ? that.processMessage(msg) : console.log(msg)
             }
         });
 
     }
 
     processMessage(msg) {
-        msg.type == 'stream' ? this.messages.push(msg) : console.log(msg.msg)
-        if (msg.startWith('$=0')) {
-            this.config = Config.parseConfig(msg)
+        this.messages.push(msg)
+        if (msg.msg.startsWith('$0=')) {
+            this.config = Config.parseConfig(msg.msg)
             console.log(this.config)
         }
     }
@@ -57,11 +60,11 @@ export default class Grbl {
     }
 
     uploadFile(url, fd, path) {
+        this.uploadingProgress = 0
         return http.sendFileHttp(url, fd, path, (e) => {
             this.uploadingProgress = Math.round(e.loaded * 100 / e.total)
         })
-            .then(response => Files.parseFiles(response, ''))
-            .finally(() => {
+            .then(() => {
                 this.uploadingProgress = 0
             })
     }
@@ -168,7 +171,13 @@ export default class Grbl {
 
     getConfig() {
         return http.sendCommand('$$')
-            .then(response => Config.parseConfig(response))
+            .then(response => {
+                if (response) {
+                    this.config = Config.parseConfig(response)
+                    return this.config
+                }
+                return response
+            })
     }
 
     updateConfig(cmd) {

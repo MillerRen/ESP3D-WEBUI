@@ -1,5 +1,8 @@
 function parseFiles(response, filters) {
     let files_file_list = [];
+    if (!response) {
+        response = {}
+    }
     if (typeof response.files != 'undefined') {
         for (var i = 0; i < response.files.length; i++) {
             var file = response.files[i]

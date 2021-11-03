@@ -221,17 +221,18 @@ export default {
   },
   data() {
     return {
-      config: [],
       loading: false
+    }
+  },
+  computed: {
+    config () {
+      return this.$store.config
     }
   },
   methods: {
     refreshConfig() {
       this.loading = true
-      return this.$store.getConfig(this.fwData.target_firmware)
-        .then((response) => {
-          this.config = response
-        })
+      return this.$store.getConfig()
         .catch(err => {
           this.$modal({
             title: 'Get Config failed',
