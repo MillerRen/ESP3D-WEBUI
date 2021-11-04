@@ -96,9 +96,9 @@ export default class Grbl {
             report = extractor.errorReport(data)
         }
 
-        else if (checker.isGrblSetting(data)) {
+        else if (checker.isGrblSetting(data.substr(0, 4))) {
             report = extractor.settingsReport(data)
-            this.config = Config.parseConfig(report.input)
+            this.config = Config.parseConfig(data)
         }
 
         else if (checker.isFeedbackMessage(data)) {

@@ -149,6 +149,7 @@ function parseConfig(str) {
     var lines = str.split('\n')
     for (var i = 0; i < lines.length; i++) {
         var line = lines[i]
+        if(!line.startsWith('$')) continue
         config.push(create_config_entry(line, i))
     }
 
