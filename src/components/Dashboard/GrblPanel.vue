@@ -16,9 +16,10 @@
                                     <td>
                                         <button
                                             id="clear_status_btn"
-                                            class="btn btn-default btn-xs hide_it"
-                                            onclick="SendPrinterCommand('$X', true, null,null, 114, 1);"
+                                            class="btn btn-default btn-xs"
+                                            @click="disableAlarm"
                                             style="padding: 5px 5px 0 5px;"
+                                            v-if="report.type=='alarm'"
                                         >
                                             <svg
                                                 width="2em"
@@ -51,7 +52,7 @@
                                         </button>
                                     </td>
                                     <td style="text-align: left; width:100%;height:30px;">
-                                        <div id="grbl_status" class="status_text">{{grblStatus.state}}</div>
+                                        <div id="grbl_status" class="status_text" >{{reportType}}</div>
                                     </td>
                                 </tr>
                                 <tr>
@@ -59,7 +60,8 @@
                                         colspan="2"
                                         style="text-align: left; height:20px;"
                                         id="grbl_status_text"
-                                    ></td>
+                                        v-if="report.type=='alarm'"
+                                    >{{report.data.message}}</td>
                                 </tr>
                             </table>
                         </td>
@@ -971,8 +973,19 @@ export default {
         }
     },
     computed: {
-        grblStatus () {
-            return this.$store.grblStatus
+        grblErrorMessage () {
+            return ['alarm','hold','error','door'].indexOf(this.$store.report.type)>-1 ? this.$store.report.data.message:''
+        },
+        report () {
+            return this.$store.report
+        },
+        reportType () {
+            return this.$store.report.type=='status'?this.$store.report.data.status.state:this.$store.report.type
+        }
+    },
+    methods: {
+        disableAlarm() {
+            this.$store.disableAlarm()
         }
     }
 }

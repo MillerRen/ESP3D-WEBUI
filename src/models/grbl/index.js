@@ -32,7 +32,7 @@ export default class Grbl {
         this.messages = []
         this.spiffs = {}
         this.sdfs = {}
-        this.serialData = {}
+        this.report = {}
         this.MPos = {
             x: 0,
             y: 0,
@@ -73,75 +73,75 @@ export default class Grbl {
     processStream(msg) {
         this.messages.push(msg)
         var data = msg.msg.trim()
-        var serialData = {}
+        var report = {}
         if (checker.isStatusReport(data)) {
-            serialData = statusExtractor.statusReport(data)
-            Object.assign(this.MPos, serialData.data.machinePosition)
-            Object.assign(this.WPos, serialData.data.workPosition)
-            Object.assign(this.grblStatus, serialData.data.status)
+            report = statusExtractor.statusReport(data)
+            Object.assign(this.MPos, report.data.machinePosition)
+            Object.assign(this.WPos, report.data.workPosition)
+            Object.assign(this.grblStatus, report.data.status)
         }
         else if (checker.isSuccessResponse(data)) {
-            serialData = extractor.successReport(data)
+            report = extractor.successReport(data)
         }
 
         else if (checker.isGrblInitialization(data)) {
-            serialData = extractor.grblInitReport(data)
+            report = extractor.grblInitReport(data)
         }
 
         else if (checker.isAlarm(data)) {
-            serialData = extractor.alarmReport(data)
+            report = extractor.alarmReport(data)
         }
 
         else if (checker.isError(data)) {
-            serialData = extractor.errorReport(data)
+            report = extractor.errorReport(data)
         }
 
         else if (checker.isGrblSetting(data)) {
-            serialData = extractor.settingsReport(data)
-            this.config = Config.parseConfig(serialData.input)
+            report = extractor.settingsReport(data)
+            this.config = Config.parseConfig(report.input)
         }
 
         else if (checker.isFeedbackMessage(data)) {
-            serialData = extractor.feedbackMessageReport(data)
+            report = extractor.feedbackMessageReport(data)
         }
 
         else if (checker.isBuildVersion(data)) {
-            serialData = extractor.buildVersionReport(data)
+            report = extractor.buildVersionReport(data)
         }
 
         else if (checker.isBuildOptions(data)) {
-            serialData = extractor.buildOptionsReport(data)
+            report = extractor.buildOptionsReport(data)
         }
 
         else if (checker.isGcodeState(data)) {
-            serialData = extractor.gcodeStateReport(data)
+            report = extractor.gcodeStateReport(data)
         }
 
         else if (checker.isHelpMessage(data)) {
-            serialData = extractor.helpMessageReport(data)
+            report = extractor.helpMessageReport(data)
         }
 
         else if (checker.isGcodeSystem(data)) {
-            serialData = extractor.gcodeSystemReport(data)
+            report = extractor.gcodeSystemReport(data)
         }
 
         else if (checker.isProbeResult(data)) {
-            serialData = extractor.probeResultReport(data)
+            report = extractor.probeResultReport(data)
         }
 
         else if (checker.isEcho(data)) {
-            serialData = extractor.echoReport(data)
+            report = extractor.echoReport(data)
         }
 
         else if (checker.isStartupLine(data)) {
-            serialData = extractor.startupLineReport(data)
+            report = extractor.startupLineReport(data)
         }
 
         else {
-            serialData = { input: data, type: messageTypes.unknown }
+            report = { input: data, type: messageTypes.unknown }
         }
-        console.log(serialData)
-        this.serialData[serialData.type] = serialData.data
+        console.log(report)
+        this.report = report
     }
 
     processStatus(msg) {
@@ -355,7 +355,9 @@ export default class Grbl {
         return http.sendCommandText(command)
     }
 
-
+    disableAlarm() {
+        return http.sendCommandText('$X')
+    }
 
 }
 
