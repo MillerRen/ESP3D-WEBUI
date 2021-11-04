@@ -172,6 +172,10 @@ export default class Grbl {
         return http.sendCommandText(cmd)
     }
 
+    sendRealtimeCommand(cmd) {
+        return http.sendCommandText(cmd)
+    }
+
     uploadFile(url, fd, path) {
         this.uploadingProgress = 0
         return http.sendFileHttp(url, fd, path, (e) => {
@@ -357,6 +361,10 @@ export default class Grbl {
 
     disableAlarm() {
         return http.sendCommandText('$X')
+    }
+
+    resetGrbl() {
+        return http.sendCommandText(String.fromCharCode(0x18))
     }
 
 }

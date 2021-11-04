@@ -71,9 +71,9 @@
                                     <td style="width:100%;height:2em;"></td>
                                     <td>
                                         <button
-                                            id="sd_pause_btn"
-                                            class="btn btn-default hide_it"
-                                            onclick="SendRealtimeCmd('!');"
+                                            id="sd_pause_btn" v-if="report.type=='status'&&report.data.status.state=='run'"
+                                            class="btn btn-default "
+                                            @click="$store.sendRealtimeCommand('!');"
                                             style="padding: 5px 4px 0 5px;"
                                         >
                                             <svg
@@ -92,10 +92,10 @@
                                     </td>
                                     <td>&nbsp;</td>
                                     <td>
-                                        <button
+                                        <button v-if="report.type=='status'&&report.data.status.state=='run'"
                                             id="sd_resume_btn"
-                                            class="btn btn-default hide_it"
-                                            onclick="SendRealtimeCmd('~');"
+                                            class="btn btn-default "
+                                            @click="$store.sendRealtimeCommand('~');"
                                             style="padding: 5px 4px 0 5px;"
                                         >
                                             <svg
@@ -114,10 +114,10 @@
                                     </td>
                                     <td>&nbsp;</td>
                                     <td>
-                                        <button
+                                        <button v-if="report.type=='status'&&report.data.status.state=='run'"
                                             id="sd_reset_btn"
-                                            class="btn btn-danger hide_it"
-                                            onclick="grbl_reset();"
+                                            class="btn btn-danger "
+                                            @click="resetGrbl();"
                                             style="padding: 5px 0px 0px 0px;"
                                         >
                                             <svg
@@ -150,21 +150,21 @@
                 <div class="tab" id="grbluitablinks">
                     <button
                         class="tablinks"
-                        onclick="opentab(event, 'grblcontroltab', 'grbluitabscontent', 'grbluitablinks')"
+                        @click="opentab(event, 'grblcontroltab', 'grbluitabscontent', 'grbluitablinks')"
                         id="grblcontroltablink"
                     >
                         <span translate>Override</span>
                     </button>
                     <button
                         class="tablinks hide_it"
-                        onclick="opentab(event, 'grblprobetab', 'grbluitabscontent', 'grbluitablinks')"
+                        @click="opentab(event, 'grblprobetab', 'grbluitabscontent', 'grbluitablinks')"
                         id="grblprobetablink"
                     >
                         <span translate>Probe</span>
                     </button>
                     <button
                         class="tablinks hide_it"
-                        onclick="opentab(event, 'grblsurfacetab', 'grbluitabscontent', 'grbluitablinks')"
+                        @click="opentab(event, 'grblsurfacetab', 'grbluitabscontent', 'grbluitablinks')"
                         id="grblsurfacetablink"
                     >
                         <span translate>Surfacing Wizard</span>
@@ -182,7 +182,7 @@
                                         <td class="td_center">
                                             <button
                                                 class="btn btn-default"
-                                                onclick="SendRealtimeCmd(String.fromCharCode(0x92,0x0));"
+                                                @click="$store.sendRealtimeCommand(String.fromCharCode(0x92,0x0));"
                                                 style="padding: 5px 4px 0 5px;"
                                             >
                                                 <table>
@@ -213,7 +213,7 @@
                                         <td class="td_center">
                                             <button
                                                 class="btn btn-default"
-                                                onclick="SendRealtimeCmd(String.fromCharCode(0x94,0x0));"
+                                                @click="$store.sendRealtimeCommand(String.fromCharCode(0x94,0x0));"
                                                 style="padding: 5px 4px 0 5px;"
                                             >
                                                 <table>
@@ -244,7 +244,7 @@
                                         <td class="td_center">
                                             <button
                                                 class="btn btn-default"
-                                                onclick="SendRealtimeCmd(String.fromCharCode(0x90,0x0));"
+                                                @click="$store.sendRealtimeCommand(String.fromCharCode(0x90,0x0));"
                                                 style="padding: 5px 4px 0 5px;"
                                             >
                                                 <svg
@@ -264,7 +264,7 @@
                                         <td class="td_center">
                                             <button
                                                 class="btn btn-default"
-                                                onclick="SendRealtimeCmd(String.fromCharCode(0x93,0x0));"
+                                                @click="$store.sendRealtimeCommand(String.fromCharCode(0x93,0x0));"
                                                 style="padding: 5px 4px 0 5px;"
                                             >
                                                 <table>
@@ -295,7 +295,7 @@
                                         <td class="td_center">
                                             <button
                                                 class="btn btn-default"
-                                                onclick="SendRealtimeCmd(String.fromCharCode(0x91,0x0));"
+                                                @click="$store.sendRealtimeCommand(String.fromCharCode(0x91,0x0));"
                                                 style="padding: 5px 4px 0 5px;"
                                             >
                                                 <table>
@@ -331,7 +331,7 @@
                                         <td class="td_center">
                                             <button
                                                 class="btn btn-default"
-                                                onclick="SendRealtimeCmd(String.fromCharCode(0x9B,0x0));"
+                                                @click="$store.sendRealtimeCommand(String.fromCharCode(0x9B,0x0));"
                                                 style="padding: 5px 4px 0 5px;"
                                             >
                                                 <table>
@@ -362,7 +362,7 @@
                                         <td class="td_center">
                                             <button
                                                 class="btn btn-default"
-                                                onclick="SendRealtimeCmd(String.fromCharCode(0x9D,0x0));"
+                                                @click="$store.sendRealtimeCommand(String.fromCharCode(0x9D,0x0));"
                                                 style="padding: 5px 4px 0 5px;"
                                             >
                                                 <table>
@@ -393,7 +393,7 @@
                                         <td class="td_center">
                                             <button
                                                 class="btn btn-default"
-                                                onclick="SendRealtimeCmd(String.fromCharCode(0x99,0x0));"
+                                                @click="$store.sendRealtimeCommand(String.fromCharCode(0x99,0x0));"
                                                 style="padding: 5px 4px 0 5px;"
                                             >
                                                 <svg
@@ -413,7 +413,7 @@
                                         <td class="td_center">
                                             <button
                                                 class="btn btn-default"
-                                                onclick="SendRealtimeCmd(String.fromCharCode(0x9C,0x0));"
+                                                @click="$store.sendRealtimeCommand(String.fromCharCode(0x9C,0x0));"
                                                 style="padding: 5px 4px 0 5px;"
                                             >
                                                 <table>
@@ -444,7 +444,7 @@
                                         <td class="td_center">
                                             <button
                                                 class="btn btn-default"
-                                                onclick="SendRealtimeCmd(String.fromCharCode(0x9A,0x0));"
+                                                @click="$store.sendRealtimeCommand(String.fromCharCode(0x9A,0x0));"
                                                 style="padding: 5px 4px 0 5px;"
                                             >
                                                 <table>
@@ -482,7 +482,7 @@
                                         <td class="td_center" width="33%">
                                             <button
                                                 class="btn btn-default"
-                                                onclick="SendRealtimeCmd(String.fromCharCode(0x9E,0x0));"
+                                                @click="$store.sendRealtimeCommand(String.fromCharCode(0x9E,0x0));"
                                                 style="padding: 5px 4px 0 5px;"
                                             >
                                                 <table>
@@ -517,7 +517,7 @@
                                         <td class="td_center" width="33%">
                                             <button
                                                 class="btn btn-default"
-                                                onclick="SendRealtimeCmd(String.fromCharCode(0xA0,0x0));"
+                                                @click="$store.sendRealtimeCommand(String.fromCharCode(0xA0,0x0));"
                                                 style="padding: 5px 4px 0 5px;"
                                             >
                                                 <table>
@@ -549,7 +549,7 @@
                                         <td class="td_center" width="33%">
                                             <button
                                                 class="btn btn-default"
-                                                onclick="SendRealtimeCmd(String.fromCharCode(0xA1,0x0));"
+                                                @click="$store.sendRealtimeCommand(String.fromCharCode(0xA1,0x0));"
                                                 style="padding: 5px 4px 0 5px;"
                                             >
                                                 <table>
@@ -641,7 +641,6 @@
                                                     type="number"
                                                     min="1"
                                                     v-model="preferences.probefeedrate"
-                                                    onchange="onprobefeedrateChange()"
                                                 />
                                                 <span class="input-group-addon hide_it"></span>
                                             </div>
@@ -719,7 +718,7 @@
                                             <button
                                                 class="btn btn-primary"
                                                 id="probingbtn"
-                                                onclick="StartProbeProcess();"
+                                                @click="startProbeProcess();"
                                                 translate
                                             >Start Probe</button>
                                         </td>
@@ -928,7 +927,7 @@
                                             </span>
                                             <button
                                                 class="btn btn-primary"
-                                                onclick="StartSurfaceProcess();"
+                                                @click="StartSurfaceProcess();"
                                                 translate
                                             >Start Surfacing</button>
                                         </td>
@@ -945,7 +944,7 @@
                 <button
                     id="global_reset_btn"
                     class="btn btn-danger"
-                    onclick="grbl_reset();"
+                    @click="resetGrbl();"
                     style="padding: 5px 0px 0px 0px;"
                 >
                     <svg width="2em" height="1.4em" viewBox="0 0 1200 1200">
@@ -986,6 +985,13 @@ export default {
     methods: {
         disableAlarm() {
             this.$store.disableAlarm()
+        },
+        resetGrbl () {
+            this.$store.resetGrbl()
+        },
+        startProbeProcess () {
+            var cmd = "G38.2 G91 Z-" + this.preferences.probemaxtravel + ' F' + this.preferences.probefeedrate
+            return this.$store.sendCustomCommand(cmd)
         }
     }
 }
