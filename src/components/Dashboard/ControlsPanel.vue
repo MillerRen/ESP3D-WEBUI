@@ -20,7 +20,7 @@
           onclick="SendZerocommand(grblzerocmd)"
         >
           &Oslash;
-          <span style="font-size:8px;" id="zero_xyz_btn_txt">XY</span>
+          <span style="font-size:8px;" id="zero_xyz_btn_txt">{{axis.toUpperCase()}}</span>
         </button>
       </div>
       <br />
@@ -37,8 +37,8 @@
               <td>
                 <span class="label label-default" style="padding: 5px 5px 3px 5px;">
                   <span
-                  >{{ fwData.target_firmware == 'grbl' || fwData.target_firmware == 'grbl-embedded' ? axes+'w': axes }}</span>:
-                  <span >&nbsp;</span>
+                  >{{ fwData.target_firmware == 'grbl' || fwData.target_firmware == 'grbl-embedded' ? axes.toUpperCase()+'w': axes.toUpperCase() }}</span>:
+                  <span >{{WPos[axes]}}</span>
                 </span>
               </td>
               <td></td>
@@ -51,8 +51,8 @@
                   <tr>
                     <td>
                       <span class="label label-default" style="padding: 5px 5px 3px 5px;">
-                        <span>{{axes}}m</span>:
-                        <span>&nbsp;</span>
+                        <span>{{axes.toUpperCase()}}m</span>:
+                        <span>{{MPos[axes]}}</span>
                       </span>
                     </td>
                   </tr>
@@ -136,9 +136,21 @@ export default {
       }
     }
   },
-  data () {
-    return {
-      axis: 'XYZABCDE'
+  // data () {
+  //   return {
+  //     axis: 'xyzabc'
+  //   }
+  // },
+  computed:{
+    MPos () {
+      return this.$store.MPos
+    },
+    WPos () {
+      return this.$store.WPos
+    },
+    axis () {
+      console.log(this.$store.fwData)
+      return 'xyzabc'.slice(0,this.$store.fwData.grblaxis)
     }
   }
 };

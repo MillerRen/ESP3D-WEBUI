@@ -94,7 +94,7 @@ export default {
         },
         onKeyup () {},
         scrollTop () {
-            console.log(this.messages)
+            // console.log(this.messages)
         }
     },
     mounted () {
