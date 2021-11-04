@@ -51,7 +51,7 @@
                                         </button>
                                     </td>
                                     <td style="text-align: left; width:100%;height:30px;">
-                                        <div id="grbl_status" class="status_text"></div>
+                                        <div id="grbl_status" class="status_text">{{grblStatus.state}}</div>
                                     </td>
                                 </tr>
                                 <tr>
@@ -968,6 +968,11 @@ export default {
             default () {
                 return {}
             }
+        }
+    },
+    computed: {
+        grblStatus () {
+            return this.$store.grblStatus
         }
     }
 }

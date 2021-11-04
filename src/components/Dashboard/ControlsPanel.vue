@@ -149,7 +149,6 @@ export default {
       return this.$store.WPos
     },
     axis () {
-      console.log(this.$store.fwData)
       return 'xyzabc'.slice(0,this.$store.fwData.grblaxis)
     }
   }

@@ -53,6 +53,7 @@ export default class Grbl {
             d: 0,
             e: 0
         }
+        this.grblStatus = {}
     }
 
     startSocket() {
@@ -77,6 +78,7 @@ export default class Grbl {
             serialData = statusExtractor.statusReport(data)
             Object.assign(this.MPos, serialData.data.machinePosition)
             Object.assign(this.WPos, serialData.data.workPosition)
+            Object.assign(this.grblStatus, serialData.data.status)
         }
         else if (checker.isSuccessResponse(data)) {
             serialData = extractor.successReport(data)
