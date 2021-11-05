@@ -31,19 +31,13 @@
 <script>
 import ControlsPanel from "../Dashboard/ControlsPanel.vue"
 import ConsolePanel from '../Dashboard/ConsolePanel.vue'
-import GrblPanel from "../Dashboard/GrblPanel.vue"
 import SDPanel from "../Dashboard/SDPanel.vue"
-import TemperaturePanel from "../Dashboard/TemperaturePanel.vue"
-import ExtruderPanel from "../Dashboard/ExtruderPanel.vue"
 
 export default {
     components: {
         ControlsPanel,
         ConsolePanel,
-        GrblPanel,
         SDPanel,
-        TemperaturePanel,
-        ExtruderPanel
     },
     props: {
         fwData: {
