@@ -12,7 +12,12 @@
             >Clear</button>
         </div>
         <div id="command-body" class="panel-body panel-flex-main">
-            <pre id="cmd_content" style="height: 350px;" :style="{scrollTop:scrollTop}">{{messages}}</pre>
+            <pre
+                ref="monitor"
+                style="height: 350px;"
+                :style="{ scrollTop: scrollTop }"
+                v-html="messages"
+            ></pre>
         </div>
         <div class="panel-footer">
             <div class="panel-flex-row">
@@ -31,11 +36,7 @@
                                     required
                                 />
                                 <span class="input-group-btn">
-                                    <button
-                                        type="submit"
-                                        class="btn btn-success"
-                                        translate
-                                    >Send</button>
+                                    <button type="submit" class="btn btn-success" translate>Send</button>
                                 </span>
                             </div>
                         </form>
@@ -44,11 +45,7 @@
                 <div class="form-group">
                     <div class="checkbox">
                         <label>
-                            <input
-                                type="checkbox"
-                                onclick=" Monitor_check_autoscroll()"
-                                id="monitor_enable_autoscroll"
-                            />
+                            <input type="checkbox" v-model="autoScroll" />
                             <span translate>Autoscroll</span>
                         </label>
                     </div>
@@ -74,12 +71,13 @@
 export default {
     data() {
         return {
-            cmd: ''
+            cmd: '',
+            autoScroll: true
         }
     },
     computed: {
-        messages () {
-            return this.$store.messages.map(item=>item.msg).join('\n')
+        messages() {
+            return this.$store.messages.map(item => item.msg).join('\n')
         }
     },
     methods: {
@@ -92,13 +90,15 @@ export default {
         clearConsole() {
             this.$store.clearMessages()
         },
-        onKeyup () {},
-        scrollTop () {
-            // console.log(this.messages)
+        onKeyup() { },
+        scrollTop() {
+            if (!this.autoScroll) return
+            this.$refs.monitor.scrollTop = this.$refs.monitor.scrollHeight
         }
     },
-    mounted () {
+    mounted() {
         this.$watch('messages', this.scrollTop)
+        // this.$refs.monitor
     }
 }
 </script>
