@@ -45,7 +45,7 @@
                 <div class="form-group">
                     <div class="checkbox">
                         <label>
-                            <input type="checkbox" v-model="autoScroll" />
+                            <input type="checkbox" v-model="preferences.enable_autoscroll" />
                             <span translate>Autoscroll</span>
                         </label>
                     </div>
@@ -55,8 +55,7 @@
                         <label>
                             <input
                                 type="checkbox"
-                                onclick=" Monitor_check_verbose_mode()"
-                                id="monitor_enable_verbose_mode"
+                                v-model="preferences.enable_verbose_mode"
                             />
                             <span translate>Verbose mode</span>
                         </label>
@@ -71,11 +70,13 @@
 export default {
     data() {
         return {
-            cmd: '',
-            autoScroll: true
+            cmd: ''
         }
     },
     computed: {
+        preferences () {
+            return this.$store.preferences
+        },
         messages() {
             return this.$store.messages.map(item => item.msg).join('\n')
         }
@@ -92,7 +93,7 @@ export default {
         },
         onKeyup() { },
         scrollTop() {
-            if (!this.autoScroll) return
+            if (!this.preferences.enable_autoscroll) return
             this.$refs.monitor.scrollTop = this.$refs.monitor.scrollHeight
         }
     },
