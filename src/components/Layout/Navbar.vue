@@ -32,22 +32,14 @@
                  <a id="FW_github" href="https://github.com/luc-github/ESP3D" target="_blank">
                      <span class="pull-right" translate>Firmware</span>
                      <span class="pull-left">
-                         <svg width='1.3em' height='1.2em' viewBox='0 0 1300 1200'>
-                             <g transform='translate(50,1200) scale(1, -1)'>
-                                 <path d='M600 1174q33 0 74 -5l38 -152l5 -1q49 -14 94 -39l5 -2l134 80q61 -48 104 -105l-80 -134l3 -5q25 -44 39 -93l1 -6l152 -38q5 -43 5 -73q0 -34 -5 -74l-152 -38l-1 -6q-15 -49 -39 -93l-3 -5l80 -134q-48 -61 -104 -105l-134 81l-5 -3q-44 -25 -94 -39l-5 -2l-38 -151 q-43 -5 -74 -5q-33 0 -74 5l-38 151l-5 2q-49 14 -94 39l-5 3l-134 -81q-60 48 -104 105l80 134l-3 5q-25 45 -38 93l-2 6l-151 38q-6 42 -6 74q0 33 6 73l151 38l2 6q13 48 38 93l3 5l-80 134q47 61 105 105l133 -80l5 2q45 25 94 39l5 1l38 152q43 5 74 5zM600 815 q-89 0 -152 -63t-63 -151.5t63 -151.5t152 -63t152 63t63 151.5t-63 151.5t-152 63z'></path>
-                             </g>
-                         </svg>
+                         <span v-html="$options.filters.icon('cog')"></span>
                      </span>
                      <span class="clearfix"></span>
                  </a>
                  <a id="UI_github" href="https://github.com/luc-github/ESP3D-webui" target="_blank">
                      <span class="pull-right" translate>Interface</span>
                      <span class="pull-left">
-                         <svg width='1.3em' height='1.2em' viewBox='0 0 1300 1200'>
-                             <g transform='translate(50,1200) scale(1, -1)'>
-                                 <path d='M600 1094q82 0 160.5 -22.5t140 -59t116.5 -82.5t94.5 -95t68 -95t42.5 -82.5t14 -57.5t-14 -57.5t-43 -82.5t-68.5 -95t-94.5 -95t-116.5 -82.5t-140 -59t-159.5 -22.5t-159.5 22.5t-140 59t-116.5 82.5t-94.5 95t-68.5 95t-43 82.5t-14 57.5t14 57.5t42.5 82.5t68 95 t94.5 95t116.5 82.5t140 59t160.5 22.5zM888 829q-15 15 -18 12t5 -22q25 -57 25 -119q0 -124 -88 -212t-212 -88t-212 88t-88 212q0 59 23 114q8 19 4.5 22t-17.5 -12q-70 -69 -160 -184q-13 -16 -15 -40.5t9 -42.5q22 -36 47 -71t70 -82t92.5 -81t113 -58.5t133.5 -24.5 t133.5 24t113 58.5t92.5 81.5t70 81.5t47 70.5q11 18 9 42.5t-14 41.5q-90 117 -163 189zM448 727l-35 -36q-15 -15 -19.5 -38.5t4.5 -41.5q37 -68 93 -116q16 -13 38.5 -11t36.5 17l35 34q14 15 12.5 33.5t-16.5 33.5q-44 44 -89 117q-11 18 -28 20t-32 -12z'> </path>
-                             </g>
-                         </svg>
+                         <span v-html="$options.filters.icon('eye-open')"></span>
                      </span>
                      <span class="clearfix"></span>
                  </a>
@@ -55,22 +47,14 @@
                  <a href="#" @click="showpreferencesdlg ()">
                      <span class="pull-right" translate>Preferences</span>
                      <span class="pull-left">
-                         <svg width='1.3em' height='1.2em' viewBox='0 0 1300 1200'>
-                             <g transform='translate(50,1200) scale(1, -1)'>
-                                 <path d='M407 800l131 353q7 19 17.5 19t17.5 -19l129 -353h421q21 0 24 -8.5t-14 -20.5l-342 -249l130 -401q7 -20 -0.5 -25.5t-24.5 6.5l-343 246l-342 -247q-17 -12 -24.5 -6.5t-0.5 25.5l130 400l-347 251q-17 12 -14 20.5t23 8.5h429z'></path>
-                             </g>
-                         </svg>
+                         <span v-html="$options.filters.icon('star')"></span>
                      </span>
                      <span class="clearfix"></span>
                  </a>
                  <a href="#" @click="setupdlg ()">
                      <span class="pull-right" translate>Setup</span>
                      <span class="pull-left">
-                         <svg width='1.3em' height='1.2em' viewBox='0 0 1300 1200'>
-                             <g transform='translate(50,1200) scale(1, -1)'>
-                                 <path d='M1000 1013l108 115q2 1 5 2t13 2t20.5 -1t25 -9.5t28.5 -21.5q22 -22 27 -43t0 -32l-6 -10l-108 -115zM350 1100h400q50 0 105 -13l-187 -187h-368q-41 0 -70.5 -29.5t-29.5 -70.5v-500q0 -41 29.5 -70.5t70.5 -29.5h500q41 0 70.5 29.5t29.5 70.5v182l200 200v-332 q0 -165 -93.5 -257.5t-256.5 -92.5h-400q-165 0 -257.5 92.5t-92.5 257.5v400q0 165 92.5 257.5t257.5 92.5zM1009 803l-362 -362l-161 -50l55 170l355 355z'></path>
-                             </g>
-                         </svg>
+                         <span v-html="$options.filters.icon('edit')"></span>
                      </span>
                      <span class="clearfix"></span>
                  </a>
@@ -78,11 +62,7 @@
                  <a href="#" @click='creditsdlg()'>
                      <span class="pull-right" translate>Credits</span>
                      <span class="pull-left">
-                         <svg width='1.3em' height='1.2em' viewBox='0 0 1300 1200'>
-                             <g transform='translate(50,1200) scale(1, -1)'>
-                                 <path d='M650 1200h50q40 0 70 -40.5t30 -84.5v-150l-28 -125h328q40 0 70 -40.5t30 -84.5v-100q0 -45 -29 -74l-238 -344q-16 -24 -38 -40.5t-45 -16.5h-250q-7 0 -42 25t-66 50l-31 25h-61q-45 0 -72.5 18t-27.5 57v400q0 36 20 63l145 196l96 198q13 28 37.5 48t51.5 20z M650 1100l-100 -212l-150 -213v-375h100l136 -100h214l250 375v125h-450l50 225v175h-50zM50 800h100q21 0 35.5 -14.5t14.5 -35.5v-500q0 -21 -14.5 -35.5t-35.5 -14.5h-100q-21 0 -35.5 14.5t-14.5 35.5v500q0 21 14.5 35.5t35.5 14.5z'></path>
-                             </g>
-                         </svg>
+                         <span v-html="$options.filters.icon('thumbs-up')"></span>
                      </span>
                      <span class="clearfix"></span>
                  </a>

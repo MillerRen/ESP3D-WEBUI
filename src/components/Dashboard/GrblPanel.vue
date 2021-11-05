@@ -76,18 +76,7 @@
                                             @click="$store.sendRealtimeCommand('!');"
                                             style="padding: 5px 4px 0 5px;"
                                         >
-                                            <svg
-                                                width="2em"
-                                                height="1.4em"
-                                                viewBox="0 0 1300 1200"
-                                            >
-                                                <g transform="translate(50,1200) scale(1, -1)">
-                                                    <path
-                                                        fill="blue"
-                                                        d="M250 1000h200q21 0 35.5 -14.5t14.5 -35.5v-800q0 -21 -14.5 -35.5t-35.5 -14.5h-200q-21 0 -35.5 14.5t-14.5 35.5v800q0 21 14.5 35.5t35.5 14.5zM650 1000h200q21 0 35.5 -14.5t14.5 -35.5v-800q0 -21 -14.5 -35.5t-35.5 -14.5h-200q-21 0 -35.5 14.5t-14.5 35.5v800 q0 21 14.5 35.5t35.5 14.5z"
-                                                    />
-                                                </g>
-                                            </svg>
+                                            <span v-html="$options.filters.icon('pause')"></span>
                                         </button>
                                     </td>
                                     <td>&nbsp;</td>
@@ -98,18 +87,7 @@
                                             @click="$store.sendRealtimeCommand('~');"
                                             style="padding: 5px 4px 0 5px;"
                                         >
-                                            <svg
-                                                width="2em"
-                                                height="1.4em"
-                                                viewBox="0 0 1300 1200"
-                                            >
-                                                <g transform="translate(50,1200) scale(1, -1)">
-                                                    <path
-                                                        fill="green"
-                                                        d="M243 1074l814 -498q18 -11 18 -26t-18 -26l-814 -498q-18 -11 -30.5 -4t-12.5 28v1000q0 21 12.5 28t30.5 -4z"
-                                                    />
-                                                </g>
-                                            </svg>
+                                            <span v-html="$options.filters.icon('play')"></span>
                                         </button>
                                     </td>
                                     <td>&nbsp;</td>
@@ -120,18 +98,7 @@
                                             @click="resetGrbl();"
                                             style="padding: 5px 0px 0px 0px;"
                                         >
-                                            <svg
-                                                width="2em"
-                                                height="1.4em"
-                                                viewBox="0 0 1200 1200"
-                                            >
-                                                <g transform="translate(1200,1200) scale(-1, -1)">
-                                                    <path
-                                                        fill="white"
-                                                        d="M947 1060l135 135q7 7 12.5 5t5.5 -13v-362q0 -10 -7.5 -17.5t-17.5 -7.5h-362q-11 0 -13 5.5t5 12.5l133 133q-109 76 -238 76q-116 0 -214.5 -57t-155.5 -155.5t-57 -214.5t57 -214.5t155.5 -155.5t214.5 -57t214.5 57t155.5 155.5t57 214.5h150q0 -117 -45.5 -224 t-123 -184.5t-184.5 -123t-224 -45.5t-224 45.5t-184.5 123t-123 184.5t-45.5 224t45.5 224t123 184.5t184.5 123t224 45.5q192 0 347 -117z"
-                                                    />
-                                                </g>
-                                            </svg>
+                                            <span v-html="$options.filters.icon('reweet')"></span>
                                         </button>
                                     </td>
                                 </tr>
@@ -188,20 +155,7 @@
                                                 <table>
                                                     <tr>
                                                         <td>
-                                                            <svg
-                                                                width="1.3em"
-                                                                height="1.4em"
-                                                                viewBox="0 0 1300 1200"
-                                                            >
-                                                                <g
-                                                                    transform="translate(50,1200) scale(1, -1)"
-                                                                >
-                                                                    <path
-                                                                        fill="black"
-                                                                        d="M50 1100h100q21 0 35.5 -14.5t14.5 -35.5v-438l464 453q15 14 25.5 10t10.5 -25v-438l464 453q15 14 25.5 10t10.5 -25v-1000q0 -21 -10.5 -25t-25.5 10l-464 453v-438q0 -21 -10.5 -25t-25.5 10l-464 453v-438q0 -21 -14.5 -35.5t-35.5 -14.5h-100q-21 0 -35.5 14.5 t-14.5 35.5v1000q0 21 14.5 35.5t35.5 14.5z"
-                                                                    />
-                                                                </g>
-                                                            </svg>
+                                                           <span v-html="$options.filters.icon('fast-backward')"></span>
                                                         </td>
                                                         <td>
                                                             <span class="button_txt">F10%</span>
@@ -219,20 +173,7 @@
                                                 <table>
                                                     <tr>
                                                         <td>
-                                                            <svg
-                                                                width="1.3em"
-                                                                height="1.4em"
-                                                                viewBox="0 0 1300 1200"
-                                                            >
-                                                                <g
-                                                                    transform="translate(50,1200) scale(1, -1)"
-                                                                >
-                                                                    <path
-                                                                        fill="black"
-                                                                        d="M250 1100h100q21 0 35.5 -14.5t14.5 -35.5v-438l464 453q15 14 25.5 10t10.5 -25v-1000q0 -21 -10.5 -25t-25.5 10l-464 453v-438q0 -21 -14.5 -35.5t-35.5 -14.5h-100q-21 0 -35.5 14.5t-14.5 35.5v1000q0 21 14.5 35.5t35.5 14.5z"
-                                                                    />
-                                                                </g>
-                                                            </svg>
+                                                            <span v-html="$options.filters.icon('step-backward')"></span>
                                                         </td>
                                                         <td>
                                                             <span class="button_txt">&nbsp;F1%</span>
@@ -247,18 +188,7 @@
                                                 @click="$store.sendRealtimeCommand(String.fromCharCode(0x90,0x0));"
                                                 style="padding: 5px 4px 0 5px;"
                                             >
-                                                <svg
-                                                    width="1.3em"
-                                                    height="1.4em"
-                                                    viewBox="0 0 1300 1200"
-                                                >
-                                                    <g transform="translate(50,1200) scale(1, -1)">
-                                                        <path
-                                                            fill="black"
-                                                            d="M947 1060l135 135q7 7 12.5 5t5.5 -13v-362q0 -10 -7.5 -17.5t-17.5 -7.5h-362q-11 0 -13 5.5t5 12.5l133 133q-109 76 -238 76q-116 0 -214.5 -57t-155.5 -155.5t-57 -214.5t57 -214.5t155.5 -155.5t214.5 -57t214.5 57t155.5 155.5t57 214.5h150q0 -117 -45.5 -224 t-123 -184.5t-184.5 -123t-224 -45.5t-224 45.5t-184.5 123t-123 184.5t-45.5 224t45.5 224t123 184.5t184.5 123t224 45.5q192 0 347 -117z"
-                                                        />
-                                                    </g>
-                                                </svg>
+                                                <span v-html="$options.filters.icon('repeat')"></span>
                                             </button>
                                         </td>
                                         <td class="td_center">
@@ -270,20 +200,7 @@
                                                 <table>
                                                     <tr>
                                                         <td>
-                                                            <svg
-                                                                width="1.3em"
-                                                                height="1.4em"
-                                                                viewBox="0 0 1300 1200"
-                                                            >
-                                                                <g
-                                                                    transform="translate(50,1200) scale(1, -1)"
-                                                                >
-                                                                    <path
-                                                                        fill="black"
-                                                                        d="M850 1100h100q21 0 35.5 -14.5t14.5 -35.5v-1000q0 -21 -14.5 -35.5t-35.5 -14.5h-100q-21 0 -35.5 14.5t-14.5 35.5v438l-464 -453q-15 -14 -25.5 -10t-10.5 25v1000q0 21 10.5 25t25.5 -10l464 -453v438q0 21 14.5 35.5t35.5 14.5z"
-                                                                    />
-                                                                </g>
-                                                            </svg>
+                                                            <span v-html="$options.filters.icon('step-forward')"></span>
                                                         </td>
                                                         <td>
                                                             <span class="button_txt">&nbsp;F1%</span>
@@ -301,20 +218,7 @@
                                                 <table>
                                                     <tr>
                                                         <td>
-                                                            <svg
-                                                                width="1.3em"
-                                                                height="1.4em"
-                                                                viewBox="0 0 1300 1200"
-                                                            >
-                                                                <g
-                                                                    transform="translate(50,1200) scale(1, -1)"
-                                                                >
-                                                                    <path
-                                                                        fill="black"
-                                                                        d="M1048 1102l100 1q20 0 35 -14.5t15 -35.5l5 -1000q0 -21 -14.5 -35.5t-35.5 -14.5l-100 -1q-21 0 -35.5 14.5t-14.5 35.5l-2 437l-463 -454q-14 -15 -24.5 -10.5t-10.5 25.5l-2 437l-462 -455q-15 -14 -25.5 -9.5t-10.5 24.5l-5 1000q0 21 10.5 25.5t25.5 -10.5l466 -450 l-2 438q0 20 10.5 24.5t25.5 -9.5l466 -451l-2 438q0 21 14.5 35.5t35.5 14.5z"
-                                                                    />
-                                                                </g>
-                                                            </svg>
+                                                            <span v-html="$options.filters.icon('fast-forward')"></span>
                                                         </td>
                                                         <td>
                                                             <span class="button_txt">F10%</span>
@@ -337,20 +241,7 @@
                                                 <table>
                                                     <tr>
                                                         <td>
-                                                            <svg
-                                                                width="1.3em"
-                                                                height="1.4em"
-                                                                viewBox="0 0 1300 1200"
-                                                            >
-                                                                <g
-                                                                    transform="translate(50,1200) scale(1, -1)"
-                                                                >
-                                                                    <path
-                                                                        fill="black"
-                                                                        d="M50 1100h100q21 0 35.5 -14.5t14.5 -35.5v-438l464 453q15 14 25.5 10t10.5 -25v-438l464 453q15 14 25.5 10t10.5 -25v-1000q0 -21 -10.5 -25t-25.5 10l-464 453v-438q0 -21 -10.5 -25t-25.5 10l-464 453v-438q0 -21 -14.5 -35.5t-35.5 -14.5h-100q-21 0 -35.5 14.5 t-14.5 35.5v1000q0 21 14.5 35.5t35.5 14.5z"
-                                                                    />
-                                                                </g>
-                                                            </svg>
+                                                            <span v-html="$options.filters.icon('fast-backward')"></span>
                                                         </td>
                                                         <td>
                                                             <span class="button_txt">S10%</span>
@@ -368,20 +259,7 @@
                                                 <table>
                                                     <tr>
                                                         <td>
-                                                            <svg
-                                                                width="1.3em"
-                                                                height="1.4em"
-                                                                viewBox="0 0 1300 1200"
-                                                            >
-                                                                <g
-                                                                    transform="translate(50,1200) scale(1, -1)"
-                                                                >
-                                                                    <path
-                                                                        fill="black"
-                                                                        d="M250 1100h100q21 0 35.5 -14.5t14.5 -35.5v-438l464 453q15 14 25.5 10t10.5 -25v-1000q0 -21 -10.5 -25t-25.5 10l-464 453v-438q0 -21 -14.5 -35.5t-35.5 -14.5h-100q-21 0 -35.5 14.5t-14.5 35.5v1000q0 21 14.5 35.5t35.5 14.5z"
-                                                                    />
-                                                                </g>
-                                                            </svg>
+                                                            <span v-html="$options.filters.icon('step-backward')"></span>
                                                         </td>
                                                         <td>
                                                             <span class="button_txt">&nbsp;S1%</span>
@@ -396,18 +274,7 @@
                                                 @click="$store.sendRealtimeCommand(String.fromCharCode(0x99,0x0));"
                                                 style="padding: 5px 4px 0 5px;"
                                             >
-                                                <svg
-                                                    width="1.3em"
-                                                    height="1.4em"
-                                                    viewBox="0 0 1300 1200"
-                                                >
-                                                    <g transform="translate(50,1200) scale(1, -1)">
-                                                        <path
-                                                            fill="black"
-                                                            d="M947 1060l135 135q7 7 12.5 5t5.5 -13v-362q0 -10 -7.5 -17.5t-17.5 -7.5h-362q-11 0 -13 5.5t5 12.5l133 133q-109 76 -238 76q-116 0 -214.5 -57t-155.5 -155.5t-57 -214.5t57 -214.5t155.5 -155.5t214.5 -57t214.5 57t155.5 155.5t57 214.5h150q0 -117 -45.5 -224 t-123 -184.5t-184.5 -123t-224 -45.5t-224 45.5t-184.5 123t-123 184.5t-45.5 224t45.5 224t123 184.5t184.5 123t224 45.5q192 0 347 -117z"
-                                                        />
-                                                    </g>
-                                                </svg>
+                                                <span v-html="$options.filters.icon('repeat')"></span>
                                             </button>
                                         </td>
                                         <td class="td_center">
@@ -419,20 +286,7 @@
                                                 <table>
                                                     <tr>
                                                         <td>
-                                                            <svg
-                                                                width="1.3em"
-                                                                height="1.4em"
-                                                                viewBox="0 0 1300 1200"
-                                                            >
-                                                                <g
-                                                                    transform="translate(50,1200) scale(1, -1)"
-                                                                >
-                                                                    <path
-                                                                        fill="black"
-                                                                        d="M850 1100h100q21 0 35.5 -14.5t14.5 -35.5v-1000q0 -21 -14.5 -35.5t-35.5 -14.5h-100q-21 0 -35.5 14.5t-14.5 35.5v438l-464 -453q-15 -14 -25.5 -10t-10.5 25v1000q0 21 10.5 25t25.5 -10l464 -453v438q0 21 14.5 35.5t35.5 14.5z"
-                                                                    />
-                                                                </g>
-                                                            </svg>
+                                                            <span v-html="$options.filters.icon('step-forward')"></span>
                                                         </td>
                                                         <td>
                                                             <span class="button_txt">&nbsp;S1%</span>
@@ -450,20 +304,7 @@
                                                 <table>
                                                     <tr>
                                                         <td>
-                                                            <svg
-                                                                width="1.3em"
-                                                                height="1.4em"
-                                                                viewBox="0 0 1300 1200"
-                                                            >
-                                                                <g
-                                                                    transform="translate(50,1200) scale(1, -1)"
-                                                                >
-                                                                    <path
-                                                                        fill="black"
-                                                                        d="M1048 1102l100 1q20 0 35 -14.5t15 -35.5l5 -1000q0 -21 -14.5 -35.5t-35.5 -14.5l-100 -1q-21 0 -35.5 14.5t-14.5 35.5l-2 437l-463 -454q-14 -15 -24.5 -10.5t-10.5 25.5l-2 437l-462 -455q-15 -14 -25.5 -9.5t-10.5 24.5l-5 1000q0 21 10.5 25.5t25.5 -10.5l466 -450 l-2 438q0 20 10.5 24.5t25.5 -9.5l466 -451l-2 438q0 21 14.5 35.5t35.5 14.5z"
-                                                                    />
-                                                                </g>
-                                                            </svg>
+                                                            <span v-html="$options.filters.icon('fast-forward')"></span>
                                                         </td>
                                                         <td>
                                                             <span class="button_txt">S10%</span>
@@ -488,20 +329,7 @@
                                                 <table>
                                                     <tr>
                                                         <td>
-                                                            <svg
-                                                                width="1.3em"
-                                                                height="1.4em"
-                                                                viewBox="0 0 1300 1200"
-                                                            >
-                                                                <g
-                                                                    transform="translate(50,1200) scale(1, -1)"
-                                                                >
-                                                                    <path
-                                                                        fill="black"
-                                                                        d="M600 1186q119 0 227.5 -46.5t187 -125t125 -187t46.5 -227.5t-46.5 -227.5t-125 -187t-187 -125t-227.5 -46.5t-227.5 46.5t-187 125t-125 187t-46.5 227.5t46.5 227.5t125 187t187 125t227.5 46.5zM600 1022q-115 0 -212 -56.5t-153.5 -153.5t-56.5 -212t56.5 -212 t153.5 -153.5t212 -56.5t212 56.5t153.5 153.5t56.5 212t-56.5 212t-153.5 153.5t-212 56.5zM600 794q80 0 137 -57t57 -137t-57 -137t-137 -57t-137 57t-57 137t57 137t137 57z"
-                                                                    />
-                                                                </g>
-                                                            </svg>
+                                                            <span v-html="$options.filters.icon('record')"></span>
                                                         </td>
                                                         <td>
                                                             <span
@@ -523,20 +351,7 @@
                                                 <table>
                                                     <tr>
                                                         <td>
-                                                            <svg
-                                                                width="1.3em"
-                                                                height="1.4em"
-                                                                viewBox="0 0 1300 1200"
-                                                            >
-                                                                <g
-                                                                    transform="translate(50,1200) scale(1, -1)"
-                                                                >
-                                                                    <path
-                                                                        fill="black"
-                                                                        d="M554 1295q21 -72 57.5 -143.5t76 -130t83 -118t82.5 -117t70 -116t49.5 -126t18.5 -136.5q0 -71 -25.5 -135t-68.5 -111t-99 -82t-118.5 -54t-125.5 -23q-84 5 -161.5 34t-139.5 78.5t-99 125t-37 164.5q0 69 18 136.5t49.5 126.5t69.5 116.5t81.5 117.5t83.5 119 t76.5 131t58.5 143zM344 710q-23 -33 -43.5 -70.5t-40.5 -102.5t-17 -123q1 -37 14.5 -69.5t30 -52t41 -37t38.5 -24.5t33 -15q21 -7 32 -1t13 22l6 34q2 10 -2.5 22t-13.5 19q-5 4 -14 12t-29.5 40.5t-32.5 73.5q-26 89 6 271q2 11 -6 11q-8 1 -15 -10z"
-                                                                    />
-                                                                </g>
-                                                            </svg>
+                                                            <span v-html="$options.filters.icon('tint')"></span>
                                                         </td>
                                                         <td>
                                                             <span class="button_txt" translate>Flood</span>
@@ -555,27 +370,7 @@
                                                 <table>
                                                     <tr>
                                                         <td>
-                                                            <svg
-                                                                width="1.3em"
-                                                                height="1.4em"
-                                                                viewBox="0 0 1300 1200"
-                                                            >
-                                                                <g
-                                                                    transform="translate(50,1200) scale(1, -1)"
-                                                                >
-                                                                    <path
-                                                                        fill="black"
-                                                                        d="M503 1089q110 0 200.5 -59.5t134.5 -156.5q44 14 90 14q120 0 205 -86.5t85 -207t-85 -207t-205 -86.5h-128v250q0 21 -14.5 35.5t-35.5 14.5h-300q-21 0 -35.5 -14.5t-14.5 -35.5v-250h-222q-80 0 -136 57.5t-56 136.5q0 69 43 122.5t108 67.5q-2 19 -2 37q0 100 49 185 t134 134t185 49zM525 500h150q10 0 17.5 -7.5t7.5 -17.5v-275h137q21 0 26 -11.5t-8 -27.5l-223 -244q-13 -16 -32 -16t-32 16l-223 244q-13 16 -8 27.5t26 11.5h137v275q0 10 7.5 17.5t17.5 7.5z"
-                                                                    />
-                                                                    <circle
-                                                                        cx="600"
-                                                                        cy="450"
-                                                                        r="300"
-                                                                        stroke="black"
-                                                                        fill="black"
-                                                                    />
-                                                                </g>
-                                                            </svg>
+                                                            <span v-html="$options.filters.icon('cloud')"></span>
                                                         </td>
                                                         <td>
                                                             <span class="button_txt" translate>Mist</span>
@@ -945,16 +740,8 @@
                     id="global_reset_btn"
                     class="btn btn-danger"
                     @click="resetGrbl();"
-                    style="padding: 5px 0px 0px 0px;"
                 >
-                    <svg width="2em" height="1.4em" viewBox="0 0 1200 1200">
-                        <g transform="translate(1200,1200) scale(-1, -1)">
-                            <path
-                                fill="white"
-                                d="M947 1060l135 135q7 7 12.5 5t5.5 -13v-362q0 -10 -7.5 -17.5t-17.5 -7.5h-362q-11 0 -13 5.5t5 12.5l133 133q-109 76 -238 76q-116 0 -214.5 -57t-155.5 -155.5t-57 -214.5t57 -214.5t155.5 -155.5t214.5 -57t214.5 57t155.5 155.5t57 214.5h150q0 -117 -45.5 -224 t-123 -184.5t-184.5 -123t-224 -45.5t-224 45.5t-184.5 123t-123 184.5t-45.5 224t45.5 224t123 184.5t184.5 123t224 45.5q192 0 347 -117z"
-                            />
-                        </g>
-                    </svg>
+                    <span v-html="$options.filters.icon('repeat')"></span>
                 </button>
             </div>
         </div>

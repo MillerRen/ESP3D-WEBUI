@@ -19,33 +19,7 @@
                                         class="btn btn-info btn-xs"
                                         style="padding: -2px 2px 0x 0px;"
                                     >
-                                        <svg width="1.5em" height="1.2em" viewBox="5 10 30 10">
-                                            <rect
-                                                x="5"
-                                                y="10"
-                                                width="30"
-                                                height="20"
-                                                rx="2"
-                                                ry="2"
-                                                fill="currentColor"
-                                            />
-                                            <rect
-                                                x="20"
-                                                y="5"
-                                                width="15"
-                                                height="15"
-                                                rx="2"
-                                                ry="2"
-                                                fill="currentColor"
-                                            />
-                                            <text
-                                                x="15"
-                                                y="25"
-                                                font-size="18"
-                                                font-weight="800"
-                                                fill="#5BC0DE"
-                                            >+</text>
-                                        </svg>
+                                        <span v-html="$options.filters.icon('folder')"></span>
                                     </button>
                                 </td>
                                 <td>&nbsp;&nbsp;</td>

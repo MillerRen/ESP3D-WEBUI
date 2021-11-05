@@ -95,6 +95,9 @@ export default {
   computed: {
     settings () {
       return this.$store.settings
+    },
+    fwData () {
+      return this.$store.fwData
     }
   },
   methods: {
@@ -112,6 +115,7 @@ export default {
     refreshSettings() {
         this.loading = true
         this.$store.getSettings()
+        .then((response) => {console.log(response)})
         .catch((err)=> {
             this.errmsg = err
         })
