@@ -71,7 +71,7 @@ export default class Grbl {
     }
 
     processStream(msg) {
-        this.messages.push(msg)
+        
         var data = msg.msg.trim()
         var report = {}
         if (checker.isStatusReport(data)) {
@@ -140,7 +140,11 @@ export default class Grbl {
         else {
             report = { input: data, type: messageTypes.unknown }
         }
-        console.log(report)
+        
+        if(this.preferences.enable_verbose_mode||(report.type!='status')) {
+            this.messages.push(msg)
+        }
+
         this.report = report
     }
 

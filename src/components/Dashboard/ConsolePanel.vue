@@ -16,7 +16,7 @@
                 ref="monitor"
                 style="height: 350px;"
                 :style="{ scrollTop: scrollTop }"
-            >{{message}}</pre>
+            >{{messages}}</pre>
         </div>
         <div class="panel-footer">
             <div class="panel-flex-row">
