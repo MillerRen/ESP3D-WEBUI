@@ -1,6 +1,6 @@
 const constants = require('grbl-parser/test/spec_constants')
-// const message = constants.validStrings.status[7]
-const message = constants.validStrings.alarm[0]
+const message = constants.validStrings.status[7]
+// const message = constants.validStrings.alarm[0]
 console.log(constants.validStrings)
 
 function str2bf (str) {

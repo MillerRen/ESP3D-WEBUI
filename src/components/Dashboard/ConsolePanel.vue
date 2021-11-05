@@ -16,8 +16,7 @@
                 ref="monitor"
                 style="height: 350px;"
                 :style="{ scrollTop: scrollTop }"
-                v-html="messages"
-            ></pre>
+            >{{message}}</pre>
         </div>
         <div class="panel-footer">
             <div class="panel-flex-row">
