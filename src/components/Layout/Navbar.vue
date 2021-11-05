@@ -89,7 +89,7 @@
              </div>
          </li>
      </ul>
-     <ul class="nav navbar-nav navbar-right hide_it" id="menu_authentication">
+     <ul class="nav navbar-nav navbar-right hidden" id="menu_authentication">
          <li class="dropdown">
              <a href="#" class="nav-link">
                  <i class="dropbtn">
@@ -103,7 +103,7 @@
                  </i>
              </a>
              <div class="dropdown-menu">
-                 <a href="#" @click="changepassworddlg()" id="password_menu" class="hide_it">
+                 <a href="#" @click="changepassworddlg()" id="password_menu" class="hidden">
                      <span class="pull-right" translate>Password</span>
                      <span class="pull-left">
                          <svg width='1.3em' height='1.2em' viewBox='0 0 1300 1200'>
@@ -126,7 +126,7 @@
                      <span class="clearfix"></span>
                  </a>
                  <div class="menu-divider" id="logout_menu_divider" ></div>
-                 <a href="#" @click="confirmdlg(translate_text_item('Disconnection requested'), translate_text_item('Please confirm disconnection.'), DisconnectLogin); " id="logout_menu" class="hide_it">
+                 <a href="#" @click="confirmdlg(translate_text_item('Disconnection requested'), translate_text_item('Please confirm disconnection.'), DisconnectLogin); " id="logout_menu" class="hidden">
                      <span class="pull-right" translate>Log out</span>
                      <span class="pull-left">
                          <svg width='1.3em' height='1.2em' viewBox='0 0 1300 1200'>

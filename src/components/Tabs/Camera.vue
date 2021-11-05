@@ -43,7 +43,7 @@
                     </div>
                 </td>
                 <td valign="top">
-                    <button type="button" id="camera_detach_button" onclick="camera_detachcam()" class="hide_it">
+                    <button type="button" id="camera_detach_button" onclick="camera_detachcam()" class="hidden">
                         <span>
                             <svg width='1.3em' height='1.2em' viewBox='0 0 1300 1200'>
                                 <g transform='translate(50,1200) scale(1, -1)'>

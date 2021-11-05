@@ -156,14 +156,14 @@
                         <span translate>Override</span>
                     </button>
                     <button
-                        class="tablinks hide_it"
+                        class="tablinks hidden"
                         @click="opentab(event, 'grblprobetab', 'grbluitabscontent', 'grbluitablinks')"
                         id="grblprobetablink"
                     >
                         <span translate>Probe</span>
                     </button>
                     <button
-                        class="tablinks hide_it"
+                        class="tablinks hidden"
                         @click="opentab(event, 'grblsurfacetab', 'grbluitabscontent', 'grbluitablinks')"
                         id="grblsurfacetablink"
                     >
@@ -595,12 +595,12 @@
                                                 <span class="input-group-addon form_control">
                                                     <span translate>Max travel</span>:
                                                 </span>
-                                                <input class="hide_it" />
+                                                <input class="hidden" />
                                             </div>
                                         </td>
                                         <td>
                                             <div class="input-group">
-                                                <span class="input-group-addon hide_it"></span>
+                                                <span class="input-group-addon hidden"></span>
                                                 <input
                                                     class="form-control w6"
                                                     type="number"
@@ -608,12 +608,12 @@
                                                     v-model="preferences.probemaxtravel"
                                                     onchange="onprobemaxtravelChange()"
                                                 />
-                                                <span class="input-group-addon hide_it"></span>
+                                                <span class="input-group-addon hidden"></span>
                                             </div>
                                         </td>
                                         <td>
                                             <div class="input-group">
-                                                <input class="hide_it" />
+                                                <input class="hidden" />
                                                 <span
                                                     class="input-group-addon form_control"
                                                     translate
@@ -630,24 +630,24 @@
                                                 <span class="input-group-addon form_control">
                                                     <span translate>Feed rate</span>:
                                                 </span>
-                                                <input class="hide_it" />
+                                                <input class="hidden" />
                                             </div>
                                         </td>
                                         <td>
                                             <div class="input-group">
-                                                <span class="input-group-addon hide_it"></span>
+                                                <span class="input-group-addon hidden"></span>
                                                 <input
                                                     class="form-control w6"
                                                     type="number"
                                                     min="1"
                                                     v-model="preferences.probefeedrate"
                                                 />
-                                                <span class="input-group-addon hide_it"></span>
+                                                <span class="input-group-addon hidden"></span>
                                             </div>
                                         </td>
                                         <td>
                                             <div class="input-group">
-                                                <input class="hide_it" />
+                                                <input class="hidden" />
                                                 <span
                                                     class="input-group-addon form_control"
                                                     translate
@@ -664,12 +664,12 @@
                                                 <span class="input-group-addon form_control">
                                                     <span translate>Plate thickness</span>:
                                                 </span>
-                                                <input class="hide_it" />
+                                                <input class="hidden" />
                                             </div>
                                         </td>
                                         <td>
                                             <div class="input-group">
-                                                <span class="input-group-addon hide_it"></span>
+                                                <span class="input-group-addon hidden"></span>
                                                 <input
                                                     class="form-control w5"
                                                     type="number"
@@ -677,12 +677,12 @@
                                                     v-model="preferences.probetouchplatethickness"
                                                     onchange="onprobetouchplatethicknessChange()"
                                                 />
-                                                <span class="input-group-addon hide_it"></span>
+                                                <span class="input-group-addon hidden"></span>
                                             </div>
                                         </td>
                                         <td>
                                             <div class="input-group">
-                                                <input class="hide_it" />
+                                                <input class="hidden" />
                                                 <span
                                                     class="input-group-addon form_control"
                                                     translate
@@ -700,7 +700,7 @@
                                         <td id="touch_status_icon"></td>
                                         <td width="100%">&nbsp;</td>
                                         <td>
-                                            <span class="hide_it" id="probingtext">
+                                            <span class="hidden" id="probingtext">
                                                 <table>
                                                     <tr>
                                                         <td>
@@ -910,7 +910,7 @@
                                 <table>
                                     <tr>
                                         <td>
-                                            <span class="hide_it" id="surfacingtext">
+                                            <span class="hidden" id="surfacingtext">
                                                 <table>
                                                     <tr>
                                                         <td>

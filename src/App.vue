@@ -180,13 +180,6 @@ body {
   white-space: nowrap;
 }
 
-.hide_it {
-  display: none;
-}
-
-.not_visible {
-  visibility: hidden;
-}
 
 .no_margin {
   margin: 0 !important;

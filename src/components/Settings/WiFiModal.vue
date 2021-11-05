@@ -12,8 +12,8 @@
         <div class="modal-body">
             <center>
                 <span id="AP_scan_status" translate>Scanning</span>
-                <div class="loader hide_it" id="AP_scan_loader"></div>
-                <span class='hide_it' id="AP_scan_list">
+                <div class="loader hidden" id="AP_scan_loader"></div>
+                <span class='hidden' id="AP_scan_list">
                     <div class="table-responsive">
                         <table class="table table-bordered table-striped">
                             <thead class="noshowonlowrestab">

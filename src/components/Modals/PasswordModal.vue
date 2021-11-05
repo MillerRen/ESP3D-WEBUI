@@ -1,7 +1,7 @@
 <template>
 <!-- password Modal -->
 <div id="passworddlg.html" class="modal topmodal">
-    <div class="loader hide_it" id="password_loader" style="margin:auto"></div>
+    <div class="loader hidden" id="password_loader" style="margin:auto"></div>
     <!-- password content -->
     <div class="modal-content" id="change_password_content">
         <div class="modal-header">

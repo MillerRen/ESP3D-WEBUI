@@ -27,7 +27,7 @@
                         </div>
                     </div>
                 </li>
-                <li class="list-group-item hide_it" id="mixed_extruder_UI">
+                <li class="list-group-item hidden" id="mixed_extruder_UI">
                     <div class="row">
                         <div class="col-md-4">
                             <table>
@@ -68,7 +68,7 @@
                         </div>
                     </div>
                 </li>
-                <li class="list-group-item hide_it" id="first_extruder_UI">
+                <li class="list-group-item hidden" id="first_extruder_UI">
                     <div class="row">
                         <div class="col-md-4">
                             <span translate>Extruder T0</span>
@@ -91,7 +91,7 @@
                         </div>
                     </div>
                 </li>
-                <li class="list-group-item hide_it" id="second_extruder_UI">
+                <li class="list-group-item hidden" id="second_extruder_UI">
                     <div class="row">
                         <div class="col-md-4">
                             <span translate>Extruder T1</span>
@@ -146,12 +146,12 @@
                                                     value
                                                     onkeyup="extruder_handleKeyUp(event, 'Flow')"
                                                 />
-                                                <span class="input-group-addon hide_it"></span>
+                                                <span class="input-group-addon hidden"></span>
                                             </div>
                                         </td>
                                         <td>
                                             <div class="input-group">
-                                                <input class="hide_it" />
+                                                <input class="hidden" />
                                                 <span
                                                     class="input-group-addon form_control"
                                                     translate
@@ -206,12 +206,12 @@
                                                     value
                                                     onkeyup="extruder_handleKeyUp(event,'Feed')"
                                                 />
-                                                <span class="input-group-addon hide_it"></span>
+                                                <span class="input-group-addon hidden"></span>
                                             </div>
                                         </td>
                                         <td>
                                             <div class="input-group">
-                                                <input class="hide_it" />
+                                                <input class="hidden" />
                                                 <span
                                                     class="input-group-addon form_control"
                                                     translate
@@ -234,7 +234,7 @@
                         </div>
                     </div>
                 </li>
-                <li class="list-group-item hide_it" id="fan_UI">
+                <li class="list-group-item hidden" id="fan_UI">
                     <div class="row">
                         <div class="col-md-4">
                             <span translate>Fan (0-100%)</span>
@@ -264,12 +264,12 @@
                                                     v-model="preferences.fanSelectedValue"
                                                     onkeyup="extruder_handleKeyUp(event, 'Fan')"
                                                 />
-                                                <span class="input-group-addon hide_it"></span>
+                                                <span class="input-group-addon hidden"></span>
                                             </div>
                                         </td>
                                         <td>
                                             <div class="input-group">
-                                                <input class="hide_it" />
+                                                <input class="hidden" />
                                                 <span
                                                     class="input-group-addon form_control"
                                                     translate
@@ -301,12 +301,12 @@
                         <td>
                             <div class="input-group">
                                 <span class="input-group-addon form_control" translate>Extrude</span>
-                                <input class="hide_it" />
+                                <input class="hidden" />
                             </div>
                         </td>
                         <td>
                             <div class="input-group">
-                                <span class="input-group-addon hide_it"></span>
+                                <span class="input-group-addon hidden"></span>
                                 <input
                                     class="form-control w4"
                                     type="number"
@@ -316,12 +316,12 @@
                                     onkeyup="on_extruder_length_Change()"
                                     v-model="preferences.e_distance"
                                 />
-                                <span class="input-group-addon hide_it"></span>
+                                <span class="input-group-addon hidden"></span>
                             </div>
                         </td>
                         <td>
                             <div class="input-group">
-                                <input class="hide_it" />
+                                <input class="hidden" />
                                 <span class="input-group-addon form_control" translate>mm</span>
                             </div>
                         </td>
@@ -332,12 +332,12 @@
                         <td>
                             <div class="input-group">
                                 <span class="input-group-addon form_control">@</span>
-                                <input class="hide_it" />
+                                <input class="hidden" />
                             </div>
                         </td>
                         <td>
                             <div class="input-group">
-                                <span class="input-group-addon hide_it"></span>
+                                <span class="input-group-addon hidden"></span>
                                 <input
                                     class="form-control w5"
                                     type="number"
@@ -346,12 +346,12 @@
                                     onkeyup="on_extruder_velocity_Change()"
                                     v-model="preferences.e_feedrate"
                                 />
-                                <span class="input-group-addon hide_it"></span>
+                                <span class="input-group-addon hidden"></span>
                             </div>
                         </td>
                         <td>
                             <div class="input-group">
-                                <input class="hide_it" />
+                                <input class="hidden" />
                                 <span class="input-group-addon form_control" translate>mm/min</span>
                             </div>
                         </td>

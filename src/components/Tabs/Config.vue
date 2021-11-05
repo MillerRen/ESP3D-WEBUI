@@ -102,12 +102,12 @@
                                             v-html="$options.filters.icon('repeat')"
                                           ></button>
                                         </span>
-                                        <input class="hide_it" />
+                                        <input class="hidden" />
                                       </div>
                                     </td>
                                     <td>
                                       <div class="input-group">
-                                        <span class="input-group-addon hide_it"></span>
+                                        <span class="input-group-addon hidden"></span>
                                         <input
                                           id="config_0"
                                           type="text"
@@ -119,14 +119,14 @@
                                           id="icon_config_0"
                                           class="form-control-feedback ico_feedback"
                                         ></span>
-                                        <span class="input-group-addon hide_it"></span>
+                                        <span class="input-group-addon hidden"></span>
                                       </div>
                                     </td>
                                   </tr>
                                 </tbody>
                               </table>
                               <div class="input-group">
-                                <input class="hide_it" />
+                                <input class="hidden" />
                                 <span class="input-group-btn">
                                   <button
                                     id="btn_config_0"
@@ -149,7 +149,7 @@
             </tbody>
           </table>
         </div>
-        <div id="config_override_list_content">
+        <div id="config_override_list_content" class="hidden">
           <table>
             <tr>
               <td style="padding: 10px">
@@ -176,7 +176,7 @@
                   type="button"
                   id="config_delete_override"
                   class="btn btn-warning"
-                  onclick="Delete_config_override()"
+                  v-if="fwData.target_firmware=='smoothieware'"
                 >
                   <span>
                     <svg width="1.3em" height="1.2em" viewBox="0 0 1300 1200">

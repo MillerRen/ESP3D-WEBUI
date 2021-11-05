@@ -84,12 +84,12 @@
                                                     v-model="preferences.heaterT0SelectedTemp"
                                                     onkeyup="temperature_handleKeyUp(event, 'T0')"
                                                 />
-                                                <span class="input-group-addon hide_it"></span>
+                                                <span class="input-group-addon hidden"></span>
                                             </div>
                                         </td>
                                         <td>
                                             <div class="input-group">
-                                                <input class="hide_it" />
+                                                <input class="hidden" />
                                                 <span
                                                     class="input-group-addon form_control"
                                                     translate
@@ -116,13 +116,13 @@
                                 <span class="tempDisplay" id="heaterT0DisplayTemp"></span>
                                 <span
                                     id="heaterT0TargetTemp_anime"
-                                    class="not_visible loader-pulse pull-right"
+                                    class="invisible loader-pulse pull-right"
                                     style="color:red"
                                 ></span>
                             </div>
                         </td>
                     </tr>
-                    <tr id="temperature_redundant" class="hide_it">
+                    <tr id="temperature_redundant" class="hidden">
                         <td>
                             <span translate>Redundant</span>
                         </td>
@@ -136,13 +136,13 @@
                                 <span class="tempDisplay" id="heaterRDisplayTemp"></span>
                                 <span
                                     id="heaterRTargetTemp_anime"
-                                    class="not_visible loader-pulse pull-right"
+                                    class="invisible loader-pulse pull-right"
                                     style="color:red"
                                 ></span>
                             </div>
                         </td>
                     </tr>
-                    <tr id="temperature_secondExtruder" class="hide_it">
+                    <tr id="temperature_secondExtruder" class="hidden">
                         <td>
                             <span translate>Heater T1</span>
                         </td>
@@ -172,12 +172,12 @@
                                                     value="0"
                                                     onkeyup="temperature_handleKeyUp(event, 'T1')"
                                                 />
-                                                <span class="input-group-addon hide_it"></span>
+                                                <span class="input-group-addon hidden"></span>
                                             </div>
                                         </td>
                                         <td>
                                             <div class="input-group">
-                                                <input class="hide_it" />
+                                                <input class="hidden" />
                                                 <span
                                                     class="input-group-addon form_control"
                                                     translate
@@ -204,13 +204,13 @@
                                 <span class="tempDisplay" id="heaterT1DisplayTemp"></span>
                                 <span
                                     id="heaterT1TargetTemp_anime"
-                                    class="not_visible loader-pulse pull-right"
+                                    class="invisible loader-pulse pull-right"
                                     style="color:red"
                                 ></span>
                             </div>
                         </td>
                     </tr>
-                    <tr id="temperature_probe" class="hide_it">
+                    <tr id="temperature_probe" class="hidden">
                         <td>
                             <span translate>Probe</span>
                         </td>
@@ -224,13 +224,13 @@
                                 <span class="tempDisplay" id="probeDisplayTemp"></span>
                                 <span
                                     id="probeTargetTemp_anime"
-                                    class="not_visible loader-pulse pull-right"
+                                    class="invisible loader-pulse pull-right"
                                     style="color:red"
                                 ></span>
                             </div>
                         </td>
                     </tr>
-                    <tr id="temperature_bed" class="hide_it">
+                    <tr id="temperature_bed" class="hidden">
                         <td>
                             <span translate>Bed</span>
                         </td>
@@ -263,12 +263,12 @@
                                                     value="0"
                                                     onkeyup="temperature_handleKeyUp(event, 'bed')"
                                                 />
-                                                <span class="input-group-addon hide_it"></span>
+                                                <span class="input-group-addon hidden"></span>
                                             </div>
                                         </td>
                                         <td>
                                             <div class="input-group">
-                                                <input class="hide_it" />
+                                                <input class="hidden" />
                                                 <span
                                                     class="input-group-addon form_control"
                                                     translate
@@ -295,13 +295,13 @@
                                 <span class="tempDisplay" id="bedDisplayTemp"></span>
                                 <span
                                     id="bedTargetTemp_anime"
-                                    class="not_visible loader-pulse pull-right"
+                                    class="invisible loader-pulse pull-right"
                                     style="color:red"
                                 ></span>
                             </div>
                         </td>
                     </tr>
-                    <tr id="temperature_chamber" class="hide_it">
+                    <tr id="temperature_chamber" class="hidden">
                         <td>
                             <span translate>Chamber</span>
                         </td>
@@ -333,12 +333,12 @@
                                                     v-model="preferences.chamberSelectedTemp"
                                                     onkeyup="temperature_handleKeyUp(event, 'chamber')"
                                                 />
-                                                <span class="input-group-addon hide_it"></span>
+                                                <span class="input-group-addon hidden"></span>
                                             </div>
                                         </td>
                                         <td>
                                             <div class="input-group">
-                                                <input class="hide_it" />
+                                                <input class="hidden" />
                                                 <span
                                                     class="input-group-addon form_control"
                                                     translate
@@ -368,7 +368,7 @@
                                 <span class="tempDisplay" id="chamberDisplayTemp"></span>
                                 <span
                                     id="chamberTargetTemp_anime"
-                                    class="not_visible loader-pulse pull-right"
+                                    class="invisible loader-pulse pull-right"
                                     style="color:red"
                                 ></span>
                             </div>
@@ -377,7 +377,7 @@
                 </tbody>
             </table>
             <ul class="list-group">
-                <li class="list-group-item hide_it" id="temperatures_output">
+                <li class="list-group-item hidden" id="temperatures_output">
                     <div class="panel-flex-row">
                         <div id="extruderstemperaturesgraphic">
                             <canvas id="extruderTempgraph" height="130" width="200"></canvas>

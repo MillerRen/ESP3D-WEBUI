@@ -70,10 +70,10 @@
           <tr>
             <td>
               <span class="input-group-addon form_control">XY:</span>
-              <input class="hide_it" />
+              <input class="hidden" />
             </td>
             <td>
-              <span class="input-group-addon hide_it"></span>
+              <span class="input-group-addon hidden"></span>
               <input
                 class="form-control w8"
                 type="number"
@@ -88,11 +88,11 @@
           <tr>
             <td>
               <span class="input-group-addon form_control" id="axis_label">Z:</span>
-              <input class="hide_it" />
+              <input class="hidden" />
             </td>
-            <td class="hide_it" id="axis_selection"></td>
+            <td class="hidden" id="axis_selection"></td>
             <td>
-              <span class="input-group-addon hide_it"></span>
+              <span class="input-group-addon hidden"></span>
               <input
                 class="form-control w5"
                 type="number"

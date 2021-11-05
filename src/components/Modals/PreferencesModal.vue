@@ -98,7 +98,7 @@
               </td>
               <td>
                 <div class="input-group">
-                  <input class="hide_it" />
+                  <input class="hidden" />
                   <span class="input-group-addon form_control" translate>sec</span>
                 </div>
               </td>
@@ -127,7 +127,7 @@
               </td>
               <td>
                 <div class="input-group">
-                  <input class="hide_it" />
+                  <input class="hidden" />
                   <span class="input-group-addon form_control" translate>mm/min</span>
                 </div>
               </td>
@@ -158,14 +158,14 @@
               </td>
               <td>
                 <div class="input-group">
-                  <input class="hide_it" />
+                  <input class="hidden" />
                   <span class="input-group-addon form_control" translate>mm/min</span>
                 </div>
               </td>
             </tr>
           </table>
         </div>
-        <div class="hide_it topmarginspace">
+        <div class="hidden topmarginspace">
           <table>
             <tr>
               <td>
@@ -186,14 +186,14 @@
               </td>
               <td>
                 <div class="input-group">
-                  <input class="hide_it" />
+                  <input class="hidden" />
                   <span class="input-group-addon form_control" translate>mm/min</span>
                 </div>
               </td>
             </tr>
           </table>
         </div>
-        <div class="hide_it topmarginspace">
+        <div class="hidden topmarginspace">
           <table>
             <tr>
               <td>
@@ -214,14 +214,14 @@
               </td>
               <td>
                 <div class="input-group">
-                  <input class="hide_it" />
+                  <input class="hidden" />
                   <span class="input-group-addon form_control" translate>mm/min</span>
                 </div>
               </td>
             </tr>
           </table>
         </div>
-        <div class="hide_it topmarginspace">
+        <div class="hidden topmarginspace">
           <table>
             <tr>
               <td>
@@ -242,7 +242,7 @@
               </td>
               <td>
                 <div class="input-group">
-                  <input class="hide_it" />
+                  <input class="hidden" />
                   <span class="input-group-addon form_control" translate>mm/min</span>
                 </div>
               </td>
@@ -283,7 +283,7 @@
               </td>
               <td>
                 <div class="input-group">
-                  <input class="hide_it" />
+                  <input class="hidden" />
                   <span class="input-group-addon form_control" translate>sec</span>
                 </div>
               </td>
@@ -348,7 +348,7 @@
               </td>
               <td>
                 <div class="input-group">
-                  <input class="hide_it" />
+                  <input class="hidden" />
                   <span class="input-group-addon form_control" translate>mm</span>
                 </div>
               </td>
@@ -378,7 +378,7 @@
               </td>
               <td>
                 <div class="input-group">
-                  <input class="hide_it" />
+                  <input class="hidden" />
                   <span class="input-group-addon form_control" translate>mm/min</span>
                 </div>
               </td>
@@ -450,7 +450,7 @@
               </td>
               <td>
                 <div class="input-group">
-                  <input class="hide_it" />
+                  <input class="hidden" />
                   <span class="input-group-addon form_control" translate>sec</span>
                 </div>
               </td>
@@ -490,7 +490,7 @@
                   </td>
                   <td>
                     <div class="input-group">
-                      <input class="hide_it" />
+                      <input class="hidden" />
                       <span class="input-group-addon form_control" translate>mm</span>
                     </div>
                   </td>
@@ -520,7 +520,7 @@
                   </td>
                   <td>
                     <div class="input-group">
-                      <input class="hide_it" />
+                      <input class="hidden" />
                       <span class="input-group-addon form_control" translate>mm/min</span>
                     </div>
                   </td>
@@ -550,7 +550,7 @@
                   </td>
                   <td>
                     <div class="input-group">
-                      <input class="hide_it" />
+                      <input class="hidden" />
                       <span class="input-group-addon form_control" translate>mm</span>
                     </div>
                   </td>
@@ -592,7 +592,7 @@
                   </td>
                   <td>
                     <div class="input-group">
-                      <input class="hide_it" />
+                      <input class="hidden" />
                       <span class="input-group-addon form_control" translate>mm</span>
                     </div>
                   </td>
@@ -622,7 +622,7 @@
                   </td>
                   <td>
                     <div class="input-group">
-                      <input class="hide_it" />
+                      <input class="hidden" />
                       <span class="input-group-addon form_control" translate>mm</span>
                     </div>
                   </td>
@@ -652,7 +652,7 @@
                   </td>
                   <td>
                     <div class="input-group">
-                      <input class="hide_it" />
+                      <input class="hidden" />
                       <span class="input-group-addon form_control" translate>mm</span>
                     </div>
                   </td>
@@ -682,7 +682,7 @@
                   </td>
                   <td>
                     <div class="input-group">
-                      <input class="hide_it" />
+                      <input class="hidden" />
                       <span class="input-group-addon form_control" translate>mm</span>
                     </div>
                   </td>
@@ -712,7 +712,7 @@
                   </td>
                   <td>
                     <div class="input-group">
-                      <input class="hide_it" />
+                      <input class="hidden" />
                       <span class="input-group-addon form_control" translate>mm</span>
                     </div>
                   </td>
@@ -742,7 +742,7 @@
                   </td>
                   <td>
                     <div class="input-group">
-                      <input class="hide_it" />
+                      <input class="hidden" />
                       <span class="input-group-addon form_control" translate>mm</span>
                     </div>
                   </td>
@@ -772,7 +772,7 @@
                   </td>
                   <td>
                     <div class="input-group">
-                      <input class="hide_it" />
+                      <input class="hidden" />
                       <span class="input-group-addon form_control" translate>mm</span>
                     </div>
                   </td>
