@@ -1,7 +1,7 @@
 <template>
   <div class="container-fluid">
     <center>
-      <span id="settings_filters">
+      <span id="settings_filters" v-if="fwData.target_firmware!='grbl-embedded'&&fwData.target_firmware!='marlin-embedded'">
         <div class="radio-inline">
           <label>
             <input
