@@ -2,13 +2,13 @@
   <main id="app" v-if="initialized">
     <Navbar :fwData="fwData" />
     <br />
-    <Tabs v-model="mainTab"  :fwData="fwData" />
+    <Tabs v-model="mainTab" :fwData="fwData" />
     <br />
-    <ConfigPanel v-if="mainTab == 'printer'"  :fwData="fwData" />
-    <DashboardPanel v-if="mainTab == 'dashboard'"  :fwData="fwData" :preferences="preferences" />
-    <CameraPanel v-if="mainTab == 'camera'"  :fwData="fwData" />
-    <UpdatePanel v-if="mainTab == 'update'"  :fwData="fwData" />
-    <SettingsPanel v-if="mainTab == 'settings'"  :fwData="fwData" />
+    <ConfigPanel v-if="mainTab == 'printer'" :fwData="fwData" />
+    <DashboardPanel v-if="mainTab == 'dashboard'" :fwData="fwData" :preferences="preferences" />
+    <CameraPanel v-if="mainTab == 'camera'" :fwData="fwData" />
+    <UpdatePanel v-if="mainTab == 'update'" :fwData="fwData" />
+    <SettingsPanel v-if="mainTab == 'settings'" :fwData="fwData" />
   </main>
 </template>
 
@@ -38,10 +38,10 @@ export default {
     }
   },
   computed: {
-    fwData () {
+    fwData() {
       return this.$store.fwData
     },
-    preferences () {
+    preferences() {
       return this.$store.preferences
     }
   },
@@ -60,7 +60,7 @@ export default {
             this.checkLogin()
             return
           }
-          
+
           this.getSettings()
         })
         .catch((err) => {
@@ -89,7 +89,7 @@ export default {
       that.loginModal = this.$modal({
         title: 'Identification requested',
         events: {
-          success () {
+          success() {
             that.loginModal.close()
             that.boot()
           }
@@ -98,7 +98,6 @@ export default {
     },
     // boot step 2
     getSettings() {
-      this.$store.startSocket()
       this.connectModal.data.bootStep = 2
       return this.$store.getSettings()
         .then(() => {
@@ -109,19 +108,21 @@ export default {
         })
     },
     // boot step 3
-    getPreferences () {
+    getPreferences() {
       this.connectModal.data.bootStep = 3
       return this.$store.getPreferences()
         .then(() => {
           this.connectModal.data.bootStep = 4
           this.connectModal.close()
           this.initialized = true
-          if (this.fwData.target_firmware=='???') {
+          this.$store.startSocket()
+
+          if (this.fwData.target_firmware == '???') {
             this.setup()
           }
         })
     },
-    setup () {
+    setup() {
       this.$modal({
         closeable: false
       }, 'SetupModal')
@@ -179,7 +180,6 @@ body {
   overflow: hidden;
   white-space: nowrap;
 }
-
 
 .no_margin {
   margin: 0 !important;
