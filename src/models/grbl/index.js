@@ -71,7 +71,7 @@ export default class Grbl {
     }
 
     processStream(msg) {
-        
+
         var data = msg.msg.trim()
         var report = {}
         if (checker.isStatusReport(data)) {
@@ -140,8 +140,8 @@ export default class Grbl {
         else {
             report = { input: data, type: messageTypes.unknown }
         }
-        
-        if(this.preferences.enable_verbose_mode||(report.type!='status')) {
+
+        if (this.preferences.enable_verbose_mode || (report.type != 'status')) {
             this.messages.push(msg)
         }
 
@@ -369,6 +369,19 @@ export default class Grbl {
 
     resetGrbl() {
         return http.sendCommandText(String.fromCharCode(0x18))
+    }
+
+    getPosition() {
+        return http.sendCommandText('?')
+    }
+
+    autoCheckPosition() {
+        var timer = setInterval(() => {
+            if (!this.preferences.interval_positions) {
+                clearInterval(timer)
+            }
+            this.getPosition()
+        }, this.preferences.interval_positions * 1000)
     }
 
 }
