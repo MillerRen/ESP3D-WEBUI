@@ -51,13 +51,13 @@
                      </span>
                      <span class="clearfix"></span>
                  </a>
-                 <a href="#" @click="setupdlg ()">
+                 <!-- <a href="#" @click="setupdlg ()">
                      <span class="pull-right" translate>Setup</span>
                      <span class="pull-left">
                          <span v-html="$options.filters.icon('edit')"></span>
                      </span>
                      <span class="clearfix"></span>
-                 </a>
+                 </a> -->
                  <div class="menu-divider"></div>
                  <a href="#" @click='creditsdlg()'>
                      <span class="pull-right" translate>Credits</span>
@@ -151,11 +151,11 @@ export default {
                 }
             }, 'PreferencesModal')
         },
-        setupdlg () {
-            this.$modal({
-                title: 'Setup'
-            }, 'SetupModal')
-        },
+        // setupdlg () {
+        //     this.$modal({
+        //         title: 'Setup'
+        //     }, 'SetupModal')
+        // },
         passworddlg () {
             this.$modal({
                 title: 'Change Password'
