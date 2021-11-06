@@ -6,7 +6,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand">
+            <a class="navbar-brand" @click.prevent="creditsdlg()" href="">
                 <span translate>ESP3D for</span>
                 <span>{{ fwName }}</span>
                 <span id="showSDused" v-if="fwData.direct_sd">SD</span>
@@ -108,7 +108,7 @@ export default {
         },
         creditsdlg() {
             this.$modal({
-                title: 'Credits'
+                title: 'About'
             }, 'CreditsModal')
         },
         logindlg() {
