@@ -19,7 +19,7 @@
                                         class="btn btn-info btn-xs"
                                         style="padding: -2px 2px 0x 0px;"
                                     >
-                                        <span v-html="$options.filters.icon('folder')"></span>
+                                        <i class="glyphicon glyphicon-folder"></i>
                                     </button>
                                 </td>
                                 <td>&nbsp;&nbsp;</td>
@@ -60,14 +60,7 @@
                                 onclick="files_filter_button(this);"
                             >
                                 <span id="files_filter_glyph" style="position:relative; top:2px">
-                                    <svg width="1.3em" height="1.2em" viewBox="0 0 1300 1200">
-                                        <g transform="translate(50,1200) scale(1, -1)">
-                                            <path
-                                                fill="currentColor"
-                                                d="M150 1200h900q21 0 35.5 -14.5t14.5 -35.5t-14.5 -35.5t-35.5 -14.5h-900q-21 0 -35.5 14.5t-14.5 35.5t14.5 35.5t35.5 14.5zM700 500v-300l-200 -200v500l-350 500h900z"
-                                            />
-                                        </g>
-                                    </svg>
+                                    <i class="glyphicon glyphicon-filter"></i>
                                 </span>
                             </button>
                             &nbsp;
@@ -153,7 +146,7 @@
                     style="cursor:pointer"
                     @click="levelup()"
                 >
-                    <span v-html="$options.filters.icon('level-up')"></span>&nbsp;&nbsp;
+                    <i class="glyphicon glyphicon-level-up"></i>&nbsp;&nbsp;
                     <span translate>Up...</span>
                 </li>
                 <li class="list-group-item list-group-hover" v-for="file in files" :key="file.name">
@@ -176,16 +169,20 @@
                         <div class="col-md-2 col-sm2">
                             <button
                                 class="btn btn-xs btn-success"
-                                v-html="$options.filters.icon('play')"
+                                
                                 v-if="file.isprintable"
                                 @click="printFile(file)"
-                            ></button>
+                            >
+                            <i class="glyphicon glyphicon-play"></i>
+                            </button>
                             &nbsp;
                             <button
                                 class="btn btn-xs btn-danger"
-                                v-html="$options.filters.icon('trash')"
+                                
                                 @click="deleteFile(file)"
-                            ></button>
+                            >
+                            <i class="glyphicon glyphicon-$1"></i>
+                            </button>
                         </div>
                     </div>
                 </li>

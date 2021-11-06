@@ -8,12 +8,12 @@
                 <tr>
                     <td style="padding:10px">
                         <button type="button" class="btn btn-info" @click="showStatusModal">
-                            <span v-html="$options.filters.icon('th-list')"></span>
+                            <i class="glyphicon glyphicon-th-list"></i>
                         </button>
                     </td>
                     <td style="padding:10px">
                         <button type="button" class="btn btn-success" @click="showSPIFFSModal">
-                            <span v-html="$options.filters.icon('folder-open')"></span>
+                            <i class="glyphicon glyphicon-folder-open"></i>
                         </button>
                     </td>
                     <td style="padding:10px">
@@ -23,7 +23,7 @@
                             class="btn btn-warning"
                             @click="showUpdateModal"
                         >
-                            <span v-html="$options.filters.icon('cloud-upload')"></span>
+                            <i class="glyphicon glyphicon-cloud-upload"></i>
                         </button>
                     </td>
                     <td style="padding:10px">
@@ -33,7 +33,7 @@
                             class="btn btn-danger"
                             @click="restartESP();"
                         >
-                            <span v-html="$options.filters.icon('off')"></span>
+                            <i class="glyphicon glyphicon-off"></i>
                         </button>
                     </td>
                     <td style="padding:10px">
@@ -43,7 +43,7 @@
                             class="btn btn-primary"
                             @click="refreshSettings()"
                         >
-                            <span v-html="$options.filters.icon('refresh')"></span>
+                            <i class="glyphicon glyphicon-refresh"></i>
                         </button>
                     </td>
                 </tr>

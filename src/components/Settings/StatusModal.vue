@@ -29,7 +29,7 @@
                                 id="refreshstatusbtn"
                                 @click="getESPStatus()"
                             >
-                                <span v-html="$options.filters.icon('repeat')"></span>
+                                <i class="glyphicon glyphicon-repeat"></i>
                             </button>
                         </td>
                     </tr>

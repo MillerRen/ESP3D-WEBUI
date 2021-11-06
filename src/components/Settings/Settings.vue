@@ -1,7 +1,10 @@
 <template>
   <div class="container-fluid">
     <center>
-      <span id="settings_filters" v-if="fwData.target_firmware!='grbl-embedded'&&fwData.target_firmware!='marlin-embedded'">
+      <span
+        id="settings_filters"
+        v-if="fwData.target_firmware != 'grbl-embedded' && fwData.target_firmware != 'marlin-embedded'"
+      >
         <div class="radio-inline">
           <label>
             <input
@@ -27,7 +30,7 @@
           </label>
         </div>
       </span>
-      <div class="settings-status" v-if="errmsg">{{errmsg}}</div>
+      <div class="settings-status" v-if="errmsg">{{ errmsg }}</div>
       <div class="loader" v-if="loading"></div>
       <table
         class="table table-bordered table-striped table-hover table-responsive"
@@ -43,15 +46,19 @@
           <tr v-for="(setting, index) in settings" :key="index" v-show="setting.F == settingsType">
             <td>{{ setting.label }}</td>
             <td>
-              <div class="form-group has-feedback" :class="{'has-warning':setting.value!=setting.defaultvalue}">
+              <div
+                class="form-group has-feedback"
+                :class="{ 'has-warning': setting.value != setting.defaultvalue }"
+              >
                 <div class="input-group">
                   <span class="input-group-btn">
                     <button
                       class="btn btn-default btn-svg"
                       type="button"
-                      v-html="$options.filters.icon('repeat')"
                       @click="revertToDefaultValue(setting)"
-                    ></button>
+                    >
+                      <i class="glyphicon glyphicon-repeat"></i>
+                    </button>
                   </span>
                   <input
                     type="text"
@@ -93,34 +100,34 @@ export default {
     };
   },
   computed: {
-    settings () {
+    settings() {
       return this.$store.settings
     },
-    fwData () {
+    fwData() {
       return this.$store.fwData
     }
   },
   methods: {
     setValue(setting) {
-        this.loading = true
+      this.loading = true
       this.$store.updateSettings(setting.cmd + setting.value)
         .then(() => {
-            this.loading = false
+          this.loading = false
         })
         .catch((err) => {
-            this.loading = false
-            this.errmsg = err
+          this.loading = false
+          this.errmsg = err
         })
     },
     refreshSettings() {
-        this.loading = true
-        this.$store.getSettings()
-        .then((response) => {console.log(response)})
-        .catch((err)=> {
-            this.errmsg = err
+      this.loading = true
+      this.$store.getSettings()
+        .then((response) => { console.log(response) })
+        .catch((err) => {
+          this.errmsg = err
         })
-        .finally(()=> {
-            this.loading = false
+        .finally(() => {
+          this.loading = false
         })
     },
     revertToDefaultValue(setting) {

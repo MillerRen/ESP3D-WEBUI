@@ -76,7 +76,7 @@
                                             @click="$store.sendRealtimeCommand('!');"
                                             style="padding: 5px 4px 0 5px;"
                                         >
-                                            <span v-html="$options.filters.icon('pause')"></span>
+                                            <i class="glyphicon glyphicon-pause"></i>
                                         </button>
                                     </td>
                                     <td>&nbsp;</td>
@@ -87,7 +87,7 @@
                                             @click="$store.sendRealtimeCommand('~');"
                                             style="padding: 5px 4px 0 5px;"
                                         >
-                                            <span v-html="$options.filters.icon('play')"></span>
+                                            <i class="glyphicon glyphicon-play"></i>
                                         </button>
                                     </td>
                                     <td>&nbsp;</td>
@@ -98,7 +98,7 @@
                                             @click="resetGrbl();"
                                             style="padding: 5px 0px 0px 0px;"
                                         >
-                                            <span v-html="$options.filters.icon('reweet')"></span>
+                                            <i class="glyphicon glyphicon-reweet"></i>
                                         </button>
                                     </td>
                                 </tr>
@@ -155,7 +155,7 @@
                                                 <table>
                                                     <tr>
                                                         <td>
-                                                           <span v-html="$options.filters.icon('fast-backward')"></span>
+                                                           <i class="glyphicon glyphicon-fast-backward"></i>
                                                         </td>
                                                         <td>
                                                             <span class="button_txt">F10%</span>
@@ -173,7 +173,7 @@
                                                 <table>
                                                     <tr>
                                                         <td>
-                                                            <span v-html="$options.filters.icon('step-backward')"></span>
+                                                            <i class="glyphicon glyphicon-step-backward"></i>
                                                         </td>
                                                         <td>
                                                             <span class="button_txt">&nbsp;F1%</span>
@@ -188,7 +188,7 @@
                                                 @click="$store.sendRealtimeCommand(String.fromCharCode(0x90,0x0));"
                                                 style="padding: 5px 4px 0 5px;"
                                             >
-                                                <span v-html="$options.filters.icon('repeat')"></span>
+                                                <i class="glyphicon glyphicon-repeat"></i>
                                             </button>
                                         </td>
                                         <td class="td_center">
@@ -200,7 +200,7 @@
                                                 <table>
                                                     <tr>
                                                         <td>
-                                                            <span v-html="$options.filters.icon('step-forward')"></span>
+                                                            <i class="glyphicon glyphicon-step-forward"></i>
                                                         </td>
                                                         <td>
                                                             <span class="button_txt">&nbsp;F1%</span>
@@ -218,7 +218,7 @@
                                                 <table>
                                                     <tr>
                                                         <td>
-                                                            <span v-html="$options.filters.icon('fast-forward')"></span>
+                                                            <i class="glyphicon glyphicon-fast-forward"></i>
                                                         </td>
                                                         <td>
                                                             <span class="button_txt">F10%</span>
@@ -241,7 +241,7 @@
                                                 <table>
                                                     <tr>
                                                         <td>
-                                                            <span v-html="$options.filters.icon('fast-backward')"></span>
+                                                            <i class="glyphicon glyphicon-fast-backward"></i>
                                                         </td>
                                                         <td>
                                                             <span class="button_txt">S10%</span>
@@ -259,7 +259,7 @@
                                                 <table>
                                                     <tr>
                                                         <td>
-                                                            <span v-html="$options.filters.icon('step-backward')"></span>
+                                                            <i class="glyphicon glyphicon-step-backward"></i>
                                                         </td>
                                                         <td>
                                                             <span class="button_txt">&nbsp;S1%</span>
@@ -274,7 +274,7 @@
                                                 @click="$store.sendRealtimeCommand(String.fromCharCode(0x99,0x0));"
                                                 style="padding: 5px 4px 0 5px;"
                                             >
-                                                <span v-html="$options.filters.icon('repeat')"></span>
+                                                <i class="glyphicon glyphicon-repeat"></i>
                                             </button>
                                         </td>
                                         <td class="td_center">
@@ -286,7 +286,7 @@
                                                 <table>
                                                     <tr>
                                                         <td>
-                                                            <span v-html="$options.filters.icon('step-forward')"></span>
+                                                            <i class="glyphicon glyphicon-step-forward"></i>
                                                         </td>
                                                         <td>
                                                             <span class="button_txt">&nbsp;S1%</span>
@@ -304,7 +304,7 @@
                                                 <table>
                                                     <tr>
                                                         <td>
-                                                            <span v-html="$options.filters.icon('fast-forward')"></span>
+                                                            <i class="glyphicon glyphicon-fast-forward"></i>
                                                         </td>
                                                         <td>
                                                             <span class="button_txt">S10%</span>
@@ -329,7 +329,7 @@
                                                 <table>
                                                     <tr>
                                                         <td>
-                                                            <span v-html="$options.filters.icon('record')"></span>
+                                                            <i class="glyphicon glyphicon-record"></i>
                                                         </td>
                                                         <td>
                                                             <span
@@ -351,7 +351,7 @@
                                                 <table>
                                                     <tr>
                                                         <td>
-                                                            <span v-html="$options.filters.icon('tint')"></span>
+                                                            <i class="glyphicon glyphicon-tint"></i>
                                                         </td>
                                                         <td>
                                                             <span class="button_txt" translate>Flood</span>
@@ -370,7 +370,7 @@
                                                 <table>
                                                     <tr>
                                                         <td>
-                                                            <span v-html="$options.filters.icon('cloud')"></span>
+                                                            <i class="glyphicon glyphicon-cloud"></i>
                                                         </td>
                                                         <td>
                                                             <span class="button_txt" translate>Mist</span>
@@ -741,7 +741,7 @@
                     class="btn btn-danger"
                     @click="resetGrbl();"
                 >
-                    <span v-html="$options.filters.icon('repeat')"></span>
+                    <i class="glyphicon glyphicon-repeat"></i>
                 </button>
             </div>
         </div>

@@ -46,6 +46,11 @@ module.exports = {
   chainWebpack: config => {
     config.plugins.delete('prefetch')
     config.plugins.delete('preload')
+    config.module
+      .rule('fonts')
+        .use('url-loader')
+          .loader('url-loader')
+          .tap(options => Object.assign(options, { limit: 19200 }))
     config
       .plugin('html')
       .tap(args => {

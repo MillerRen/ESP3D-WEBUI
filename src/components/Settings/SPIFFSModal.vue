@@ -38,7 +38,7 @@
                     :disabled="uploads.length < 1"
                     @click="uploadFile();"
                 >
-                    <span v-html="$options.filters.icon('upload')"></span>
+                    <i class="glyphicon glyphicon-upload"></i>
                 </button>
                 &nbsp;
                 <progress
@@ -63,7 +63,7 @@
                     @click="createDir()"
                     class="btn btn-info btn-svg-no_pad"
                 >
-                    <span v-html="$options.filters.icon('folder-open')"></span>
+                    <i class="glyphicon glyphicon-folder-open"></i>
                 </button>
                 <div id="SPIFFS_path" class="info">
                     <table>
@@ -100,11 +100,9 @@
                         </td>
                         <td>{{ !file.isdir ? file.size : '' }}</td>
                         <td>
-                            <button
-                                class="btn btn-danger btn-sm"
-                                v-html="$options.filters.icon('trash')"
-                                @click="remove(file)"
-                            ></button>
+                            <button class="btn btn-danger btn-sm" @click="remove(file)">
+                                <i class="glyphicon glyphicon-trash"></i>
+                            </button>
                         </td>
                     </tr>
                 </tbody>

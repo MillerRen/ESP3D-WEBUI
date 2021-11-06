@@ -10,7 +10,7 @@
         class="btn btn-primary"
         @click="refreshConfig();"
       >
-        <span v-html="$options.filters.icon('refresh')"></span>
+        <i class="glyphicon glyphicon-refresh"></i>
       </button>
       <br />
       <span id="config_status"></span>
@@ -92,8 +92,10 @@
                                           <button
                                             class="btn btn-default btn-svg"
                                             @click="item.value = item.defaultvalue"
-                                            v-html="$options.filters.icon('repeat')"
-                                          ></button>
+                                            
+                                          >
+                                          <i class="glyphicon glyphicon-repeat"></i>
+                                          </button>
                                         </span>
                                         <input class="hidden" />
                                       </div>
