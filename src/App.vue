@@ -117,16 +117,16 @@ export default {
           this.initialized = true
           this.$store.startSocket()
 
-          if (this.fwData.target_firmware == '???') {
-            this.setup()
-          }
+          // if (this.fwData.target_firmware == '???') {
+          //   this.setup()
+          // }
         })
     },
-    setup() {
-      this.$modal({
-        closeable: false
-      }, 'SetupModal')
-    },
+    // setup() {
+    //   this.$modal({
+    //     closeable: false
+    //   }, 'SetupModal')
+    // },
     boot() {
       var that = this
       this.connectModal = this.$modal({
