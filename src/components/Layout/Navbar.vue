@@ -6,7 +6,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" @click.prevent="creditsdlg()" href="">
+            <a class="navbar-brand" @click.prevent="creditsdlg()" href>
                 <span translate>ESP3D for</span>
                 <span>{{ fwName }}</span>
                 <span id="showSDused" v-if="fwData.direct_sd">SD</span>
@@ -14,7 +14,7 @@
         </div>
         <div class="collapse navbar-collapse">
             <ul class="nav navbar-nav pull-right">
-                <li class="dropdown">
+                <li class="dropdown" v-if="fwData.ESP3D_authentication">
                     <a href="#" class="nav-link">
                         <i class="dropbtn">
                             <i class="glyphicon glyphicon-user"></i>
@@ -62,6 +62,11 @@
                             </a>
                         </li>
                     </ul>
+                </li>
+                <li>
+                    <a href="#" @click="showpreferencesdlg()">
+                        <i class="glyphicon glyphicon-cog"></i>
+                    </a>
                 </li>
             </ul>
         </div>

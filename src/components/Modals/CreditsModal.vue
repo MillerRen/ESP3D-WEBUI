@@ -1,14 +1,6 @@
 <template>
     <div class="modal-credits">
-        <!-- <a href="#" @click="showpreferencesdlg()">
-            <span class="pull-right" translate>Preferences</span>
-            <span class="pull-left">
-                <i class="glyphicon glyphicon-star"></i>
-            </span>
-            <span class="clearfix"></span>
-        </a>-->
-        <!-- <hr>
-        <h3>Credits</h3>-->
+        
         <ul>
             <li>
                 This UI for firmware of 
