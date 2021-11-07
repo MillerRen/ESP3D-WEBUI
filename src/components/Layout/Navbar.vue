@@ -101,11 +101,6 @@ export default {
                 }
             }, 'PreferencesModal')
         },
-        // setupdlg () {
-        //     this.$modal({
-        //         title: 'Setup'
-        //     }, 'SetupModal')
-        // },
         passworddlg() {
             this.$modal({
                 title: 'Change Password'

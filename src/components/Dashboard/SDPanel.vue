@@ -181,7 +181,7 @@
                                 
                                 @click="deleteFile(file)"
                             >
-                            <i class="glyphicon glyphicon-$1"></i>
+                            <i class="glyphicon glyphicon-trash"></i>
                             </button>
                         </div>
                     </div>
