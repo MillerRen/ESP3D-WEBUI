@@ -1,6 +1,5 @@
 <template>
     <div class="container-fluid">
-        <div class="panel-flex-col">
             <div class="grid-container">
                 <ControlsPanel
                     v-if="preferences.enable_control_panel == 'true'"
@@ -24,7 +23,6 @@
                 <SDPanel v-if="preferences.enable_files_panel == 'true'" :fwData="fwData" />
                 <ConsolePanel v-if="preferences.enable_commands_panel == 'true'" :fwData="fwData" />
             </div>
-        </div>
     </div>
 </template>
 
