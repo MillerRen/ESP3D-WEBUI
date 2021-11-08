@@ -138,8 +138,9 @@
             id="file-body"
             class="panel-body panel-height panel-max-height panel-scroll panel-flex-main"
         >
-            <div v-if="loading" id="files_list_loader" class="loader" style="margin:auto"></div>
-            <ul class="list-group" id="files_fileList">
+            <!-- <div v-if="loading" id="files_list_loader" class="loader" style="margin:auto"></div> -->
+            <div class="file-list" style="height:350px;overflow-y:scroll">
+<ul class="list-group" id="files_fileList">
                 <li
                     v-if="currentPath != '/'"
                     class="list-group-item list-group-hover"
@@ -185,6 +186,8 @@
                     </div>
                 </li>
             </ul>
+            </div>
+            
         </div>
         <div class="panel-footer panel-footer-height">
             <div class="row" v-if="sdfs.status && sdfs.status.toLowerCase() == 'ok'">

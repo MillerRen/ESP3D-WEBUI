@@ -12,54 +12,44 @@
             >Clear</button>
         </div>
         <div id="command-body" class="panel-body panel-flex-main">
-            <pre
-                ref="monitor"
-                style="height: 350px;"
-                :style="{ scrollTop: scrollTop }"
-            >{{messages}}</pre>
+            <pre ref="monitor" style="height: 350px;" :style="{ scrollTop: scrollTop }">{{ messages }}</pre>
         </div>
         <div class="panel-footer">
             <div class="panel-flex-row">
-                <div class="input-group">
-                    <div class="input-group">
-                        <form @submit.prevent="sendCustomCommand">
-                            <div class="input-group">
-                                <input
-                                    autocomplete="off"
-                                    class="form-control w14"
-                                    type="text"
-                                    @keyup="onKeyup"
-                                    v-model="cmd"
-                                    translateph
-                                    placeholder="Send Command..."
-                                    required
-                                />
-                                <span class="input-group-btn">
-                                    <button type="submit" class="btn btn-success" translate>Send</button>
-                                </span>
-                            </div>
-                        </form>
-                    </div>
-                </div>&nbsp;&nbsp;
-                <div class="form-group">
-                    <div class="checkbox">
-                        <label>
-                            <input type="checkbox" v-model="preferences.enable_autoscroll" />
-                            <span translate>Autoscroll</span>
-                        </label>
-                    </div>
-                </div>&nbsp;&nbsp;
-                <div class="form-group" id="cmd_verbose">
-                    <div class="checkbox">
-                        <label>
+                <form @submit.prevent="sendCustomCommand" class="form-inline">
+                    <div class="form-group">
+                        <div class="input-group input-group-sm">
                             <input
-                                type="checkbox"
-                                v-model="preferences.enable_verbose_mode"
+                                autocomplete="off"
+                                class="form-control w14"
+                                type="text"
+                                @keyup="onKeyup"
+                                v-model="cmd"
+                                translateph
+                                placeholder="Send Command..."
+                                required
                             />
-                            <span translate>Verbose mode</span>
-                        </label>
+                            <span class="input-group-btn">
+                                <button type="submit" class="btn btn-success" translate>Send</button>
+                            </span>
+                        </div>
                     </div>
-                </div>
+                    <div class="form-group">
+                        &nbsp;&nbsp;
+                        <div class="checkbox">
+                            <label>
+                                <input type="checkbox" v-model="preferences.enable_autoscroll" />
+                                <span translate>Autoscroll</span>
+                            </label>
+                        </div>&nbsp;&nbsp;
+                        <div class="checkbox">
+                            <label>
+                                <input type="checkbox" v-model="preferences.enable_verbose_mode" />
+                                <span translate>Verbose mode</span>
+                            </label>
+                        </div>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
@@ -73,7 +63,7 @@ export default {
         }
     },
     computed: {
-        preferences () {
+        preferences() {
             return this.$store.preferences
         },
         messages() {
