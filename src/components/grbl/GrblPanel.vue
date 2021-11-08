@@ -19,7 +19,7 @@
                                             class="btn btn-default btn-xs"
                                             @click="disableAlarm"
                                             style="padding: 5px 5px 0 5px;"
-                                            v-if="report.type=='alarm'"
+                                            v-if="report.type == 'alarm'"
                                         >
                                             <svg
                                                 width="2em"
@@ -52,7 +52,7 @@
                                         </button>
                                     </td>
                                     <td style="text-align: left; width:100%;height:30px;">
-                                        <div id="grbl_status" class="status_text" >{{reportType}}</div>
+                                        <div id="grbl_status" class="status_text">{{ reportType }}</div>
                                     </td>
                                 </tr>
                                 <tr>
@@ -60,8 +60,8 @@
                                         colspan="2"
                                         style="text-align: left; height:20px;"
                                         id="grbl_status_text"
-                                        v-if="report.type=='alarm'"
-                                    >{{report.data.message}}</td>
+                                        v-if="report.type == 'alarm'"
+                                    >{{ report.data.message }}</td>
                                 </tr>
                             </table>
                         </td>
@@ -71,8 +71,9 @@
                                     <td style="width:100%;height:2em;"></td>
                                     <td>
                                         <button
-                                            id="sd_pause_btn" v-if="report.type=='status'&&report.data.status.state=='run'"
-                                            class="btn btn-default "
+                                            id="sd_pause_btn"
+                                            v-if="report.type == 'status' && report.data.status.state == 'run'"
+                                            class="btn btn-default"
                                             @click="$store.sendRealtimeCommand('!');"
                                             style="padding: 5px 4px 0 5px;"
                                         >
@@ -81,9 +82,10 @@
                                     </td>
                                     <td>&nbsp;</td>
                                     <td>
-                                        <button v-if="report.type=='status'&&report.data.status.state=='run'"
+                                        <button
+                                            v-if="report.type == 'status' && report.data.status.state == 'run'"
                                             id="sd_resume_btn"
-                                            class="btn btn-default "
+                                            class="btn btn-default"
                                             @click="$store.sendRealtimeCommand('~');"
                                             style="padding: 5px 4px 0 5px;"
                                         >
@@ -92,9 +94,10 @@
                                     </td>
                                     <td>&nbsp;</td>
                                     <td>
-                                        <button v-if="report.type=='status'&&report.data.status.state=='run'"
+                                        <button
+                                            v-if="report.type == 'status' && report.data.status.state == 'run'"
                                             id="sd_reset_btn"
-                                            class="btn btn-danger "
+                                            class="btn btn-danger"
                                             @click="resetGrbl();"
                                             style="padding: 5px 0px 0px 0px;"
                                         >
@@ -115,32 +118,39 @@
                 </table>
                 <br />
                 <div class="tab" id="grbluitablinks">
-                    <button
-                        class="tablinks"
-                        @click="opentab(event, 'grblcontroltab', 'grbluitabscontent', 'grbluitablinks')"
-                        id="grblcontroltablink"
-                    >
-                        <span translate>Override</span>
-                    </button>
-                    <button
-                        class="tablinks hidden"
-                        @click="opentab(event, 'grblprobetab', 'grbluitabscontent', 'grbluitablinks')"
-                        id="grblprobetablink"
-                    >
-                        <span translate>Probe</span>
-                    </button>
-                    <button
-                        class="tablinks hidden"
-                        @click="opentab(event, 'grblsurfacetab', 'grbluitabscontent', 'grbluitablinks')"
-                        id="grblsurfacetablink"
-                    >
-                        <span translate>Surfacing Wizard</span>
-                    </button>
+                    <ul class="nav nav-tabs">
+                        <li :class="{active:tab=='override'}">
+                            <a href=""
+                                class="tablinks"
+                                @click.prevent="opentab('override')"
+                            >
+                                <span translate>Override</span>
+                            </a>
+                        </li>
+                        <li :class="{active:tab=='probe'}">
+                            <a href=""
+                                class="tablinks"
+                                @click.prevent="opentab('probe')"
+                                v-if="preferences.enable_grbl_probe_panel"
+                            >
+                                <span translate>Probe</span>
+                            </a>
+                        </li>
+                        <li :class="{active:tab=='sufacing'}">
+                            <a href=""
+                                class="tablinks"
+                                @click.prevent="opentab('surfacing')"
+                                v-if="preferences.enable_grbl_surface_panel"
+                            >
+                                <span translate>Surfacing Wizard</span>
+                            </a>
+                        </li>
+                    </ul>
                 </div>
                 <div class="panel panel-default">
                     <div class="panel-body panel-flex-main">
                         <div id="grbluitabscontent">
-                            <div id="grblcontroltab" class="tabcontent">
+                            <div v-if="tab=='override'" class="tabcontent">
                                 <table width="100%">
                                     <tr>
                                         <td style="height:10px;"></td>
@@ -149,13 +159,15 @@
                                         <td class="td_center">
                                             <button
                                                 class="btn btn-default"
-                                                @click="$store.sendRealtimeCommand(String.fromCharCode(0x92,0x0));"
+                                                @click="$store.sendRealtimeCommand(String.fromCharCode(0x92, 0x0));"
                                                 style="padding: 5px 4px 0 5px;"
                                             >
                                                 <table>
                                                     <tr>
                                                         <td>
-                                                           <i class="glyphicon glyphicon-fast-backward"></i>
+                                                            <i
+                                                                class="glyphicon glyphicon-fast-backward"
+                                                            ></i>
                                                         </td>
                                                         <td>
                                                             <span class="button_txt">F10%</span>
@@ -167,13 +179,15 @@
                                         <td class="td_center">
                                             <button
                                                 class="btn btn-default"
-                                                @click="$store.sendRealtimeCommand(String.fromCharCode(0x94,0x0));"
+                                                @click="$store.sendRealtimeCommand(String.fromCharCode(0x94, 0x0));"
                                                 style="padding: 5px 4px 0 5px;"
                                             >
                                                 <table>
                                                     <tr>
                                                         <td>
-                                                            <i class="glyphicon glyphicon-step-backward"></i>
+                                                            <i
+                                                                class="glyphicon glyphicon-step-backward"
+                                                            ></i>
                                                         </td>
                                                         <td>
                                                             <span class="button_txt">&nbsp;F1%</span>
@@ -185,7 +199,7 @@
                                         <td class="td_center">
                                             <button
                                                 class="btn btn-default"
-                                                @click="$store.sendRealtimeCommand(String.fromCharCode(0x90,0x0));"
+                                                @click="$store.sendRealtimeCommand(String.fromCharCode(0x90, 0x0));"
                                                 style="padding: 5px 4px 0 5px;"
                                             >
                                                 <i class="glyphicon glyphicon-repeat"></i>
@@ -194,13 +208,15 @@
                                         <td class="td_center">
                                             <button
                                                 class="btn btn-default"
-                                                @click="$store.sendRealtimeCommand(String.fromCharCode(0x93,0x0));"
+                                                @click="$store.sendRealtimeCommand(String.fromCharCode(0x93, 0x0));"
                                                 style="padding: 5px 4px 0 5px;"
                                             >
                                                 <table>
                                                     <tr>
                                                         <td>
-                                                            <i class="glyphicon glyphicon-step-forward"></i>
+                                                            <i
+                                                                class="glyphicon glyphicon-step-forward"
+                                                            ></i>
                                                         </td>
                                                         <td>
                                                             <span class="button_txt">&nbsp;F1%</span>
@@ -212,13 +228,15 @@
                                         <td class="td_center">
                                             <button
                                                 class="btn btn-default"
-                                                @click="$store.sendRealtimeCommand(String.fromCharCode(0x91,0x0));"
+                                                @click="$store.sendRealtimeCommand(String.fromCharCode(0x91, 0x0));"
                                                 style="padding: 5px 4px 0 5px;"
                                             >
                                                 <table>
                                                     <tr>
                                                         <td>
-                                                            <i class="glyphicon glyphicon-fast-forward"></i>
+                                                            <i
+                                                                class="glyphicon glyphicon-fast-forward"
+                                                            ></i>
                                                         </td>
                                                         <td>
                                                             <span class="button_txt">F10%</span>
@@ -235,13 +253,15 @@
                                         <td class="td_center">
                                             <button
                                                 class="btn btn-default"
-                                                @click="$store.sendRealtimeCommand(String.fromCharCode(0x9B,0x0));"
+                                                @click="$store.sendRealtimeCommand(String.fromCharCode(0x9B, 0x0));"
                                                 style="padding: 5px 4px 0 5px;"
                                             >
                                                 <table>
                                                     <tr>
                                                         <td>
-                                                            <i class="glyphicon glyphicon-fast-backward"></i>
+                                                            <i
+                                                                class="glyphicon glyphicon-fast-backward"
+                                                            ></i>
                                                         </td>
                                                         <td>
                                                             <span class="button_txt">S10%</span>
@@ -253,13 +273,15 @@
                                         <td class="td_center">
                                             <button
                                                 class="btn btn-default"
-                                                @click="$store.sendRealtimeCommand(String.fromCharCode(0x9D,0x0));"
+                                                @click="$store.sendRealtimeCommand(String.fromCharCode(0x9D, 0x0));"
                                                 style="padding: 5px 4px 0 5px;"
                                             >
                                                 <table>
                                                     <tr>
                                                         <td>
-                                                            <i class="glyphicon glyphicon-step-backward"></i>
+                                                            <i
+                                                                class="glyphicon glyphicon-step-backward"
+                                                            ></i>
                                                         </td>
                                                         <td>
                                                             <span class="button_txt">&nbsp;S1%</span>
@@ -271,7 +293,7 @@
                                         <td class="td_center">
                                             <button
                                                 class="btn btn-default"
-                                                @click="$store.sendRealtimeCommand(String.fromCharCode(0x99,0x0));"
+                                                @click="$store.sendRealtimeCommand(String.fromCharCode(0x99, 0x0));"
                                                 style="padding: 5px 4px 0 5px;"
                                             >
                                                 <i class="glyphicon glyphicon-repeat"></i>
@@ -280,13 +302,15 @@
                                         <td class="td_center">
                                             <button
                                                 class="btn btn-default"
-                                                @click="$store.sendRealtimeCommand(String.fromCharCode(0x9C,0x0));"
+                                                @click="$store.sendRealtimeCommand(String.fromCharCode(0x9C, 0x0));"
                                                 style="padding: 5px 4px 0 5px;"
                                             >
                                                 <table>
                                                     <tr>
                                                         <td>
-                                                            <i class="glyphicon glyphicon-step-forward"></i>
+                                                            <i
+                                                                class="glyphicon glyphicon-step-forward"
+                                                            ></i>
                                                         </td>
                                                         <td>
                                                             <span class="button_txt">&nbsp;S1%</span>
@@ -298,13 +322,15 @@
                                         <td class="td_center">
                                             <button
                                                 class="btn btn-default"
-                                                @click="$store.sendRealtimeCommand(String.fromCharCode(0x9A,0x0));"
+                                                @click="$store.sendRealtimeCommand(String.fromCharCode(0x9A, 0x0));"
                                                 style="padding: 5px 4px 0 5px;"
                                             >
                                                 <table>
                                                     <tr>
                                                         <td>
-                                                            <i class="glyphicon glyphicon-fast-forward"></i>
+                                                            <i
+                                                                class="glyphicon glyphicon-fast-forward"
+                                                            ></i>
                                                         </td>
                                                         <td>
                                                             <span class="button_txt">S10%</span>
@@ -323,7 +349,7 @@
                                         <td class="td_center" width="33%">
                                             <button
                                                 class="btn btn-default"
-                                                @click="$store.sendRealtimeCommand(String.fromCharCode(0x9E,0x0));"
+                                                @click="$store.sendRealtimeCommand(String.fromCharCode(0x9E, 0x0));"
                                                 style="padding: 5px 4px 0 5px;"
                                             >
                                                 <table>
@@ -345,7 +371,7 @@
                                         <td class="td_center" width="33%">
                                             <button
                                                 class="btn btn-default"
-                                                @click="$store.sendRealtimeCommand(String.fromCharCode(0xA0,0x0));"
+                                                @click="$store.sendRealtimeCommand(String.fromCharCode(0xA0, 0x0));"
                                                 style="padding: 5px 4px 0 5px;"
                                             >
                                                 <table>
@@ -364,7 +390,7 @@
                                         <td class="td_center" width="33%">
                                             <button
                                                 class="btn btn-default"
-                                                @click="$store.sendRealtimeCommand(String.fromCharCode(0xA1,0x0));"
+                                                @click="$store.sendRealtimeCommand(String.fromCharCode(0xA1, 0x0));"
                                                 style="padding: 5px 4px 0 5px;"
                                             >
                                                 <table>
@@ -382,7 +408,7 @@
                                     </tr>
                                 </table>
                             </div>
-                            <div id="grblprobetab" class="tabcontent" style="margin: auto;">
+                            <div v-if="tab=='probe'" class="tabcontent" style="margin: auto;">
                                 <table>
                                     <tr>
                                         <td>
@@ -390,12 +416,6 @@
                                                 <span class="input-group-addon form_control">
                                                     <span translate>Max travel</span>:
                                                 </span>
-                                                <input class="hidden" />
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div class="input-group">
-                                                <span class="input-group-addon hidden"></span>
                                                 <input
                                                     class="form-control w6"
                                                     type="number"
@@ -403,12 +423,6 @@
                                                     v-model="preferences.probemaxtravel"
                                                     onchange="onprobemaxtravelChange()"
                                                 />
-                                                <span class="input-group-addon hidden"></span>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div class="input-group">
-                                                <input class="hidden" />
                                                 <span
                                                     class="input-group-addon form_control"
                                                     translate
@@ -425,24 +439,12 @@
                                                 <span class="input-group-addon form_control">
                                                     <span translate>Feed rate</span>:
                                                 </span>
-                                                <input class="hidden" />
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div class="input-group">
-                                                <span class="input-group-addon hidden"></span>
                                                 <input
                                                     class="form-control w6"
                                                     type="number"
                                                     min="1"
                                                     v-model="preferences.probefeedrate"
                                                 />
-                                                <span class="input-group-addon hidden"></span>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div class="input-group">
-                                                <input class="hidden" />
                                                 <span
                                                     class="input-group-addon form_control"
                                                     translate
@@ -459,12 +461,6 @@
                                                 <span class="input-group-addon form_control">
                                                     <span translate>Plate thickness</span>:
                                                 </span>
-                                                <input class="hidden" />
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div class="input-group">
-                                                <span class="input-group-addon hidden"></span>
                                                 <input
                                                     class="form-control w5"
                                                     type="number"
@@ -472,12 +468,6 @@
                                                     v-model="preferences.probetouchplatethickness"
                                                     onchange="onprobetouchplatethicknessChange()"
                                                 />
-                                                <span class="input-group-addon hidden"></span>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div class="input-group">
-                                                <input class="hidden" />
                                                 <span
                                                     class="input-group-addon form_control"
                                                     translate
@@ -520,11 +510,8 @@
                                     </tr>
                                 </table>
                             </div>
-                            <div id="grblsurfacetab" class="tabcontent" style="margin: auto;">
-                                <table
-                                    class="table table-bordered table-striped table-hover table-responsive"
-                                    style="width:auto;"
-                                >
+                            <div v-if="tab=='sufacing'" class="tabcontent" style="margin: auto;">
+                                <table class="table table-responsive" style="width:auto;">
                                     <tr>
                                         <td>
                                             <div class="input-group">
@@ -736,11 +723,7 @@
         </div>
         <div class="panel-footer">
             <div class="panel-flex-row">
-                <button
-                    id="global_reset_btn"
-                    class="btn btn-danger"
-                    @click="resetGrbl();"
-                >
+                <button id="global_reset_btn" class="btn btn-danger" @click="resetGrbl();">
                     <i class="glyphicon glyphicon-repeat"></i>
                 </button>
             </div>
@@ -753,32 +736,40 @@ export default {
     props: {
         preferences: {
             type: Object,
-            default () {
+            default() {
                 return {}
             }
         }
     },
+    data () {
+        return {
+            tab: 'override'
+        }
+    },
     computed: {
-        grblErrorMessage () {
-            return ['alarm','hold','error','door'].indexOf(this.$store.report.type)>-1 ? this.$store.report.data.message:''
+        grblErrorMessage() {
+            return ['alarm', 'hold', 'error', 'door'].indexOf(this.$store.report.type) > -1 ? this.$store.report.data.message : ''
         },
-        report () {
+        report() {
             return this.$store.report
         },
-        reportType () {
-            return this.$store.report.type=='status'?this.$store.report.data.status.state:this.$store.report.type
+        reportType() {
+            return this.$store.report.type == 'status' ? this.$store.report.data.status.state : this.$store.report.type
         }
     },
     methods: {
         disableAlarm() {
             this.$store.disableAlarm()
         },
-        resetGrbl () {
+        resetGrbl() {
             this.$store.resetGrbl()
         },
-        startProbeProcess () {
+        startProbeProcess() {
             var cmd = "G38.2 G91 Z-" + this.preferences.probemaxtravel + ' F' + this.preferences.probefeedrate
             return this.$store.sendCustomCommand(cmd)
+        },
+        opentab(tab) {
+            this.tab = tab
         }
     }
 }
