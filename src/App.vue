@@ -155,23 +155,6 @@ export default {
 </script>
 
 <style>
-html {
-  overflow-y: scroll;
-}
-
-:root {
-  overflow-y: auto;
-  overflow-x: hidden;
-}
-
-:root body {
-  position: absolute;
-}
-
-body {
-  width: 100vw;
-  overflow: hidden;
-}
 
 .loadertxt {
   position: absolute;

@@ -119,8 +119,8 @@
                 <br />
                 
                 <div class="panel panel-default">
-                    <div class="panel-heading" style="padding: 0;">
-                    <ul class="nav nav-tabs">
+                    <div class="panel-heading" style="padding-bottom: 0;">
+                    <ul class="nav nav-tabs" style="margin-bottom:-1px">
                         <li :class="{active:tab=='override'}">
                             <a href=""
                                 class="tablinks"
