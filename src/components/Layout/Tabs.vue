@@ -56,6 +56,8 @@ export default {
 /* Style the tab */
 div.tab {
   overflow: hidden;
+  padding: 10px;
+  padding-bottom: 0;
   border-left: 1px solid #ccc;
   border-right: 1px solid #ccc;
   border-top: 1px solid #ccc;
