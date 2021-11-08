@@ -19,7 +19,7 @@
                                         class="btn btn-info btn-xs"
                                         style="padding: -2px 2px 0x 0px;"
                                     >
-                                        <i class="glyphicon glyphicon-folder"></i>
+                                        <i class="glyphicon glyphicon-folder-open"></i>
                                     </button>
                                 </td>
                                 <td>&nbsp;&nbsp;</td>
@@ -166,22 +166,20 @@
                         </div>
                         <div class="col-md-2 col-sm2">{{ file.size != -1 ? file.size : '' }}</div>
                         <div class="col-md-3 col-sm-3">{{ file.datetime }}</div>
-                        <div class="col-md-2 col-sm2">
+                        <div class="col-md-2 col-sm2" style="text-align:right">
                             <button
                                 class="btn btn-xs btn-success"
-                                
                                 v-if="file.isprintable"
                                 @click="printFile(file)"
                             >
-                            <i class="glyphicon glyphicon-play"></i>
+                                <i class="glyphicon glyphicon-play"></i>
                             </button>
                             &nbsp;
                             <button
                                 class="btn btn-xs btn-danger"
-                                
                                 @click="deleteFile(file)"
                             >
-                            <i class="glyphicon glyphicon-trash"></i>
+                                <i class="glyphicon glyphicon-trash"></i>
                             </button>
                         </div>
                     </div>
@@ -393,14 +391,14 @@ export default {
                 path += tlist[nb] + "/";
                 nb++;
             }
-            
+
             this.getFiles(path)
         },
-        printFile (file) {
+        printFile(file) {
             return this.$store.printFile(file.name)
         },
-        abortPrinting () {},
-        checkPrintingProgress () {},
+        abortPrinting() { },
+        checkPrintingProgress() { },
         refreshSD() { },
         refreshSD1() { },
         refreshSD2() { },

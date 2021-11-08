@@ -50,3 +50,12 @@
 </div>
 <!-- /macro Modal -->
 </template>
+
+<style>
+.macro-container {
+  display: inline-grid;
+  grid-gap: 10px;
+  padding: 10px;
+  grid-template-columns: auto auto;
+}
+</style>

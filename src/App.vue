@@ -256,23 +256,6 @@ export default {
   }
 }
 
-
-
-.filetext {
-  display: block;
-  width: 12em;
-  min-width: 12em;
-  max-width: 12em;
-  height: 34px;
-  padding: 6px 6px;
-  font-size: 14px;
-  color: #555555;
-  background-color: #ffffff;
-  background-image: none;
-  text-align: left;
-  border: 0px solid #ffffff;
-}
-
 .w4 {
   width: 4em !important;
 }
@@ -312,17 +295,6 @@ w25 {
 }
 
 
-.position_text {
-  font-size: 16px;
-  font-weight: bold;
-}
-
-.macro-container {
-  display: inline-grid;
-  grid-gap: 10px;
-  padding: 10px;
-  grid-template-columns: auto auto;
-}
 
 .panel-flex-col {
   display: flex;

@@ -1,52 +1,14 @@
 <template>
   <div id="controlPanel" class="panel panel-default panel-flex-col panel-min-width">
     <div class="panel-heading">
-      <div class="row">
-        <div class="col-md-12">
-          <div class="pull-left">
-            <h3 class="panel-title">
-              <span translate>Controls</span>
-            </h3>
-          </div>
-          <div class="pull-right">
-            <div id="auto_check_control" class="panel-flex-row">
-                  <div class="checkbox">
-                    <label>
-                      <input
-                        type="checkbox"
-                        id="autocheck_position"
-                        onclick="on_autocheck_position()"
-                      />
-                      <span translate>auto-check position every:</span>
-                    </label>
-                  </div>
-                  <div class="input-group">
-                    <input
-                      class="form-control w4"
-                      type="number"
-                      min="1"
-                      max="99"
-                      id="posInterval_check"
-                      v-model="preferences.interval_positions"
-                      onchange="onPosIntervalChange()"
-                    />
-                    <span class="input-group-addon" translate>sec</span>
-                  </div>
-            </div>
-          </div>
-        </div>
-      </div>
+      <h3 class="panel-title">
+        <span translate>Controls</span>
+      </h3>
     </div>
     <div id="control-body" class="panel-body panel-flex-main">
-      <div class="row">
-        <div id="JogUI" class="col col-md-7 col-lg-7">
+        <div id="JogUI" class="jog">
           <Jog />
         </div>
-        <div class="col col-lg-4">
-          <div id="Macro_list" class="macro-container"></div>
-        </div>
-        <div class="col">&nbsp;</div>
-      </div>
       <div
         class="position-container"
         v-if="fwData.target_firmware == 'grbl' || fwData.target_firmware == 'grbl-embedded'"
@@ -102,48 +64,21 @@
     </div>
     <div class="panel-footer">
       <div class="panel-flex-row">
-        <table class="input-group">
-          <tr>
-            <td>
-              <span class="input-group-addon form_control">XY:</span>
-              <input class="hidden" />
-            </td>
-            <td>
-              <span class="input-group-addon hidden"></span>
-              <input
-                class="form-control w8"
-                type="number"
-                min="1"
-                v-model="preferences.xy_feedrate"
-              />
-              <span class="input-group-addon form_control" translate>mm/min</span>
-            </td>
-          </tr>
-        </table>&nbsp;
-        <table id="z_velocity_display" class="input-group">
-          <tr>
-            <td>
-              <span class="input-group-addon form_control" id="axis_label">Z:</span>
-              <input class="hidden" />
-            </td>
-            <td class="hidden" id="axis_selection"></td>
-            <td>
-              <span class="input-group-addon hidden"></span>
-              <input
-                class="form-control w5"
-                type="number"
-                min="1"
-                v-model="preferences.z_feedrate"
-                onchange="onZvelocityChange()"
-              />
-              <span class="input-group-addon form_control" translate>mm/min</span>
-            </td>
-          </tr>
-        </table>&nbsp;
+        &nbsp;
+        <div class="input-group">
+          <span class="input-group-addon form_control">XY:</span>
+          <input class="form-control w8" type="number" min="1" v-model="preferences.xy_feedrate" />
+          <span class="input-group-addon form_control" translate>mm/min</span>
+        </div>&nbsp;
+        <div class="input-group">
+          <span class="input-group-addon form_control" id="axis_label">Z:</span>
+          <input class="form-control w5" type="number" min="1" v-model="preferences.z_feedrate" />
+          <span class="input-group-addon form_control" translate>mm/min</span>
+        </div>&nbsp;
         <button
           id="motor_off_control"
           class="btn btn-primary"
-          onclick="control_motorsOff()"
+          @click="motorsOff()"
           translate
         >Motors off</button>
       </div>
@@ -172,11 +107,6 @@ export default {
       }
     }
   },
-  // data () {
-  //   return {
-  //     axis: 'xyzabc'
-  //   }
-  // },
   computed: {
     MPos() {
       return this.$store.MPos
@@ -187,6 +117,26 @@ export default {
     axis() {
       return 'xyzabc'.slice(0, this.$store.fwData.grblaxis)
     }
+  },
+  methods: {
+    motorOff() {
+      return this.$store.motorOff()
+    }
   }
 };
 </script>
+
+<style>
+.position-container {
+  margin-left: -10px;
+  display: inline-grid;
+  grid-gap: 10px;
+  padding: 10px;
+  grid-template-columns: auto auto auto auto;
+}
+
+.position_text {
+  font-size: 16px;
+  font-weight: bold;
+}
+</style>
