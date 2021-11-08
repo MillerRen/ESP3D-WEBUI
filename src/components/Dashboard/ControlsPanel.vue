@@ -22,6 +22,7 @@
               v-for="(m,index) in macros"
               :key="index"
               v-show="m.class"
+              @click="runMacro(m)"
             >{{ m.name }}</button>
           </div>
         </div>
@@ -148,6 +149,9 @@ export default {
       this.$modal({
         title: 'Macro Editor'
       }, 'MacroModal')
+    },
+    runMacro (m) {
+      return this.$store.runMacro(m)
     }
   }
 };

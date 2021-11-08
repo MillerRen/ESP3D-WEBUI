@@ -329,6 +329,17 @@ export default class Grbl {
         return this.uploadFile(MACROS_FILE_NAME, [file])
     }
 
+    runMacro(macro) {
+        if(macro.target=='ESP') {
+            return this.sendCustomCommand(`[ESP700]${macro.filename}`)
+        } else if(macro.target=='SD') {
+            return this.printFile(macro.filename)
+        } else if(macro.target=='URI'){
+            window.open(macro.filename)
+        }
+        
+    }
+
     getESPStatus() {
         return http.sendCommand('[ESP420]plain')
             .then(response => {

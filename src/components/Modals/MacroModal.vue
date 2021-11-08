@@ -1,5 +1,5 @@
 <template>
-    <div class="modal-body">
+    <form class="modal-body"  @submit="updateMacros">
         <table class="table table-responsive">
             <thead>
                 <tr>
@@ -21,7 +21,7 @@
                         >
                             <i class="glyphicon glyphicon-plus"></i>
                         </button>
-                        <button class="btn btn-xs btn-danger" v-if="m.class" @click="resetMacro(m)">
+                        <button class="btn btn-sm btn-danger" v-if="m.class" @click="resetMacro(m)">
                             <i class="glyphicon glyphicon-trash"></i>
                         </button>
                     </td>
@@ -31,13 +31,14 @@
                             v-model="m.name"
                             class="form-control w4 input-sm"
                             v-if="m.class"
+                            required
                         />
                     </td>
                     <td>
                         <i class="glyphicon" :class="'glyphicon-' + m.glyph" v-if="m.class"></i>
                     </td>
                     <td>
-                        <select name id class="form-control input-sm" v-if="m.class">
+                        <select name id class="form-control input-sm" v-if="m.class" required>
                             <option
                                 :value="color"
                                 v-for="color in ['default', 'primary', 'info', 'warning', 'danger']"
@@ -46,7 +47,7 @@
                         </select>
                     </td>
                     <td>
-                        <select v-model="m.target" class="form-control input-sm" v-if="m.class">
+                        <select v-model="m.target" class="form-control input-sm" v-if="m.class" required>
                             <option
                                 :value="target"
                                 v-for="target in ['ESP', 'SD', 'URI']"
@@ -62,9 +63,9 @@
         </table>
         <hr>
         <div class="clearfix">
-            <button class="btn btn-primary pull-right" @click="updateMacros">Save</button>
+            <button type="submit" class="btn btn-primary pull-right">Save</button>
         </div>
-    </div>
+    </form>
 </template>
 
 <script>
