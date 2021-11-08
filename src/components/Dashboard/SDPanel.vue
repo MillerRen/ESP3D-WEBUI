@@ -140,88 +140,89 @@
         >
             <!-- <div v-if="loading" id="files_list_loader" class="loader" style="margin:auto"></div> -->
             <div class="file-list" style="height:350px;overflow-y:scroll">
-<ul class="list-group" id="files_fileList">
-                <li
-                    v-if="currentPath != '/'"
-                    class="list-group-item list-group-hover"
-                    style="cursor:pointer"
-                    @click="levelup()"
-                >
-                    <i class="glyphicon glyphicon-level-up"></i>&nbsp;&nbsp;
-                    <span translate>Up...</span>
-                </li>
-                <li class="list-group-item list-group-hover" v-for="file in files" :key="file.name">
-                    <div class="row">
-                        <div class="col-md-5 col-sm-5 no_overflow">
-                            <table>
-                                <tr>
-                                    <td>
-                                        <a
-                                            href="###"
-                                            @click="selectDir(file.name)"
-                                            class="btn btn-xs btn-link"
-                                        >{{ file.name }}</a>
-                                    </td>
-                                </tr>
-                            </table>
+                <ul class="list-group" id="files_fileList">
+                    <li
+                        v-if="currentPath != '/'"
+                        class="list-group-item list-group-hover"
+                        style="cursor:pointer"
+                        @click="levelup()"
+                    >
+                        <i class="glyphicon glyphicon-level-up"></i>&nbsp;&nbsp;
+                        <span translate>Up...</span>
+                    </li>
+                    <li
+                        class="list-group-item list-group-hover"
+                        v-for="file in files"
+                        :key="file.name"
+                    >
+                        <div class="row">
+                            <div class="col-md-5 col-sm-5 no_overflow">
+                                <table>
+                                    <tr>
+                                        <td>
+                                            <a
+                                                href="###"
+                                                @click="selectDir(file.name)"
+                                                class="btn btn-xs btn-link"
+                                            >{{ file.name }}</a>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                            <div class="col-md-2 col-sm2">{{ file.size != -1 ? file.size : '' }}</div>
+                            <div class="col-md-3 col-sm-3">{{ file.datetime }}</div>
+                            <div class="col-md-2 col-sm2" style="text-align:right">
+                                <button
+                                    class="btn btn-xs btn-success"
+                                    v-if="file.isprintable"
+                                    @click="printFile(file)"
+                                >
+                                    <i class="glyphicon glyphicon-play"></i>
+                                </button>
+                                &nbsp;
+                                <button
+                                    class="btn btn-xs btn-danger"
+                                    @click="deleteFile(file)"
+                                >
+                                    <i class="glyphicon glyphicon-trash"></i>
+                                </button>
+                            </div>
                         </div>
-                        <div class="col-md-2 col-sm2">{{ file.size != -1 ? file.size : '' }}</div>
-                        <div class="col-md-3 col-sm-3">{{ file.datetime }}</div>
-                        <div class="col-md-2 col-sm2" style="text-align:right">
-                            <button
-                                class="btn btn-xs btn-success"
-                                v-if="file.isprintable"
-                                @click="printFile(file)"
-                            >
-                                <i class="glyphicon glyphicon-play"></i>
-                            </button>
-                            &nbsp;
-                            <button
-                                class="btn btn-xs btn-danger"
-                                @click="deleteFile(file)"
-                            >
-                                <i class="glyphicon glyphicon-trash"></i>
-                            </button>
-                        </div>
-                    </div>
-                </li>
-            </ul>
+                    </li>
+                </ul>
             </div>
-            
         </div>
         <div class="panel-footer panel-footer-height">
             <div class="row" v-if="sdfs.status && sdfs.status.toLowerCase() == 'ok'">
                 <div class="col-md-12">
                     <div class="form-inline">
                         <div class="form-group">
-                            <span>
-                                <span translate>Total:</span>&nbsp;
-                                <span id="files_sd_status_total">{{ sdfs.total }}</span>
-                            </span>
-                            <span>&nbsp;|&nbsp;</span>
-                            <span>
-                                <span translate>Used:</span>&nbsp;
-                                <span id="files_sd_status_used">{{ sdfs.used }}</span>
-                            </span>
-                            <span>&nbsp;</span>
-                            <span class="noshowonlowres">| &nbsp;</span>
-                            <span class="form-inline">
-                                <div class="form-group">
-                                    <span>
-                                        <span translate>Occupation:</span>
-                                        <meter
-                                            id="files_sd_status_occupation"
-                                            style="width:150px"
-                                            min="0"
-                                            max="100"
-                                            high="90"
-                                            :value="sdfs.occupation"
-                                        ></meter>
-                                    </span>
-                                    <span id="files_sd_status_percent">{{ sdfs.occupation }}</span>
-                                    <span>%</span>
-                                </div>
-                            </span>
+                            <div class="form-control-static">
+                                <span>
+                                    <span translate>Total:</span>&nbsp;
+                                    <span id="files_sd_status_total">{{ sdfs.total }}</span>
+                                </span>
+                                <span>&nbsp;|&nbsp;</span>
+                                <span>
+                                    <span translate>Used:</span>&nbsp;
+                                    <span id="files_sd_status_used">{{ sdfs.used }}</span>
+                                </span>
+                                <span>&nbsp;</span>
+                                <span class="noshowonlowres">| &nbsp;</span>
+                                <span>
+                                    <span translate>Occupation:</span>
+                                    <meter
+                                        id="files_sd_status_occupation"
+                                        style="width:150px"
+                                        min="0"
+                                        max="100"
+                                        high="90"
+                                        :value="sdfs.occupation"
+                                    ></meter>
+                                </span>
+                                <span id="files_sd_status_percent">{{ sdfs.occupation }}</span>
+                                <span>%</span>
+                            </div>
                         </div>
                     </div>
                 </div>
