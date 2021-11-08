@@ -1,61 +1,84 @@
 <template>
-<!-- macro Modal -->
-<div id="macrodlg.html" class="modal" onclick="clear_drop_menu(event)">
-    <!-- macro content -->
-    <div class="modal-content">
-        <div class="modal-header">
-            <span class="close" onclick="closeMacroDialog()"><b>&times;</b></span>
-            <h3>
-                <div class="modal-title" translate>Macro Editor</div>
-            </h3>
-        </div>
-        <div class="modal-body">
-            <div class="table-responsive">
-                <table class="table">
-                    <thead>
-                        <tr>
-                            <th></th>
-                            <th translate>Name</th>
-                            <th translate>Icon</th>
-                            <th translate>Color</th>
-                            <th translate>Target</th>
-                            <th translate>Filename/URI</th>
-                        </tr>
-                    </thead>
-                    <tbody id="dlg_macro_list">
-                    </tbody>
-                </table>
-            </div>
-        </div>
-        <div class="modal-footer">
-            <div class="pull-left" id="macrodlg_upload_msg">
-                <span translate>Saving</span>
-                &nbsp;
-                <progress name='prg' id='macrodlg_prg' max='100'></progress>
-                &nbsp;
-                <span id="macrodlg_upload_percent">0</span>%
-            </div>
-            <span class="pull-right">
-                <button class="btn btn-warning" onclick="closeMacroDialog()" translate>Cancel</button>
-            </span>
-            <span class="pull-right">
-                &nbsp;&nbsp;
-            </span>
-            <span class="pull-right">
-                <button class="btn btn-primary" onclick="SaveNewMacroList()" translate>Save</button>
-            </span>
+    <div class="modal-body">
+        <div class="table-responsive">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th></th>
+                        <th translate>Name</th>
+                        <th translate>Icon</th>
+                        <th translate>Color</th>
+                        <th translate>Target</th>
+                        <th translate>Filename/URI</th>
+                    </tr>
+                </thead>
+                <tbody id="dlg_macro_list">
+                    <tr v-for="m in macros" :key="m.index">
+                        <td>
+                            <button class="btn btn-xs btn-default" v-if="!m.class">
+                                <i class="glyphicon glyphicon-plus"></i>
+                            </button>
+                            <button class="btn btn-xs btn-danger" v-if="m.class">
+                                <i class="glyphicon glyphicon-trash"></i>
+                            </button>
+                        </td>
+                        <td>
+                            <input type="text" v-model="m.name" class="form-control w4">
+                        </td>
+                        <td>
+                            <i class="glyphicon glyphicon-star"></i>
+                        </td>
+                        <td>
+                            <select name id class="form-control">
+                                <option
+                                    :value="color"
+                                    v-for="color in ['default', 'primary', 'info', 'warning', 'danger']"
+                                    :key="color"
+                                >{{ color }}</option>
+                            </select>
+                        </td>
+                        <td>
+                            <select v-model="m.target" class="form-control">
+                                <option
+                                    :value="target"
+                                    v-for="target in ['ESP', 'SD', 'URI']"
+                                    :key="target"
+                                >{{ target }}</option>
+                            </select>
+                        </td>
+                        <td>
+                            <input type="text" class="form-control" v-model="m.filename">
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
     </div>
-    <!-- /macro content -->
-</div>
-<!-- /macro Modal -->
 </template>
+
+<script>
+export default {
+    computed: {
+        macros() {
+            return this.$store.macros
+        }
+    },
+    methods: {
+        getMacros() {
+            return this.$store.getMacros()
+        }
+    },
+    mounted() {
+        this.getMacros()
+    }
+}
+</script>
 
 <style>
 .macro-container {
-  display: inline-grid;
-  grid-gap: 10px;
-  padding: 10px;
-  grid-template-columns: auto auto;
+    display: inline-grid;
+    grid-gap: 10px;
+    padding: 10px;
+    grid-template-columns: auto auto;
 }
 </style>

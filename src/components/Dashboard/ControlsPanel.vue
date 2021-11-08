@@ -6,9 +6,22 @@
       </h3>
     </div>
     <div id="control-body" class="panel-body panel-flex-main">
-        <div id="JogUI" class="jog">
+      <div class="row">
+        <div id="JogUI" class="col col-md-8">
           <Jog />
         </div>
+        <div class="col col-md-4">
+          <div id="Macro_list" class="macro-container">
+            <button class="btn btn-primary" @click="openMacroModal">
+              <i class="glyphicon glyphicon-star"></i>
+              &nbsp;
+              <i class="glyphicon glyphicon-pencil"></i>
+            </button>
+            <button class="btn" v-for="m in macros" :key="m.name" v-show="m.name">{{m.name}}</button>
+          </div>
+        </div>
+        <div class="col">&nbsp;</div>
+      </div>
       <div
         class="position-container"
         v-if="fwData.target_firmware == 'grbl' || fwData.target_firmware == 'grbl-embedded'"
@@ -116,11 +129,19 @@ export default {
     },
     axis() {
       return 'xyzabc'.slice(0, this.$store.fwData.grblaxis)
+    },
+    macros () {
+      return this.$store.macros
     }
   },
   methods: {
     motorOff() {
       return this.$store.motorOff()
+    },
+    openMacroModal () {
+      this.$modal({
+        title: 'Macro Editor'
+      }, 'MacroModal')
     }
   }
 };

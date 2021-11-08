@@ -1,6 +1,6 @@
 import http from '../../lib/http'
 import WS from '../../lib/websocket'
-import { PREFERENCES_FILE_NAME, TOTAL_WAITING_TIMES } from '../../constants'
+import { MACROS_FILE_NAME, PREFERENCES_FILE_NAME, TOTAL_WAITING_TIMES } from '../../constants'
 import Config from './config'
 import Settings from './settings'
 import Firmware from './firmware'
@@ -24,6 +24,7 @@ export default class Grbl {
         this.fwData = null
         this.settings = null
         this.preferences = null
+        this.macros = null
         this.config = null
         this.user = null
         this.status = null
@@ -303,6 +304,29 @@ export default class Grbl {
 
     updateConfig(cmd) {
         return http.sendCommand(cmd)
+    }
+
+    getMacros() {
+        return http.sendGetHttp(MACROS_FILE_NAME)
+            .then((response) => {
+                var macros
+                if (typeof response == 'string' && response.indexOf("<HTML>") != -1) {
+                    macros = []
+                } else {
+                    macros = response
+                }
+                this.macros = macros
+                return macros
+            })
+    }
+
+    updateMacros(macros) {
+        var blob = new Blob([JSON.stringify([macros], null, " ")], {
+            type: 'application/json'
+        });
+        var file = new File([blob], MACROS_FILE_NAME);
+
+        return this.uploadFile(MACROS_FILE_NAME, [file])
     }
 
     getESPStatus() {
