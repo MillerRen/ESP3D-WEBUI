@@ -17,7 +17,12 @@
               &nbsp;
               <i class="glyphicon glyphicon-pencil"></i>
             </button>
-            <button class="btn" v-for="m in macros" :key="m.name" v-show="m.name">{{m.name}}</button>
+            <button
+              class="btn"
+              v-for="(m,index) in macros"
+              :key="index"
+              v-show="m.class"
+            >{{ m.name }}</button>
           </div>
         </div>
         <div class="col">&nbsp;</div>
@@ -93,8 +98,8 @@
           <span class="input-group-addon form_control" id="axis_label">Z:</span>
           <input class="form-control w5" type="number" min="1" v-model="preferences.z_feedrate" />
           <span class="input-group-addon form_control" translate>mm/min</span>
-        </div>&nbsp;
-        
+        </div>
+&nbsp;
       </div>
     </div>
   </div>
@@ -131,7 +136,7 @@ export default {
     axis() {
       return 'xyzabc'.slice(0, this.$store.fwData.grblaxis)
     },
-    macros () {
+    macros() {
       return this.$store.macros
     }
   },
@@ -139,7 +144,7 @@ export default {
     motorOff() {
       return this.$store.motorOff()
     },
-    openMacroModal () {
+    openMacroModal() {
       this.$modal({
         title: 'Macro Editor'
       }, 'MacroModal')
@@ -149,6 +154,12 @@ export default {
 </script>
 
 <style>
+.macro-container {
+  display: grid;
+    grid-gap: 10px;
+    padding: 10px;
+    grid-template-columns: 100%;
+}
 .position-container {
   margin-left: -10px;
   display: inline-grid;
