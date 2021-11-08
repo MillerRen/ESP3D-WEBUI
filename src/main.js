@@ -1,6 +1,6 @@
 import 'bootstrap/dist/css/bootstrap.css'
 import Vue from 'vue'
-import './filters'
+// import './filters'
 import './components'
 import './store'
 import VueModalBootstrap from './plugins/modal'

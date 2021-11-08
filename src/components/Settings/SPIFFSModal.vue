@@ -91,7 +91,14 @@
                 </thead>
                 <tbody id="SPIFFS_file_list">
                     <tr v-for="file in files" :key="file.name">
-                        <td v-html="$options.filters.icon(file.isdir ? 'folder-close' : 'file')"></td>
+                        <td>
+                            <button class="btn btn-link" disabled>
+                                <i
+                                    class="glyphicon"
+                                    :class="file.isdir ? 'glyphicon-folder-open' : 'glyphicon-file'"
+                                ></i>
+                            </button>
+                        </td>
                         <td>
                             <button
                                 class="btn btn-link"
@@ -100,25 +107,35 @@
                         </td>
                         <td>{{ !file.isdir ? file.size : '' }}</td>
                         <td>
-                            <button class="btn btn-danger btn-sm" @click="remove(file)">
+                            <button class="btn btn-danger btn-xs" @click="remove(file)">
                                 <i class="glyphicon glyphicon-trash"></i>
                             </button>
                         </td>
                     </tr>
+                    
                 </tbody>
+                <tfoot>
+                    <tr>
+                        <td colspan="4">
+                            <div v-if="stats.status == 'Ok'">
+                                Total: {{ stats.total }}&nbsp;&nbsp;|&nbsp;&nbsp;Used: {{ spiffs.used }}&nbsp;&nbsp;|&nbsp;&nbsp;Occupation:
+                                <meter
+                                    min="0"
+                                    max="100"
+                                    high="90"
+                                    :value="stats.occupation"
+                                ></meter>
+                                &nbsp;{{ stats.occupation }}%
+                            </div>
+                            <div
+                                class="panel-footer panel-footer1"
+                                v-if="stats.status != 'Ok'"
+                            >{{ stats.status }}</div>
+                        </td>
+                    </tr>
+                </tfoot>
             </table>
         </div>
-        <div class="panel-footer panel-footer1" v-if="stats.status == 'Ok'">
-            Total: {{ stats.total }}&nbsp;&nbsp;|&nbsp;&nbsp;Used: {{ spiffs.used }}&nbsp;&nbsp;|&nbsp;&nbsp;Occupation:
-            <meter
-                min="0"
-                max="100"
-                high="90"
-                :value="stats.occupation"
-            ></meter>
-            &nbsp;{{ stats.occupation }}%
-        </div>
-        <div class="panel-footer panel-footer1" v-if="stats.status != 'Ok'">{{ stats.status }}</div>
     </div>
 </template>
 

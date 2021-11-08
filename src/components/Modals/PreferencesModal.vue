@@ -57,7 +57,7 @@
             </span>
             <input
               type="text"
-              class="form-control w14"
+              class="form-control"
               v-model="preferences.enable_camera_webaddress"
               translateph
               placeholder="Camera address"
@@ -76,7 +76,6 @@
         </div>
       </div>
       <div v-if="preferences.enable_control_panel" class="panel-body">
-        <div>
           <table>
             <tr>
               <td>
@@ -87,27 +86,16 @@
               <td>
                 <div class="input-group has-control">
                   <input
-                    class="form-control w4"
+                    class="form-control "
                     type="number"
                     min="1"
                     max="99"
                     v-model="preferences.interval_positions"
                   />
-                  <span class="form-control-feedback ico_feedback"></span>
-                </div>
-              </td>
-              <td>
-                <div class="input-group">
-                  <input class="hidden" />
                   <span class="input-group-addon form_control" translate>sec</span>
                 </div>
               </td>
             </tr>
-          </table>
-        </div>
-        <br />
-        <div>
-          <table>
             <tr>
               <td>
                 <span>
@@ -117,138 +105,34 @@
               <td>
                 <div class="input-group has-control">
                   <input
-                    class="form-control w8"
+                    class="form-control"
                     type="number"
                     min="1"
                     v-model="preferences.xy_feedrate"
                   />
-                  <span class="form-control-feedback ico_feedback"></span>
-                </div>
-              </td>
-              <td>
-                <div class="input-group">
-                  <input class="hidden" />
                   <span class="input-group-addon form_control" translate>mm/min</span>
                 </div>
               </td>
             </tr>
-          </table>
-        </div>
-
-        <br />
-
-        <div>
-          <table>
-            <tr>
+            <tr v-for="axis in axes" :key="axis">
               <td>
                 <span>
-                  <span translate>Z feedrate</span>:&nbsp;
+                  <span translate>{{axis.toUpperCase()}} feedrate</span>:&nbsp;
                 </span>
               </td>
               <td>
                 <div class="input-group has-control">
                   <input
-                    class="form-control w6"
+                    class="form-control"
                     type="number"
                     min="1"
-                    v-model="preferences.z_feedrate"
+                    v-model="preferences[axis+'_feedrate']"
                   />
-                  <span class="form-control-feedback ico_feedback"></span>
-                </div>
-              </td>
-              <td>
-                <div class="input-group">
-                  <input class="hidden" />
                   <span class="input-group-addon form_control" translate>mm/min</span>
                 </div>
               </td>
             </tr>
           </table>
-        </div>
-        <div class="hidden topmarginspace">
-          <table>
-            <tr>
-              <td>
-                <span>
-                  <span translate>A feedrate</span>:&nbsp;
-                </span>
-              </td>
-              <td>
-                <div class="input-group has-control">
-                  <input
-                    class="form-control w6"
-                    type="number"
-                    min="1"
-                    v-model="preferences.a_feedrate"
-                  />
-                  <span class="form-control-feedback ico_feedback"></span>
-                </div>
-              </td>
-              <td>
-                <div class="input-group">
-                  <input class="hidden" />
-                  <span class="input-group-addon form_control" translate>mm/min</span>
-                </div>
-              </td>
-            </tr>
-          </table>
-        </div>
-        <div class="hidden topmarginspace">
-          <table>
-            <tr>
-              <td>
-                <span>
-                  <span translate>B feedrate</span>:&nbsp;
-                </span>
-              </td>
-              <td>
-                <div class="input-group has-control">
-                  <input
-                    class="form-control w6"
-                    type="number"
-                    min="1"
-                    v-model="preferences.b_feedrate"
-                  />
-                  <span class="form-control-feedback ico_feedback"></span>
-                </div>
-              </td>
-              <td>
-                <div class="input-group">
-                  <input class="hidden" />
-                  <span class="input-group-addon form_control" translate>mm/min</span>
-                </div>
-              </td>
-            </tr>
-          </table>
-        </div>
-        <div class="hidden topmarginspace">
-          <table>
-            <tr>
-              <td>
-                <span>
-                  <span translate>C feedrate</span>:&nbsp;
-                </span>
-              </td>
-              <td>
-                <div class="input-group has-control">
-                  <input
-                    class="form-control w6"
-                    type="number"
-                    min="1"
-                    v-model="preferences.c_feedrate"
-                  />
-                  <span class="form-control-feedback ico_feedback"></span>
-                </div>
-              </td>
-              <td>
-                <div class="input-group">
-                  <input class="hidden" />
-                  <span class="input-group-addon form_control" translate>mm/min</span>
-                </div>
-              </td>
-            </tr>
-          </table>
-        </div>
       </div>
     </div>
     <div class="panel panel-default">
@@ -272,18 +156,12 @@
               <td>
                 <div class="input-group has-control">
                   <input
-                    class="form-control w4"
+                    class="form-control "
                     type="number"
                     min="1"
                     max="99"
                     v-model="preferences.interval_temperatures"
                   />
-                  <span class="form-control-feedback ico_feedback"></span>
-                </div>
-              </td>
-              <td>
-                <div class="input-group">
-                  <input class="hidden" />
                   <span class="input-group-addon form_control" translate>sec</span>
                 </div>
               </td>
@@ -337,18 +215,12 @@
               <td>
                 <div class="input-group has-control">
                   <input
-                    class="form-control w6"
+                    class="form-control"
                     type="number"
                     min="1"
                     max="9999"
                     v-model="preferences.e_distance"
                   />
-                  <span class="form-control-feedback ico_feedback"></span>
-                </div>
-              </td>
-              <td>
-                <div class="input-group">
-                  <input class="hidden" />
                   <span class="input-group-addon form_control" translate>mm</span>
                 </div>
               </td>
@@ -367,18 +239,12 @@
               <td>
                 <div class="input-group has-control">
                   <input
-                    class="form-control w6"
+                    class="form-control"
                     type="number"
                     min="1"
                     max="9999"
                     v-model="preferences.e_feedrate"
                   />
-                  <span class="form-control-feedback ico_feedback"></span>
-                </div>
-              </td>
-              <td>
-                <div class="input-group">
-                  <input class="hidden" />
                   <span class="input-group-addon form_control" translate>mm/min</span>
                 </div>
               </td>
@@ -398,7 +264,7 @@
               </td>
               <td>
                 <select class="form-control" v-model="preferences.number_extruders">
-                  <option :value="v" v-for="v in number_extruders" :key="v">{{v}}</option>
+                  <option :value="v" v-for="v in number_extruders" :key="v">{{ v }}</option>
                 </select>
               </td>
             </tr>
@@ -439,18 +305,12 @@
               <td>
                 <div class="input-group has-control">
                   <input
-                    class="form-control w4"
+                    class="form-control "
                     type="number"
                     min="1"
                     max="99"
                     v-model="preferences.interval_status"
                   />
-                  <span class="form-control-feedback ico_feedback"></span>
-                </div>
-              </td>
-              <td>
-                <div class="input-group">
-                  <input class="hidden" />
                   <span class="input-group-addon form_control" translate>sec</span>
                 </div>
               </td>
@@ -468,95 +328,65 @@
             </div>
           </div>
           <div v-if="preferences.enable_grbl_probe_panel" class="panel-body">
-            <div>
-              <table>
-                <tr>
-                  <td>
-                    <span>
-                      <span translate>Max travel</span>:&nbsp;
-                    </span>
-                  </td>
-                  <td>
-                    <div class="input-group has-control">
-                      <input
-                        class="form-control w8"
-                        type="number"
-                        min="1"
-                        max="99999"
-                        v-model="preferences.probemaxtravel"
-                      />
-                      <span class="form-control-feedback ico_feedback"></span>
-                    </div>
-                  </td>
-                  <td>
-                    <div class="input-group">
-                      <input class="hidden" />
-                      <span class="input-group-addon form_control" translate>mm</span>
-                    </div>
-                  </td>
-                </tr>
-              </table>
-            </div>
-            <br />
-            <div>
-              <table>
-                <tr>
-                  <td>
-                    <span>
-                      <span translate>Feed rate</span>:&nbsp;
-                    </span>
-                  </td>
-                  <td>
-                    <div class="input-group has-control">
-                      <input
-                        class="form-control w8"
-                        type="number"
-                        min="1"
-                        max="99999"
-                        v-model="preferences.probefeedrate"
-                      />
-                      <span class="form-control-feedback ico_feedback"></span>
-                    </div>
-                  </td>
-                  <td>
-                    <div class="input-group">
-                      <input class="hidden" />
-                      <span class="input-group-addon form_control" translate>mm/min</span>
-                    </div>
-                  </td>
-                </tr>
-              </table>
-            </div>
-            <br />
-            <div>
-              <table>
-                <tr>
-                  <td>
-                    <span>
-                      <span translate>Touch plate thickness</span>:&nbsp;
-                    </span>
-                  </td>
-                  <td>
-                    <div class="input-group has-control">
-                      <input
-                        class="form-control w8"
-                        type="number"
-                        min="0"
-                        max="99999"
-                        v-model="preferences.probetouchplatethickness"
-                      />
-                      <span class="form-control-feedback ico_feedback"></span>
-                    </div>
-                  </td>
-                  <td>
-                    <div class="input-group">
-                      <input class="hidden" />
-                      <span class="input-group-addon form_control" translate>mm</span>
-                    </div>
-                  </td>
-                </tr>
-              </table>
-            </div>
+            <table>
+              <tr>
+                <td>
+                  <span>
+                    <span translate>Max travel</span>:&nbsp;
+                  </span>
+                </td>
+                <td>
+                  <div class="input-group has-control">
+                    <input
+                      class="form-control"
+                      type="number"
+                      min="1"
+                      max="99999"
+                      v-model="preferences.probemaxtravel"
+                    />
+                    <span class="input-group-addon form_control" translate>mm</span>
+                  </div>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <span>
+                    <span translate>Feed rate</span>:&nbsp;
+                  </span>
+                </td>
+                <td>
+                  <div class="input-group has-control">
+                    <input
+                      class="form-control"
+                      type="number"
+                      min="1"
+                      max="99999"
+                      v-model="preferences.probefeedrate"
+                    />
+                    <span class="input-group-addon form_control" translate>mm/min</span>
+                  </div>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <span>
+                    <span translate>Touch plate thickness</span>:&nbsp;
+                  </span>
+                </td>
+                <td>
+                  <div class="input-group has-control">
+                    <input
+                      class="form-control"
+                      type="number"
+                      min="0"
+                      max="99999"
+                      v-model="preferences.probetouchplatethickness"
+                    />
+                    <span class="input-group-addon form_control" translate>mm</span>
+                  </div>
+                </td>
+              </tr>
+            </table>
           </div>
         </div>
         <br />
@@ -570,215 +400,141 @@
             </div>
           </div>
           <div v-if="preferences.enable_grbl_surface_panel" class="panel-body">
-            <div>
-              <table>
-                <tr>
-                  <td>
-                    <span>
-                      <span translate>Surface Width (X)</span>:&nbsp;
-                    </span>
-                  </td>
-                  <td>
-                    <div class="input-group has-control">
-                      <input
-                        class="form-control w6"
-                        type="number"
-                        min="1"
-                        max="99999"
-                        v-model="preferences.surfacewidth"
-                      />
-                      <span class="form-control-feedback ico_feedback"></span>
-                    </div>
-                  </td>
-                  <td>
-                    <div class="input-group">
-                      <input class="hidden" />
-                      <span class="input-group-addon form_control" translate>mm</span>
-                    </div>
-                  </td>
-                </tr>
-              </table>
-            </div>
-            <br />
-            <div>
-              <table>
-                <tr>
-                  <td>
-                    <span>
-                      <span translate>Surface Length (Y)</span>:&nbsp;
-                    </span>
-                  </td>
-                  <td>
-                    <div class="input-group has-control">
-                      <input
-                        class="form-control w6"
-                        type="number"
-                        min="1"
-                        max="99999"
-                        v-model="preferences.surfacelength"
-                      />
-                      <span class="form-control-feedback ico_feedback"></span>
-                    </div>
-                  </td>
-                  <td>
-                    <div class="input-group">
-                      <input class="hidden" />
-                      <span class="input-group-addon form_control" translate>mm</span>
-                    </div>
-                  </td>
-                </tr>
-              </table>
-            </div>
-            <br />
-            <div>
-              <table>
-                <tr>
-                  <td>
-                    <span>
-                      <span translate>Skim Depth (-Z)</span>:&nbsp;
-                    </span>
-                  </td>
-                  <td>
-                    <div class="input-group has-control">
-                      <input
-                        class="form-control w5"
-                        type="number"
-                        min="0.1"
-                        max="9999"
-                        v-model="preferences.surfacezdepth"
-                      />
-                      <span class="form-control-feedback ico_feedback"></span>
-                    </div>
-                  </td>
-                  <td>
-                    <div class="input-group">
-                      <input class="hidden" />
-                      <span class="input-group-addon form_control" translate>mm</span>
-                    </div>
-                  </td>
-                </tr>
-              </table>
-            </div>
-            <br />
-            <div>
-              <table>
-                <tr>
-                  <td>
-                    <span>
-                      <span translate>Bit Diameter</span>:&nbsp;
-                    </span>
-                  </td>
-                  <td>
-                    <div class="input-group has-control">
-                      <input
-                        class="form-control w6"
-                        type="number"
-                        min="0.1"
-                        max="999"
-                        v-model="preferences.surfacebitdiam"
-                      />
-                      <span class="form-control-feedback ico_feedback"></span>
-                    </div>
-                  </td>
-                  <td>
-                    <div class="input-group">
-                      <input class="hidden" />
-                      <span class="input-group-addon form_control" translate>mm</span>
-                    </div>
-                  </td>
-                </tr>
-              </table>
-            </div>
-            <br />
-            <div>
-              <table>
-                <tr>
-                  <td>
-                    <span>
-                      <span translate>Surfacing Stepover</span>:&nbsp;
-                    </span>
-                  </td>
-                  <td>
-                    <div class="input-group has-control">
-                      <input
-                        class="form-control w5"
-                        type="number"
-                        min="1"
-                        max="100"
-                        v-model="preferences.surfacestepover"
-                      />
-                      <span class="form-control-feedback ico_feedback"></span>
-                    </div>
-                  </td>
-                  <td>
-                    <div class="input-group">
-                      <input class="hidden" />
-                      <span class="input-group-addon form_control" translate>mm</span>
-                    </div>
-                  </td>
-                </tr>
-              </table>
-            </div>
-            <br />
-            <div>
-              <table>
-                <tr>
-                  <td>
-                    <span>
-                      <span translate>Surfacing Feedrate</span>:&nbsp;
-                    </span>
-                  </td>
-                  <td>
-                    <div class="input-group has-control">
-                      <input
-                        class="form-control w6"
-                        type="number"
-                        min="1"
-                        max="99999"
-                        v-model="preferences.surfacefeedrate"
-                      />
-                      <span class="form-control-feedback ico_feedback"></span>
-                    </div>
-                  </td>
-                  <td>
-                    <div class="input-group">
-                      <input class="hidden" />
-                      <span class="input-group-addon form_control" translate>mm</span>
-                    </div>
-                  </td>
-                </tr>
-              </table>
-            </div>
-            <br />
-            <div>
-              <table>
-                <tr>
-                  <td>
-                    <span>
-                      <span translate>Surfacing Spindle RPM</span>:&nbsp;
-                    </span>
-                  </td>
-                  <td>
-                    <div class="input-group has-control">
-                      <input
-                        class="form-control w6"
-                        type="number"
-                        min="0"
-                        max="99999"
-                        v-model="preferences.surfacespindle"
-                      />
-                      <span class="form-control-feedback ico_feedback"></span>
-                    </div>
-                  </td>
-                  <td>
-                    <div class="input-group">
-                      <input class="hidden" />
-                      <span class="input-group-addon form_control" translate>mm</span>
-                    </div>
-                  </td>
-                </tr>
-              </table>
-            </div>
+            <table>
+              <tr>
+                <td>
+                  <span>
+                    <span translate>Surface Width (X)</span>:&nbsp;
+                  </span>
+                </td>
+                <td>
+                  <div class="input-group has-control">
+                    <input
+                      class="form-control"
+                      type="number"
+                      min="1"
+                      max="99999"
+                      v-model="preferences.surfacewidth"
+                    />
+                    <span class="input-group-addon form_control" translate>mm</span>
+                  </div>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <span>
+                    <span translate>Surface Length (Y)</span>:&nbsp;
+                  </span>
+                </td>
+                <td>
+                  <div class="input-group has-control">
+                    <input
+                      class="form-control"
+                      type="number"
+                      min="1"
+                      max="99999"
+                      v-model="preferences.surfacelength"
+                    />
+                    <span class="input-group-addon form_control" translate>mm</span>
+                  </div>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <span>
+                    <span translate>Skim Depth (-Z)</span>:&nbsp;
+                  </span>
+                </td>
+                <td>
+                  <div class="input-group has-control">
+                    <input
+                      class="form-control"
+                      type="number"
+                      min="0.1"
+                      max="9999"
+                      v-model="preferences.surfacezdepth"
+                    />
+                    <span class="input-group-addon form_control" translate>mm</span>
+                  </div>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <span>
+                    <span translate>Bit Diameter</span>:&nbsp;
+                  </span>
+                </td>
+                <td>
+                  <div class="input-group has-control">
+                    <input
+                      class="form-control"
+                      type="number"
+                      min="0.1"
+                      max="999"
+                      v-model="preferences.surfacebitdiam"
+                    />
+                    <span class="input-group-addon form_control" translate>mm</span>
+                  </div>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <span>
+                    <span translate>Surfacing Stepover</span>:&nbsp;
+                  </span>
+                </td>
+                <td>
+                  <div class="input-group has-control">
+                    <input
+                      class="form-control"
+                      type="number"
+                      min="1"
+                      max="100"
+                      v-model="preferences.surfacestepover"
+                    />
+                    <span class="input-group-addon form_control" translate>mm</span>
+                  </div>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <span>
+                    <span translate>Surfacing Feedrate</span>:&nbsp;
+                  </span>
+                </td>
+                <td>
+                  <div class="input-group has-control">
+                    <input
+                      class="form-control"
+                      type="number"
+                      min="1"
+                      max="99999"
+                      v-model="preferences.surfacefeedrate"
+                    />
+                    <span class="input-group-addon form_control" translate>mm</span>
+                  </div>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <span>
+                    <span translate>Surfacing Spindle RPM</span>:&nbsp;
+                  </span>
+                </td>
+                <td>
+                  <div class="input-group has-control">
+                    <input
+                      class="form-control"
+                      type="number"
+                      min="0"
+                      max="99999"
+                      v-model="preferences.surfacespindle"
+                    />
+                    <span class="input-group-addon form_control" translate>mm</span>
+                  </div>
+                </td>
+              </tr>
+            </table>
           </div>
         </div>
       </div>
@@ -858,12 +614,12 @@
     </div>
     <div class="clearfix">
       <div class="pull-left" v-if="uploading">
-                <span translate>Saving</span>
-                &nbsp;
-                <progress name="prg" v-if="uploading" :value="uploadingProgress" max="100"></progress>
-                &nbsp;
-                <!-- <span id="preferencesdlg_upload_percent">0</span>% -->
-            </div>
+        <span translate>Saving</span>
+        &nbsp;
+        <progress name="prg" v-if="uploading" :value="uploadingProgress" max="100"></progress>
+        &nbsp;
+        <!-- <span id="preferencesdlg_upload_percent">0</span>% -->
+      </div>
       <span class="pull-right">&nbsp;&nbsp;</span>
       <span class="pull-right">
         <button class="btn btn-warning" @click="$emit('cancel')" translate>Cancel</button>
@@ -886,21 +642,24 @@ export default {
       },
     },
   },
-  data () {
+  data() {
     return {
       uploading: false
     }
   },
   computed: {
-    number_extruders () {
+    number_extruders() {
       return this.preferences.is_mixed_extruder ? 9 : 2
     },
-    uploadingProgress () {
+    uploadingProgress() {
       return this.$store.uploadingProgress
+    },
+    axes() {
+      return 'xyzabc'.slice(2, this.$store.fwData.grblaxis)
     }
   },
   methods: {
-    save () {
+    save() {
       this.uploading = true
       this.$store.updatePreferences(this.preferences)
         .then(() => {
