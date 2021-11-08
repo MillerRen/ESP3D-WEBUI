@@ -117,7 +117,9 @@
                     </tr>
                 </table>
                 <br />
-                <div class="tab" id="grbluitablinks">
+                
+                <div class="panel panel-default">
+                    <div class="panel-heading" style="padding: 0;">
                     <ul class="nav nav-tabs">
                         <li :class="{active:tab=='override'}">
                             <a href=""
@@ -136,7 +138,7 @@
                                 <span translate>Probe</span>
                             </a>
                         </li>
-                        <li :class="{active:tab=='sufacing'}">
+                        <li :class="{active:tab=='surfacing'}">
                             <a href=""
                                 class="tablinks"
                                 @click.prevent="opentab('surfacing')"
@@ -147,7 +149,6 @@
                         </li>
                     </ul>
                 </div>
-                <div class="panel panel-default">
                     <div class="panel-body panel-flex-main">
                         <div id="grbluitabscontent">
                             <div v-if="tab=='override'" class="tabcontent">
@@ -510,7 +511,7 @@
                                     </tr>
                                 </table>
                             </div>
-                            <div v-if="tab=='sufacing'" class="tabcontent" style="margin: auto;">
+                            <div v-if="tab=='surfacing'" class="tabcontent" style="margin: auto;">
                                 <table class="table table-responsive" style="width:auto;">
                                     <tr>
                                         <td>
