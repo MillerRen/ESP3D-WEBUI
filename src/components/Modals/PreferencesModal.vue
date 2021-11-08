@@ -84,7 +84,7 @@
                 </span>
               </td>
               <td>
-                <div class="input-group has-control">
+                <div class="input-group input-group-sm has-control">
                   <input
                     class="form-control "
                     type="number"
@@ -103,7 +103,7 @@
                 </span>
               </td>
               <td>
-                <div class="input-group has-control">
+                <div class="input-group input-group-sm has-control">
                   <input
                     class="form-control"
                     type="number"
@@ -121,7 +121,7 @@
                 </span>
               </td>
               <td>
-                <div class="input-group has-control">
+                <div class="input-group input-group-sm has-control">
                   <input
                     class="form-control"
                     type="number"
@@ -154,7 +154,7 @@
                 </span>
               </td>
               <td>
-                <div class="input-group has-control">
+                <div class="input-group input-group-sm has-control">
                   <input
                     class="form-control "
                     type="number"
@@ -213,7 +213,7 @@
                 </span>
               </td>
               <td>
-                <div class="input-group has-control">
+                <div class="input-group input-group-sm has-control">
                   <input
                     class="form-control"
                     type="number"
@@ -237,7 +237,7 @@
                 </span>
               </td>
               <td>
-                <div class="input-group has-control">
+                <div class="input-group input-group-sm has-control">
                   <input
                     class="form-control"
                     type="number"
@@ -303,7 +303,7 @@
                 </span>
               </td>
               <td>
-                <div class="input-group has-control">
+                <div class="input-group input-group-sm has-control">
                   <input
                     class="form-control "
                     type="number"
@@ -336,7 +336,7 @@
                   </span>
                 </td>
                 <td>
-                  <div class="input-group has-control">
+                  <div class="input-group input-group-sm has-control">
                     <input
                       class="form-control"
                       type="number"
@@ -355,7 +355,7 @@
                   </span>
                 </td>
                 <td>
-                  <div class="input-group has-control">
+                  <div class="input-group input-group-sm has-control">
                     <input
                       class="form-control"
                       type="number"
@@ -374,7 +374,7 @@
                   </span>
                 </td>
                 <td>
-                  <div class="input-group has-control">
+                  <div class="input-group input-group-sm has-control">
                     <input
                       class="form-control"
                       type="number"
@@ -408,7 +408,7 @@
                   </span>
                 </td>
                 <td>
-                  <div class="input-group has-control">
+                  <div class="input-group input-group-sm has-control">
                     <input
                       class="form-control"
                       type="number"
@@ -427,7 +427,7 @@
                   </span>
                 </td>
                 <td>
-                  <div class="input-group has-control">
+                  <div class="input-group input-group-sm has-control">
                     <input
                       class="form-control"
                       type="number"
@@ -446,7 +446,7 @@
                   </span>
                 </td>
                 <td>
-                  <div class="input-group has-control">
+                  <div class="input-group input-group-sm has-control">
                     <input
                       class="form-control"
                       type="number"
@@ -465,7 +465,7 @@
                   </span>
                 </td>
                 <td>
-                  <div class="input-group has-control">
+                  <div class="input-group input-group-sm has-control">
                     <input
                       class="form-control"
                       type="number"
@@ -484,7 +484,7 @@
                   </span>
                 </td>
                 <td>
-                  <div class="input-group has-control">
+                  <div class="input-group input-group-sm has-control">
                     <input
                       class="form-control"
                       type="number"
@@ -503,7 +503,7 @@
                   </span>
                 </td>
                 <td>
-                  <div class="input-group has-control">
+                  <div class="input-group input-group-sm has-control">
                     <input
                       class="form-control"
                       type="number"
@@ -522,7 +522,7 @@
                   </span>
                 </td>
                 <td>
-                  <div class="input-group has-control">
+                  <div class="input-group input-group-sm has-control">
                     <input
                       class="form-control"
                       type="number"
@@ -578,7 +578,7 @@
                 </span>
               </td>
               <td>
-                <div class="input-group has-control">
+                <div class="input-group input-group-sm has-control">
                   <input class="form-control w25" type="text" v-model="preferences.f_filters" />
                   <span class="form-control-feedback ico_feedback"></span>
                 </div>
@@ -674,3 +674,10 @@ export default {
   }
 };
 </script>
+
+<style>
+.panel-heading .checkbox {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+</style>
