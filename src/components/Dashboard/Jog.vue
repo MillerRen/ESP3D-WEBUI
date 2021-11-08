@@ -1,7 +1,6 @@
 <template>
   <svg
-    width="320"
-    height="260"
+    viewBox="0 0 320 260"
     xmlns="http://www.w3.org/2000/svg"
     version="1.1"
     xmlns:xlink="http://www.w3.org/1999/xlink"
