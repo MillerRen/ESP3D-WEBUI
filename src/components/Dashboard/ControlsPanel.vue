@@ -34,6 +34,12 @@
           &Oslash;
           <span style="font-size:8px;" id="zero_xyz_btn_txt">{{ axis.toUpperCase() }}</span>
         </button>
+        <button
+          id="motor_off_control"
+          class="btn btn-primary btn-xs"
+          @click="motorsOff()"
+          translate
+        >Motors off</button>
       </div>
       <br />
       <div
@@ -88,12 +94,7 @@
           <input class="form-control w5" type="number" min="1" v-model="preferences.z_feedrate" />
           <span class="input-group-addon form_control" translate>mm/min</span>
         </div>&nbsp;
-        <button
-          id="motor_off_control"
-          class="btn btn-primary"
-          @click="motorsOff()"
-          translate
-        >Motors off</button>
+        
       </div>
     </div>
   </div>
