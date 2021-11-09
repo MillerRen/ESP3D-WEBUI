@@ -32,11 +32,7 @@
         class="position-container"
         v-if="fwData.target_firmware == 'grbl' || fwData.target_firmware == 'grbl-embedded'"
       >
-        <button
-          class="btn btn-xs btn-default"
-          id="zero_xyz_btn"
-          onclick="SendZerocommand(grblzerocmd)"
-        >
+        <button class="btn btn-xs btn-default" id="zero_xyz_btn" @click="sendZeroCommand(zeroAxes)">
           &Oslash;
           <span style="font-size:8px;" id="zero_xyz_btn_txt">{{ axis.toUpperCase() }}</span>
         </button>
@@ -56,7 +52,10 @@
           <table>
             <tr>
               <td>
-                <button class="btn btn-xs btn-default" onclick="SendZerocommand('X0')">&Oslash;</button>
+                <button
+                  class="btn btn-xs btn-default"
+                  @click="sendZeroCommand(axes.toUpperCase() + '0')"
+                >&Oslash;</button>
               </td>
               <td>
                 <span class="label label-default" style="padding: 5px 5px 3px 5px;">
@@ -99,8 +98,7 @@
           <span class="input-group-addon form_control" id="axis_label">Z:</span>
           <input class="form-control w5" type="number" min="1" v-model="preferences.z_feedrate" />
           <span class="input-group-addon form_control" translate>mm/min</span>
-        </div>
-&nbsp;
+        </div>&nbsp;
       </div>
     </div>
   </div>
@@ -137,6 +135,9 @@ export default {
     axis() {
       return 'xyzabc'.slice(0, this.$store.fwData.grblaxis)
     },
+    zeroAxes() {
+      return this.axis.split('').map(item => item.toUpperCase() + '0').join(' ')
+    },
     macros() {
       return this.$store.macros
     }
@@ -150,8 +151,11 @@ export default {
         title: 'Macro Editor'
       }, 'MacroModal')
     },
-    runMacro (m) {
+    runMacro(m) {
       return this.$store.runMacro(m)
+    },
+    sendZeroCommand(axis) {
+      return this.$store.sendZeroCommand(axis)
     }
   }
 };
@@ -160,9 +164,9 @@ export default {
 <style>
 .macro-container {
   display: grid;
-    grid-gap: 10px;
-    padding: 10px;
-    grid-template-columns: 50% 50%;
+  grid-gap: 10px;
+  padding: 10px;
+  grid-template-columns: 50% 50%;
 }
 .position-container {
   margin-left: -10px;

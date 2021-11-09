@@ -410,6 +410,10 @@ export default class Grbl {
         return http.sendCommandText('?')
     }
 
+    sendZeroCommand(axis) {
+        return http.sendCommandText(`G10 L20 P0 ${axis}`)
+    }
+
     autoCheckPosition() {
         var timer = setInterval(() => {
             if (!this.preferences.interval_positions) {
