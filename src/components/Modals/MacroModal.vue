@@ -12,7 +12,7 @@
                 </tr>
             </thead>
             <tbody id="dlg_macro_list">
-                <tr v-for="(m,index) in macros" :key="index">
+                <tr v-for="(m,index) in macros" :key="index" :class="'bg-'+m.class">
                     <td>
                         <button
                             type="button"
@@ -60,7 +60,7 @@
                         </select>
                     </td>
                     <td>
-                        <input type="text" class="form-control" v-model="m.filename" v-if="m.class" />
+                        <input type="text" class="form-control input-sm" v-model="m.filename" v-if="m.class" />
                     </td>
                 </tr>
             </tbody>
