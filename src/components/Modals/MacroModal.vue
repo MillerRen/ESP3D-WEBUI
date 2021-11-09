@@ -15,13 +15,17 @@
                 <tr v-for="(m,index) in macros" :key="index">
                     <td>
                         <button
+                            type="button"
                             class="btn btn-sm btn-default"
                             v-if="!m.class"
                             @click="resetMacro(m)"
                         >
                             <i class="glyphicon glyphicon-plus"></i>
                         </button>
-                        <button class="btn btn-sm btn-danger" v-if="m.class" @click="resetMacro(m)">
+                        <button 
+                            type="button"
+
+                        class="btn btn-sm btn-danger" v-if="m.class" @click="resetMacro(m)">
                             <i class="glyphicon glyphicon-trash"></i>
                         </button>
                     </td>

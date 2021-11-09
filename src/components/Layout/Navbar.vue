@@ -7,9 +7,8 @@
                 <span class="icon-bar"></span>
             </button>
             <a class="navbar-brand" @click.prevent="creditsdlg()" href>
-                <span translate>ESP3D for</span>
+                <span translate>ESP3D for </span>
                 <span>{{ fwName }}</span>
-                <span id="showSDused" v-if="fwData.direct_sd">SD</span>
             </a>
         </div>
         <div class="collapse navbar-collapse">
