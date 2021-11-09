@@ -162,7 +162,7 @@ export default {
   display: grid;
     grid-gap: 10px;
     padding: 10px;
-    grid-template-columns: 100%;
+    grid-template-columns: 50% 50%;
 }
 .position-container {
   margin-left: -10px;
