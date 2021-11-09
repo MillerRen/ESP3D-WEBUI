@@ -330,14 +330,14 @@ export default class Grbl {
     }
 
     runMacro(macro) {
-        if(macro.target=='ESP') {
+        if (macro.target == 'ESP') {
             return this.sendCustomCommand(`[ESP700]${macro.filename}`)
-        } else if(macro.target=='SD') {
+        } else if (macro.target == 'SD') {
             return this.printFile(macro.filename)
-        } else if(macro.target=='URI'){
+        } else if (macro.target == 'URI') {
             window.open(macro.filename)
         }
-        
+
     }
 
     getESPStatus() {
@@ -379,23 +379,33 @@ export default class Grbl {
 
     homeAll() {
         return http.sendCommandText('$H')
+            .then(this.getPosition)
+
     }
 
     homeX() {
         return http.sendCommandText('$HX')
+            .then(this.getPosition)
+
     }
 
     homeY() {
         return http.sendCommandText('$HY')
+            .then(this.getPosition)
+
     }
 
     homeZ() {
         return http.sendCommandText('$HZ')
+            .then(this.getPosition)
+
     }
 
     jog(cmd, feedrate) {
         let command = "$J=G91 G21 F" + feedrate + " " + cmd
         return http.sendCommandText(command)
+            .then(this.getPosition)
+
     }
 
     disableAlarm() {
@@ -412,6 +422,7 @@ export default class Grbl {
 
     sendZeroCommand(axis) {
         return http.sendCommandText(`G10 L20 P0 ${axis}`)
+            .then(this.getPosition)
     }
 
     autoCheckPosition() {
