@@ -89,12 +89,12 @@
     <div class="panel-footer">
       <div class="panel-flex-row">
         &nbsp;
-        <div class="input-group">
+        <div class="input-group input-group-sm">
           <span class="input-group-addon form_control">XY:</span>
           <input class="form-control w8" type="number" min="1" v-model="preferences.xy_feedrate" />
           <span class="input-group-addon form_control" translate>mm/min</span>
         </div>&nbsp;
-        <div class="input-group">
+        <div class="input-group input-group-sm">
           <span class="input-group-addon form_control" id="axis_label">Z:</span>
           <input class="form-control w5" type="number" min="1" v-model="preferences.z_feedrate" />
           <span class="input-group-addon form_control" translate>mm/min</span>

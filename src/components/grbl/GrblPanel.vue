@@ -724,7 +724,7 @@
         </div>
         <div class="panel-footer">
             <div class="panel-flex-row">
-                <button id="global_reset_btn" class="btn btn-danger" @click="resetGrbl();">
+                <button class="btn btn-danger btn-sm" @click="resetGrbl();">
                     <i class="glyphicon glyphicon-repeat"></i>
                 </button>
             </div>
