@@ -48,7 +48,6 @@
                     </td>
                 </tr>
             </table>
-            <br />
             <span id="settings_status"></span>
             <hr />
             <Settings ref="settings" />
