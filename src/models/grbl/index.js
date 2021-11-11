@@ -55,6 +55,7 @@ export default class Grbl {
             e: 0
         }
         this.grblStatus = {}
+        this.probeStatus = false
     }
 
     startSocket() {
@@ -145,7 +146,7 @@ export default class Grbl {
         if (this.preferences.enable_verbose_mode || (report.type != 'status')) {
             this.messages.push(msg)
         }
-
+console.log(report)
         this.report = report
     }
 

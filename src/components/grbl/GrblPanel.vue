@@ -483,7 +483,9 @@
                                         <td nowrap translate style="vertical-align: middle; ">
                                             <span translate>Touch status</span>:
                                         </td>
-                                        <td id="touch_status_icon"></td>
+                                        <td id="touch_status_icon">
+                                            <i class="glyphicon" :class="probeStatus?'glyphicon-ok-circle':'glyphicon-record'"></i>
+                                        </td>
                                         <td width="100%">&nbsp;</td>
                                         <td>
                                             <span class="hidden" id="probingtext">
@@ -756,6 +758,9 @@ export default {
         },
         reportType() {
             return this.$store.report.type == 'status' ? this.$store.report.data.status.state : this.$store.report.type
+        },
+        probeStatus () {
+            return this.$store.probeStatus
         }
     },
     methods: {
