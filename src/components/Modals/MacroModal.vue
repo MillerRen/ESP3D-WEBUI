@@ -1,5 +1,5 @@
 <template>
-    <form class="modal-body"  @submit="updateMacros">
+    <form class="modal-body" @submit="updateMacros">
         <table class="table table-responsive">
             <thead>
                 <tr>
@@ -12,7 +12,7 @@
                 </tr>
             </thead>
             <tbody id="dlg_macro_list">
-                <tr v-for="(m,index) in macros" :key="index" :class="'bg-'+m.class">
+                <tr v-for="(m,index) in macros" :key="index">
                     <td>
                         <button
                             type="button"
@@ -22,10 +22,12 @@
                         >
                             <i class="glyphicon glyphicon-plus"></i>
                         </button>
-                        <button 
+                        <button
                             type="button"
-
-                        class="btn btn-sm btn-danger" v-if="m.class" @click="resetMacro(m)">
+                            class="btn btn-sm btn-danger"
+                            v-if="m.class"
+                            @click="resetMacro(m)"
+                        >
                             <i class="glyphicon glyphicon-trash"></i>
                         </button>
                     </td>
@@ -39,19 +41,51 @@
                         />
                     </td>
                     <td>
-                        <i class="glyphicon" :class="'glyphicon-' + m.glyph" v-if="m.class"></i>
+                        <div class="btn-group" v-if="m.class">
+                            <button
+                                type="button"
+                                class="btn btn-sm dropdown-toggle"
+                                :class="'btn-' + m.class"
+                            >
+                                <i class="glyphicon" :class="'glyphicon-' + m.glyph" v-if="m.class"></i>
+                                <span class="caret"></span>
+                            </button>
+                            <ul class="dropdown-menu">
+                                <li>
+                                    <a href>aaa</a>
+                                </li>
+                            </ul>
+                        </div>
                     </td>
                     <td>
-                        <select name id class="form-control input-sm" v-if="m.class" required>
-                            <option
-                                :value="color"
-                                v-for="color in ['default', 'primary', 'info', 'warning', 'danger']"
-                                :key="color"
-                            >{{ color }}</option>
-                        </select>
+                        <div class="btn-group" v-if="m.class">
+                            <button type="button" class="btn btn-sm dropdown-toggle" :class="'btn-' + m.class">
+                                {{ m.class }}
+                                <span class="caret"></span>
+                            </button>
+                            <ul class="dropdown-menu">
+                                <li
+                                    :value="color"
+                                    v-for="color in ['default', 'primary', 'info', 'warning', 'danger']"
+                                    :key="color"
+                                >
+                                    <a
+                                        href
+                                        @click.prevent="m.class = color"
+                                        class="btn btn-sm"
+                                        :class="'btn-' + color"
+                                    >{{ color }}</a>
+                                </li>
+                            </ul>
+                        </div>
                     </td>
                     <td>
-                        <select v-model="m.target" class="form-control input-sm" v-if="m.class" required>
+                        <select
+                            v-model="m.target"
+                            class="form-control input-sm"
+                            v-if="m.class"
+                            required
+                        >
                             <option
                                 :value="target"
                                 v-for="target in ['ESP', 'SD', 'URI']"
@@ -60,12 +94,17 @@
                         </select>
                     </td>
                     <td>
-                        <input type="text" class="form-control input-sm" v-model="m.filename" v-if="m.class" />
+                        <input
+                            type="text"
+                            class="form-control input-sm"
+                            v-model="m.filename"
+                            v-if="m.class"
+                        />
                     </td>
                 </tr>
             </tbody>
         </table>
-        <hr>
+        <hr />
         <div class="clearfix">
             <button type="submit" class="btn btn-primary pull-right">Save</button>
         </div>
@@ -83,7 +122,7 @@ export default {
         getMacros() {
             return this.$store.getMacros()
         },
-        updateMacros () {
+        updateMacros() {
             this.$store.updateMacros(this.$store.macros)
         },
         resetMacro(m) {
@@ -96,7 +135,7 @@ export default {
             }
             else {
                 m.name = 'M' + (1 + m.index)
-                m.class = 'btn-default'
+                m.class = 'default'
                 m.target = 'ESP'
                 m.glyph = 'star'
                 m.filename = '/macro' + (1 + m.index) + '.g'

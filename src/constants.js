@@ -25,3 +25,5 @@ export const FIRMWARE_NAMES = {
     'grbl': 'Grbl',
     '': 'Unknown'
 }
+
+export const LANGUAGES = [["de", "Deutsch"], ["en", "English"], ["es", "Espa&ntilde;ol"], ["fr", "Fran&ccedil;ais"], ["it", "Italiano"], ["ja", "&#26085;&#26412;&#35486;"], ["hu", "Magyar"], ["pl", "Polski"], ["ptbr", "Português-Br"], ["ru", "Русский"], ["tr", "T&uuml;rk&ccedil;e"], ["uk", "Українська"], ["zh_CN", "&#31616;&#20307;&#20013;&#25991;"]]

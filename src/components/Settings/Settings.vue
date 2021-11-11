@@ -47,7 +47,7 @@
             <td>{{ setting.label }}</td>
             <td>
               <div
-                class="form-group has-feedback"
+                class="has-feedback"
                 :class="{ 'has-warning': setting.value != setting.defaultvalue }"
               >
                 <div class="input-group">

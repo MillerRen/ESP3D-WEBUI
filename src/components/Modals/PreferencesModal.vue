@@ -1,7 +1,9 @@
 <template>
   <div class="modal-body panel-scroll">
     <center>
-      <div></div>
+      <select v-model="preferences.language" class="form-control">
+        <option :value="lang[0]" v-for="lang in languages" :key="lang[0]" v-html="lang[1]"></option>
+      </select>
     </center>
     <br />
     <div class="panel panel-default">
@@ -76,63 +78,58 @@
         </div>
       </div>
       <div v-if="preferences.enable_control_panel" class="panel-body">
-          <table>
-            <tr>
-              <td>
-                <span>
-                  <span translate>Position Refresh Time</span>:&nbsp;
-                </span>
-              </td>
-              <td>
-                <div class="input-group input-group-sm has-control">
-                  <input
-                    class="form-control "
-                    type="number"
-                    min="1"
-                    max="99"
-                    v-model="preferences.interval_positions"
-                  />
-                  <span class="input-group-addon form_control" translate>sec</span>
-                </div>
-              </td>
-            </tr>
-            <tr>
-              <td>
-                <span>
-                  <span translate>XY feedrate</span>:&nbsp;
-                </span>
-              </td>
-              <td>
-                <div class="input-group input-group-sm has-control">
-                  <input
-                    class="form-control"
-                    type="number"
-                    min="1"
-                    v-model="preferences.xy_feedrate"
-                  />
-                  <span class="input-group-addon form_control" translate>mm/min</span>
-                </div>
-              </td>
-            </tr>
-            <tr v-for="axis in axes" :key="axis">
-              <td>
-                <span>
-                  <span translate>{{axis.toUpperCase()}} feedrate</span>:&nbsp;
-                </span>
-              </td>
-              <td>
-                <div class="input-group input-group-sm has-control">
-                  <input
-                    class="form-control"
-                    type="number"
-                    min="1"
-                    v-model="preferences[axis+'_feedrate']"
-                  />
-                  <span class="input-group-addon form_control" translate>mm/min</span>
-                </div>
-              </td>
-            </tr>
-          </table>
+        <table>
+          <tr>
+            <td>
+              <span>
+                <span translate>Position Refresh Time</span>:&nbsp;
+              </span>
+            </td>
+            <td>
+              <div class="input-group input-group-sm has-control">
+                <input
+                  class="form-control"
+                  type="number"
+                  min="1"
+                  max="99"
+                  v-model="preferences.interval_positions"
+                />
+                <span class="input-group-addon form_control" translate>sec</span>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <span>
+                <span translate>XY feedrate</span>:&nbsp;
+              </span>
+            </td>
+            <td>
+              <div class="input-group input-group-sm has-control">
+                <input class="form-control" type="number" min="1" v-model="preferences.xy_feedrate" />
+                <span class="input-group-addon form_control" translate>mm/min</span>
+              </div>
+            </td>
+          </tr>
+          <tr v-for="axis in axes" :key="axis">
+            <td>
+              <span>
+                <span translate>{{ axis.toUpperCase() }} feedrate</span>:&nbsp;
+              </span>
+            </td>
+            <td>
+              <div class="input-group input-group-sm has-control">
+                <input
+                  class="form-control"
+                  type="number"
+                  min="1"
+                  v-model="preferences[axis + '_feedrate']"
+                />
+                <span class="input-group-addon form_control" translate>mm/min</span>
+              </div>
+            </td>
+          </tr>
+        </table>
       </div>
     </div>
     <div class="panel panel-default">
@@ -156,7 +153,7 @@
               <td>
                 <div class="input-group input-group-sm has-control">
                   <input
-                    class="form-control "
+                    class="form-control"
                     type="number"
                     min="1"
                     max="99"
@@ -305,7 +302,7 @@
               <td>
                 <div class="input-group input-group-sm has-control">
                   <input
-                    class="form-control "
+                    class="form-control"
                     type="number"
                     min="1"
                     max="99"
@@ -633,6 +630,7 @@
 </template>
 
 <script>
+import { LANGUAGES } from "../../constants";
 export default {
   props: {
     preferences: {
@@ -644,7 +642,8 @@ export default {
   },
   data() {
     return {
-      uploading: false
+      uploading: false,
+      languages: LANGUAGES
     }
   },
   computed: {

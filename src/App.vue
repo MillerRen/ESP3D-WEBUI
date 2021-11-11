@@ -375,4 +375,8 @@ w25 {
   font-variant: small-caps slashed-zero;
   text-transform: none;
 }
+
+.btn-group:hover .dropdown-menu{
+  display: block;
+}
 </style>
