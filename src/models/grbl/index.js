@@ -1,23 +1,26 @@
 import http from '../../lib/http'
 import WS from '../../lib/websocket'
-import {
-  MACROS_FILE_NAME,
-  PREFERENCES_FILE_NAME,
-  TOTAL_WAITING_TIMES,
-  LOGIN_URL,
-  COMMAND_URL,
-  DEFAULT_PREFERENCES
-} from '../../constants'
+
 import Config from './config'
 import Settings from './settings'
 import Firmware from './firmware'
 import Status from './status'
 import Files from './files'
 import Websocket from './websocket'
+
 const constants = require('grbl-parser/lib/constants')
 const Checker = require('grbl-parser/lib/checker')
 const StatusExtractor = require('grbl-parser/lib/status_extractor')
 const Extractor = require('grbl-parser/lib/extractor')
+
+import {
+    MACROS_FILE_NAME,
+    PREFERENCES_FILE_NAME,
+    TOTAL_WAITING_TIMES,
+    LOGIN_URL,
+    COMMAND_URL,
+    DEFAULT_PREFERENCES
+  } from '../../constants'
 
 var checker = new Checker()
 var messageTypes = constants.messageTypes
