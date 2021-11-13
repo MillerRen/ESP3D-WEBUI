@@ -1,5 +1,4 @@
 import http from '../../lib/http'
-import 'browser-request'
 import WS from '../../lib/websocket'
 import {
   MACROS_FILE_NAME,
