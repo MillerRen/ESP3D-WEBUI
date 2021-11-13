@@ -185,22 +185,28 @@ export default class Grbl {
     this.messages = []
   }
 
-  sendCommand(cmd) {
+  sendCommand (cmd) {
     return http.sendGetHttp(COMMAND_URL, {
-        plain: cmd
+      plain: cmd
     })
-}
+  }
+
+  sendCommandText (cmd) {
+    return http.sendGetHttp(COMMAND_URL, {
+      commandText: cmd
+    })
+  }
 
   sendCustomCommand (cmd) {
     this.messages.push({
       type: 'input',
       msg: cmd
     })
-    return http.sendCommandText(cmd)
+    return this.sendCommandText(cmd)
   }
 
   sendRealtimeCommand (cmd) {
-    return http.sendCommandText(cmd)
+    return this.sendCommandText(cmd)
   }
 
   uploadFile (url, fd, path) {
@@ -214,16 +220,24 @@ export default class Grbl {
       })
   }
 
+  listFiles (path, params) {
+    return http.sendGetHttp(path, {
+      action: 'list',
+      filename: 'all',
+      ...params
+    })
+  }
+
   listSPIFFS (url, params) {
-    return http
-      .listFiles(url, params)
-      .then(response => Files.parseFiles(response, ''))
+    return this.listFiles(url, params).then(response =>
+      Files.parseFiles(response, '')
+    )
   }
 
   listSD (url, params) {
-    return http
-      .listFiles(url, params)
-      .then(response => Files.parseFiles(response, this.preferences.f_filters))
+    return this.listFiles(url, params).then(response =>
+      Files.parseFiles(response, this.preferences.f_filters)
+    )
   }
 
   createDir (url, params) {
@@ -249,7 +263,7 @@ export default class Grbl {
 
   printFile (filename) {
     let cmd = `[ESP220]${filename}`
-    return http.sendCommandText(cmd)
+    return this.sendCommandText(cmd)
   }
 
   checkLogin () {
@@ -276,7 +290,7 @@ export default class Grbl {
   }
 
   getFWData () {
-    return http.sendCommand('[ESP800]').then(response => {
+    return this.sendCommand('[ESP800]').then(response => {
       var fwData = Firmware.parseFWData(response)
       this.fwData = fwData
       return fwData
@@ -284,7 +298,7 @@ export default class Grbl {
   }
 
   getSettings () {
-    return http.sendCommand('[ESP400]').then(response => {
+    return this.sendCommand('[ESP400]').then(response => {
       if (!response.EEPROM) {
         throw new Error('wrong data')
       }
@@ -313,7 +327,7 @@ export default class Grbl {
   }
 
   updateSettings (cmd) {
-    return http.sendCommand(cmd)
+    return this.sendCommand(cmd)
   }
 
   updatePreferences (preferences) {
@@ -326,7 +340,7 @@ export default class Grbl {
   }
 
   getConfig () {
-    return http.sendCommand('$$').then(response => {
+    return this.sendCommand('$$').then(response => {
       if (response) {
         this.config = Config.parseConfig(response)
         return this.config
@@ -336,7 +350,7 @@ export default class Grbl {
   }
 
   updateConfig (cmd) {
-    return http.sendCommand(cmd)
+    return this.sendCommand(cmd)
   }
 
   getMacros () {
@@ -372,7 +386,7 @@ export default class Grbl {
   }
 
   getESPStatus () {
-    return http.sendCommand('[ESP420]plain').then(response => {
+    return this.sendCommand('[ESP420]plain').then(response => {
       let status = Status.parseStatus(response)
       this.status = status
       return status
@@ -380,7 +394,7 @@ export default class Grbl {
   }
 
   restartESP () {
-    return http.sendCommandText('[ESP444]RESTART').then(() => {
+    return this.sendCommandText('[ESP444]RESTART').then(() => {
       this.waitRestarting()
     })
   }
@@ -408,40 +422,40 @@ export default class Grbl {
   }
 
   homeAll () {
-    return http.sendCommandText('$H').then(this.getPosition)
+    return this.sendCommandText('$H').then(this.getPosition)
   }
 
   homeX () {
-    return http.sendCommandText('$HX').then(this.getPosition)
+    return this.sendCommandText('$HX').then(this.getPosition)
   }
 
   homeY () {
-    return http.sendCommandText('$HY').then(this.getPosition)
+    return this.sendCommandText('$HY').then(this.getPosition)
   }
 
   homeZ () {
-    return http.sendCommandText('$HZ').then(this.getPosition)
+    return this.sendCommandText('$HZ').then(this.getPosition)
   }
 
   jog (cmd, feedrate) {
     let command = '$J=G91 G21 F' + feedrate + ' ' + cmd
-    return http.sendCommandText(command).then(this.getPosition)
+    return this.sendCommandText(command).then(this.getPosition)
   }
 
   disableAlarm () {
-    return http.sendCommandText('$X')
+    return this.sendCommandText('$X')
   }
 
   resetGrbl () {
-    return http.sendCommandText(String.fromCharCode(0x18))
+    return this.sendCommandText(String.fromCharCode(0x18))
   }
 
   getPosition () {
-    return http.sendCommandText('?')
+    return this.sendCommandText('?')
   }
 
   sendZeroCommand (axis) {
-    return http.sendCommandText(`G10 L20 P0 ${axis}`).then(this.getPosition)
+    return this.sendCommandText(`G10 L20 P0 ${axis}`).then(this.getPosition)
   }
 
   autoCheckPosition () {
