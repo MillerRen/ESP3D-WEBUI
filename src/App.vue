@@ -1,7 +1,6 @@
 <template>
   <main id="app" v-if="initialized">
     <Navbar :fwData="fwData" />
-    <br />
     <Tabs v-model="mainTab" :fwData="fwData" />
     <br />
     <ConfigPanel v-if="mainTab == 'printer'" :fwData="fwData" />
