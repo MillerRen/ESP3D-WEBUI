@@ -37,12 +37,11 @@ export default {
     value: {
       type: String,
       default: "dashboard",
-    },
-    preferences: {
-      type: Object,
-      default() {
-        return {}
-      }
+    }
+  },
+  computed: {
+    preferences () {
+      return this.$store.preferences
     }
   },
   methods: {
