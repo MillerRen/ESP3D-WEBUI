@@ -1,5 +1,5 @@
 <template>
-    <form class="modal-body" @submit="updateMacros">
+    <form class="modal-body" @submit.prevent="updateMacros">
         <table class="table table-responsive">
             <thead>
                 <tr>
