@@ -78,60 +78,34 @@
                       <tr>
                         <td>
                           <div
-                            id="status_config_0"
-                            class="form-group has-feedback"
-                            style="margin: auto;"
+                            class="has-feedback"
+                            :class="{ 'has-warning': item.defaultvalue != item.value }"
                           >
-                            <div class="item-flex-row">
-                              <table>
-                                <tbody>
-                                  <tr>
-                                    <td>
-                                      <div class="input-group">
-                                        <span class="input-group-btn">
-                                          <button
-                                            class="btn btn-default btn-svg"
-                                            @click="item.value = item.defaultvalue"
-                                            
-                                          >
-                                          <i class="glyphicon glyphicon-repeat"></i>
-                                          </button>
-                                        </span>
-                                        <input class="hidden" />
-                                      </div>
-                                    </td>
-                                    <td>
-                                      <div class="input-group">
-                                        <span class="input-group-addon hidden"></span>
-                                        <input
-                                          id="config_0"
-                                          type="text"
-                                          class="form-control"
-                                          style="width:auto"
-                                          v-model="item.value"
-                                        />
-                                        <span
-                                          id="icon_config_0"
-                                          class="form-control-feedback ico_feedback"
-                                        ></span>
-                                        <span class="input-group-addon hidden"></span>
-                                      </div>
-                                    </td>
-                                  </tr>
-                                </tbody>
-                              </table>
-                              <div class="input-group">
-                                <input class="hidden" />
-                                <span class="input-group-btn">
-                                  <button
-                                    id="btn_config_0"
-                                    class="btn btn-default"
-                                    @click="updateConfig(item)"
-                                    translate
-                                    english_content="Set"
-                                  >Set</button>&nbsp;
-                                </span>
-                              </div>
+                            <div class="input-group">
+                              <span class="input-group-btn">
+                                <button
+                                  class="btn btn-default btn-svg"
+                                  @click="item.value = item.defaultvalue"
+                                >
+                                  <i class="glyphicon glyphicon-repeat"></i>
+                                </button>
+                              </span>
+                              <input
+                                id="config_0"
+                                type="text"
+                                class="form-control"
+                                style="width:auto"
+                                v-model="item.value"
+                              />
+                              <span class="input-group-btn">
+                                <button
+                                  id="btn_config_0"
+                                  class="btn btn-default"
+                                  @click="updateConfig(item)"
+                                  translate
+                                  english_content="Set"
+                                >Set</button>&nbsp;
+                              </span>
                             </div>
                           </div>
                         </td>
@@ -197,7 +171,7 @@
           >
             <tbody id="config_override_data"></tbody>
           </table>
-        </div> -->
+        </div>-->
       </div>
     </center>
   </div>
@@ -220,7 +194,7 @@ export default {
     }
   },
   computed: {
-    config () {
+    config() {
       return this.$store.config
     }
   },
