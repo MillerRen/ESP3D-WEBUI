@@ -241,6 +241,11 @@ export default {
     updateConfig(item) {
       this.loading = true
       return this.$store.updateConfig(item.cmd + item.value)
+        .then((reponse) => {
+          if (reponse == 'ok') {
+            item.defaultValue = item.value
+          }
+        })
         .catch((err) => {
           this.$modal({
             title: 'Set failed',
