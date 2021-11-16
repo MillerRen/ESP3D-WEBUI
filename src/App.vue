@@ -1,5 +1,5 @@
 <template>
-  <main id="app" v-if="initialized">
+  <main  v-if="initialized">
     <Navbar :fwData="fwData" />
     <Tabs v-model="mainTab" :fwData="fwData" />
     <br />

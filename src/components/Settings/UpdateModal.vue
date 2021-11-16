@@ -6,19 +6,19 @@
                     <input
                         type="file"
                         style="display:none"
-                        id="fw-select"
+                        
                         name="myfiles[]"
                         accept=".bin, .bin.gz"
                         @change="checkupdatefile()"
                         ref="fileInput"
                     />
-                    <table id="fw-select_form">
+                    <table >
                         <tr>
                             <td>
                                 <button
                                     class="btn btn-info"
                                     type="button"
-                                    id="fw_select_files"
+                                    
                                     @click="$refs.fileInput.click()"
                                     translate
                                 >Select file</button>
@@ -38,7 +38,7 @@
                 <td>
                     <button
                         class="btn btn-primary"
-                        id="uploadfw-button"
+                        
                         v-if="uploads && uploads.length"
                         @click="UploadUpdatefile();"
                         translate

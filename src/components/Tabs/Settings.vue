@@ -1,5 +1,5 @@
 <template>
-    <div id="settingstab" class="tabcontent">
+    <div  class="tabcontent">
         <center>
             <h2>
                 <span translate>ESP3D Settings</span>
@@ -18,7 +18,7 @@
                     </td>
                     <td style="padding:10px">
                         <button
-                            id="settings_update_fw_btn"
+                            
                             type="button"
                             class="btn btn-warning"
                             @click="showUpdateModal"
@@ -29,7 +29,7 @@
                     <td style="padding:10px">
                         <button
                             type="button"
-                            id="settings_restart_btn"
+                            
                             class="btn btn-danger"
                             @click="restartESP();"
                         >
@@ -39,7 +39,7 @@
                     <td style="padding:10px">
                         <button
                             type="button"
-                            id="settings_refresh_btn"
+                            
                             class="btn btn-primary"
                             @click="refreshSettings()"
                         >
@@ -48,7 +48,7 @@
                     </td>
                 </tr>
             </table>
-            <span id="settings_status"></span>
+            <span ></span>
             <hr />
             <Settings ref="settings" />
         </center>

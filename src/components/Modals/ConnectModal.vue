@@ -1,6 +1,6 @@
 <template>
     <center>
-        <span id="connecting_msg">
+        <span >
             <span translate>Please wait...</span>
             <progress :value="bootProgress" max="100"></progress>
         </span>

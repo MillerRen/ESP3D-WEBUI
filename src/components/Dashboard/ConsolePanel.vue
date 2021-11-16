@@ -1,17 +1,17 @@
 <template>
-    <div id="commandsPanel" class="panel panel-default panel-flex-col">
+    <div  class="panel panel-default panel-flex-col">
         <div class="panel-heading">
             <b>
                 <span translate>Commands</span>
             </b>
             <button
-                id="clear_monitor_btn"
+                
                 class="btn btn-primary btn-xs pull-right"
                 @click="clearConsole()"
                 translate
             >Clear</button>
         </div>
-        <div id="command-body" class="panel-body panel-flex-main">
+        <div  class="panel-body panel-flex-main">
             <pre ref="monitor" style="height: 350px;" :style="{ scrollTop: scrollTop }">{{ messages }}</pre>
         </div>
         <div class="panel-footer">

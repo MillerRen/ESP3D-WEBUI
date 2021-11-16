@@ -6,7 +6,7 @@
             </td>
             <td>&nbsp;</td>
             <td>
-                <span id="restartmsg" translate>Restarting, please wait....&nbsp;</span>
+                <span  translate>Restarting, please wait....&nbsp;</span>
             </td>
             <td>
                 <button v-if="errmsg" @click="restartESP" class="btn btn-primary btn-sm">Retry</button>

@@ -1,5 +1,5 @@
 <template>
-    <div id="cameratab" class="tabcontent">
+    <div  class="tabcontent">
         <center>
             <br />
             <form class="form-inline">
@@ -27,7 +27,7 @@
                 </button>
             </form>
             <br />
-            <table id="camera_frame_display">
+            <table >
                 <tr>
                     <td width="100%">
                         <div class="embed-responsive embed-responsive-16by9">

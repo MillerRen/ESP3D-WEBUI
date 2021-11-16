@@ -1,12 +1,12 @@
 <template>
-    <div id="grblPanel" class="panel panel-default panel-flex-col panel-min-width">
+    <div  class="panel panel-default panel-flex-col panel-min-width">
         <div class="panel-heading">
             <h3 class="panel-title">
                 <span translate>GRBL</span>
             </h3>
         </div>
 
-        <div id="control-body" class="panel-body panel-flex-main">
+        <div  class="panel-body panel-flex-main">
             <div class="panel-flex-col">
                 <table width="100%">
                     <tr>
@@ -15,7 +15,7 @@
                                 <tr>
                                     <td>
                                         <button
-                                            id="clear_status_btn"
+                                            
                                             class="btn btn-default btn-xs"
                                             @click="disableAlarm"
                                             style="padding: 5px 5px 0 5px;"
@@ -52,14 +52,14 @@
                                         </button>
                                     </td>
                                     <td style="text-align: left; width:100%;height:30px;">
-                                        <div id="grbl_status" class="status_text">{{ reportType }}</div>
+                                        <div  class="status_text">{{ reportType }}</div>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td
                                         colspan="2"
                                         style="text-align: left; height:20px;"
-                                        id="grbl_status_text"
+                                        
                                         v-if="report.type == 'alarm'"
                                     >{{ report.data.message }}</td>
                                 </tr>
@@ -71,7 +71,7 @@
                                     <td style="width:100%;height:2em;"></td>
                                     <td>
                                         <button
-                                            id="sd_pause_btn"
+                                            
                                             v-if="report.type == 'status' && report.data.status.state == 'run'"
                                             class="btn btn-default"
                                             @click="$store.sendRealtimeCommand('!');"
@@ -84,7 +84,7 @@
                                     <td>
                                         <button
                                             v-if="report.type == 'status' && report.data.status.state == 'run'"
-                                            id="sd_resume_btn"
+                                            
                                             class="btn btn-default"
                                             @click="$store.sendRealtimeCommand('~');"
                                             style="padding: 5px 4px 0 5px;"
@@ -96,7 +96,7 @@
                                     <td>
                                         <button
                                             v-if="report.type == 'status' && report.data.status.state == 'run'"
-                                            id="sd_reset_btn"
+                                            
                                             class="btn btn-danger"
                                             @click="resetGrbl();"
                                             style="padding: 5px 0px 0px 0px;"
@@ -111,7 +111,7 @@
                     <tr>
                         <td colspan="2" class="td_center">
                             <center>
-                                <div id="grbl_SD_status"></div>
+                                <div ></div>
                             </center>
                         </td>
                     </tr>
@@ -150,7 +150,7 @@
                     </ul>
                 </div>
                     <div class="panel-body panel-flex-main">
-                        <div id="grbluitabscontent">
+                        <div >
                             <div v-if="tab=='override'" class="tabcontent">
                                 <table width="100%">
                                     <tr>
@@ -483,12 +483,12 @@
                                         <td nowrap translate style="vertical-align: middle; ">
                                             <span translate>Touch status</span>:
                                         </td>
-                                        <td id="touch_status_icon">
+                                        <td >
                                             <i class="glyphicon" :class="probeStatus?'glyphicon-ok-circle':'glyphicon-record'"></i>
                                         </td>
                                         <td width="100%">&nbsp;</td>
                                         <td>
-                                            <span class="hidden" id="probingtext">
+                                            <span class="hidden" >
                                                 <table>
                                                     <tr>
                                                         <td>
@@ -505,7 +505,7 @@
                                             </span>
                                             <button
                                                 class="btn btn-primary"
-                                                id="probingbtn"
+                                                
                                                 @click="startProbeProcess();"
                                                 translate
                                             >Start Probe</button>
@@ -695,7 +695,7 @@
                                 <table>
                                     <tr>
                                         <td>
-                                            <span class="hidden" id="surfacingtext">
+                                            <span class="hidden" >
                                                 <table>
                                                     <tr>
                                                         <td>

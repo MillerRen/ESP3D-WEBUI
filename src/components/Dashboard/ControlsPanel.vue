@@ -1,17 +1,17 @@
 <template>
-  <div id="controlPanel" class="panel panel-default panel-flex-col panel-min-width">
+  <div  class="panel panel-default panel-flex-col panel-min-width">
     <div class="panel-heading">
       <h3 class="panel-title">
         <span translate>Controls</span>
       </h3>
     </div>
-    <div id="control-body" class="panel-body panel-flex-main">
+    <div  class="panel-body panel-flex-main">
       <div class="row">
-        <div id="JogUI" class="col col-md-8">
+        <div  class="col col-md-8">
           <Jog />
         </div>
         <div class="col col-md-4">
-          <div id="Macro_list" class="macro-container">
+          <div  class="macro-container">
             <button class="btn btn-primary" @click="openMacroModal">
               <i class="glyphicon glyphicon-plus-sign"></i>
             </button>
@@ -30,12 +30,12 @@
         class="position-container"
         v-if="fwData.target_firmware == 'grbl' || fwData.target_firmware == 'grbl-embedded'"
       >
-        <button class="btn btn-xs btn-default" id="zero_xyz_btn" @click="sendZeroCommand(zeroAxes)">
+        <button class="btn btn-xs btn-default"  @click="sendZeroCommand(zeroAxes)">
           &Oslash;
-          <span style="font-size:8px;" id="zero_xyz_btn_txt">{{ axis.toUpperCase() }}</span>
+          <span style="font-size:8px;" >{{ axis.toUpperCase() }}</span>
         </button>
         <button
-          id="motor_off_control"
+          
           class="btn btn-primary btn-xs"
           @click="motorsOff()"
           translate
@@ -93,7 +93,7 @@
           <span class="input-group-addon form_control" translate>mm/min</span>
         </div>&nbsp;
         <div class="input-group input-group-sm">
-          <span class="input-group-addon form_control" id="axis_label">Z:</span>
+          <span class="input-group-addon form_control" >Z:</span>
           <input class="form-control w5" type="number" min="1" v-model="preferences.z_feedrate" />
           <span class="input-group-addon form_control" translate>mm/min</span>
         </div>&nbsp;

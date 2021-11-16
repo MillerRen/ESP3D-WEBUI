@@ -43,26 +43,26 @@
       <text x="202" y="232" class="home">Z</text>
     </g>
 
-    <g id="Jog100" fill="#c0c0c0" class="std" transform="translate(10, 10)">
-      <g id="Y+100" @click="jogXYClick('Y100')" transform="translate(120 120)">
+    <g  fill="#c0c0c0" class="std" transform="translate(10, 10)">
+      <g  @click="jogXYClick('Y100')" transform="translate(120 120)">
         <path
           class="std"
           d="M-60 -67.07 L-75.93,-83 A112.5,112.5 0 0,1 75,-83 L60,-67.07 A90,90 0 0,0 -60.00,-67.07 z"
         />
       </g>
-      <g id="X+100" @click="jogXYClick('X100')" transform="translate(120 120)">
+      <g  @click="jogXYClick('X100')" transform="translate(120 120)">
         <path
           class="std"
           d="M67.07,-60 L83,-75.93 A112.5,112.5 0 0,1 83,75.93 L67.07,60 A90,90 0 0,0 67.07,-60"
         />
       </g>
-      <g id="Y-100" @click="jogXYClick('Y-100')" transform="translate(120 120)">
+      <g  @click="jogXYClick('Y-100')" transform="translate(120 120)">
         <path
           class="std"
           d="M-60,67.07 L-75.93,83 A112.5,112.5 0 0,0 75,83 L60,67.07 A90,90 0 0,1 -60.00,67.07 z"
         />
       </g>
-      <g id="X-100" @click="jogXYClick('X-100')" transform="translate(120 120)">
+      <g  @click="jogXYClick('X-100')" transform="translate(120 120)">
         <path
           class="std"
           d="M-67.07,-60 L-83,-75.93 A112.5,112.5 0 0,0 -83,75.93 L-67.07,60 A90,90 0 0,1 -67.07,-60 z"
@@ -70,26 +70,26 @@
       </g>
     </g>
 
-    <g id="Jog10" fill="#d0d0d0" transform="translate(10, 10)">
-      <g id="Y+10" @click="jogXYClick('Y10')" transform="translate(120 120)">
+    <g  fill="#d0d0d0" transform="translate(10, 10)">
+      <g  @click="jogXYClick('Y10')" transform="translate(120 120)">
         <path
           class="std"
           d="M-44.06 -51.13 L-60,-67.07 A90,90 0 0,1 60,-67 L44.06,-51.13 A67.5,67.5 0 0,0 -44.06,-51.13 z"
         />
       </g>
-      <g id="X+10" @click="jogXYClick('X10')" transform="translate(120 120)">
+      <g  @click="jogXYClick('X10')" transform="translate(120 120)">
         <path
           class="std"
           d="M51.13 44.06 L67.07,60 A90,90 0 0,0 67.07,-60 L51.13,-44.06 A67.5,67.5 0 0,1 51.13,44.06 z"
         />
       </g>
-      <g id="Y-10" @click="jogXYClick('Y-10')" transform="translate(120 120)">
+      <g  @click="jogXYClick('Y-10')" transform="translate(120 120)">
         <path
           class="std"
           d="M-44.06 51.13 L-60,67.07 A90,90 0 0,0 60,67 L44.06,51.13 A67.5,67.5 0 0,1 -44.06,51.13 z"
         />
       </g>
-      <g id="X-10" @click="jogXYClick('X-10')" transform="translate(120 120)">
+      <g  @click="jogXYClick('X-10')" transform="translate(120 120)">
         <path
           class="std"
           d="M-51.13 44.06 L-67.07,60 A90,90 0 0,1 -67.07,-60 L-51.13,-44.06 A67.5,67.5 0 0,0 -51.13,44.06 z"
@@ -97,26 +97,26 @@
       </g>
     </g>
 
-    <g id="Jog1" fill="#e0e0e0" transform="translate(10, 10)">
-      <g id="Y+1" @click="jogXYClick('Y1')" transform="translate(120 120)">
+    <g  fill="#e0e0e0" transform="translate(10, 10)">
+      <g  @click="jogXYClick('Y1')" transform="translate(120 120)">
         <path
           class="std"
           d="M-28.09 -35.16 L-44.06,-51.13 A67.5,67.5 0 0,1 44.06,-51.13 L28.09,-35.16 A45,45 0 0,0 -28.09,-35.16 z"
         />
       </g>
-      <g id="X+1" @click="jogXYClick('X1')" transform="translate(120 120)">
+      <g  @click="jogXYClick('X1')" transform="translate(120 120)">
         <path
           class="std"
           d="M35.16 -28.09 L51.13,-44.06 A67.5,67.05 0 0,1 51.13,44.06 L35.16,28.09 A45,45 0 0,0 35.16,-28.09 z"
         />
       </g>
-      <g id="Y-1" @click="jogXYClick('Y-1')" transform="translate(120 120)">
+      <g  @click="jogXYClick('Y-1')" transform="translate(120 120)">
         <path
           class="std"
           d="M-28.09 35.16 L-44.06,51.13 A67.5,67.5 0 0,0 44.06,51.13 L28.09,35.16 A45,45 0 0,1 -28.09,35.16 z"
         />
       </g>
-      <g id="X-1" @click="jogXYClick('X-1')" transform="translate(120 120)">
+      <g  @click="jogXYClick('X-1')" transform="translate(120 120)">
         <path
           class="std"
           d="M-35.16 -28.09 L-51.13,-44.06 A67.5,67.05 0 0,0 -51.13,44.06 L-35.16,28.09 A45,45 0 0,1 -35.16,-28.09 z"
@@ -124,75 +124,75 @@
       </g>
     </g>
 
-    <g id="Jog0_1" fill="#f0f0f0" transform="translate(10, 10)">
-      <g id="Y+0.1" @click="jogXYClick('Y0.1')" transform="translate(120 120)">
+    <g  fill="#f0f0f0" transform="translate(10, 10)">
+      <g  @click="jogXYClick('Y0.1')" transform="translate(120 120)">
         <path class="std" d="M-28.09 -35.16 A45,45 0 0,1 29.09,-35.16 L0,-7.07 z" />
       </g>
-      <g id="X+0.1" @click="jogXYClick('X0.1')" transform="translate(120 120)">
+      <g  @click="jogXYClick('X0.1')" transform="translate(120 120)">
         <path class="std" d="M35.16 -28.09 A45,45 0 0,1 35.16,28.09 L7.07,0 z" />
       </g>
-      <g id="Y-0.1" @click="jogXYClick('Y-0.1')" transform="translate(120 120)">
+      <g  @click="jogXYClick('Y-0.1')" transform="translate(120 120)">
         <path class="std" d="M-28.09 35.16 A45,45 0 0,0 29.09,35.16 L0,7.07 z" />
       </g>
-      <g id="X-0.1" @click="jogXYClick('X-0.1')" transform="translate(120 120)">
+      <g  @click="jogXYClick('X-0.1')" transform="translate(120 120)">
         <path class="std" d="M-35.16 -28.09 A45,45 0 0,0 -35.16,28.09 L-7.07,0 z" />
       </g>
     </g>
 
-    <g id="+Z" fill="#b0b0b0" transform="translate(270, 10)" pointer-events="none">
+    <g  fill="#b0b0b0" transform="translate(270, 10)" pointer-events="none">
       <path class="std" d=" M5,0 h30 a5,5 0 0,1 5,5 v27 h-40 v-27 a5,5 0 0,1 5,-5 z" />
       <path class="std" d="M20,2 l17,17 h-10 v11 h-14 v-11 h-10 z" fill="DarkSeaGreen" />
       <text x="11" y="18" font-size="12">+Z</text>
     </g>
-    <g id="-Z" fill="#b0b0b0" transform="translate(270, 10)" pointer-events="none">
+    <g  fill="#b0b0b0" transform="translate(270, 10)" pointer-events="none">
       <path class="std" d=" M0,208 h40 v27 a5,5 0 0,1 -5,5 h-30 a5,5 0 0,1 -5,-5 z" />
       <path class="std" d="M20,238 l-17,-17 h10 v-11 h14 v11 h10 z" fill="DarkSeaGreen" />
       <text x="13" y="230" font-size="12">-Z</text>
     </g>
-    <g id="Z+10" @click="jogZClick('Z10')" fill="#d0d0d0" transform="translate(270, 10)">
+    <g  @click="jogZClick('Z10')" fill="#d0d0d0" transform="translate(270, 10)">
       <rect class="std" x="0" y="32" width="40" height="30" />
       <circle class="scl" cx="20" cy="47" r="13" />
       <text class="scl" x="9" y="53" font-size="18">10</text>
     </g>
-    <g id="Z+1" @click="jogZClick('Z1')" fill="#e0e0e0" transform="translate(270, 10)">
+    <g  @click="jogZClick('Z1')" fill="#e0e0e0" transform="translate(270, 10)">
       <rect class="std" x="0" y="62" width="40" height="26" />
       <circle class="scl" cx="20" cy="75" r="11" />
       <text class="scl" x="15" y="81.5" font-size="18">1</text>
     </g>
-    <g id="Z+0.1" @click="jogZClick('Z0.1')" fill="#f0f0f0" transform="translate(270, 10)">
+    <g  @click="jogZClick('Z0.1')" fill="#f0f0f0" transform="translate(270, 10)">
       <rect class="std" x="0" y="88" width="40" height="24" />
       <circle class="scl" cx="20" cy="100" r="9.5" />
       <text class="scl" x="13" y="103.5" font-size="10">0.1</text>
     </g>
-    <g id="Z-10" @click="jogZClick('Z-10')" fill="#d0d0d0" transform="translate(270, 10)">
+    <g  @click="jogZClick('Z-10')" fill="#d0d0d0" transform="translate(270, 10)">
       <rect class="std" x="0" y="178" width="40" height="30" />
     </g>
-    <g id="Z-1" @click="jogZClick('Z-1')" fill="#e0e0e0" transform="translate(270, 10)">
+    <g  @click="jogZClick('Z-1')" fill="#e0e0e0" transform="translate(270, 10)">
       <rect class="std" x="0" y="152" width="40" height="26" />
     </g>
-    <g id="Z-0.1" @click="jogZClick('Z-0.1')" fill="#f0f0f0" transform="translate(270, 10)">
+    <g  @click="jogZClick('Z-0.1')" fill="#f0f0f0" transform="translate(270, 10)">
       <rect class="std" x="0" y="128" width="40" height="24" />
     </g>
-    <g id="ZSpace" fill="#000000" transform="translate(270, 10)" pointer-events="none">
+    <g  fill="#000000" transform="translate(270, 10)" pointer-events="none">
       <rect class="std" x="0" y="112" width="40" height="16" />
     </g>
 
     <defs>
-      <filter id="f1" x="-1" y="-1" width="300%" height="300%">
+      <filter  x="-1" y="-1" width="300%" height="300%">
         <feOffset result="offOut" in="SourceAlpha" dx="3" dy="3" />
         <feGaussianBlur result="blurOut" in="offOut" stdDeviation="4" />
         <feBlend in="SourceGraphic" in2="blurOut" mode="normal" />
       </filter>
 
-      <symbol id="HomeIcon" viewBox="0 0 20 18" pointer-events="none">
+      <symbol  viewBox="0 0 20 18" pointer-events="none">
         <desc>HomeIcon - house</desc>
         <path class="home" d="M3,18 v-8 l7,-6 l7,6 v8 h-5 v-6 h-4 v6 z" fill="black" />
         <path class="home" d="M0,10 l10-8.5 l10,8.5" stroke-width="1.5" fill="none" />
         <path class="home" d="M15,3 v2.8 l1,.8 v-3.6 z" />
       </symbol>
 
-      <symbol id="JogRose" viewBox="20 -10 260 260">
-        <g id="RoseScale">
+      <symbol  viewBox="20 -10 260 260">
+        <g >
           <g>
             <circle class="scl" cx="144" cy="96" r="9.5" />
             <circle class="scl" cx="159.5" cy="80.5" r="10.5" />
@@ -205,7 +205,7 @@
           </g>
         </g>
         <g
-          id="Decoration"
+          
           pointer-events="none"
           font-weight="900"
           font-size="11"
@@ -226,7 +226,7 @@
         </g>
       </symbol>
 
-      <symbol id="PrinterCtl">
+      <symbol >
         <use x="0" y="0" xlink:href="#JogRose" />
         <use x="260" y="0" xlink:href="#JogBar" />
       </symbol>

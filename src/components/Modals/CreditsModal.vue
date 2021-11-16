@@ -4,13 +4,13 @@
         <ul>
             <li>
                 This UI for firmware of 
-                <a id="FW_github" href="https://github.com/luc-github/ESP3D" target="_blank">
+                <a  href="https://github.com/luc-github/ESP3D" target="_blank">
                     <span translate>ESP3D</span>
                 </a>
             </li>
             <li>
                 This UI is open source code 
-                <a id="UI_github" href="https://github.com/luc-github/ESP3D-webui" target="_blank">
+                <a  href="https://github.com/luc-github/ESP3D-webui" target="_blank">
                     <span translate>ESP3D-WEBUI</span>
                 </a>
             </li>

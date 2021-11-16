@@ -1,6 +1,6 @@
 <template>
     <!-- scanwifi Modal -->
-<div id="scanwifidlg.html" class="modal topmodal">
+<div  class="modal topmodal">
     <!-- scanwifi content -->
     <div class="modal-content">
         <div class="modal-header">
@@ -11,9 +11,9 @@
         </div>
         <div class="modal-body">
             <center>
-                <span id="AP_scan_status" translate>Scanning</span>
-                <div class="loader hidden" id="AP_scan_loader"></div>
-                <span class='hidden' id="AP_scan_list">
+                <span  translate>Scanning</span>
+                <div class="loader hidden" ></div>
+                <span class='hidden' >
                     <div class="table-responsive">
                         <table class="table table-bordered table-striped">
                             <thead class="noshowonlowrestab">
@@ -24,7 +24,7 @@
                                     <th translate>Join</th>
                                 </tr>
                             </thead>
-                            <tbody id="AP_scan_data"></tbody>
+                            <tbody ></tbody>
                         </table>
                     </div>
                 </span>
@@ -41,7 +41,7 @@
                             <span class=""> &nbsp;&nbsp;</span>
                         </td>
                         <td>
-                            <button class="btn btn-primary" id="refresh_scanwifi_btn" onclick="refresh_scanwifi() ">
+                            <button class="btn btn-primary"  onclick="refresh_scanwifi() ">
                                 <svg width="1.3em" height="1.2em" viewBox="0 0 1300 1200">
                                     <g transform="translate(50,1200) scale(1, -1)">
                                         <path fill="currentColor" d="M947 1060l135 135q7 7 12.5 5t5.5 -13v-361q0 -11 -7.5 -18.5t-18.5 -7.5h-361q-11 0 -13 5.5t5 12.5l134 134q-110 75 -239 75q-116 0 -214.5 -57t-155.5 -155.5t-57 -214.5h-150q0 117 45.5 224t123 184.5t184.5 123t224 45.5q192 0 347 -117zM1027 600h150 q0 -117 -45.5 -224t-123 -184.5t-184.5 -123t-224 -45.5q-192 0 -348 118l-134 -134q-7 -8 -12.5 -5.5t-5.5 12.5v360q0 11 7.5 18.5t18.5 7.5h360q10 0 12.5 -5.5t-5.5 -12.5l-133 -133q110 -76 240 -76q116 0 214.5 57t155.5 155.5t57 214.5z"></path>

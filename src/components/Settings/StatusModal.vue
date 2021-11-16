@@ -26,7 +26,7 @@
                         <td>
                             <button
                                 class="btn btn-primary"
-                                id="refreshstatusbtn"
+                                
                                 @click="getESPStatus()"
                             >
                                 <i class="glyphicon glyphicon-repeat"></i>

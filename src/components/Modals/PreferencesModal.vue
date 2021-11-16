@@ -615,7 +615,7 @@
         &nbsp;
         <progress name="prg" v-if="uploading" :value="uploadingProgress" max="100"></progress>
         &nbsp;
-        <!-- <span id="preferencesdlg_upload_percent">0</span>% -->
+        <!-- <span >0</span>% -->
       </div>
       <span class="pull-right">&nbsp;&nbsp;</span>
       <span class="pull-right">

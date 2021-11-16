@@ -2,7 +2,7 @@
     <div class="panel panel-spiffs">
         <div class="panel-heading row">
             <div class="panel-flex-row">
-                <table id="SPIFFS-select_form">
+                <table >
                     <tr>
                         <td>
                             <input
@@ -16,13 +16,13 @@
                             <button
                                 class="btn btn-info"
                                 type="button"
-                                id="SPIFFS_select_files"
+                                
                                 @click="$refs.fileinput.click();"
                                 translate
                             >Select files</button>
                         </td>
                         <td>
-                            <div class="filetext no_overflow" id="SPIFFS_file_name">
+                            <div class="filetext no_overflow" >
                                 <span v-if="!uploads || !uploads.length">No file chosen</span>
                                 <span v-if="uploads && uploads.length == 1">{{ uploads[0].name }}</span>
                                 <span
@@ -50,7 +50,7 @@
                 &nbsp;
                 <span
                     v-if="uploading"
-                    id="uploadSPIFFSmsg"
+                    
                     translate
                 >Uploading</span>
             </div>
@@ -65,7 +65,7 @@
                 >
                     <i class="glyphicon glyphicon-folder-open"></i>
                 </button>
-                <div id="SPIFFS_path" class="info">
+                <div  class="info">
                     <table>
                         <tr>
                             <td>
@@ -78,7 +78,7 @@
                     </table>
                 </div>
 
-                <div id="SPIFFS_loader" class="loader" style="width:2em;height:2em;" v-if="loading"></div>
+                <div  class="loader" style="width:2em;height:2em;" v-if="loading"></div>
             </div>
             <table class="table table-striped" style="margin-bottom:20px;">
                 <thead>
@@ -89,7 +89,7 @@
                         <th width="0%"></th>
                     </tr>
                 </thead>
-                <tbody id="SPIFFS_file_list">
+                <tbody >
                     <tr v-for="file in files" :key="file.name">
                         <td>
                             <button class="btn btn-link" disabled>

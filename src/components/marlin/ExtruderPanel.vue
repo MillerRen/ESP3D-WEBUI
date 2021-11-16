@@ -1,5 +1,5 @@
 <template>
-    <div id="extruderPanel" class="panel panel-default panel-flex-col panel-min-width">
+    <div  class="panel panel-default panel-flex-col panel-min-width">
         <div class="panel-heading">
             <div class="row">
                 <div class="col-md-12">
@@ -11,7 +11,7 @@
                 </div>
             </div>
         </div>
-        <div id="extruder-body" class="panel-body panel-height panel-flex-main">
+        <div  class="panel-body panel-height panel-flex-main">
             <ul class="list-group">
                 <li class="list-group-item">
                     <div class="row">
@@ -27,7 +27,7 @@
                         </div>
                     </div>
                 </li>
-                <li class="list-group-item hidden" id="mixed_extruder_UI">
+                <li class="list-group-item hidden" >
                     <div class="row">
                         <div class="col-md-4">
                             <table>
@@ -36,7 +36,7 @@
                                         <span translate>Extruder</span>
                                     </td>
                                     <td>&nbsp;</td>
-                                    <td id="extruder_list">
+                                    <td >
                                         <select
                                             style="width:4em"
                                             class="form-control"
@@ -68,7 +68,7 @@
                         </div>
                     </div>
                 </li>
-                <li class="list-group-item hidden" id="first_extruder_UI">
+                <li class="list-group-item hidden" >
                     <div class="row">
                         <div class="col-md-4">
                             <span translate>Extruder T0</span>
@@ -91,7 +91,7 @@
                         </div>
                     </div>
                 </li>
-                <li class="list-group-item hidden" id="second_extruder_UI">
+                <li class="list-group-item hidden" >
                     <div class="row">
                         <div class="col-md-4">
                             <span translate>Extruder T1</span>
@@ -118,7 +118,7 @@
                     <div class="row">
                         <div class="col-md-4">
                             <span translate>Flow (50-300%)</span>&nbsp;
-                            <span id="flowratecatched"></span>
+                            <span ></span>
                         </div>
                         <div class="col-md-8">
                             <div class="panel-flex-row">
@@ -178,7 +178,7 @@
                     <div class="row">
                         <div class="col-md-4">
                             <span translate>Feed (25-150%)</span>&nbsp;
-                            <span id="feedratecatched"></span>
+                            <span ></span>
                         </div>
                         <div class="col-md-8">
                             <div class="panel-flex-row">
@@ -234,7 +234,7 @@
                         </div>
                     </div>
                 </li>
-                <li class="list-group-item hidden" id="fan_UI">
+                <li class="list-group-item hidden" >
                     <div class="row">
                         <div class="col-md-4">
                             <span translate>Fan (0-100%)</span>

@@ -17,8 +17,8 @@
                     <a href="#" class="nav-link">
                         <i class="dropbtn">
                             <i class="glyphicon glyphicon-user"></i>
-                            <span id="current_ID"></span>
-                            <span id="current_auth_level"></span>
+                            <span ></span>
+                            <span ></span>
                         </i>
                     </a>
                     <ul class="dropdown-menu">
@@ -26,7 +26,7 @@
                             <a
                                 href="#"
                                 @click="changepassworddlg()"
-                                id="password_menu"
+                                
                                 class="hidden"
                             >
                                 <span class="pull-right" translate>Password</span>
@@ -50,7 +50,7 @@
                             <a
                                 href="#"
                                 @click="confirmdlg(translate_text_item('Disconnection requested'), translate_text_item('Please confirm disconnection.'), DisconnectLogin); "
-                                id="logout_menu"
+                                
                                 class="hidden"
                             >
                                 <span class="pull-right" translate>Log out</span>

@@ -1,5 +1,5 @@
 <template>
-    <div id="temperaturesPanel" class="panel panel-default panel-min-width">
+    <div  class="panel panel-default panel-min-width">
         <div class="panel-heading">
             <div class="row">
                 <div class="col-md-12">
@@ -113,16 +113,16 @@
                         </td>
                         <td>
                             <div class="panel-flex-col panel-flex-center">
-                                <span class="tempDisplay" id="heaterT0DisplayTemp"></span>
+                                <span class="tempDisplay" ></span>
                                 <span
-                                    id="heaterT0TargetTemp_anime"
+                                    
                                     class="invisible loader-pulse pull-right"
                                     style="color:red"
                                 ></span>
                             </div>
                         </td>
                     </tr>
-                    <tr id="temperature_redundant" class="hidden">
+                    <tr  class="hidden">
                         <td>
                             <span translate>Redundant</span>
                         </td>
@@ -133,16 +133,16 @@
                         </td>
                         <td>
                             <div class="panel-flex-col panel-flex-center">
-                                <span class="tempDisplay" id="heaterRDisplayTemp"></span>
+                                <span class="tempDisplay" ></span>
                                 <span
-                                    id="heaterRTargetTemp_anime"
+                                    
                                     class="invisible loader-pulse pull-right"
                                     style="color:red"
                                 ></span>
                             </div>
                         </td>
                     </tr>
-                    <tr id="temperature_secondExtruder" class="hidden">
+                    <tr  class="hidden">
                         <td>
                             <span translate>Heater T1</span>
                         </td>
@@ -201,16 +201,16 @@
                         </td>
                         <td>
                             <div class="panel-flex-col panel-flex-center">
-                                <span class="tempDisplay" id="heaterT1DisplayTemp"></span>
+                                <span class="tempDisplay" ></span>
                                 <span
-                                    id="heaterT1TargetTemp_anime"
+                                    
                                     class="invisible loader-pulse pull-right"
                                     style="color:red"
                                 ></span>
                             </div>
                         </td>
                     </tr>
-                    <tr id="temperature_probe" class="hidden">
+                    <tr  class="hidden">
                         <td>
                             <span translate>Probe</span>
                         </td>
@@ -221,16 +221,16 @@
                         </td>
                         <td>
                             <div class="panel-flex-col panel-flex-center">
-                                <span class="tempDisplay" id="probeDisplayTemp"></span>
+                                <span class="tempDisplay" ></span>
                                 <span
-                                    id="probeTargetTemp_anime"
+                                    
                                     class="invisible loader-pulse pull-right"
                                     style="color:red"
                                 ></span>
                             </div>
                         </td>
                     </tr>
-                    <tr id="temperature_bed" class="hidden">
+                    <tr  class="hidden">
                         <td>
                             <span translate>Bed</span>
                         </td>
@@ -292,16 +292,16 @@
                         </td>
                         <td>
                             <div class="panel-flex-col panel-flex-center">
-                                <span class="tempDisplay" id="bedDisplayTemp"></span>
+                                <span class="tempDisplay" ></span>
                                 <span
-                                    id="bedTargetTemp_anime"
+                                    
                                     class="invisible loader-pulse pull-right"
                                     style="color:red"
                                 ></span>
                             </div>
                         </td>
                     </tr>
-                    <tr id="temperature_chamber" class="hidden">
+                    <tr  class="hidden">
                         <td>
                             <span translate>Chamber</span>
                         </td>
@@ -365,9 +365,9 @@
                         </td>
                         <td>
                             <div class="panel-flex-col panel-flex-center">
-                                <span class="tempDisplay" id="chamberDisplayTemp"></span>
+                                <span class="tempDisplay" ></span>
                                 <span
-                                    id="chamberTargetTemp_anime"
+                                    
                                     class="invisible loader-pulse pull-right"
                                     style="color:red"
                                 ></span>
@@ -377,14 +377,14 @@
                 </tbody>
             </table>
             <ul class="list-group">
-                <li class="list-group-item hidden" id="temperatures_output">
+                <li class="list-group-item hidden" >
                     <div class="panel-flex-row">
-                        <div id="extruderstemperaturesgraphic">
-                            <canvas id="extruderTempgraph" height="130" width="200"></canvas>
+                        <div >
+                            <canvas  height="130" width="200"></canvas>
                             &nbsp;&nbsp;
                         </div>
-                        <div id="bedtemperaturesgraphic">
-                            <canvas id="bedTempgraph" height="130" width="200"></canvas>
+                        <div >
+                            <canvas  height="130" width="200"></canvas>
                         </div>
                     </div>
                 </li>

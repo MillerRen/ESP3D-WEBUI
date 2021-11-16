@@ -11,7 +11,7 @@
           <th translate>Filename/URI</th>
         </tr>
       </thead>
-      <tbody id="dlg_macro_list">
+      <tbody >
         <tr v-for="(m, index) in macros" :key="index">
           <td>
             <button

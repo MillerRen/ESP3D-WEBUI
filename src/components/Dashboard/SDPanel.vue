@@ -1,5 +1,5 @@
 <template>
-    <div id="filesPanel" class="panel panel-default panel-flex-col">
+    <div  class="panel panel-default panel-flex-col">
         <div class="panel-heading">
             <div class="row">
                 <div class="col-md-12">
@@ -8,7 +8,7 @@
                             <tr>
                                 <td>
                                     <b>
-                                        <span id="fileSource" translate>SD Files</span>
+                                        <span  translate>SD Files</span>
                                     </b>
                                 </td>
                                 <td>&nbsp;&nbsp;</td>
@@ -24,7 +24,7 @@
                                 </td>
                                 <td>&nbsp;&nbsp;</td>
                                 <td>
-                                    <span id="files_currentPath">{{ currentPath }}</span>
+                                    <span >{{ currentPath }}</span>
                                 </td>
                                 <td>&nbsp;&nbsp;</td>
                                 <td>
@@ -41,25 +41,25 @@
                                 </td>
                                 <td>&nbsp;</td>
                                 <td>
-                                    <span class="text-info" id="files_currentUpload_msg"></span>
+                                    <span class="text-info" ></span>
                                 </td>
                                 <td>&nbsp;</td>
                                 <td width="100px">
                                     <progress name="prg" :value="uploadingProgress" max="100"></progress>
                                 </td>
                                 <td>
-                                    <span id="files_percent_upload">{{ uploadingProgress }}</span>%
+                                    <span >{{ uploadingProgress }}</span>%
                                 </td>
                             </tr>
                         </table>
                     </div>
-                    <div class="pull-right" id="files_navigation_buttons" v-if="!uploading">
+                    <div class="pull-right"  v-if="!uploading">
                         <div class="item-flex-row-wrap">
                             <button
                                 class="btn btn-xs btn-primary"
                                 onclick="files_filter_button(this);"
                             >
-                                <span id="files_filter_glyph" style="position:relative; top:2px">
+                                <span  style="position:relative; top:2px">
                                     <i class="glyphicon glyphicon-filter"></i>
                                 </span>
                             </button>
@@ -135,12 +135,12 @@
             </div>
         </div>
         <div
-            id="file-body"
+            
             class="panel-body panel-height panel-max-height panel-scroll panel-flex-main"
         >
-            <!-- <div v-if="loading" id="files_list_loader" class="loader" style="margin:auto"></div> -->
+            <!-- <div v-if="loading"  class="loader" style="margin:auto"></div> -->
             <div class="file-list" style="height:350px;overflow-y:scroll">
-                <ul class="list-group" id="files_fileList">
+                <ul class="list-group" >
                     <li
                         v-if="currentPath != '/'"
                         class="list-group-item list-group-hover"
@@ -200,19 +200,19 @@
                             <div class="form-control-static">
                                 <span>
                                     <span translate>Total:</span>&nbsp;
-                                    <span id="files_sd_status_total">{{ sdfs.total }}</span>
+                                    <span >{{ sdfs.total }}</span>
                                 </span>
                                 <span>&nbsp;|&nbsp;</span>
                                 <span>
                                     <span translate>Used:</span>&nbsp;
-                                    <span id="files_sd_status_used">{{ sdfs.used }}</span>
+                                    <span >{{ sdfs.used }}</span>
                                 </span>
                                 <span>&nbsp;</span>
                                 <span class="noshowonlowres">| &nbsp;</span>
                                 <span>
                                     <span translate>Occupation:</span>
                                     <meter
-                                        id="files_sd_status_occupation"
+                                        
                                         style="width:150px"
                                         min="0"
                                         max="100"
@@ -220,7 +220,7 @@
                                         :value="sdfs.occupation"
                                     ></meter>
                                 </span>
-                                <span id="files_sd_status_percent">{{ sdfs.occupation }}</span>
+                                <span >{{ sdfs.occupation }}</span>
                                 <span>%</span>
                             </div>
                         </div>
@@ -229,7 +229,7 @@
             </div>
             <div class="row" v-if="sdfs.status && sdfs.status.toLowerCase() != 'ok'">
                 <div class="col-md-12">
-                    <span id="files_sd_status_msg">{{ sdfs.status }}</span>
+                    <span >{{ sdfs.status }}</span>
                 </div>
             </div>
         </div>

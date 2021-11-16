@@ -2,7 +2,7 @@
   <div class="container-fluid">
     <center>
       <span
-        id="settings_filters"
+        
         v-if="
           fwData.target_firmware != 'grbl-embedded' &&
             fwData.target_firmware != 'marlin-embedded'
@@ -12,7 +12,7 @@
           <label>
             <input
               type="radio"
-              id="network_setting_filter"
+              
               name="setting_filter"
               v-model="settingsType"
               value="network"
@@ -24,7 +24,7 @@
           <label>
             <input
               type="radio"
-              id="printer_setting_filter"
+              
               name="setting_filter"
               v-model="settingsType"
               value="printer"
