@@ -3,7 +3,10 @@
     <center>
       <span
         id="settings_filters"
-        v-if="fwData.target_firmware != 'grbl-embedded' && fwData.target_firmware != 'marlin-embedded'"
+        v-if="
+          fwData.target_firmware != 'grbl-embedded' &&
+            fwData.target_firmware != 'marlin-embedded'
+        "
       >
         <div class="radio-inline">
           <label>
@@ -43,12 +46,18 @@
           </tr>
         </thead>
         <tbody v-if="settings">
-          <tr v-for="(setting, index) in settings" :key="index" v-show="setting.F == settingsType">
+          <tr
+            v-for="(setting, index) in settings"
+            :key="index"
+            v-show="setting.F == settingsType"
+          >
             <td>{{ setting.label }}</td>
             <td>
               <div
                 class="has-feedback"
-                :class="{ 'has-warning': setting.value != setting.defaultvalue }"
+                :class="{
+                  'has-warning': setting.value != setting.defaultvalue
+                }"
               >
                 <div class="input-group">
                   <span class="input-group-btn">
@@ -75,10 +84,21 @@
                     v-if="setting.Options.length"
                     class="form-control"
                   >
-                    <option v-for="o in setting.Options" :key="o.id" :value="o.id">{{ o.display }}</option>
+                    <option
+                      v-for="o in setting.Options"
+                      :key="o.id"
+                      :value="o.id"
+                      >{{ o.display }}</option
+                    >
                   </select>
                   <span class="input-group-btn">
-                    <button class="btn btn-default" type="button" @click="setValue(setting)">set</button>
+                    <button
+                      class="btn btn-default"
+                      type="button"
+                      @click="setValue(setting)"
+                    >
+                      set
+                    </button>
                   </span>
                 </div>
               </div>
@@ -92,47 +112,54 @@
 
 <script>
 export default {
-  data() {
+  data () {
     return {
-      settingsType: "network",
+      settingsType: 'network',
       loading: false,
       errmsg: ''
-    };
+    }
   },
   computed: {
-    settings() {
+    settings () {
       return this.$store.settings
     },
-    fwData() {
+    fwData () {
       return this.$store.fwData
     }
   },
   methods: {
-    setValue(setting) {
+    setValue (setting) {
       this.loading = true
-      this.$store.updateSettings(setting.cmd + setting.value)
-        .then(() => {
+      this.$store
+        .updateSettings(setting.cmd + setting.value)
+        .then((response) => {
           this.loading = false
+          if(response == 'ok') {
+            setting.defaultvalue = setting.value
+          }
         })
-        .catch((err) => {
+        .catch(err => {
           this.loading = false
           this.errmsg = err
         })
     },
-    refreshSettings() {
+    refreshSettings () {
       this.loading = true
-      this.$store.getSettings()
-        .then((response) => { console.log(response) })
-        .catch((err) => {
+      this.$store
+        .getSettings()
+        .then(response => {
+          console.log(response)
+        })
+        .catch(err => {
           this.errmsg = err
         })
         .finally(() => {
           this.loading = false
         })
     },
-    revertToDefaultValue(setting) {
+    revertToDefaultValue (setting) {
       setting.value = setting.defaultvalue
     }
-  },
-};
+  }
+}
 </script>
