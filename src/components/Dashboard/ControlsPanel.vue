@@ -13,9 +13,7 @@
         <div class="col col-md-4">
           <div id="Macro_list" class="macro-container">
             <button class="btn btn-primary" @click="openMacroModal">
-              <i class="glyphicon glyphicon-star"></i>
-              &nbsp;
-              <i class="glyphicon glyphicon-pencil"></i>
+              <i class="glyphicon glyphicon-plus-sign"></i>
             </button>
             <button
               class="btn"
