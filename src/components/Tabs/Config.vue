@@ -1,23 +1,23 @@
 <template>
-  <div id="configtab" class="tabcontent">
+  <div  class="tabcontent">
     <center>
-      <h2 id="tab_title_configuration">
+      <h2 >
         <span translate>Printer configuration</span>
       </h2>
       <button
         type="button"
-        id="config_refresh_btn"
+        
         class="btn btn-primary"
         @click="refreshConfig();"
       >
         <i class="glyphicon glyphicon-refresh"></i>
       </button>
       <br />
-      <span id="config_status"></span>
+      <span ></span>
       <hr />
       <div class="loader" v-show="loading"></div>
-      <div id="config_list_content">
-        <div id="config_smoothie_nav" v-if="fwData.target_firmware == 'smoothieware'">
+      <div >
+        <div  v-if="fwData.target_firmware == 'smoothieware'">
           <center>
             <table>
               <tr>
@@ -26,12 +26,12 @@
                     <label>
                       <input
                         type="radio"
-                        id="config_main_file"
+                        
                         name="config_filter"
                         value="config"
                         onclick="config_display_override(false);"
                       />
-                      <span id="config_main_file_name">config</span>
+                      <span >config</span>
                     </label>
                   </div>
                 </td>
@@ -40,12 +40,12 @@
                     <label>
                       <input
                         type="radio"
-                        id="config_override_file"
+                        
                         name="config_filter"
                         value="override"
                         onclick="config_display_override(true);"
                       />
-                      <span id="config_override_file_name">smoothieware</span>
+                      <span >smoothieware</span>
                     </label>
                   </div>
                 </td>
@@ -53,7 +53,7 @@
             </table>
           </center>
         </div>
-        <div id="config_main_content">
+        <div >
           <table
             class="table table-bordered table-striped table-hover table-responsive"
             style="
@@ -69,7 +69,7 @@
                 <th width="0%" translate>Help</th>
               </tr>
             </thead>
-            <tbody id="config_list_data">
+            <tbody >
               <tr v-for="item in config" :key="item.lable">
                 <td style="vertical-align:middle">{{ item.label }}</td>
                 <td style="vertical-align:middle;">
@@ -91,7 +91,7 @@
                                 </button>
                               </span>
                               <input
-                                id="config_0"
+                                
                                 type="text"
                                 class="form-control"
                                 style="width:auto"
@@ -99,7 +99,7 @@
                               />
                               <span class="input-group-btn">
                                 <button
-                                  id="btn_config_0"
+                                  
                                   class="btn btn-default"
                                   @click="updateConfig(item)"
                                   translate
@@ -118,13 +118,13 @@
             </tbody>
           </table>
         </div>
-        <!-- <div id="config_override_list_content" class="hidden">
+        <!-- <div  class="hidden">
           <table>
             <tr>
               <td style="padding: 10px">
                 <button
                   type="button"
-                  id="config_apply_override"
+                  
                   class="btn btn-success"
                   onclick="Apply_config_override()"
                 >
@@ -143,7 +143,7 @@
               <td style="padding: 10px">
                 <button
                   type="button"
-                  id="config_delete_override"
+                  
                   class="btn btn-warning"
                   v-if="fwData.target_firmware=='smoothieware'"
                 >
@@ -169,7 +169,7 @@
               word-wrap: break-word;
             "
           >
-            <tbody id="config_override_data"></tbody>
+            <tbody ></tbody>
           </table>
         </div>-->
       </div>
