@@ -86,7 +86,6 @@
     </div>
     <div class="panel-footer">
       <div class="panel-flex-row">
-        &nbsp;
         <div class="input-group input-group-sm">
           <span class="input-group-addon form_control">XY:</span>
           <input class="form-control w8" type="number" min="1" v-model="preferences.xy_feedrate" />
