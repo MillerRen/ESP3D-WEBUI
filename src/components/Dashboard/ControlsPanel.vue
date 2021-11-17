@@ -12,11 +12,12 @@
         </div>
         <div class="col col-md-4">
           <div  class="macro-container">
-            <button class="btn btn-primary" @click="openMacroModal">
+            <button class="btn btn-primary btn-sm" @click="openMacroModal">
               <i class="glyphicon glyphicon-plus-sign"></i>
             </button>
             <button
-              class="btn"
+              class="btn btn-sm"
+              :class="'btn-'+m.class"
               v-for="(m,index) in macros"
               :key="index"
               v-show="m.class"
@@ -93,7 +94,7 @@
         </div>&nbsp;
         <div class="input-group input-group-sm">
           <span class="input-group-addon form_control" >{{selectAxis.toUpperCase()}}:</span>
-          <select class="form-control w4" v-model="selectAxis" v-if="axis.length>3">
+          <select class="form-control w5" v-model="selectAxis" v-if="axis.length>3">
             <option :value="axes" v-for="axes in axis.slice(2)" :key="axes">{{axes}}</option>
           </select>
           <input class="form-control w5" type="number" min="1" v-model="preferences[selectAxis+'_feedrate']" />
