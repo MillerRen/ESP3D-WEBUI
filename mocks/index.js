@@ -7,4 +7,5 @@
 module.exports = function (app) {
   require('./commands')(app)
   require('./spiffs')(app)
+  require('./upload')(app)
 }
