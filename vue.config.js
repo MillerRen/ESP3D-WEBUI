@@ -1,4 +1,5 @@
 const HtmlWebpackInlineSourcePlugin = require('html-webpack-inline-source-plugin')
+const mock = require('./mocks')
 
 process.env.VUE_APP_UI_VERSION = process.env.npm_package_version
 
@@ -18,6 +19,11 @@ class CleanWebpackPlugin {
 }
 
 module.exports = {
+  devServer: {
+    setup: function (app) {
+      mock(app)
+    }
+  },
   pluginOptions: {
     compression: {
       gzip: {
