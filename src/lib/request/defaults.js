@@ -13,9 +13,5 @@ export default {
     return Object.keys(obj)
       .map(k => `${k}=${obj[k]}`)
       .join('&')
-  },
-  transformResponse: function (response) {
-    if (this.responseType == 'json') return JSON.parse(response)
-    return response
   }
 }

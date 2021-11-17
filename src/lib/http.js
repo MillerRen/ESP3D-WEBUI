@@ -35,6 +35,7 @@ function sendGetHttp (url, params) {
     url,
     params
   })
+  .then(response=>response.data)
 }
 
 function sendPostHttp (url, data, params) {
@@ -44,6 +45,7 @@ function sendPostHttp (url, data, params) {
     data,
     params
   })
+  .then(response=>response.data)
 }
 
 function sendFileHttp (space, files, path, onUploadProgress) {

@@ -14,13 +14,13 @@ const StatusExtractor = require('grbl-parser/lib/status_extractor')
 const Extractor = require('grbl-parser/lib/extractor')
 
 import {
-    MACROS_FILE_NAME,
-    PREFERENCES_FILE_NAME,
-    TOTAL_WAITING_TIMES,
-    LOGIN_URL,
-    COMMAND_URL,
-    DEFAULT_PREFERENCES
-  } from '../../constants'
+  MACROS_FILE_NAME,
+  PREFERENCES_FILE_NAME,
+  TOTAL_WAITING_TIMES,
+  LOGIN_URL,
+  COMMAND_URL,
+  DEFAULT_PREFERENCES
+} from '../../constants'
 
 var checker = new Checker()
 var messageTypes = constants.messageTypes
@@ -370,24 +370,24 @@ export default class Grbl {
   }
 
   homeAll () {
-    return this.sendCommandText('$H').then(this.getPosition)
+    return this.sendCommandText('$H').then(() => this.getPosition)
   }
 
   homeX () {
-    return this.sendCommandText('$HX').then(this.getPosition)
+    return this.sendCommandText('$HX').then(() => this.getPosition)
   }
 
   homeY () {
-    return this.sendCommandText('$HY').then(this.getPosition)
+    return this.sendCommandText('$HY').then(() => this.getPosition)
   }
 
   homeZ () {
-    return this.sendCommandText('$HZ').then(this.getPosition)
+    return this.sendCommandText('$HZ').then(() => this.getPosition)
   }
 
   jog (cmd, feedrate) {
     let command = '$J=G91 G21 F' + feedrate + ' ' + cmd
-    return this.sendCommandText(command).then(this.getPosition)
+    return this.sendCommandText(command).then(() => this.getPosition)
   }
 
   disableAlarm () {
@@ -403,7 +403,9 @@ export default class Grbl {
   }
 
   sendZeroCommand (axis) {
-    return this.sendCommandText(`G10 L20 P0 ${axis}`).then(this.getPosition)
+    return this.sendCommandText(`G10 L20 P0 ${axis}`).then(
+      () => this.getPosition
+    )
   }
 
   autoCheckPosition () {

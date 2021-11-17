@@ -1,5 +1,5 @@
 function buildURL(url, params, serialize) {
-  if(typeof url == 'undefined') return url
+  if(typeof params == 'undefined') return url
   return url + '?' + serialize(params)
 }
 

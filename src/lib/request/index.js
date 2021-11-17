@@ -7,24 +7,31 @@ function request (config) {
   return new Promise(function (resolve, reject) {
     const url = buildURL(config.url, config.params, config.serialize)
     const xhr = new XMLHttpRequest()
+    xhr.open(config.method, url, true)
     xhr.timeout = config.timeout
+    xhr.responseType = config.responseType || 'text'
     xhr.onreadystatechange = function () {
       if (xhr.readyState != 4) return
+      if (xhr.status >= 400)
+        return reject({
+          status: xhr.status,
+          statusText: xhr.statusText
+        })
+      let res = 'response' in xhr ? xhr.response : xhr.responseText
+      if (res && typeOf(res) == 'String') {
+        try {
+          res = JSON.parse(res)
+        } catch (e) {
+          console.log(config.url, e)
+        }
+      }
+
       const response = {
         status: xhr.status,
         statusText: xhr.statusText,
-        data:
-          !config.responseType || ~xhr.responseType.indexOf(['text', 'json'])
-            ? xhr.responseText
-            : xhr.response
+        data: res
       }
-      try{
-        const res = config.transformResponse.call(config, response.data)
-        resolve(res)
-      } catch(e) {
-        reject(e)
-      }
-      
+      resolve(response)
     }
     xhr.onabort = function () {
       reject(new Error('request abort'))
@@ -41,7 +48,7 @@ function request (config) {
     if (typeOf(config.onUploadProgress) == 'Function') {
       xhr.upload.onprogress = config.onUploadProgress
     }
-    xhr.open(config.method, url, true)
+
     xhr.send(config.data)
   })
 }
