@@ -8,7 +8,7 @@
     <div  class="panel-body panel-flex-main">
       <div class="row">
         <div  class="col col-md-8">
-          <Jog />
+          <Jog :selectAxis="selectAxis.toUpperCase()" />
         </div>
         <div class="col col-md-4">
           <div  class="macro-container">
@@ -92,10 +92,13 @@
           <span class="input-group-addon form_control" translate>mm/min</span>
         </div>&nbsp;
         <div class="input-group input-group-sm">
-          <span class="input-group-addon form_control" >Z:</span>
-          <input class="form-control w5" type="number" min="1" v-model="preferences.z_feedrate" />
+          <span class="input-group-addon form_control" >{{selectAxis.toUpperCase()}}:</span>
+          <select class="form-control w4" v-model="selectAxis" v-if="axis.length>3">
+            <option :value="axes" v-for="axes in axis.slice(2)" :key="axes">{{axes}}</option>
+          </select>
+          <input class="form-control w5" type="number" min="1" v-model="preferences[selectAxis+'_feedrate']" />
           <span class="input-group-addon form_control" translate>mm/min</span>
-        </div>&nbsp;
+        </div>
       </div>
     </div>
   </div>
@@ -137,6 +140,11 @@ export default {
     },
     macros() {
       return this.$store.macros
+    }
+  },
+  data () {
+    return {
+      selectAxis: 'z'
     }
   },
   methods: {

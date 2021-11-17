@@ -40,7 +40,7 @@
         fill="DarkSeaGreen"
       />
       <use x="217" y="217" width="20" height="18" xlink:href="#HomeIcon" />
-      <text x="202" y="232" class="home">Z</text>
+      <text x="202" y="232" class="home">{{selectAxis}}</text>
     </g>
 
     <g id="Jog100" fill="#c0c0c0" class="std" transform="translate(10, 10)">
@@ -142,12 +142,12 @@
     <g id="+Z" fill="#b0b0b0" transform="translate(270, 10)" pointer-events="none">
       <path class="std" d=" M5,0 h30 a5,5 0 0,1 5,5 v27 h-40 v-27 a5,5 0 0,1 5,-5 z" />
       <path class="std" d="M20,2 l17,17 h-10 v11 h-14 v-11 h-10 z" fill="DarkSeaGreen" />
-      <text x="11" y="18" font-size="12">+Z</text>
+      <text x="11" y="18" font-size="12">+{{selectAxis}}</text>
     </g>
     <g id="-Z" fill="#b0b0b0" transform="translate(270, 10)" pointer-events="none">
       <path class="std" d=" M0,208 h40 v27 a5,5 0 0,1 -5,5 h-30 a5,5 0 0,1 -5,-5 z" />
       <path class="std" d="M20,238 l-17,-17 h10 v-11 h14 v11 h10 z" fill="DarkSeaGreen" />
-      <text x="13" y="230" font-size="12">-Z</text>
+      <text x="13" y="230" font-size="12">-{{selectAxis}}</text>
     </g>
     <g id="Z+10" @click="jogZClick('Z10')" fill="#d0d0d0" transform="translate(270, 10)">
       <rect class="std" x="0" y="32" width="40" height="30" />
@@ -238,6 +238,12 @@
 
 <script>
 export default {
+  props: {
+    selectAxis: {
+      type: String,
+      default: 'z'
+    }
+  },
   methods: {
     homeAll() {
       return this.$store.homeAll()
@@ -255,7 +261,7 @@ export default {
       return this.$store.jog(cmd, this.$store.preferences.xy_feedrate)
     },
     jogZClick(cmd) {
-      return this.$store.jog(cmd, this.$store.preferences.z_feedrate)
+      return this.$store.jog(cmd.replace('Z', this.selectAxis), this.$store.preferences[this.selectAxis.toLowerCase()+'_feedrate'])
     }
   }
 }
