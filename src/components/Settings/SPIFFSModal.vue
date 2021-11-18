@@ -35,7 +35,7 @@
                 <button
                     class="btn btn-primary btn-svg"
                     type="button"
-                    :disabled="uploads.length < 1"
+                    :disabled="uploads.length < 1 || uploadingProgress"
                     @click="uploadFile();"
                 >
                     <i class="glyphicon glyphicon-upload"></i>
