@@ -1,7 +1,6 @@
-import mock from "../mock"
-
-mock.onGet('/command', {
-    params: {
-        commandText: '$H'
+module.exports = function (req, res, next) {
+    if(req.query.commandText == '$H'||req.query.commandText == '$HX'||req.query.commandText == '$HY'||req.query.commandText == '$HZ') {
+        return res.status(200).end()
     }
-}).reply(200, 'ok')
+    next()
+}

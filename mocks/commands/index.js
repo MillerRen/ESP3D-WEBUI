@@ -10,11 +10,5 @@
 // import './❓'
 
 module.exports = function (app) {
-  app.get('/command', require('./ESP800'), require('./ESP400'), function (
-    req,
-    res,
-    next
-  ) {
-    res.status(404).end()
-  })
+  app.get('/command', require('./ESP800'), require('./ESP400'), require('./❓'), require('../notfound'))
 }

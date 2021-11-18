@@ -1,6 +1,4 @@
 
 module.exports = function (app) {
-  app.use('/upload', require('./list'), function (req, res, next) {
-    res.status(404).end()
-  })
+  app.use('/upload', require('./list'), require('../notfound'))
 }
