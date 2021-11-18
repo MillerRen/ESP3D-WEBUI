@@ -11,7 +11,7 @@
           <th translate>Filename/URI</th>
         </tr>
       </thead>
-      <tbody >
+      <tbody>
         <tr v-for="(m, index) in macros" :key="index">
           <td>
             <button
@@ -42,32 +42,22 @@
           </td>
           <td>
             <div class="btn-group" v-if="m.class">
-              <button
-                type="button"
-                class="btn btn-sm dropdown-toggle"
-                :class="'btn-' + m.class"
-              >
-                <i
-                  class="glyphicon"
-                  :class="'glyphicon-' + m.glyph"
-                  v-if="m.class"
-                ></i>
+              <button type="button" class="btn btn-sm dropdown-toggle" :class="'btn-' + m.class">
+                <i class="glyphicon" :class="'glyphicon-' + m.glyph" v-if="m.class"></i>
                 <span class="caret"></span>
               </button>
-              <ul class="dropdown-menu">
-                <li>
-                  <a href>aaa</a>
+              <ul class="dropdown-menu" style="min-width:20em">
+                <li style="width:2em;float:left" v-for="icon in icons" :key="icon">
+                  <a href >
+                    <i class="glyphicon" :class="'glyphicon-' + icon"></i>
+                  </a>
                 </li>
               </ul>
             </div>
           </td>
           <td>
             <div class="btn-group" v-if="m.class">
-              <button
-                type="button"
-                class="btn btn-sm dropdown-toggle"
-                :class="'btn-' + m.class"
-              >
+              <button type="button" class="btn btn-sm dropdown-toggle" :class="'btn-' + m.class">
                 {{ m.class }}
                 <span class="caret"></span>
               </button>
@@ -88,34 +78,22 @@
                     @click.prevent="m.class = color"
                     class="btn btn-sm"
                     :class="'btn-' + color"
-                    >{{ color }}</a
-                  >
+                  >{{ color }}</a>
                 </li>
               </ul>
             </div>
           </td>
           <td>
-            <select
-              v-model="m.target"
-              class="form-control input-sm"
-              v-if="m.class"
-              required
-            >
+            <select v-model="m.target" class="form-control input-sm" v-if="m.class" required>
               <option
                 :value="target"
                 v-for="target in ['ESP', 'SD', 'URI']"
                 :key="target"
-                >{{ target }}</option
-              >
+              >{{ target }}</option>
             </select>
           </td>
           <td>
-            <input
-              type="text"
-              class="form-control input-sm"
-              v-model="m.filename"
-              v-if="m.class"
-            />
+            <input type="text" class="form-control input-sm" v-model="m.filename" v-if="m.class" />
           </td>
         </tr>
       </tbody>
@@ -128,20 +106,24 @@
 </template>
 
 <script>
+import { ICONS_LIST } from "../../constants"
 export default {
   computed: {
-    macros () {
+    macros() {
       return this.$store.macros
+    },
+    icons() {
+      return ICONS_LIST
     }
   },
   methods: {
-    getMacros () {
+    getMacros() {
       return this.$store.getMacros()
     },
-    updateMacros () {
+    updateMacros() {
       this.$store.updateMacros(this.$store.macros)
     },
-    resetMacro (m) {
+    resetMacro(m) {
       if (m.class) {
         m.name = ''
         m.class = ''
@@ -157,7 +139,7 @@ export default {
       }
     }
   },
-  mounted () {
+  mounted() {
     this.getMacros()
   }
 }
