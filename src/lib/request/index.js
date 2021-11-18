@@ -18,7 +18,7 @@ function request (config) {
           statusText: xhr.statusText
         })
       let res = 'response' in xhr ? xhr.response : xhr.responseText
-      if (res && typeOf(res) == 'String') {
+      if (res && typeOf(res) == 'String' && res.indexOf('<')!=0) {
         try {
           res = JSON.parse(res)
         } catch (e) {

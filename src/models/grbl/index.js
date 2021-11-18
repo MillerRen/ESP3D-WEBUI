@@ -27,6 +27,8 @@ var messageTypes = constants.messageTypes
 var statusExtractor = new StatusExtractor()
 var extractor = new Extractor()
 
+var checkPositionTimer
+
 export default class Grbl {
   constructor () {
     this.fwData = null
@@ -64,6 +66,7 @@ export default class Grbl {
     }
     this.grblStatus = {}
     this.probeStatus = false
+    this.enableAutoCheckPosition = true
   }
 
   startSocket () {
@@ -409,9 +412,13 @@ export default class Grbl {
   }
 
   autoCheckPosition () {
-    var timer = setInterval(() => {
+    if (checkPositionTimer) {
+      clearInterval(checkPositionTimer)
+    }
+    if (!this.enableAutoCheckPosition || !this.interval_positions) return
+    checkPositionTimer = setInterval(() => {
       if (!this.preferences.interval_positions) {
-        clearInterval(timer)
+        clearInterval(checkPositionTimer)
       }
       this.getPosition()
     }, this.preferences.interval_positions * 1000)
