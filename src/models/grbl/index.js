@@ -283,12 +283,12 @@ export default class Grbl {
   }
 
   updatePreferences (preferences) {
-    var blob = new Blob([JSON.stringify([preferences], null, ' ')], {
+    var blob = new Blob([JSON.stringify(preferences, null, ' ')], {
       type: 'application/json'
     })
     var file = new File([blob], PREFERENCES_FILE_NAME)
 
-    return this.uploadFile(PREFERENCES_FILE_NAME, [file], '/')
+    return this.uploadFile('/files', [file], '/')
   }
 
   getConfig () {
@@ -329,12 +329,12 @@ export default class Grbl {
   }
 
   updateMacros (macros) {
-    var blob = new Blob([JSON.stringify([macros], null, ' ')], {
+    var blob = new Blob([JSON.stringify(macros, null, ' ')], {
       type: 'application/json'
     })
     var file = new File([blob], MACROS_FILE_NAME)
 
-    return this.uploadFile(MACROS_FILE_NAME, [file], '/')
+    return this.uploadFile('/files', [file], '/')
   }
 
   runMacro (macro) {

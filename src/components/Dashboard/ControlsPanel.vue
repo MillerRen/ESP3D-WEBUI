@@ -171,6 +171,9 @@ export default {
     sendZeroCommand(axis) {
       return this.$store.sendZeroCommand(axis)
     }
+  },
+  mounted () {
+    this.$store.getMacros()
   }
 };
 </script>
