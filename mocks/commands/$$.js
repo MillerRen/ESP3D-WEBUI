@@ -3,7 +3,7 @@ const grbl_config = "$0=10\n$1=25\n$2=0\n$3=0\n$4=0\n$5=0\n$6=0\n$10=1\n$11=0.01
 
 module.exports = function (req, res, next) {
     if(req.query.plain == '$$') {
-        return res.status(200).end()
+        return res.status(200).send(grbl_config)
     }
     next()
 }
