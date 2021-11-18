@@ -1,7 +1,7 @@
 <template>
     <nav class="navbar navbar-default navbar-static-top" role="navigation">
         <div class="navbar-header">
-            <button type="button" class="navbar-toggle collapsed">
+            <button type="button" class="navbar-toggle collapsed" @click="collapsed=!collapsed">
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
@@ -11,7 +11,7 @@
                 <span>{{ fwName }}</span>
             </a>
         </div>
-        <div class="collapse navbar-collapse">
+        <div class="collapse navbar-collapse" :style="{display:collapsed?'none':'block'}">
             <ul class="nav navbar-nav pull-right">
                 <li class="dropdown" v-if="fwData.ESP3D_authentication">
                     <a href="#" class="nav-link">
@@ -75,6 +75,11 @@
 <script>
 import { FIRMWARE_NAMES } from '../../constants'
 export default {
+    data () {
+        return {
+            collapsed: true
+        }
+    },
     computed: {
         fwName() {
             return FIRMWARE_NAMES[this.$store.fwData.target_firmware]
