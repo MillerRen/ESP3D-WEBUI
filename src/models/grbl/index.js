@@ -67,6 +67,7 @@ export default class Grbl {
     this.grblStatus = {}
     this.probeStatus = false
     this.enableAutoCheckPosition = true
+    this.message = ''
   }
 
   startSocket () {

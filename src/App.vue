@@ -1,5 +1,6 @@
 <template>
   <main  v-if="initialized">
+    <Toaster />
     <Navbar :fwData="fwData" />
     <Tabs v-model="mainTab" :fwData="fwData" />
     <br />
@@ -19,6 +20,7 @@ import SettingsPanel from "./components/Tabs/Settings.vue";
 import ConfigPanel from "./components/Tabs/Config.vue";
 import CameraPanel from "./components/Tabs/Camera.vue";
 import DashboardPanel from "./components/Tabs/Dashboard.vue";
+import Toaster from "./components/Common/Toaster.vue";
 
 export default {
   name: "App",
@@ -28,8 +30,9 @@ export default {
     ConfigPanel,
     DashboardPanel,
     CameraPanel,
-    SettingsPanel
-  },
+    SettingsPanel,
+    Toaster
+},
   data() {
     return {
       mainTab: "dashboard",
