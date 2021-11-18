@@ -7,10 +7,10 @@
     </div>
     <div  class="panel-body panel-flex-main">
       <div class="row">
-        <div  class="col col-md-8">
+        <div  class="col col-md-8 col-lg-6">
           <Jog :selectAxis="selectAxis.toUpperCase()" />
         </div>
-        <div class="col col-md-4">
+        <div class="col col-md-4 col-lg-6">
           <div  class="macro-container">
             <button class="btn btn-primary btn-sm" @click="openMacroModal">
               <i class="glyphicon glyphicon-plus-sign"></i>
