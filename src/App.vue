@@ -1,11 +1,15 @@
 <template>
-  <main  v-if="initialized">
+  <main v-if="initialized">
     <Toaster />
     <Navbar :fwData="fwData" />
     <Tabs v-model="mainTab" :fwData="fwData" />
     <br />
     <ConfigPanel v-if="mainTab == 'printer'" :fwData="fwData" />
-    <DashboardPanel v-if="mainTab == 'dashboard'" :fwData="fwData" :preferences="preferences" />
+    <DashboardPanel
+      v-if="mainTab == 'dashboard'"
+      :fwData="fwData"
+      :preferences="preferences"
+    />
     <CameraPanel v-if="mainTab == 'camera'" :fwData="fwData" />
     <UpdatePanel v-if="mainTab == 'update'" :fwData="fwData" />
     <SettingsPanel v-if="mainTab == 'settings'" :fwData="fwData" />
@@ -13,7 +17,6 @@
 </template>
 
 <script>
-
 import Navbar from "./components/Layout/Navbar.vue";
 import Tabs from "./components/Layout/Tabs.vue";
 import SettingsPanel from "./components/Tabs/Settings.vue";
@@ -31,102 +34,107 @@ export default {
     DashboardPanel,
     CameraPanel,
     SettingsPanel,
-    Toaster
-},
+    Toaster,
+  },
   data() {
     return {
       mainTab: "dashboard",
-      initialized: false
-    }
+      initialized: false,
+    };
   },
   computed: {
     fwData() {
-      return this.$store.fwData
+      return this.$store.fwData;
     },
     preferences() {
-      return this.$store.preferences
-    }
+      return this.$store.preferences;
+    },
   },
   methods: {
     // boot step 1
     getFWData() {
-      this.connectModal.data.bootStep = 1
-      this.connectModal.data.error = false
-      this.connectModal.okText = ''
+      this.connectModal.data.bootStep = 1;
+      this.connectModal.data.error = false;
+      this.connectModal.okText = "";
 
-      return this.$store.getFWData()
+      return this.$store
+        .getFWData()
         .then((fwData) => {
-          console.log("Fw identification:", fwData)
-          document.title = fwData.esp_hostname
+          console.log("Fw identification:", fwData);
+          document.title = fwData.esp_hostname;
           if (fwData.ESP3D_authentication) {
-            this.checkLogin()
-            return
+            this.checkLogin();
+            return;
           }
 
-          this.getSettings()
+          this.getSettings();
         })
         .catch((err) => {
-          this.connectModal.data.error = true
-          this.connectModal.okText = 'Retry'
-          console.log(err)
-        })
+          this.connectModal.data.error = true;
+          this.connectModal.okText = "Retry";
+          console.log(err);
+        });
     },
     checkLogin() {
-      return this.$store.checkLogin()
-        .then(user => {
+      return this.$store
+        .checkLogin()
+        .then((user) => {
           if (user.need_auth) {
-            this.connectModal.close()
-            this.login()
-            return
+            this.connectModal.close();
+            this.login();
+            return;
           }
-          this.getSettings()
+          this.getSettings();
         })
-        .catch(err => {
-          console.log(err)
-          this.login()
-        })
+        .catch((err) => {
+          console.log(err);
+          this.login();
+        });
     },
     login() {
-      var that = this
-      that.loginModal = this.$modal({
-        title: 'Identification requested',
-        events: {
-          success() {
-            that.loginModal.close()
-            that.boot()
-          }
-        }
-      }, 'LoginModal')
+      var that = this;
+      that.loginModal = this.$modal(
+        {
+          title: "Identification requested",
+          events: {
+            success() {
+              that.loginModal.close();
+              that.boot();
+            },
+          },
+        },
+        "LoginModal"
+      );
     },
     // boot step 2
     getSettings() {
-      this.connectModal.data.bootStep = 2
-      return this.$store.getSettings()
+      this.connectModal.data.bootStep = 2;
+      return this.$store
+        .getSettings()
         .then(() => {
-          this.getPreferences()
+          this.getPreferences();
         })
-        .catch(err => {
-          this.connectModal.message = err.message
-        })
+        .catch((err) => {
+          this.connectModal.message = err.message;
+        });
     },
     // boot step 3
     getPreferences() {
-      this.connectModal.data.bootStep = 3
-      return this.$store.getPreferences()
-        .then(() => {
-          this.connectModal.data.bootStep = 4
-          this.connectModal.close()
-          this.initialized = true
-          this.$store.startSocket()
+      this.connectModal.data.bootStep = 3;
+      return this.$store.getPreferences().then(() => {
+        this.connectModal.data.bootStep = 4;
+        this.connectModal.close();
+        this.initialized = true;
+        this.$store.startSocket();
 
-          if (this.preferences.interval_positions) {
-            this.$store.autoCheckPosition()
-          }
+        if (this.preferences.interval_positions) {
+          this.$store.autoCheckPosition();
+        }
 
-          // if (this.fwData.target_firmware == '???') {
-          //   this.setup()
-          // }
-        })
+        // if (this.fwData.target_firmware == '???') {
+        //   this.setup()
+        // }
+      });
     },
     // setup() {
     //   this.$modal({
@@ -134,30 +142,32 @@ export default {
     //   }, 'SetupModal')
     // },
     boot() {
-      var that = this
-      this.connectModal = this.$modal({
-        title: 'Connecting ESP3D...',
-        closeable: false,
-        autoClose: false,
-        data: {
-          bootStep: 0,
-          error: false
+      var that = this;
+      this.connectModal = this.$modal(
+        {
+          title: "Connecting ESP3D...",
+          closeable: false,
+          autoClose: false,
+          data: {
+            bootStep: 0,
+            error: false,
+          },
+          callback() {
+            that.getFWData();
+          },
         },
-        callback() {
-          that.getFWData()
-        }
-      }, 'ConnectModal')
-      this.getFWData()
-    }
+        "ConnectModal"
+      );
+      this.getFWData();
+    },
   },
   mounted() {
-    this.boot()
-  }
+    this.boot();
+  },
 };
 </script>
 
 <style>
-
 .loadertxt {
   position: absolute;
   top: 50%;
@@ -273,20 +283,6 @@ export default {
   width: 8em !important;
 }
 
-w14 {
-  width: 14em !important;
-}
-
-w25 {
-  width: 25em !important;
-}
-
-.w50 {
-  width: 50em !important;
-}
-
-
-
 .grid-container {
   display: grid;
   grid-gap: 10px;
@@ -294,8 +290,6 @@ w25 {
   justify-content: center;
   grid-template-columns: auto auto auto auto auto;
 }
-
-
 
 .panel-flex-col {
   display: flex;
@@ -378,24 +372,24 @@ w25 {
   text-transform: none;
 }
 
-.btn-group:hover .dropdown-menu{
+.btn-group:hover .dropdown-menu {
   display: block;
 }
 
 /* 滚动槽 */
 ::-webkit-scrollbar {
-    width: 6px;
-    height: 6px;
+  width: 6px;
+  height: 6px;
 }
 ::-webkit-scrollbar-track {
-    border-radius: 3px;
-    background: rgba(0,0,0,0.06);
-    box-shadow: inset 0 0 5px rgba(0,0,0,0.08);
+  border-radius: 3px;
+  background: rgba(0, 0, 0, 0.06);
+  box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.08);
 }
 /* 滚动条滑块 */
 ::-webkit-scrollbar-thumb {
-    border-radius: 3px;
-    background: rgba(0,0,0,0.12);
-    box-shadow: inset 0 0 10px rgba(0,0,0,0.2);
+  border-radius: 3px;
+  background: rgba(0, 0, 0, 0.12);
+  box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.2);
 }
 </style>
