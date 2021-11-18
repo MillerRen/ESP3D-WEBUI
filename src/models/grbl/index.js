@@ -288,7 +288,7 @@ export default class Grbl {
     })
     var file = new File([blob], PREFERENCES_FILE_NAME)
 
-    return this.uploadFile(PREFERENCES_FILE_NAME, [file])
+    return this.uploadFile(PREFERENCES_FILE_NAME, [file], '/')
   }
 
   getConfig () {
@@ -334,7 +334,7 @@ export default class Grbl {
     })
     var file = new File([blob], MACROS_FILE_NAME)
 
-    return this.uploadFile(MACROS_FILE_NAME, [file])
+    return this.uploadFile(MACROS_FILE_NAME, [file], '/')
   }
 
   runMacro (macro) {

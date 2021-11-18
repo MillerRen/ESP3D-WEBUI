@@ -22,7 +22,10 @@
               :key="index"
               v-show="m.class"
               @click="runMacro(m)"
-            >{{ m.name }}</button>
+            >
+            <i class="glyphicon" :class="'glyphicon-'+m.glyph"></i>
+            {{ m.name }}
+            </button>
           </div>
         </div>
         <div class="col">&nbsp;</div>
@@ -153,8 +156,13 @@ export default {
       return this.$store.motorOff()
     },
     openMacroModal() {
-      this.$modal({
-        title: 'Macro Editor'
+      var macroModal = this.$modal({
+        title: 'Macro Editor',
+        events: {
+          success () {
+            if(macroModal) macroModal.close()
+          }
+        }
       }, 'MacroModal')
     },
     runMacro(m) {

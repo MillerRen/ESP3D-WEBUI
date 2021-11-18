@@ -48,7 +48,7 @@
               </button>
               <ul class="dropdown-menu" style="min-width:20em">
                 <li style="width:2em;float:left" v-for="icon in icons" :key="icon">
-                  <a href >
+                  <a href @click.prevent="m.glyph=icon">
                     <i class="glyphicon" :class="'glyphicon-' + icon"></i>
                   </a>
                 </li>
@@ -100,7 +100,16 @@
     </table>
     <hr />
     <div class="clearfix">
-      <button type="submit" class="btn btn-primary pull-right">Save</button>
+      <!-- <div class="pull-left" id="macrodlg_upload_msg">
+        <span translate>Saving</span>
+        &nbsp;
+        <progress name="prg" id="macrodlg_prg" max="100"></progress>
+        &nbsp;
+        <span id="macrodlg_upload_percent">0</span>%
+      </div>-->
+      <div class="pull-right">
+        <button type="submit" class="btn btn-primary pull-right">Save</button>
+      </div>
     </div>
   </form>
 </template>
@@ -122,6 +131,9 @@ export default {
     },
     updateMacros() {
       this.$store.updateMacros(this.$store.macros)
+        .then(() => {
+          this.$emit('success')
+        })
     },
     resetMacro(m) {
       if (m.class) {

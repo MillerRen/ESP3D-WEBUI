@@ -1,5 +1,5 @@
-export const PREFERENCES_FILE_NAME = '/preferences.json'
-export const MACROS_FILE_NAME = '/macrocfg.json'
+export const PREFERENCES_FILE_NAME = 'preferences.json'
+export const MACROS_FILE_NAME = 'macrocfg.json'
 export const LOGIN_URL = '/login'
 export const COMMAND_URL = '/command'
 export const SPIFFS_URL = '/files'
