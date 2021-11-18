@@ -24,10 +24,6 @@
                                 </td>
                                 <td>&nbsp;&nbsp;</td>
                                 <td>
-                                    <span >{{ currentPath }}</span>
-                                </td>
-                                <td>&nbsp;&nbsp;</td>
-                                <td>
                                     <div v-if="loading" style="width:1em;height:1em" class="loader"></div>
                                 </td>
                             </tr>
