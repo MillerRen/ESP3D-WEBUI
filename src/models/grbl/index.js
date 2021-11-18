@@ -310,6 +310,16 @@ export default class Grbl {
       var macros
       if (typeof response == 'string' && response.indexOf('<HTML>') != -1) {
         macros = []
+        for(let i=0;i<9;i++) {
+          macros.push({
+            name: '',
+            glyph: '',
+            filename: '',
+            target: '',
+            class: '',
+            index: i
+        })
+        }
       } else {
         macros = response
       }
