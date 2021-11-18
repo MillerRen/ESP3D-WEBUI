@@ -78,7 +78,6 @@
                       <tr>
                         <td>
                           <div
-                            class="has-feedback"
                             :class="{ 'has-warning': item.defaultvalue != item.value }"
                           >
                             <div class="input-group">
@@ -91,10 +90,8 @@
                                 </button>
                               </span>
                               <input
-                                
                                 type="text"
-                                class="form-control"
-                                style="width:auto"
+                                class="form-control w5"
                                 v-model="item.value"
                               />
                               <span class="input-group-btn">
