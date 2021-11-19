@@ -95,7 +95,7 @@
                               </span>
                               <input
                                 type="text"
-                                class="form-control w5"
+                                class="form-control w6"
                                 v-model="item.value"
                               />
                               <span class="input-group-btn">
