@@ -1,16 +1,21 @@
 <template>
   <div class="modal-body panel-scroll">
-    <center>
+    <!-- <center>
       <select v-model="preferences.language" class="form-control">
         <option :value="lang[0]" v-for="lang in languages" :key="lang[0]" v-html="lang[1]"></option>
       </select>
     </center>
-    <br />
+    <br /> -->
     <div class="panel panel-default">
       <div class="panel-heading">
         <div class="checkbox">
           <label>
-            <input type="checkbox" v-model="preferences.enable_lock_UI" />
+            <input
+              type="checkbox"
+              v-model="preferences.enable_lock_UI"
+              true-value="true"
+              false-value="false"
+            />
             <span v-t>Enable lock interface</span>
           </label>
         </div>
@@ -20,7 +25,12 @@
       <div class="panel-heading">
         <div class="checkbox">
           <label>
-            <input type="checkbox" v-model="preferences.enable_ping" />
+            <input
+              type="checkbox"
+              v-model="preferences.enable_ping"
+              true-value="true"
+              false-value="false"
+            />
             <span v-t>Connection monitoring</span>
           </label>
         </div>
@@ -30,7 +40,12 @@
       <div class="panel-heading">
         <div class="checkbox">
           <label>
-            <input type="checkbox" v-model="preferences.enable_DHT" />
+            <input
+              type="checkbox"
+              v-model="preferences.enable_DHT"
+              true-value="true"
+              false-value="false"
+            />
             <span v-t>Show DHT output</span>
           </label>
         </div>
@@ -40,23 +55,31 @@
       <div class="panel-heading">
         <div class="checkbox">
           <label>
-            <input type="checkbox" v-model="preferences.enable_camera_panel" />
+            <input
+              type="checkbox"
+              v-model="preferences.enable_camera"
+              true-value="true"
+              false-value="false"
+            />
             <span v-t>Show camera panel</span>
           </label>
         </div>
       </div>
-      <div v-if="preferences.enable_camera_panel" class="panel-body">
+      <div v-if="preferences.enable_camera == 'true'" class="panel-body">
         <div class="checkbox">
           <label>
-            <input type="checkbox" v-model="preferences.autoload_camera_panel" />
+            <input
+              type="checkbox"
+              v-model="preferences.autoload_camera"
+              true-value="true"
+              false-value="false"
+            />
             <span v-t>Auto load camera</span>
           </label>
         </div>
         <div class="form-inline">
           <div class="form-group">
-            <span>
-              <span v-t>Camera address</span>:
-            </span>
+            <span> <span v-t>Camera address</span>: </span>
             <input
               type="text"
               class="form-control"
@@ -72,18 +95,21 @@
       <div class="panel-heading">
         <div class="checkbox">
           <label>
-            <input type="checkbox" v-model="preferences.enable_control_panel" />
+            <input
+              type="checkbox"
+              v-model="preferences.enable_control_panel"
+              true-value="true"
+              false-value="false"
+            />
             <span v-t>Show control panel</span>
           </label>
         </div>
       </div>
-      <div v-if="preferences.enable_control_panel" class="panel-body">
+      <div v-if="preferences.enable_control_panel == 'true'" class="panel-body">
         <table>
           <tr>
             <td>
-              <span>
-                <span v-t>Position Refresh Time</span>:&nbsp;
-              </span>
+              <span> <span v-t>Position Refresh Time</span>:&nbsp; </span>
             </td>
             <td>
               <div class="input-group input-group-sm has-control">
@@ -100,13 +126,16 @@
           </tr>
           <tr>
             <td>
-              <span>
-                <span v-t>XY feedrate</span>:&nbsp;
-              </span>
+              <span> <span v-t>XY feedrate</span>:&nbsp; </span>
             </td>
             <td>
               <div class="input-group input-group-sm has-control">
-                <input class="form-control" type="number" min="1" v-model="preferences.xy_feedrate" />
+                <input
+                  class="form-control"
+                  type="number"
+                  min="1"
+                  v-model="preferences.xy_feedrate"
+                />
                 <span class="input-group-addon form_control" v-t>mm/min</span>
               </div>
             </td>
@@ -136,19 +165,25 @@
       <div class="panel-heading">
         <div class="checkbox">
           <label>
-            <input type="checkbox" v-model="preferences.enable_temperatures_panel" />
+            <input
+              type="checkbox"
+              v-model="preferences.enable_temperatures_panel"
+              true-value="true"
+              false-value="false"
+            />
             <span v-t>Show temperatures panel</span>
           </label>
         </div>
       </div>
-      <div v-if="preferences.enable_temperatures_panel" class="panel-body">
+      <div
+        v-if="preferences.enable_temperatures_panel == 'true'"
+        class="panel-body"
+      >
         <div>
           <table>
             <tr>
               <td>
-                <span>
-                  <span v-t>Temperature Refresh Time</span>:&nbsp;
-                </span>
+                <span> <span v-t>Temperature Refresh Time</span>:&nbsp; </span>
               </td>
               <td>
                 <div class="input-group input-group-sm has-control">
@@ -167,25 +202,45 @@
         </div>
         <div class="checkbox">
           <label>
-            <input type="checkbox" v-model="preferences.enable_redundant" />
+            <input
+              type="checkbox"
+              v-model="preferences.enable_redundant"
+              true-value="true"
+              false-value="false"
+            />
             <span v-t>Enable heater T0 redundant temperatures</span>
           </label>
         </div>
         <div class="checkbox">
           <label>
-            <input type="checkbox" v-model="preferences.enable_probe_controls" />
+            <input
+              type="checkbox"
+              v-model="preferences.enable_probe_controls"
+              true-value="true"
+              false-value="false"
+            />
             <span v-t>Enable probe temperatures</span>
           </label>
         </div>
         <div class="checkbox">
           <label>
-            <input type="checkbox" v-model="preferences.enable_bed" />
+            <input
+              type="checkbox"
+              v-model="preferences.enable_bed"
+              true-value="true"
+              false-value="false"
+            />
             <span v-t>Enable bed controls</span>
           </label>
         </div>
         <div class="checkbox">
           <label>
-            <input type="checkbox" v-model="preferences.enable_chamber" />
+            <input
+              type="checkbox"
+              v-model="preferences.enable_chamber"
+              true-value="true"
+              false-value="false"
+            />
             <span v-t>Enable chamber controls</span>
           </label>
         </div>
@@ -195,19 +250,25 @@
       <div class="panel-heading">
         <div class="checkbox">
           <label>
-            <input type="checkbox" v-model="preferences.enable_extruder_panel" />
+            <input
+              type="checkbox"
+              v-model="preferences.enable_extruder_panel"
+              true-value="true"
+              false-value="false"
+            />
             <span v-t>Show extruder panel</span>
           </label>
         </div>
       </div>
-      <div v-if="preferences.enable_extruder_panel" class="panel-body">
+      <div
+        v-if="preferences.enable_extruder_panel == 'true'"
+        class="panel-body"
+      >
         <div>
           <table>
             <tr>
               <td>
-                <span>
-                  <span v-t>Length</span>:&nbsp;
-                </span>
+                <span> <span v-t>Length</span>:&nbsp; </span>
               </td>
               <td>
                 <div class="input-group input-group-sm has-control">
@@ -229,9 +290,7 @@
           <table>
             <tr>
               <td>
-                <span>
-                  <span v-t>E feedrate</span>:&nbsp;
-                </span>
+                <span> <span v-t>E feedrate</span>:&nbsp; </span>
               </td>
               <td>
                 <div class="input-group input-group-sm has-control">
@@ -255,13 +314,16 @@
           <table>
             <tr>
               <td>
-                <span>
-                  <span v-t>Number of extruders</span>:&nbsp;
-                </span>
+                <span> <span v-t>Number of extruders</span>:&nbsp; </span>
               </td>
               <td>
-                <select class="form-control" v-model="preferences.number_extruders">
-                  <option :value="v" v-for="v in number_extruders" :key="v">{{ v }}</option>
+                <select
+                  class="form-control"
+                  v-model="preferences.number_extruders"
+                >
+                  <option :value="v" v-for="v in number_extruders" :key="v">
+                    {{ v }}
+                  </option>
                 </select>
               </td>
             </tr>
@@ -269,13 +331,23 @@
         </div>
         <div class="checkbox">
           <label>
-            <input type="checkbox" v-model="preferences.is_mixed_extruder" />
+            <input
+              type="checkbox"
+              v-model="preferences.is_mixed_extruder"
+              true-value="true"
+              false-value="false"
+            />
             <span v-t>Mixed extruders</span>
           </label>
         </div>
         <div class="checkbox">
           <label>
-            <input type="checkbox" v-model="preferences.enable_fan" />
+            <input
+              type="checkbox"
+              v-model="preferences.enable_fan"
+              true-value="true"
+              false-value="false"
+            />
             <span v-t>Enable fan controls</span>
           </label>
         </div>
@@ -285,19 +357,22 @@
       <div class="panel-heading">
         <div class="checkbox">
           <label>
-            <input type="checkbox" v-model="preferences.enable_grbl_panel" />
+            <input
+              type="checkbox"
+              v-model="preferences.enable_grbl_panel"
+              true-value="true"
+              false-value="false"
+            />
             <span v-t>Show GRBL panel</span>
           </label>
         </div>
       </div>
-      <div v-if="preferences.enable_grbl_panel" class="panel-body">
+      <div v-if="preferences.enable_grbl_panel == 'true'" class="panel-body">
         <div>
           <table>
             <tr>
               <td>
-                <span>
-                  <span v-t>Status Refresh Time</span>:&nbsp;
-                </span>
+                <span> <span v-t>Status Refresh Time</span>:&nbsp; </span>
               </td>
               <td>
                 <div class="input-group input-group-sm has-control">
@@ -319,18 +394,24 @@
           <div class="panel-heading">
             <div class="checkbox">
               <label>
-                <input type="checkbox" v-model="preferences.enable_grbl_probe_panel" />
+                <input
+                  type="checkbox"
+                  v-model="preferences.enable_grbl_probe_panel"
+                  true-value="true"
+                  false-value="false"
+                />
                 <span v-t>Show probe panel</span>
               </label>
             </div>
           </div>
-          <div v-if="preferences.enable_grbl_probe_panel" class="panel-body">
+          <div
+            v-if="preferences.enable_grbl_probe_panel == 'true'"
+            class="panel-body"
+          >
             <table>
               <tr>
                 <td>
-                  <span>
-                    <span v-t>Max travel</span>:&nbsp;
-                  </span>
+                  <span> <span v-t>Max travel</span>:&nbsp; </span>
                 </td>
                 <td>
                   <div class="input-group input-group-sm has-control">
@@ -347,9 +428,7 @@
               </tr>
               <tr>
                 <td>
-                  <span>
-                    <span v-t>Feed rate</span>:&nbsp;
-                  </span>
+                  <span> <span v-t>Feed rate</span>:&nbsp; </span>
                 </td>
                 <td>
                   <div class="input-group input-group-sm has-control">
@@ -360,15 +439,15 @@
                       max="99999"
                       v-model="preferences.probefeedrate"
                     />
-                    <span class="input-group-addon form_control" v-t>mm/min</span>
+                    <span class="input-group-addon form_control" v-t
+                      >mm/min</span
+                    >
                   </div>
                 </td>
               </tr>
               <tr>
                 <td>
-                  <span>
-                    <span v-t>Touch plate thickness</span>:&nbsp;
-                  </span>
+                  <span> <span v-t>Touch plate thickness</span>:&nbsp; </span>
                 </td>
                 <td>
                   <div class="input-group input-group-sm has-control">
@@ -391,18 +470,24 @@
           <div class="panel-heading">
             <div class="checkbox">
               <label>
-                <input type="checkbox" v-model="preferences.enable_grbl_surface_panel" />
+                <input
+                  type="checkbox"
+                  v-model="preferences.enable_grbl_surface_panel"
+                  true-value="true"
+                  false-value="false"
+                />
                 <span v-t>Show surface panel</span>
               </label>
             </div>
           </div>
-          <div v-if="preferences.enable_grbl_surface_panel" class="panel-body">
+          <div
+            v-if="preferences.enable_grbl_surface_panel == 'true'"
+            class="panel-body"
+          >
             <table>
               <tr>
                 <td>
-                  <span>
-                    <span v-t>Surface Width (X)</span>:&nbsp;
-                  </span>
+                  <span> <span v-t>Surface Width (X)</span>:&nbsp; </span>
                 </td>
                 <td>
                   <div class="input-group input-group-sm has-control">
@@ -419,9 +504,7 @@
               </tr>
               <tr>
                 <td>
-                  <span>
-                    <span v-t>Surface Length (Y)</span>:&nbsp;
-                  </span>
+                  <span> <span v-t>Surface Length (Y)</span>:&nbsp; </span>
                 </td>
                 <td>
                   <div class="input-group input-group-sm has-control">
@@ -438,9 +521,7 @@
               </tr>
               <tr>
                 <td>
-                  <span>
-                    <span v-t>Skim Depth (-Z)</span>:&nbsp;
-                  </span>
+                  <span> <span v-t>Skim Depth (-Z)</span>:&nbsp; </span>
                 </td>
                 <td>
                   <div class="input-group input-group-sm has-control">
@@ -457,9 +538,7 @@
               </tr>
               <tr>
                 <td>
-                  <span>
-                    <span v-t>Bit Diameter</span>:&nbsp;
-                  </span>
+                  <span> <span v-t>Bit Diameter</span>:&nbsp; </span>
                 </td>
                 <td>
                   <div class="input-group input-group-sm has-control">
@@ -476,9 +555,7 @@
               </tr>
               <tr>
                 <td>
-                  <span>
-                    <span v-t>Surfacing Stepover</span>:&nbsp;
-                  </span>
+                  <span> <span v-t>Surfacing Stepover</span>:&nbsp; </span>
                 </td>
                 <td>
                   <div class="input-group input-group-sm has-control">
@@ -495,9 +572,7 @@
               </tr>
               <tr>
                 <td>
-                  <span>
-                    <span v-t>Surfacing Feedrate</span>:&nbsp;
-                  </span>
+                  <span> <span v-t>Surfacing Feedrate</span>:&nbsp; </span>
                 </td>
                 <td>
                   <div class="input-group input-group-sm has-control">
@@ -514,9 +589,7 @@
               </tr>
               <tr>
                 <td>
-                  <span>
-                    <span v-t>Surfacing Spindle RPM</span>:&nbsp;
-                  </span>
+                  <span> <span v-t>Surfacing Spindle RPM</span>:&nbsp; </span>
                 </td>
                 <td>
                   <div class="input-group input-group-sm has-control">
@@ -540,19 +613,29 @@
       <div class="panel-heading">
         <div class="checkbox">
           <label>
-            <input type="checkbox" v-model="preferences.enable_files_panel" />
+            <input
+              type="checkbox"
+              v-model="preferences.enable_files_panel"
+              true-value="true"
+              false-value="false"
+            />
             <span v-t>Show files panel</span>
           </label>
         </div>
       </div>
-      <div v-if="preferences.enable_files_panel" class="panel-body">
+      <div v-if="preferences.enable_files_panel == 'true'" class="panel-body">
         <div>
           <table>
             <tr>
               <td colspan="2">
                 <div class="checkbox">
                   <label>
-                    <input type="checkbox" v-model="preferences.has_TFT_SD" />
+                    <input
+                      type="checkbox"
+                      v-model="preferences.has_TFT_SD"
+                      true-value="true"
+                      false-value="false"
+                    />
                     <span v-t>TFT SD card</span>
                   </label>
                 </div>
@@ -562,7 +645,12 @@
               <td colspan="2">
                 <div class="checkbox">
                   <label>
-                    <input type="checkbox" v-model="preferences.has_TFT_USB" />
+                    <input
+                      type="checkbox"
+                      v-model="preferences.has_TFT_USB"
+                      true-value="true"
+                      false-value="false"
+                    />
                     <span v-t>TFT USB disk</span>
                   </label>
                 </div>
@@ -576,7 +664,11 @@
               </td>
               <td>
                 <div class="input-group input-group-sm has-control">
-                  <input class="form-control w25" type="text" v-model="preferences.f_filters" />
+                  <input
+                    class="form-control w25"
+                    type="text"
+                    v-model="preferences.f_filters"
+                  />
                   <span class="form-control-feedback ico_feedback"></span>
                 </div>
               </td>
@@ -589,21 +681,39 @@
       <div class="panel-heading">
         <div class="checkbox">
           <label>
-            <input type="checkbox" v-model="preferences.enable_commands_panel" />
+            <input
+              type="checkbox"
+              v-model="preferences.enable_commands_panel"
+              true-value="true"
+              false-value="false"
+            />
             <span v-t>Show commands panel</span>
           </label>
         </div>
       </div>
-      <div v-if="preferences.enable_commands_panel" class="panel-body">
+      <div
+        v-if="preferences.enable_commands_panel == 'true'"
+        class="panel-body"
+      >
         <div class="checkbox">
           <label>
-            <input type="checkbox" v-model="preferences.enable_autoscroll" />
+            <input
+              type="checkbox"
+              v-model="preferences.enable_autoscroll"
+              true-value="true"
+              false-value="false"
+            />
             <span v-t>Autoscroll</span>
           </label>
         </div>
         <div class="checkbox">
           <label>
-            <input type="checkbox" v-model="preferences.enable_verbose_mode" />
+            <input
+              type="checkbox"
+              v-model="preferences.enable_verbose_mode"
+              true-value="true"
+              false-value="false"
+            />
             <span v-t>Verbose mode</span>
           </label>
         </div>
@@ -613,13 +723,20 @@
       <div class="pull-left" v-if="uploading">
         <span v-t>Saving</span>
         &nbsp;
-        <progress name="prg" v-if="uploading" :value="uploadingProgress" max="100"></progress>
+        <progress
+          name="prg"
+          v-if="uploading"
+          :value="uploadingProgress"
+          max="100"
+        ></progress>
         &nbsp;
         <!-- <span >0</span>% -->
       </div>
       <span class="pull-right">&nbsp;&nbsp;</span>
       <span class="pull-right">
-        <button class="btn btn-warning" @click="$emit('cancel')" v-t>Cancel</button>
+        <button class="btn btn-warning" @click="$emit('cancel')" v-t>
+          Cancel
+        </button>
       </span>
       <span class="pull-right">&nbsp;&nbsp;</span>
       <span class="pull-right">
@@ -643,34 +760,35 @@ export default {
   data() {
     return {
       uploading: false,
-      languages: LANGUAGES
-    }
+      languages: LANGUAGES,
+    };
   },
   computed: {
     number_extruders() {
-      return this.preferences.is_mixed_extruder ? 9 : 2
+      return this.preferences.is_mixed_extruder ? 9 : 2;
     },
     uploadingProgress() {
-      return this.$store.uploadingProgress
+      return this.$store.uploadingProgress;
     },
     axes() {
-      return 'xyzabc'.slice(2, this.$store.fwData.grblaxis)
-    }
+      return "xyzabc".slice(2, this.$store.fwData.grblaxis);
+    },
   },
   methods: {
     save() {
-      this.uploading = true
-      this.$store.updatePreferences(this.preferences)
+      this.uploading = true;
+      this.$store
+        .updatePreferences(this.preferences)
         .then(() => {
-          this.uploading = false
-          this.$emit('success')
+          this.uploading = false;
+          this.$emit("success");
         })
-        .catch(err => {
-          this.uploading = false
-          console.log(err)
-        })
-    }
-  }
+        .catch((err) => {
+          this.uploading = false;
+          console.log(err);
+        });
+    },
+  },
 };
 </script>
 
