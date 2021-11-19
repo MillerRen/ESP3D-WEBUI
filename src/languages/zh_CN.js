@@ -100,6 +100,7 @@ export default {
   'Please wait...': '请稍候...',
   'Printer configuration': '打印机配置',
   'GRBL configuration': 'GRBL 配置',
+  'Configuration': '配置',
   Printer: '打印机',
   Progress: '进度',
   Protected: '受保护',
