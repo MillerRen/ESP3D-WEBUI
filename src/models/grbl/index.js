@@ -283,7 +283,7 @@ export default class Grbl {
   }
 
   updatePreferences (preferences) {
-    var blob = new Blob([JSON.stringify(preferences, null, ' ')], {
+    var blob = new Blob([JSON.stringify([preferences], null, ' ')], {
       type: 'application/json'
     })
     var file = new File([blob], PREFERENCES_FILE_NAME)
