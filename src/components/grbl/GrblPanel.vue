@@ -55,6 +55,7 @@
                     colspan="2"
                     style="text-align: left; height: 20px"
                     v-if="report.type == 'alarm'"
+                    v-t="report.input"
                   >{{ report.data.message }}</td>
                 </tr>
               </table>
