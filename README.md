@@ -15,22 +15,22 @@
 1. 适配3.0： 适配最新版本
 1. 重构ESP3D: 对ESP3D后端和通信协议进行优化
 
-## Project setup
+## 使用方法
 ```
 npm install
 ```
 
-### Compiles and hot-reloads for development
+### 启动开发环境
 ```
 npm run serve
 ```
 
-### Compiles and minifies for production
+### 编译
 ```
 npm run build
 ```
 
-### Lints and fixes files
+### 上传
 ```
-npm run lint
+上传编译好的index.html.gz文件到ESP3D
 ```
