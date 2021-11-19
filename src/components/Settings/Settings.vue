@@ -34,7 +34,7 @@
         </thead>
         <tbody v-if="settings">
           <tr v-for="(setting, index) in settings" :key="index" v-show="setting.F == settingsType">
-            <td>{{ setting.label }}</td>
+            <td v-t>{{ setting.label }}</td>
             <td>
               <div
                 class="has-feedback"
