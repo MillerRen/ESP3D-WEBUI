@@ -2,7 +2,7 @@
   <div class="panel panel-default panel-flex-col panel-min-width">
     <div class="panel-heading">
       <h3 class="panel-title">
-        <span translate>GRBL</span>
+        <span v-t>GRBL</span>
       </h3>
     </div>
 
@@ -123,7 +123,7 @@
             <ul class="nav nav-tabs" style="margin-bottom: -1px">
               <li :class="{ active: tab == 'override' }">
                 <a href class="tablinks" @click.prevent="opentab('override')">
-                  <span translate>Override</span>
+                  <span v-t>Override</span>
                 </a>
               </li>
               <li :class="{ active: tab == 'probe' }">
@@ -133,7 +133,7 @@
                   @click.prevent="opentab('probe')"
                   v-if="preferences.enable_grbl_probe_panel"
                 >
-                  <span translate>Probe</span>
+                  <span v-t>Probe</span>
                 </a>
               </li>
               <li :class="{ active: tab == 'surfacing' }">
@@ -143,7 +143,7 @@
                   @click.prevent="opentab('surfacing')"
                   v-if="preferences.enable_grbl_surface_panel"
                 >
-                  <span translate>Surfacing</span>
+                  <span v-t>Surfacing</span>
                 </a>
               </li>
             </ul>
@@ -314,7 +314,7 @@
                         style="padding: 5px 4px 0 5px"
                       >
                         <i class="glyphicon glyphicon-record"></i>
-                        <span class="button_txt" translate>Spindle</span>
+                        <span class="button_txt" v-t>Spindle</span>
                       </button>
                     </td>
                     <td>&nbsp;</td>
@@ -329,7 +329,7 @@
                         style="padding: 5px 4px 0 5px"
                       >
                         <i class="glyphicon glyphicon-tint"></i>
-                        <span class="button_txt" translate>Flood</span>
+                        <span class="button_txt" v-t>Flood</span>
                       </button>
                     </td>
                     <td>&nbsp;</td>
@@ -344,7 +344,7 @@
                         style="padding: 5px 4px 0 5px"
                       >
                         <i class="glyphicon glyphicon-cloud"></i>
-                        <span class="button_txt" translate>Mist</span>
+                        <span class="button_txt" v-t>Mist</span>
                       </button>
                     </td>
                   </tr>
@@ -356,7 +356,7 @@
                     <td>
                       <div class="input-group">
                         <span class="input-group-addon form_control">
-                          <span translate>Max travel</span>:
+                          <span v-t>Max travel</span>:
                         </span>
                         <input
                           class="form-control w4"
@@ -365,7 +365,7 @@
                           v-model="preferences.probemaxtravel"
                           onchange="onprobemaxtravelChange()"
                         />
-                        <span class="input-group-addon form_control" translate>mm</span>
+                        <span class="input-group-addon form_control" v-t>mm</span>
                       </div>
                     </td>
                   </tr>
@@ -376,7 +376,7 @@
                     <td>
                       <div class="input-group">
                         <span class="input-group-addon form_control">
-                          <span translate>Feed rate</span>:
+                          <span v-t>Feed rate</span>:
                         </span>
                         <input
                           class="form-control w4"
@@ -384,7 +384,7 @@
                           min="1"
                           v-model="preferences.probefeedrate"
                         />
-                        <span class="input-group-addon form_control" translate>mm/min</span>
+                        <span class="input-group-addon form_control" v-t>mm/min</span>
                       </div>
                     </td>
                   </tr>
@@ -395,7 +395,7 @@
                     <td>
                       <div class="input-group">
                         <span class="input-group-addon form_control">
-                          <span translate>Plate thickness</span>:
+                          <span v-t>Plate thickness</span>:
                         </span>
                         <input
                           class="form-control w5"
@@ -404,7 +404,7 @@
                           v-model="preferences.probetouchplatethickness"
                           onchange="onprobetouchplatethicknessChange()"
                         />
-                        <span class="input-group-addon form_control" translate>mm</span>
+                        <span class="input-group-addon form_control" v-t>mm</span>
                       </div>
                     </td>
                   </tr>
@@ -413,7 +413,7 @@
                 <table>
                   <tr>
                     <td nowrap translate style="vertical-align: middle">
-                      <span translate>Touch status</span>:
+                      <span v-t>Touch status</span>:
                     </td>
                     <td>
                       <i
@@ -431,7 +431,7 @@
                         <table>
                           <tr>
                             <td>
-                              <span translate>Probing...</span>
+                              <span v-t>Probing...</span>
                             </td>
                             <td>
                               <div class="loader" style="width: 2em; height: 2em"></div>
@@ -451,7 +451,7 @@
               <div v-if="tab == 'surfacing'" class="tabcontent" style="margin: auto">
                 <div class="input-group">
                   <span style="width: 150px" class="input-group-addon form_control">
-                    <span translate>Width (X)</span>:
+                    <span v-t>Width (X)</span>:
                   </span>
                   <input
                     class="form-control w4"
@@ -461,11 +461,11 @@
                     max="9999"
                     v-model="preferences.surfacewidth"
                   />
-                  <span style="width: 80px" class="input-group-addon form_control" translate>mm</span>
+                  <span style="width: 80px" class="input-group-addon form_control" v-t>mm</span>
                 </div>
                 <div class="input-group">
                   <span style="width: 150px" class="input-group-addon form_control">
-                    <span translate>Length (Y)</span>:
+                    <span v-t>Length (Y)</span>:
                   </span>
                   <input
                     class="form-control w4"
@@ -475,11 +475,11 @@
                     max="9999"
                     v-model="preferences.surfacelength"
                   />
-                  <span style="width: 80px" class="input-group-addon form_control" translate>mm</span>
+                  <span style="width: 80px" class="input-group-addon form_control" v-t>mm</span>
                 </div>
                 <div class="input-group">
                   <span style="width: 150px" class="input-group-addon form_control">
-                    <span translate>Skim Depth (Z-)</span>:
+                    <span v-t>Skim Depth (Z-)</span>:
                   </span>
                   <input
                     class="form-control w4"
@@ -489,11 +489,11 @@
                     max="999"
                     v-model="preferences.surfacezdepth"
                   />
-                  <span style="width: 80px" class="input-group-addon form_control" translate>mm</span>
+                  <span style="width: 80px" class="input-group-addon form_control" v-t>mm</span>
                 </div>
                 <div class="input-group">
                   <span style="width: 150px" class="input-group-addon form_control">
-                    <span translate>Bit Diameter</span>:
+                    <span v-t>Bit Diameter</span>:
                   </span>
                   <input
                     class="form-control w4"
@@ -503,11 +503,11 @@
                     max="999"
                     v-model="preferences.surfacebitdiam"
                   />
-                  <span style="width: 80px" class="input-group-addon form_control" translate>mm</span>
+                  <span style="width: 80px" class="input-group-addon form_control" v-t>mm</span>
                 </div>
                 <div class="input-group">
                   <span style="width: 150px" class="input-group-addon form_control">
-                    <span translate>Stepover</span>:
+                    <span v-t>Stepover</span>:
                   </span>
                   <input
                     class="form-control w4"
@@ -517,11 +517,11 @@
                     max="99"
                     v-model="preferences.surfacestepover"
                   />
-                  <span style="width: 80px" class="input-group-addon form_control" translate>%</span>
+                  <span style="width: 80px" class="input-group-addon form_control" v-t>%</span>
                 </div>
                 <div class="input-group">
                   <span style="width: 150px" class="input-group-addon form_control">
-                    <span translate>Feedrate</span>:
+                    <span v-t>Feedrate</span>:
                   </span>
                   <input
                     class="form-control w4"
@@ -531,11 +531,11 @@
                     max="10000"
                     v-model="preferences.surfacefeedrate"
                   />
-                  <span style="width: 80px" class="input-group-addon form_control" translate>mm/min</span>
+                  <span style="width: 80px" class="input-group-addon form_control" v-t>mm/min</span>
                 </div>
                 <div class="input-group">
                   <span style="width: 150px" class="input-group-addon form_control">
-                    <span translate>Spindle RPM</span>:
+                    <span v-t>Spindle RPM</span>:
                   </span>
                   <input
                     class="form-control w4"
@@ -545,7 +545,7 @@
                     max="50000"
                     v-model="preferences.surfacespindle"
                   />
-                  <span style="width: 80px" class="input-group-addon form_control" translate>RPM</span>
+                  <span style="width: 80px" class="input-group-addon form_control" v-t>RPM</span>
                 </div>
                 <br />
                 <table>
@@ -555,7 +555,7 @@
                         <table>
                           <tr>
                             <td>
-                              <span translate>Surfacing...</span>
+                              <span v-t>Surfacing...</span>
                             </td>
                             <td>
                               <div class="loader" style="width: 2em; height: 2em"></div>
@@ -584,7 +584,7 @@
         </button>&nbsp;
         <div class="input-group input-group-sm">
           <span class="input-group-addon">
-            <span translate>auto-check every:</span>
+            <span v-t>auto-check every:</span>
             <input
               type="checkbox"
               v-model="$store.enableAutoCheckPosition"
@@ -599,7 +599,7 @@
             v-model="preferences.interval_positions"
             @change="autoCheckPosition"
           />
-          <span class="input-group-addon form_control" translate>sec</span>
+          <span class="input-group-addon form_control" v-t>sec</span>
         </div>
       </div>
     </div>

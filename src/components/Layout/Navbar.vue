@@ -7,7 +7,7 @@
                 <span class="icon-bar"></span>
             </button>
             <a class="navbar-brand" @click.prevent="creditsdlg()" href>
-                <span translate>ESP3D for </span>
+                <span v-t>ESP3D for </span>
                 <span>{{ fwName }}</span>
             </a>
         </div>
@@ -29,7 +29,7 @@
                                 
                                 class="hidden"
                             >
-                                <span class="pull-right" translate>Password</span>
+                                <span class="pull-right" v-t>Password</span>
                                 <span class="pull-left">
                                     <i class="glyphicon glyphicon-key"></i>
                                 </span>
@@ -38,7 +38,7 @@
                         </li>
                         <li>
                             <a href="#" @click="logindlg()">
-                                <span class="pull-right" translate>Login</span>
+                                <span class="pull-right" v-t>Login</span>
                                 <span class="pull-left">
                                     <i class="glyphicon glyphicon-login"></i>
                                 </span>
@@ -53,7 +53,7 @@
                                 
                                 class="hidden"
                             >
-                                <span class="pull-right" translate>Log out</span>
+                                <span class="pull-right" v-t>Log out</span>
                                 <span class="pull-left">
                                     <i class="glyphicon glyphicon-logout"></i>
                                 </span>

@@ -2,7 +2,7 @@
   <div  class="tabcontent">
     <center>
       <h2 >
-        <span translate>Printer configuration</span>
+        <span v-t>Printer configuration</span>
       </h2>
       <button
         type="button"
@@ -64,9 +64,9 @@
           >
             <thead>
               <tr>
-                <th width="0%" translate>Label</th>
-                <th width="auto" translate>Value</th>
-                <th width="0%" translate>Help</th>
+                <th width="0%" v-t>Label</th>
+                <th width="auto" v-t>Value</th>
+                <th width="0%" v-t>Help</th>
               </tr>
             </thead>
             <tbody >

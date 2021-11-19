@@ -57,7 +57,7 @@
             @click="levelup()"
           >
             <i class="glyphicon glyphicon-level-up"></i>&nbsp;&nbsp;
-            <span translate>Up...</span>
+            <span v-t>Up...</span>
           </li>
           <li class="list-group-item list-group-hover" v-for="file in data.files" :key="file.name">
             <div class="row">
@@ -93,18 +93,18 @@
             <div class="form-group">
               <div class="form-control-static">
                 <span>
-                  <span translate>Total:</span>&nbsp;
+                  <span v-t>Total:</span>&nbsp;
                   <span>{{ data.total }}</span>
                 </span>
                 <span>&nbsp;|&nbsp;</span>
                 <span>
-                  <span translate>Used:</span>&nbsp;
+                  <span v-t>Used:</span>&nbsp;
                   <span>{{ data.used }}</span>
                 </span>
                 <span>&nbsp;</span>
                 <span class="noshowonlowres">| &nbsp;</span>
                 <span>
-                  <span translate>Occupation:</span>
+                  <span v-t>Occupation:</span>
                   <meter style="width:150px" min="0" max="100" high="90" :value="data.occupation"></meter>
                 </span>
                 <span>{{ data.occupation }}</span>

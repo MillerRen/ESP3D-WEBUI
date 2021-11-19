@@ -6,25 +6,25 @@
       <li :class="{ active: value == 'dashboard' }">
         <a href=" " @click.prevent="opentab('dashboard')">
           <i class="glyphicon glyphicon-dashboard"></i>
-        <span translate>Dashboard</span>
+        <span v-t>Dashboard</span>
         </a>
       </li>
       <li v-if="preferences.enable_camera == 'true'" :class="{ active: value == 'camera' }">
         <a href=" " @click.prevent="opentab('camera')">
           <i class="glyphicon glyphicon-camera"></i>
-        <span translate>Camera</span>
+        <span v-t>Camera</span>
         </a>
       </li>
       <li :class="{ active: value == 'printer' }">
         <a href=" " @click.prevent="opentab('printer')">
           <i class="glyphicon glyphicon-wrench"></i>
-          <span translate>Machine</span>
+          <span v-t>Machine</span>
         </a>
       </li>
       <li :class="{ active: value == 'settings' }">
         <a href=" " @click.prevent="opentab('settings')">
          <i class="glyphicon glyphicon-tasks"></i>
-        <span translate>ESP3D</span>
+        <span v-t>ESP3D</span>
         </a>
       </li>
     </ul>

@@ -4,11 +4,11 @@
       <thead>
         <tr>
           <th></th>
-          <th translate>Name</th>
-          <th translate>Icon</th>
-          <th translate>Color</th>
-          <th translate>Target</th>
-          <th translate>Filename/URI</th>
+          <th v-t>Name</th>
+          <th v-t>Icon</th>
+          <th v-t>Color</th>
+          <th v-t>Target</th>
+          <th v-t>Filename/URI</th>
         </tr>
       </thead>
       <tbody>
@@ -101,7 +101,7 @@
     <hr />
     <div class="clearfix">
       <!-- <div class="pull-left" id="macrodlg_upload_msg">
-        <span translate>Saving</span>
+        <span v-t>Saving</span>
         &nbsp;
         <progress name="prg" id="macrodlg_prg" max="100"></progress>
         &nbsp;

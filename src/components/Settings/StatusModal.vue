@@ -18,7 +18,7 @@
                             <div class="loader" v-if="loading"></div>
                         </td>
                         <td>
-                            <button class="btn btn-warning" @click="$emit('cancel')" translate>Close</button>
+                            <button class="btn btn-warning" @click="$emit('cancel')" v-t>Close</button>
                         </td>
                         <td>
                             <span class>&nbsp;&nbsp;</span>

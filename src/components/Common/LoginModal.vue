@@ -13,7 +13,7 @@
         <p class="control-static text-danger">{{msg}}</p>
       </div>
       <div class="form-group">
-        <button type="submit" class="btn btn-primary" translate>
+        <button type="submit" class="btn btn-primary" v-t>
           Submit
         </button>
       </div>

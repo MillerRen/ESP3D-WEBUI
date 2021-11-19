@@ -2,7 +2,7 @@
     <div  class="panel panel-default panel-flex-col">
         <div class="panel-heading">
             <b>
-                <span translate>Commands</span>
+                <span v-t>Commands</span>
             </b>
             <button
                 
@@ -30,7 +30,7 @@
                                 required
                             />
                             <span class="input-group-btn">
-                                <button type="submit" class="btn btn-success" translate>Send</button>
+                                <button type="submit" class="btn btn-success" v-t>Send</button>
                             </span>
                         </div>
                     </div>
@@ -39,13 +39,13 @@
                         <div class="checkbox">
                             <label>
                                 <input type="checkbox" v-model="preferences.enable_autoscroll" />
-                                <span translate>Autoscroll</span>
+                                <span v-t>Autoscroll</span>
                             </label>
                         </div>&nbsp;&nbsp;
                         <div class="checkbox">
                             <label>
                                 <input type="checkbox" v-model="preferences.enable_verbose_mode" />
-                                <span translate>Verbose mode</span>
+                                <span v-t>Verbose mode</span>
                             </label>
                         </div>
                     </div>

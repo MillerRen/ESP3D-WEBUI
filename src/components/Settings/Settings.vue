@@ -17,7 +17,7 @@
               v-model="settingsType"
               value="network"
             />
-            <span translate>Network</span>
+            <span v-t>Network</span>
           </label>
         </div>
         <div class="radio-inline">
@@ -29,7 +29,7 @@
               v-model="settingsType"
               value="printer"
             />
-            <span translate>Printer</span>
+            <span v-t>Printer</span>
           </label>
         </div>
       </span>
@@ -41,8 +41,8 @@
       >
         <thead>
           <tr>
-            <th translate>Label</th>
-            <th translate>Value</th>
+            <th v-t>Label</th>
+            <th v-t>Value</th>
           </tr>
         </thead>
         <tbody v-if="settings">

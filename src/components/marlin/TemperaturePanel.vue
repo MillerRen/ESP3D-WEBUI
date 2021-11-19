@@ -5,7 +5,7 @@
                 <div class="col-md-12">
                     <div class="pull-left">
                         <b>
-                            <span translate>Temperatures</span>
+                            <span v-t>Temperatures</span>
                         </b>
                     </div>
                     <!-- <div class="pull-right">
@@ -20,7 +20,7 @@
                                                 v-model="preferences.autocheck_temperature"
                                                 onclick="on_autocheck_temperature()"
                                             />
-                                            <span translate>auto-check every:</span>
+                                            <span v-t>auto-check every:</span>
                                         </label>
                                     </td>
                                 </tr>
@@ -36,7 +36,7 @@
                                             v-model="preferences.tempInterval_check"
                                             onchange="onTempIntervalChange()"
                                         />
-                                        <span class="input-group-addon form_control" translate>sec</span>
+                                        <span class="input-group-addon form_control" v-t>sec</span>
                                     </td>
                                 </tr>
                             </table>
@@ -49,15 +49,15 @@
             <table class="table table-responsive">
                 <thead>
                     <tr>
-                        <th translate>Name</th>
-                        <th translate>Options</th>
+                        <th v-t>Name</th>
+                        <th v-t>Options</th>
                         <th translate nowrap>Value | Target</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
                         <td>
-                            <span translate>Heater T0</span>
+                            <span v-t>Heater T0</span>
                         </td>
                         <td>
                             <div class="panel-flex-row">
@@ -124,7 +124,7 @@
                     </tr>
                     <tr  class="hidden">
                         <td>
-                            <span translate>Redundant</span>
+                            <span v-t>Redundant</span>
                         </td>
                         <td>
                             <div class="panel-flex-row">
@@ -144,7 +144,7 @@
                     </tr>
                     <tr  class="hidden">
                         <td>
-                            <span translate>Heater T1</span>
+                            <span v-t>Heater T1</span>
                         </td>
                         <td>
                             <div class="panel-flex-row">
@@ -212,7 +212,7 @@
                     </tr>
                     <tr  class="hidden">
                         <td>
-                            <span translate>Probe</span>
+                            <span v-t>Probe</span>
                         </td>
                         <td>
                             <div class="panel-flex-row">
@@ -232,7 +232,7 @@
                     </tr>
                     <tr  class="hidden">
                         <td>
-                            <span translate>Bed</span>
+                            <span v-t>Bed</span>
                         </td>
                         <td>
                             <div class="panel-flex-row">
@@ -303,7 +303,7 @@
                     </tr>
                     <tr  class="hidden">
                         <td>
-                            <span translate>Chamber</span>
+                            <span v-t>Chamber</span>
                         </td>
                         <td>
                             <div class="panel-flex-row">

@@ -2,7 +2,7 @@
     <div  class="tabcontent">
         <center>
             <h2>
-                <span translate>ESP3D Settings</span>
+                <span v-t>ESP3D Settings</span>
             </h2>
             <table>
                 <tr>

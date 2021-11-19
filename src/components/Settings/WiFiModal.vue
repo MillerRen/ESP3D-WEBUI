@@ -6,22 +6,22 @@
         <div class="modal-header">
             <span class="close" onclick="closeModal('cancel')"><b>&times;</b></span>
             <h3>
-                <div class="modal-title"><span translate>List of available Access Points</span></div>
+                <div class="modal-title"><span v-t>List of available Access Points</span></div>
             </h3>
         </div>
         <div class="modal-body">
             <center>
-                <span  translate>Scanning</span>
+                <span  v-t>Scanning</span>
                 <div class="loader hidden" ></div>
                 <span class='hidden' >
                     <div class="table-responsive">
                         <table class="table table-bordered table-striped">
                             <thead class="noshowonlowrestab">
                                 <tr>
-                                    <th translate>SSID</th>
-                                    <th translate>Signal</th>
-                                    <th translate>Protected</th>
-                                    <th translate>Join</th>
+                                    <th v-t>SSID</th>
+                                    <th v-t>Signal</th>
+                                    <th v-t>Protected</th>
+                                    <th v-t>Join</th>
                                 </tr>
                             </thead>
                             <tbody ></tbody>
@@ -35,7 +35,7 @@
                 <table>
                     <tr>
                         <td>
-                            <button class="btn btn-warning " onclick="closeModal('cancel') " translate>Close</button>
+                            <button class="btn btn-warning " onclick="closeModal('cancel') " v-t>Close</button>
                         </td>
                         <td>
                             <span class=""> &nbsp;&nbsp;</span>

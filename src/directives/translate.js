@@ -1,12 +1,17 @@
 // simple translate directive
 const lang = process.env.VUE_APP_LANG
-const trans = require(`../languages/${lang}`).default
+const messages = require(`../languages/${lang}`).default
+
+function translate (el, binding) {
+  let key = binding.value || el.textContent
+  el.textContent = messages[key] || key // translate and fallback
+}
 
 export default {
-  bind (el) {
-    el.textContent = trans[el.textContent]
+  bind () {
+    translate.apply(this,arguments)
   },
-  update(el) {
-    el.textContent = trans[el.textContent]
+  update() {
+    translate.apply(this,arguments)
   }
 }

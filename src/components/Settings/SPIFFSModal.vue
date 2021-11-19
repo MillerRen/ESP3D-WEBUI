@@ -83,9 +83,9 @@
             <table class="table table-striped" style="margin-bottom:20px;">
                 <thead>
                     <tr>
-                        <th width="0%" translate>Type</th>
-                        <th width="auto" translate>Name</th>
-                        <th translate>Size</th>
+                        <th width="0%" v-t>Type</th>
+                        <th width="auto" v-t>Name</th>
+                        <th v-t>Size</th>
                         <th width="0%"></th>
                     </tr>
                 </thead>

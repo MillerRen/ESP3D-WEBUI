@@ -2,7 +2,7 @@
   <div  class="panel panel-default panel-flex-col panel-min-width">
     <div class="panel-heading">
       <h3 class="panel-title">
-        <span translate>Controls</span>
+        <span v-t>Controls</span>
       </h3>
     </div>
     <div  class="panel-body panel-flex-main">
@@ -93,7 +93,7 @@
         <div class="input-group input-group-sm">
           <span class="input-group-addon form_control">XY:</span>
           <input class="form-control w8" type="number" min="1" v-model="preferences.xy_feedrate" />
-          <span class="input-group-addon form_control" translate>mm/min</span>
+          <span class="input-group-addon form_control" v-t>mm/min</span>
         </div>&nbsp;
         <div class="input-group input-group-sm">
           <span class="input-group-addon form_control" >{{selectAxis.toUpperCase()}}:</span>
@@ -101,7 +101,7 @@
             <option :value="axes" v-for="axes in axis.slice(2)" :key="axes">{{axes}}</option>
           </select>
           <input class="form-control w5" type="number" min="1" v-model="preferences[selectAxis+'_feedrate']" />
-          <span class="input-group-addon form_control" translate>mm/min</span>
+          <span class="input-group-addon form_control" v-t>mm/min</span>
         </div>
       </div>
     </div>

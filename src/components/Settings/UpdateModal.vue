@@ -54,7 +54,7 @@
         <br>
         <div class="restarting-msg text-center" v-if="restartingProgress">
                     <progress name="prgfw" max="100" :value="restartingProgress" ></progress>
-                    <span  translate>&nbsp; Restarting, please wait....</span>
+                    <span  v-t>&nbsp; Restarting, please wait....</span>
         </div>
         <br>
         <div v-if="errmsg" class="errmsg text-danger">{{ errmsg }}</div>

@@ -5,7 +5,7 @@
                 <div class="col-md-12">
                     <div class="pull-left">
                         <b>
-                            <span translate>Extruders</span>
+                            <span v-t>Extruders</span>
                         </b>
                     </div>
                 </div>
@@ -17,12 +17,12 @@
                     <div class="row">
                         <div class="col-md-4">
                             <b>
-                                <label translate>Name</label>
+                                <label v-t>Name</label>
                             </b>
                         </div>
                         <div class="col-md-8">
                             <b>
-                                <label translate>Options</label>
+                                <label v-t>Options</label>
                             </b>
                         </div>
                     </div>
@@ -33,7 +33,7 @@
                             <table>
                                 <tr>
                                     <td>
-                                        <span translate>Extruder</span>
+                                        <span v-t>Extruder</span>
                                     </td>
                                     <td>&nbsp;</td>
                                     <td >
@@ -71,7 +71,7 @@
                 <li class="list-group-item hidden" >
                     <div class="row">
                         <div class="col-md-4">
-                            <span translate>Extruder T0</span>
+                            <span v-t>Extruder T0</span>
                         </div>
                         <div class="col-md-8">
                             <div class="form-inline">
@@ -94,7 +94,7 @@
                 <li class="list-group-item hidden" >
                     <div class="row">
                         <div class="col-md-4">
-                            <span translate>Extruder T1</span>
+                            <span v-t>Extruder T1</span>
                         </div>
                         <div class="col-md-8">
                             <div class="form-inline">
@@ -117,7 +117,7 @@
                 <li class="list-group-item">
                     <div class="row">
                         <div class="col-md-4">
-                            <span translate>Flow (50-300%)</span>&nbsp;
+                            <span v-t>Flow (50-300%)</span>&nbsp;
                             <span ></span>
                         </div>
                         <div class="col-md-8">
@@ -177,7 +177,7 @@
                 <li class="list-group-item">
                     <div class="row">
                         <div class="col-md-4">
-                            <span translate>Feed (25-150%)</span>&nbsp;
+                            <span v-t>Feed (25-150%)</span>&nbsp;
                             <span ></span>
                         </div>
                         <div class="col-md-8">
@@ -237,7 +237,7 @@
                 <li class="list-group-item hidden" >
                     <div class="row">
                         <div class="col-md-4">
-                            <span translate>Fan (0-100%)</span>
+                            <span v-t>Fan (0-100%)</span>
                         </div>
                         <div class="col-md-8">
                             <div class="panel-flex-row">
@@ -300,7 +300,7 @@
                     <tr>
                         <td>
                             <div class="input-group">
-                                <span class="input-group-addon form_control" translate>Extrude</span>
+                                <span class="input-group-addon form_control" v-t>Extrude</span>
                                 <input class="hidden" />
                             </div>
                         </td>
@@ -322,7 +322,7 @@
                         <td>
                             <div class="input-group">
                                 <input class="hidden" />
-                                <span class="input-group-addon form_control" translate>mm</span>
+                                <span class="input-group-addon form_control" v-t>mm</span>
                             </div>
                         </td>
                     </tr>
@@ -352,7 +352,7 @@
                         <td>
                             <div class="input-group">
                                 <input class="hidden" />
-                                <span class="input-group-addon form_control" translate>mm/min</span>
+                                <span class="input-group-addon form_control" v-t>mm/min</span>
                             </div>
                         </td>
                     </tr>
