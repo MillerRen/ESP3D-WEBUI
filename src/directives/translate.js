@@ -4,6 +4,7 @@ const messages = require(`../languages/${lang}`).default
 
 function translate (el, binding) {
   let key = binding.value || el.textContent
+  key = key.trim()
   el.textContent = messages[key] || key // translate and fallback
 }
 
