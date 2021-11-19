@@ -1,9 +1,9 @@
 <template>
   <div class="tabcontent">
     <center>
-      <h2>
+      <!-- <h2>
         <span v-t>ESP3D Settings</span>
-      </h2>
+      </h2> -->
       <div class="btn-toolbar" style="display:inline-block">
         <button type="button" class="btn btn-info" @click="showStatusModal">
           <i class="glyphicon glyphicon-th-list"></i>
