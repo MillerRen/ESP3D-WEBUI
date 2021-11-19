@@ -42,7 +42,7 @@
           
           class="btn btn-primary btn-xs"
           @click="motorsOff()"
-          translate
+          v-t
         >Motors off</button>
       </div>
       <br />

@@ -18,7 +18,7 @@
       <li :class="{ active: value == 'printer' }">
         <a href=" " @click.prevent="opentab('printer')">
           <i class="glyphicon glyphicon-wrench"></i>
-          <span v-t>Machine</span>
+          <span v-t>Config</span>
         </a>
       </li>
       <li :class="{ active: value == 'settings' }">

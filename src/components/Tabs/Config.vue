@@ -1,23 +1,18 @@
 <template>
-  <div  class="tabcontent">
+  <div class="tabcontent">
     <center>
-      <h2 >
+      <h2>
         <span v-t>Printer configuration</span>
       </h2>
-      <button
-        type="button"
-        
-        class="btn btn-primary"
-        @click="refreshConfig();"
-      >
+      <button type="button" class="btn btn-primary" @click="refreshConfig()">
         <i class="glyphicon glyphicon-refresh"></i>
       </button>
       <br />
-      <span ></span>
+      <span></span>
       <hr />
       <div class="loader" v-show="loading"></div>
-      <div >
-        <div  v-if="fwData.target_firmware == 'smoothieware'">
+      <div>
+        <div v-if="fwData.target_firmware == 'smoothieware'">
           <center>
             <table>
               <tr>
@@ -26,12 +21,11 @@
                     <label>
                       <input
                         type="radio"
-                        
                         name="config_filter"
                         value="config"
                         onclick="config_display_override(false);"
                       />
-                      <span >config</span>
+                      <span v-t>config</span>
                     </label>
                   </div>
                 </td>
@@ -40,12 +34,11 @@
                     <label>
                       <input
                         type="radio"
-                        
                         name="config_filter"
                         value="override"
                         onclick="config_display_override(true);"
                       />
-                      <span >smoothieware</span>
+                      <span>smoothieware</span>
                     </label>
                   </div>
                 </td>
@@ -53,9 +46,11 @@
             </table>
           </center>
         </div>
-        <div >
+        <div>
           <table
-            class="table table-bordered table-striped table-hover table-responsive"
+            class="
+              table table-bordered table-striped table-hover table-responsive
+            "
             style="
               width: auto;
               max-width: 90% !important;
@@ -69,16 +64,18 @@
                 <th width="0%" v-t>Help</th>
               </tr>
             </thead>
-            <tbody >
+            <tbody>
               <tr v-for="item in config" :key="item.lable">
-                <td style="vertical-align:middle">{{ item.label }}</td>
-                <td style="vertical-align:middle;">
+                <td style="vertical-align: middle">{{ item.label }}</td>
+                <td style="vertical-align: middle">
                   <table>
                     <tbody>
                       <tr>
                         <td>
                           <div
-                            :class="{ 'has-warning': item.defaultvalue != item.value }"
+                            :class="{
+                              'has-warning': item.defaultvalue != item.value,
+                            }"
                           >
                             <div class="input-group">
                               <span class="input-group-btn">
@@ -96,12 +93,12 @@
                               />
                               <span class="input-group-btn">
                                 <button
-                                  
                                   class="btn btn-default"
                                   @click="updateConfig(item)"
-                                  translate
-                                  english_content="Set"
-                                >Set</button>&nbsp;
+                                  v-t
+                                >
+                                  Set</button
+                                >&nbsp;
                               </span>
                             </div>
                           </div>
@@ -110,7 +107,7 @@
                     </tbody>
                   </table>
                 </td>
-                <td style="vertical-align:middle">{{ item.help }}</td>
+                <td style="vertical-align: middle" v-t>{{ item.help }}</td>
               </tr>
             </tbody>
           </table>
@@ -175,61 +172,62 @@
 </template>
 
 <script>
-
 export default {
   props: {
     fwData: {
       type: Object,
       default() {
-        return {}
-      }
-    }
+        return {};
+      },
+    },
   },
   data() {
     return {
-      loading: false
-    }
+      loading: false,
+    };
   },
   computed: {
     config() {
-      return this.$store.config
-    }
+      return this.$store.config;
+    },
   },
   methods: {
     refreshConfig() {
-      this.loading = true
-      return this.$store.getConfig()
-        .catch(err => {
+      this.loading = true;
+      return this.$store
+        .getConfig()
+        .catch((err) => {
           this.$modal({
-            title: 'Get Config failed',
-            message: 'Error' + err.message
-          })
+            title: "Get Config failed",
+            message: "Error" + err.message,
+          });
         })
         .finally(() => {
-          this.loading = false
-        })
+          this.loading = false;
+        });
     },
     updateConfig(item) {
-      this.loading = true
-      return this.$store.updateConfig(item.cmd + item.value)
+      this.loading = true;
+      return this.$store
+        .updateConfig(item.cmd + item.value)
         .then((reponse) => {
-          if (reponse == 'ok') {
-            item.defaultValue = item.value
+          if (reponse == "ok") {
+            item.defaultValue = item.value;
           }
         })
         .catch((err) => {
           this.$modal({
-            title: 'Set failed',
-            message: 'Error' + err.message
-          })
+            title: "Set failed",
+            message: "Error" + err.message,
+          });
         })
         .finally(() => {
-          this.loading = false
-        })
-    }
+          this.loading = false;
+        });
+    },
   },
   mounted() {
-    this.refreshConfig()
-  }
-}
+    this.refreshConfig();
+  },
+};
 </script>

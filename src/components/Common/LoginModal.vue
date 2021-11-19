@@ -2,11 +2,11 @@
   <div class="modal-body">
     <form class="form" @submit.prevent="submit">
       <div class="form-group">
-        <label for="" class="form-control-label">User:</label>
+        <label for="" class="form-control-label" v-t>User:</label>
         <input type="text" class="form-control" required v-model="user.user" />
       </div>
       <div class="form-group">
-        <label for="" class="form-control-label">Password:</label>
+        <label for="" class="form-control-label" v-t>Password:</label>
         <input type="password" class="form-control" required v-model="user.password" />
       </div>
       <div class="form-grou">

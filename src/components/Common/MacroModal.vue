@@ -108,7 +108,7 @@
         <span id="macrodlg_upload_percent">0</span>%
       </div>-->
       <div class="pull-right">
-        <button type="submit" class="btn btn-primary pull-right">Save</button>
+        <button type="submit" class="btn btn-primary pull-right" v-t>Save</button>
       </div>
     </div>
   </form>

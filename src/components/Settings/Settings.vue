@@ -2,33 +2,20 @@
   <div class="container-fluid">
     <center>
       <span
-        
         v-if="
           fwData.target_firmware != 'grbl-embedded' &&
-            fwData.target_firmware != 'marlin-embedded'
+          fwData.target_firmware != 'marlin-embedded'
         "
       >
         <div class="radio-inline">
           <label>
-            <input
-              type="radio"
-              
-              name="setting_filter"
-              v-model="settingsType"
-              value="network"
-            />
+            <input type="radio" name="setting_filter" v-model="settingsType" value="network" />
             <span v-t>Network</span>
           </label>
         </div>
         <div class="radio-inline">
           <label>
-            <input
-              type="radio"
-              
-              name="setting_filter"
-              v-model="settingsType"
-              value="printer"
-            />
+            <input type="radio" name="setting_filter" v-model="settingsType" value="printer" />
             <span v-t>Printer</span>
           </label>
         </div>
@@ -46,11 +33,7 @@
           </tr>
         </thead>
         <tbody v-if="settings">
-          <tr
-            v-for="(setting, index) in settings"
-            :key="index"
-            v-show="setting.F == settingsType"
-          >
+          <tr v-for="(setting, index) in settings" :key="index" v-show="setting.F == settingsType">
             <td>{{ setting.label }}</td>
             <td>
               <div
@@ -84,21 +67,10 @@
                     v-if="setting.Options.length"
                     class="form-control"
                   >
-                    <option
-                      v-for="o in setting.Options"
-                      :key="o.id"
-                      :value="o.id"
-                      >{{ o.display }}</option
-                    >
+                    <option v-for="o in setting.Options" :key="o.id" :value="o.id">{{ o.display }}</option>
                   </select>
                   <span class="input-group-btn">
-                    <button
-                      class="btn btn-default"
-                      type="button"
-                      @click="setValue(setting)"
-                    >
-                      set
-                    </button>
+                    <button class="btn btn-default" type="button" @click="setValue(setting)">set</button>
                   </span>
                 </div>
               </div>
@@ -112,7 +84,7 @@
 
 <script>
 export default {
-  data () {
+  data() {
     return {
       settingsType: 'network',
       loading: false,
@@ -120,21 +92,21 @@ export default {
     }
   },
   computed: {
-    settings () {
+    settings() {
       return this.$store.settings
     },
-    fwData () {
+    fwData() {
       return this.$store.fwData
     }
   },
   methods: {
-    setValue (setting) {
+    setValue(setting) {
       this.loading = true
       this.$store
         .updateSettings(setting.cmd + setting.value)
         .then((response) => {
           this.loading = false
-          if(response == 'ok') {
+          if (response == 'ok') {
             setting.defaultvalue = setting.value
           }
         })
@@ -143,7 +115,7 @@ export default {
           this.errmsg = err
         })
     },
-    refreshSettings () {
+    refreshSettings() {
       this.loading = true
       this.$store
         .getSettings()
@@ -157,7 +129,7 @@ export default {
           this.loading = false
         })
     },
-    revertToDefaultValue (setting) {
+    revertToDefaultValue(setting) {
       setting.value = setting.defaultvalue
     }
   }
