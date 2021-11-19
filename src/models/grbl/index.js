@@ -426,7 +426,7 @@ export default class Grbl {
     if (checkPositionTimer) {
       clearInterval(checkPositionTimer)
     }
-    if (!this.enableAutoCheckPosition || !this.interval_positions) return
+    if (!this.enableAutoCheckPosition || !this.preferences.interval_positions) return
     checkPositionTimer = setInterval(() => {
       if (!this.preferences.interval_positions) {
         clearInterval(checkPositionTimer)
