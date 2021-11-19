@@ -132,7 +132,7 @@
                   href
                   class="tablinks"
                   @click.prevent="opentab('probe')"
-                  v-if="preferences.enable_grbl_probe_panel"
+                  v-if="preferences.enable_grbl_probe_panel=='true'"
                 >
                   <span v-t>Probe</span>
                 </a>
@@ -142,7 +142,7 @@
                   href
                   class="tablinks"
                   @click.prevent="opentab('surfacing')"
-                  v-if="preferences.enable_grbl_surface_panel"
+                  v-if="preferences.enable_grbl_surface_panel=='true'"
                 >
                   <span v-t>Surfacing</span>
                 </a>
@@ -443,7 +443,7 @@
                       <button
                         class="btn btn-primary"
                         @click="startProbeProcess()"
-                        translate
+                        v-t
                       >Start Probe</button>
                     </td>
                   </tr>
@@ -567,7 +567,7 @@
                       <button
                         class="btn btn-primary"
                         @click="StartSurfaceProcess()"
-                        translate
+                        v-t
                       >Start Surfacing</button>
                     </td>
                   </tr>
