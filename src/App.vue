@@ -127,9 +127,9 @@ export default {
         this.initialized = true;
         this.$store.startSocket();
 
-        if (this.preferences.interval_positions) {
-          this.$store.autoCheckPosition();
-        }
+        // if (this.preferences.interval_positions) {
+        this.$store.autoCheckPosition();
+        // }
 
         // if (this.fwData.target_firmware == '???') {
         //   this.setup()
