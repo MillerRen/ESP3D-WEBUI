@@ -9,7 +9,7 @@
         <header class="modal-header" v-if="title" ref="header" v-t>{{ title }}</header>
         <content class="modal-body" v-if="message || prompt">
           <div class="message-content">
-            <p v-if="message">{{ message }}</p>
+            <p v-if="message" v-t>{{ message }}</p>
             <input type="text" class="form-control" v-model="inputValue" v-if="prompt" />
           </div>
         </content>

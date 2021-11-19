@@ -106,7 +106,7 @@ export default {
     showUpdateModal() {
       this.$modal(
         {
-          title: "ESP3D Firmware Update",
+          title: "ESP3D Update",
         },
         UpdateModal
       );
