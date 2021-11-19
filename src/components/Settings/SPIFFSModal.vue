@@ -24,7 +24,7 @@
             </td>
             <td>
               <div class="filetext no_overflow">
-                <span v-if="!uploads || !uploads.length">No file chosen</span>
+                <span v-if="!uploads || !uploads.length" v-t>No file chosen</span>
                 <span v-if="uploads && uploads.length == 1">{{
                   uploads[0].name
                 }}</span>
@@ -52,12 +52,12 @@
           max="100"
         ></progress>
         &nbsp;
-        <span v-if="uploading"  v-t>Uploading</span>
+        <span v-if="uploading" v-t>Uploading</span>
       </div>
     </div>
     <div class="panel-body row">
       <div class="panel-flex-row">
-        <button class="btn btn-primary" type="button" @click="refreshFiles">
+        <button class="btn btn-primary" type="button" @click="refreshFiles" v-t>
           Refresh
         </button>
         &nbsp;

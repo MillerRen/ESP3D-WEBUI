@@ -6,7 +6,7 @@
         <span aria-hidden="true">×</span>
       </button>
       <div class="modal-content">
-        <header class="modal-header" v-if="title" ref="header">{{ title }}</header>
+        <header class="modal-header" v-if="title" ref="header" v-t>{{ title }}</header>
         <content class="modal-body" v-if="message || prompt">
           <div class="message-content">
             <p v-if="message">{{ message }}</p>

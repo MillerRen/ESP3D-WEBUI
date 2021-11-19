@@ -98,7 +98,7 @@ export default {
     showSPIFFSModal() {
       this.$modal(
         {
-          title: "ESP3D FileSystem",
+          title: "ESP3D Filesystem",
         },
         SPIFFSModal
       );
