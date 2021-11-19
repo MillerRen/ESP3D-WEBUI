@@ -24,7 +24,9 @@
             </td>
             <td>
               <div class="filetext no_overflow">
-                <span v-if="!uploads || !uploads.length" v-t>No file chosen</span>
+                <span v-if="!uploads || !uploads.length" v-t
+                  >No file chosen</span
+                >
                 <span v-if="uploads && uploads.length == 1">{{
                   uploads[0].name
                 }}</span>
@@ -39,7 +41,7 @@
         <button
           class="btn btn-primary btn-svg"
           type="button"
-          :disabled="uploads.length < 1 || uploadingProgress"
+          :disabled="(uploads.length < 1) || uploading"
           @click="uploadFile()"
         >
           <i class="glyphicon glyphicon-upload"></i>
@@ -154,7 +156,7 @@ import { SPIFFS_URL } from "../../constants";
 export default {
   data() {
     return {
-      uploading: 0,
+      uploading: false,
       uploads: [],
       currentPath: "/",
       loading: false,
