@@ -4,48 +4,34 @@
       <h2>
         <span v-t>ESP3D Settings</span>
       </h2>
-      <table>
-        <tr>
-          <td style="padding: 10px">
-            <button type="button" class="btn btn-info" @click="showStatusModal">
-              <i class="glyphicon glyphicon-th-list"></i>
-            </button>
-          </td>
-          <td style="padding: 10px">
-            <button
-              type="button"
-              class="btn btn-success"
-              @click="showSPIFFSModal"
-            >
-              <i class="glyphicon glyphicon-folder-open"></i>
-            </button>
-          </td>
-          <td style="padding: 10px">
-            <button
-              type="button"
-              class="btn btn-warning"
-              @click="showUpdateModal"
-            >
-              <i class="glyphicon glyphicon-cloud-upload"></i>
-            </button>
-          </td>
-          <td style="padding: 10px">
-            <button type="button" class="btn btn-danger" @click="restartESP()">
-              <i class="glyphicon glyphicon-off"></i>
-            </button>
-          </td>
-          <td style="padding: 10px">
-            <button
-              type="button"
-              class="btn btn-primary"
-              @click="refreshSettings()"
-            >
-              <i class="glyphicon glyphicon-refresh"></i>
-            </button>
-          </td>
-        </tr>
-      </table>
-      <span></span>
+      <div class="btn-toolbar" style="display:inline-block">
+        <button type="button" class="btn btn-info" @click="showStatusModal">
+          <i class="glyphicon glyphicon-th-list"></i>
+        </button>
+        <button type="button" class="btn btn-success" @click="showSPIFFSModal">
+          <i class="glyphicon glyphicon-folder-open"></i>
+        </button>
+        <button type="button" class="btn btn-warning" @click="showUpdateModal">
+          <i class="glyphicon glyphicon-cloud-upload"></i>
+        </button>
+        <button type="button" class="btn btn-danger" @click="restartESP()">
+          <i class="glyphicon glyphicon-off"></i>
+        </button>
+        <button
+          type="button"
+          class="btn btn-primary"
+          @click="showPreferencesModal()"
+        >
+          <i class="glyphicon glyphicon-eye-open"></i>
+        </button>
+        <button
+          type="button"
+          class="btn btn-primary"
+          @click="refreshSettings()"
+        >
+          <i class="glyphicon glyphicon-refresh"></i>
+        </button>
+      </div>
       <hr />
       <Settings ref="settings" />
     </center>
@@ -123,6 +109,25 @@ export default {
           title: "ESP3D Firmware Update",
         },
         UpdateModal
+      );
+    },
+    showPreferencesModal() {
+      var modal = this.$modal(
+        {
+          title: "Preferences",
+          data: {
+            preferences: this.$store.preferences,
+          },
+          events: {
+            success() {
+              modal.close();
+            },
+            cancel() {
+              modal.close();
+            },
+          },
+        },
+        "PreferencesModal"
       );
     },
   },

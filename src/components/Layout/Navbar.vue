@@ -62,11 +62,6 @@
                         </li>
                     </ul>
                 </li>
-                <li>
-                    <a href="#" @click="showpreferencesdlg()">
-                        <i class="glyphicon glyphicon-cog"></i>
-                    </a>
-                </li>
             </ul>
         </div>
     </nav>
@@ -89,22 +84,6 @@ export default {
         }
     },
     methods: {
-        showpreferencesdlg() {
-            var modal = this.$modal({
-                title: 'Preferences',
-                data: {
-                    preferences: this.$store.preferences
-                },
-                events: {
-                    success() {
-                        modal.close()
-                    },
-                    cancel() {
-                        modal.close()
-                    }
-                }
-            }, 'PreferencesModal')
-        },
         passworddlg() {
             this.$modal({
                 title: 'Change Password'
