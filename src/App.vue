@@ -17,16 +17,16 @@
 </template>
 
 <script>
-import Navbar from "./components/Layout/Navbar.vue";
-import Tabs from "./components/Layout/Tabs.vue";
-import SettingsPanel from "./components/Tabs/Settings.vue";
-import ConfigPanel from "./components/Tabs/Config.vue";
-import CameraPanel from "./components/Tabs/Camera.vue";
-import DashboardPanel from "./components/Tabs/Dashboard.vue";
-import Toaster from "./components/Common/Toaster.vue";
+import Navbar from './components/Layout/Navbar.vue'
+import Tabs from './components/Layout/Tabs.vue'
+import SettingsPanel from './components/Tabs/Settings.vue'
+import ConfigPanel from './components/Tabs/Config.vue'
+import CameraPanel from './components/Tabs/Camera.vue'
+import DashboardPanel from './components/Tabs/Dashboard.vue'
+import Toaster from './components/Common/Toaster.vue'
 
 export default {
-  name: "App",
+  name: 'App',
   components: {
     Navbar,
     Tabs,
@@ -34,137 +34,126 @@ export default {
     DashboardPanel,
     CameraPanel,
     SettingsPanel,
-    Toaster,
+    Toaster
   },
-  data() {
+  data () {
     return {
-      mainTab: "dashboard",
-      initialized: false,
-    };
+      mainTab: 'dashboard',
+      initialized: false
+    }
   },
   computed: {
-    fwData() {
-      return this.$store.fwData;
+    fwData () {
+      return this.$store.fwData
     },
-    preferences() {
-      return this.$store.preferences;
-    },
+    preferences () {
+      return this.$store.preferences
+    }
   },
   methods: {
     // boot step 1
-    getFWData() {
-      this.connectModal.data.bootStep = 1;
-      this.connectModal.data.error = false;
-      this.connectModal.okText = "";
+    getFWData () {
+      this.connectModal.data.bootStep = 1
+      this.connectModal.data.error = false
+      this.connectModal.okText = ''
 
       return this.$store
         .getFWData()
-        .then((fwData) => {
-          console.log("Fw identification:", fwData);
-          document.title = fwData.esp_hostname;
+        .then(fwData => {
+          console.log('Fw identification:', fwData)
+          document.title = fwData.esp_hostname
           if (fwData.ESP3D_authentication) {
-            this.checkLogin();
-            return;
+            this.checkLogin()
+            return
           }
 
-          this.getSettings();
+          this.getSettings()
         })
-        .catch((err) => {
-          this.connectModal.data.error = true;
-          this.connectModal.okText = "Retry";
-          console.log(err);
-        });
+        .catch(err => {
+          this.connectModal.data.error = true
+          this.connectModal.okText = 'Retry'
+          console.log(err)
+        })
     },
-    checkLogin() {
+    checkLogin () {
       return this.$store
         .checkLogin()
-        .then((user) => {
+        .then(user => {
           if (user.need_auth) {
-            this.connectModal.close();
-            this.login();
-            return;
+            this.connectModal.close()
+            this.login()
+            return
           }
-          this.getSettings();
+          this.getSettings()
         })
-        .catch((err) => {
-          console.log(err);
-          this.login();
-        });
+        .catch(err => {
+          console.log(err)
+          this.login()
+        })
     },
-    login() {
-      var that = this;
+    login () {
+      var that = this
       that.loginModal = this.$modal(
         {
-          title: "Identification requested",
+          title: 'Identification requested',
           events: {
-            success() {
-              that.loginModal.close();
-              that.boot();
-            },
-          },
+            success () {
+              that.loginModal.close()
+              that.boot()
+            }
+          }
         },
-        "LoginModal"
-      );
+        'LoginModal'
+      )
     },
     // boot step 2
-    getSettings() {
-      this.connectModal.data.bootStep = 2;
+    getSettings () {
+      this.connectModal.data.bootStep = 2
       return this.$store
         .getSettings()
         .then(() => {
-          this.getPreferences();
+          this.getPreferences()
         })
-        .catch((err) => {
-          this.connectModal.message = err.message;
-        });
+        .catch(err => {
+          this.connectModal.message = err.message
+        })
     },
     // boot step 3
-    getPreferences() {
-      this.connectModal.data.bootStep = 3;
+    getPreferences () {
+      this.connectModal.data.bootStep = 3
       return this.$store.getPreferences().then(() => {
-        this.connectModal.data.bootStep = 4;
-        this.connectModal.close();
-        this.initialized = true;
-        this.$store.startSocket();
-
-        // if (this.preferences.interval_positions) {
-        this.$store.autoCheckPosition();
-        // }
-
-        // if (this.fwData.target_firmware == '???') {
-        //   this.setup()
-        // }
-      });
+        this.connectModal.data.bootStep = 4
+        this.connectModal.close()
+        this.initialized = true
+        this.$store.startSocket()
+        this.$store.autoCheckPosition()
+        this.$store.getMacros()
+      })
     },
-    // setup() {
-    //   this.$modal({
-    //     closeable: false
-    //   }, 'SetupModal')
-    // },
-    boot() {
-      var that = this;
+    boot () {
+      var that = this
       this.connectModal = this.$modal(
         {
-          title: "Connecting ESP3D...",
+          title: 'Connecting ESP3D...',
           closeable: false,
           autoClose: false,
           data: {
             bootStep: 0,
-            error: false,
+            error: false
           },
-          callback() {
-            that.getFWData();
-          },
+          callback () {
+            that.getFWData()
+          }
         },
-        "ConnectModal"
-      );
-      this.getFWData();
-    },
+        'ConnectModal'
+      )
+      this.getFWData()
+    }
   },
-  mounted() {
-    this.boot();
-  },
-};
+  mounted () {
+    this.boot()
+  }
+}
 </script>
 
 <style>
@@ -222,7 +211,7 @@ export default {
 
 .loader-pulse:before,
 .loader-pulse:after {
-  content: "";
+  content: '';
   position: absolute;
   display: block;
   height: 0.4em;
