@@ -173,7 +173,7 @@ export default {
     }
   },
   mounted () {
-    this.$store.getMacros()
+    // this.$store.getMacros()
   }
 };
 </script>
