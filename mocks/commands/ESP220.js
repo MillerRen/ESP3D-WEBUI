@@ -1,10 +1,7 @@
-import mock from '../mock'
 
-const response = {}
-
-mock.onGet('/command', {
-    params: {
-        commandText: '[ESP220]test2.gco'
+module.exports = function (req, res, next) {
+    if(req.query.commandText == '[ESP220]test2.gco') {
+        return res.status(200).end()
     }
-})
-.reply(200, response)
+    next()
+}
