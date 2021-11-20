@@ -37,7 +37,6 @@
             <td v-t>{{ setting.label }}</td>
             <td>
               <div
-                class="has-feedback"
                 :class="{
                   'has-warning': setting.value != setting.defaultvalue
                 }"
@@ -53,7 +52,7 @@
                     </button>
                   </span>
                   <input
-                    type="text"
+                    :type="setting.type=='B'||setting.type=='I'?'number':'text'"
                     class="form-control"
                     v-model="setting.value"
                     :min="setting.min_val"
@@ -67,7 +66,15 @@
                     v-if="setting.Options.length"
                     class="form-control"
                   >
-                    <option v-for="o in setting.Options" :key="o.id" :value="o.id">{{ o.display }}</option>
+                    <option v-for="o in setting.Options" :key="o.id" :value="o.id" v-t>{{ o.display }}</option>
+                  </select>
+                  <select
+                    v-model="setting.value"
+                    v-if="setting.type=='F'"
+                    class="form-control"
+                  >
+                    <option value="1" v-t>Disable</option>
+                    <option value="0" v-t>Enable</option>
                   </select>
                   <span class="input-group-btn">
                     <button class="btn btn-default" type="button" @click="setValue(setting)">set</button>
