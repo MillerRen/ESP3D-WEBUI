@@ -115,6 +115,7 @@ export default class Grbl {
       report = extractor.gcodeSystemReport(data)
     } else if (checker.isProbeResult(data)) {
       report = extractor.probeResultReport(data)
+      this.probeStatus = false
     } else if (checker.isEcho(data)) {
       report = extractor.echoReport(data)
     } else if (checker.isStartupLine(data)) {
@@ -448,7 +449,6 @@ export default class Grbl {
   }
 
   startProbeProcess () {
-    this.probeStatus = true
     var cmd =
       'G38.2 G91 Z-' +
       this.preferences.probemaxtravel +

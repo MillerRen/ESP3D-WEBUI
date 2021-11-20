@@ -384,14 +384,14 @@
                 </div>
                 <div class="form-group">
                   <button
-                    :disabled="probing"
+                    :disabled="probeStatus"
                     class="btn btn-primary btn-sm"
                     @click="startProbeProcess()"
                     v-t
                   >
                     Start Probe
                   </button>
-                  <span v-if="probing" v-t>Probing...</span>
+                  <span v-if="probeStatus" v-t>Probing...</span>
                 </div>
               </div>
               <div
@@ -629,8 +629,7 @@ export default {
   },
   data() {
     return {
-      tab: "override",
-      probing: false,
+      tab: "override"
     };
   },
   computed: {
@@ -661,7 +660,6 @@ export default {
       this.$store.resetGrbl();
     },
     startProbeProcess() {
-      this.probing = true;
       this.$store.startProbeProcess();
     },
     opentab(tab) {
