@@ -1,10 +1,6 @@
-import mock from '../mock'
-
-const response = {}
-
-mock.onGet('/command', {
-    params: {
-        plain: '[ESP401]P=0 T=B V=2'
+module.exports = function (req, res, next) {
+    if (req.query.plain == '[ESP401]P=Sta/SSID T=S V=NETGEAR_2GEXT_OFFICE2') {
+      return res.send('ok').end()
     }
-})
-.reply(200, response)
+    next()
+  }
