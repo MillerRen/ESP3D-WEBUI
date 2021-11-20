@@ -30,7 +30,7 @@
           </label>
         </div>
       </span>
-      <div class="settings-status" v-if="errmsg">{{ errmsg }}</div>
+      <!-- <div class="settings-status" v-if="errmsg">{{ errmsg }}</div> -->
       <div class="loader" v-if="loading"></div>
       <table
         class="table table-bordered table-striped table-hover table-responsive"
