@@ -4,7 +4,7 @@ const response = [
    "glyph": "star",
    "filename": "/macro1.g",
    "target": "ESP",
-   "class": "btn btn-primary",
+   "class": "primary",
    "index": 0
   },
   {
