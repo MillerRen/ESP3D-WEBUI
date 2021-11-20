@@ -21,8 +21,8 @@
           class="modal-body"
         ></modal-body>
         <footer class="modal-footer" v-if="okText || cancelText" ref="footer">
-          <button class="btn btn-primary" v-if="okText" @click="postive">{{ okText }}</button>
-          <button class="btn btn-default" v-if="cancelText" @click="negative">{{ cancelText }}</button>
+          <button class="btn btn-primary" v-if="okText" @click="postive" v-t>{{ okText }}</button>
+          <button class="btn btn-default" v-if="cancelText" @click="negative" v-t>{{ cancelText }}</button>
         </footer>
       </div>
     </div>

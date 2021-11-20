@@ -328,8 +328,8 @@ export default {
     deleteFile(file) {
       var that = this;
       this.$modal({
-        title: "Please Confirm",
-        message: "Confirm deletion of file: " + file.name,
+        title: "Confirm deletion of file: ",
+        message: file.name,
         okText: "Confirm",
         callback() {
           that.loading = true;
@@ -349,8 +349,8 @@ export default {
     deleteDir(file) {
       var that = this;
       this.$modal({
-        title: "Please Confirm",
-        message: "Confirm deletion of directory: " + file.name,
+        title: "Confirm deletion of directory: ",
+        message: file.name,
         okText: "Confirm",
         callback() {
           that.loading = true;
