@@ -1,7 +1,8 @@
 <template>
   <div class="toaster">
-    <div class="toaster-content">
-      <div class="alert alert-warning" v-if="message">
+    <div class="toaster-content" v-if="message">
+      <button type="button" class="close" @click="close"><span>&times;</span></button>
+      <div class="alert alert-warning">
       <span>{{message}}</span>
       </div>
     </div>
@@ -12,6 +13,11 @@ export default {
   computed: {
     message () {
       return this.$store.message
+    }
+  },
+  methods:{
+    close() {
+      this.$store.message = ''
     }
   }
 }

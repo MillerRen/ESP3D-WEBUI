@@ -141,11 +141,19 @@ export default class Grbl {
     return http.sendGetHttp(COMMAND_URL, {
       plain: cmd
     })
+    .catch(err => {
+      this.message = 'send command failed'
+      throw err
+    })
   }
 
   sendCommandText (cmd) {
     return http.sendGetHttp(COMMAND_URL, {
       commandText: cmd
+    })
+    .catch(err => {
+      this.message = 'send command text failed'
+      throw err
     })
   }
 
