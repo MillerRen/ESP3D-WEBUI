@@ -276,7 +276,7 @@
       </div>
       <div class="row" v-if="sdfs.status && sdfs.status.toLowerCase() != 'ok'">
         <div class="col-md-12">
-          <span>{{ sdfs.status }}</span>
+          <span v-t>{{ sdfs.status }}</span>
         </div>
       </div>
     </div>
