@@ -9,6 +9,7 @@ module.exports = function (app) {
     require('./ESP420'),
     require('./❓'),
     require('./$$'),
+    require('./probe'),
     require('../notfound')
   )
 }
