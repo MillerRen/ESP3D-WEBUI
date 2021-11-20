@@ -14,7 +14,7 @@
                 @change="checkFiles()"
               />
               <button
-                class="btn btn-info"
+                class="btn btn-info btn-sm"
                 type="button"
                 @click="$refs.fileinput.click()"
                 v-t
@@ -39,7 +39,7 @@
         </table>
         &nbsp;
         <button
-          class="btn btn-primary btn-svg"
+          class="btn btn-primary btn-sm"
           type="button"
           :disabled="uploads.length < 1 || uploading"
           @click="uploadFile()"
@@ -59,18 +59,18 @@
     </div>
     <div class="panel-body row">
       <div class="panel-flex-row">
-        <button class="btn btn-primary" type="button" @click="refreshFiles" v-t>
+        <button class="btn btn-primary btn-sm" type="button" @click="refreshFiles" v-t>
           Refresh
         </button>
         &nbsp;
-        <button @click="createDir()" class="btn btn-info btn-svg-no_pad">
+        <button @click="createDir()" class="btn btn-info  btn-sm">
           <i class="glyphicon glyphicon-folder-open"></i>
         </button>
         <div class="info">
           <table>
             <tr>
               <td>
-                <button class="btn btn-link" @click="selectDir('/')">/</button>
+                <button class="btn btn-link btn-sm" @click="selectDir('/')">/</button>
               </td>
               <td v-for="(p, index) in paths" :key="index">
                 <button class="btn btn-link" @click="gotoDir(index)">{{ p }}</button
