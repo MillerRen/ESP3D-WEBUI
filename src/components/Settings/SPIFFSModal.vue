@@ -113,7 +113,7 @@
             <td>
               <button
                 class="btn btn-link btn-xs"
-                @click="file.isdir && selectDir(file.name + '/')"
+                @click="file.isdir && selectDir(currentPath+file.name + '/')"
               >
                 {{ file.name }}{{ file.isdir ? "/" : "" }}
               </button>
@@ -263,7 +263,7 @@ export default {
       });
     },
     selectDir(path) {
-      this.getFiles(this.currentPath + path).catch(this.spiffsFailed);
+      this.getFiles(path).catch(this.spiffsFailed);
     },
     gotoDir(index) {
       this.getFiles("/" + this.paths.slice(0, index + 1).join("/") + "/");
