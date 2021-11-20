@@ -31,7 +31,7 @@
                   uploads[0].name
                 }}</span>
                 <span v-if="uploads && uploads.length > 1"
-                  >{{ uploads.length }} files</span
+                  >&nbsp;{{ uploads.length }} <span v-t>files</span></span
                 >
               </div>
             </td>

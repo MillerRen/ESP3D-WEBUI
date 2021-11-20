@@ -273,7 +273,7 @@ export default {
   'Show commands panel': '显示命令面板',
   'Select files': '选择文件',
   'Select file': '选择文件',
-  '$n files': '$n 文件',
+  'files': '文件',
   'No file chosen': '未选择文件',
   Length: '长度',
   'Output msg': '输出消息',
