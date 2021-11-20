@@ -63,7 +63,7 @@ export default {
       var modal = this.$modal({
         title: "Please Confirm",
         message: "Restart ESP3D",
-        okText: "OK",
+        okText: "确定",
         cancelText: "Cancel",
         callback(ok) {
           if (ok) {

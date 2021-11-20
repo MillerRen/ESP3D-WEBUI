@@ -93,7 +93,7 @@ export default {
   No: 'No',
   'Occupation:': '占用:',
   Ok: '好的',
-  Confirm: '确认',
+  Confirm: '确定',
   Options: '选项',
   'Out of range': '超出范围',
   'Please Confirm': '请确认',
