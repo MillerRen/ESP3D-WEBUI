@@ -143,7 +143,7 @@ export default class Grbl {
     })
     .catch(err => {
       this.message = 'send command failed'
-      throw err
+      throw new Error(err)
     })
   }
 
@@ -153,7 +153,7 @@ export default class Grbl {
     })
     .catch(err => {
       this.message = 'send command text failed'
-      throw err
+      throw new Error(err)
     })
   }
 
