@@ -268,6 +268,11 @@ export default class Grbl {
     })
   }
 
+  scanWifi () {
+    return this.sendCommand('[ESP410]')
+      .then(response=>response.AP_LIST)
+  }
+
   getPreferences () {
     return http
       .sendGetHttp(PREFERENCES_FILE_NAME)

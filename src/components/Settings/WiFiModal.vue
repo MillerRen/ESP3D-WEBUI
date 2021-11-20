@@ -1,71 +1,60 @@
 <template>
-  <!-- scanwifi Modal -->
-  <div class="modal topmodal">
-    <!-- scanwifi content -->
-    <div class="modal-content">
-      <div class="modal-header">
-        <span class="close" onclick="closeModal('cancel')"><b>&times;</b></span>
-        <h3>
-          <div class="modal-title">
-            <span v-t>List of available Access Points</span>
-          </div>
-        </h3>
-      </div>
-      <div class="modal-body">
-        <center>
-          <span v-t>Scanning</span>
-          <div class="loader hidden"></div>
-          <span class="hidden">
-            <div class="table-responsive">
-              <table class="table table-bordered table-striped">
-                <thead class="noshowonlowrestab">
-                  <tr>
-                    <th v-t>SSID</th>
-                    <th v-t>Signal</th>
-                    <th v-t>Protected</th>
-                    <th v-t>Join</th>
-                  </tr>
-                </thead>
-                <tbody></tbody>
-              </table>
-            </div>
-          </span>
-        </center>
-      </div>
-      <div class="modal-footer">
-        <div style="float: right; padding-right: 20px">
-          <table>
+  <div class="modal-body">
+    <center>
+      <span v-t v-if="!wifis.length">Scanning</span>
+      <div class="loader hidden"></div>
+      <div class="table-responsive" v-if="wifis.length">
+        <table class="table table-bordered table-striped">
+          <thead class="noshowonlowrestab">
             <tr>
+              <th v-t>SSID</th>
+              <th v-t>Signal</th>
+              <th v-t>Protected</th>
+              <th v-t>Join</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr v-for="wifi in wifis" :key="wifi.SSID">
+              <td>{{ wifi.SSID }}</td>
+              <td>{{ wifi.SIGNAL }}%</td>
               <td>
-                <button
-                  class="btn btn-warning"
-                  onclick="closeModal('cancel') "
-                  v-t
-                >
-                  Close
-                </button>
+                <i
+                  class="glyphicon"
+                  :class="'glyphicon-' + (wifi.IS_PROTECTED=='1' ? 'lock' : 'signal')"
+                ></i>
               </td>
               <td>
-                <span class=""> &nbsp;&nbsp;</span>
-              </td>
-              <td>
-                <button class="btn btn-primary" onclick="refresh_scanwifi() ">
-                  <svg width="1.3em" height="1.2em" viewBox="0 0 1300 1200">
-                    <g transform="translate(50,1200) scale(1, -1)">
-                      <path
-                        fill="currentColor"
-                        d="M947 1060l135 135q7 7 12.5 5t5.5 -13v-361q0 -11 -7.5 -18.5t-18.5 -7.5h-361q-11 0 -13 5.5t5 12.5l134 134q-110 75 -239 75q-116 0 -214.5 -57t-155.5 -155.5t-57 -214.5h-150q0 117 45.5 224t123 184.5t184.5 123t224 45.5q192 0 347 -117zM1027 600h150 q0 -117 -45.5 -224t-123 -184.5t-184.5 -123t-224 -45.5q-192 0 -348 118l-134 -134q-7 -8 -12.5 -5.5t-5.5 12.5v360q0 11 7.5 18.5t18.5 7.5h360q10 0 12.5 -5.5t-5.5 -12.5l-133 -133q110 -76 240 -76q116 0 214.5 57t155.5 155.5t57 214.5z"
-                      ></path>
-                    </g>
-                  </svg>
-                </button>
+                  <button class="btn btn-sm btn-success" @click="join(wifi)">
+                      <i class="glyphicon glyphicon-ok"></i>
+                  </button>
               </td>
             </tr>
-          </table>
-        </div>
+          </tbody>
+        </table>
       </div>
-    </div>
-    <!-- /scanwifi content -->
+    </center>
   </div>
-  <!-- /scanwifi Modal -->
 </template>
+
+<script>
+export default {
+  data() {
+    return {
+      wifis: [],
+    };
+  },
+  methods: {
+    scanWifi() {
+      return this.$store.scanWifi().then((response) => {
+        this.wifis = response;
+      });
+    },
+    join(wifi) {
+        this.$emit('success', wifi.SSID)
+    }
+  },
+  mounted() {
+    this.scanWifi();
+  },
+};
+</script>

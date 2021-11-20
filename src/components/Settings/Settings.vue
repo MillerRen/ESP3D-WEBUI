@@ -9,13 +9,23 @@
       >
         <div class="radio-inline">
           <label>
-            <input type="radio" name="setting_filter" v-model="settingsType" value="network" />
+            <input
+              type="radio"
+              name="setting_filter"
+              v-model="settingsType"
+              value="network"
+            />
             <span v-t>Network</span>
           </label>
         </div>
         <div class="radio-inline">
           <label>
-            <input type="radio" name="setting_filter" v-model="settingsType" value="printer" />
+            <input
+              type="radio"
+              name="setting_filter"
+              v-model="settingsType"
+              value="printer"
+            />
             <span v-t>Printer</span>
           </label>
         </div>
@@ -33,12 +43,16 @@
           </tr>
         </thead>
         <tbody v-if="settings">
-          <tr v-for="(setting, index) in settings" :key="index" v-show="setting.F == settingsType">
+          <tr
+            v-for="(setting, index) in settings"
+            :key="index"
+            v-show="setting.F == settingsType"
+          >
             <td v-t>{{ setting.label }}</td>
             <td>
               <div
                 :class="{
-                  'has-warning': setting.value != setting.defaultvalue
+                  'has-warning': setting.value != setting.defaultvalue,
                 }"
               >
                 <div class="input-group">
@@ -52,7 +66,11 @@
                     </button>
                   </span>
                   <input
-                    :type="setting.type=='B'||setting.type=='I'?'number':'text'"
+                    :type="
+                      setting.type == 'B' || setting.type == 'I'
+                        ? 'number'
+                        : 'text'
+                    "
                     class="form-control"
                     v-model="setting.value"
                     :min="setting.min_val"
@@ -66,18 +84,41 @@
                     v-if="setting.Options.length"
                     class="form-control"
                   >
-                    <option v-for="o in setting.Options" :key="o.id" :value="o.id" v-t>{{ o.display }}</option>
+                    <option
+                      v-for="o in setting.Options"
+                      :key="o.id"
+                      :value="o.id"
+                      v-t
+                    >
+                      {{ o.display }}
+                    </option>
                   </select>
                   <select
                     v-model="setting.value"
-                    v-if="setting.type=='F'"
+                    v-if="setting.type == 'F'"
                     class="form-control"
                   >
                     <option value="1" v-t>Disable</option>
                     <option value="0" v-t>Enable</option>
                   </select>
                   <span class="input-group-btn">
-                    <button class="btn btn-default" type="button" @click="setValue(setting)">set</button>
+                    <button
+                      class="btn btn-default"
+                      type="button"
+                      @click="setValue(setting)"
+                    >
+                      set
+                    </button>
+                    <button
+                      class="btn btn-default"
+                      type="button"
+                      @click="scanWifi(setting)"
+                      v-if="
+                        setting.pos == 'Sta/SSID' || setting.pos == 'STA_SSID'
+                      "
+                    >
+                      <i class="glyphicon glyphicon-search"></i>
+                    </button>
                   </span>
                 </div>
               </div>
@@ -90,55 +131,70 @@
 </template>
 
 <script>
+import WiFiModal from "./WiFiModal.vue";
 export default {
   data() {
     return {
-      settingsType: 'network',
+      settingsType: "network",
       loading: false,
-      errmsg: ''
-    }
+      errmsg: "",
+    };
   },
   computed: {
     settings() {
-      return this.$store.settings
+      return this.$store.settings;
     },
     fwData() {
-      return this.$store.fwData
-    }
+      return this.$store.fwData;
+    },
   },
   methods: {
     setValue(setting) {
-      this.loading = true
+      this.loading = true;
       this.$store
         .updateSettings(setting.cmd + setting.value)
         .then((response) => {
-          this.loading = false
-          if (response == 'ok') {
-            setting.defaultvalue = setting.value
+          this.loading = false;
+          if (response == "ok") {
+            setting.defaultvalue = setting.value;
           }
         })
-        .catch(err => {
-          this.loading = false
-          this.errmsg = err
-        })
+        .catch((err) => {
+          this.loading = false;
+          this.errmsg = err;
+        });
     },
     refreshSettings() {
-      this.loading = true
+      this.loading = true;
       this.$store
         .getSettings()
-        .then(response => {
-          console.log(response)
+        .then((response) => {
+          console.log(response);
         })
-        .catch(err => {
-          this.errmsg = err
+        .catch((err) => {
+          this.errmsg = err;
         })
         .finally(() => {
-          this.loading = false
-        })
+          this.loading = false;
+        });
     },
     revertToDefaultValue(setting) {
-      setting.value = setting.defaultvalue
-    }
-  }
-}
+      setting.value = setting.defaultvalue;
+    },
+    scanWifi(setting) {
+      var modal = this.$modal(
+        {
+          title: "List of available Access Points",
+          events: {
+            success(wifi) {
+              setting.value = wifi;
+              modal.close();
+            },
+          },
+        },
+        WiFiModal
+      );
+    },
+  },
+};
 </script>
