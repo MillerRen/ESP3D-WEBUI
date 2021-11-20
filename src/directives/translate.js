@@ -5,6 +5,7 @@ const messages = require(`../languages/${lang}`).default
 function translate (el, binding) {
   let key = binding.value || el.textContent
   key = key.trim()
+  if(key=='Yes')console.log(key, messages[key])
   el.textContent = messages[key] || key // translate and fallback
 }
 
