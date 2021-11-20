@@ -50,7 +50,8 @@
           >
             <td v-t>{{ setting.label }}</td>
             <td>
-              <div
+              <form
+                @submit.prevent.stop="setValue(setting)"
                 :class="{
                   'has-warning': setting.value != setting.defaultvalue,
                 }"
@@ -102,13 +103,7 @@
                     <option value="0" v-t>Enable</option>
                   </select>
                   <span class="input-group-btn">
-                    <button
-                      class="btn btn-default"
-                      type="button"
-                      @click="setValue(setting)"
-                    >
-                      set
-                    </button>
+                    <button class="btn btn-default" type="submit">set</button>
                     <button
                       class="btn btn-default"
                       type="button"
@@ -121,7 +116,7 @@
                     </button>
                   </span>
                 </div>
-              </div>
+              </form>
             </td>
           </tr>
         </tbody>
