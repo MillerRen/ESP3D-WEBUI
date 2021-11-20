@@ -41,7 +41,7 @@
         <button
           class="btn btn-primary btn-svg"
           type="button"
-          :disabled="(uploads.length < 1) || uploading"
+          :disabled="uploads.length < 1 || uploading"
           @click="uploadFile()"
         >
           <i class="glyphicon glyphicon-upload"></i>
@@ -86,7 +86,7 @@
           v-if="loading"
         ></div>
       </div>
-      <table class="table table-striped" style="margin-bottom: 20px">
+      <table class="table table-striped table-condensed" style="margin-bottom: 0px">
         <thead>
           <tr>
             <th width="0%" v-t>Type</th>
@@ -98,7 +98,7 @@
         <tbody>
           <tr v-for="file in files" :key="file.name">
             <td>
-              <button class="btn btn-link" disabled>
+              <button class="btn btn-link btn-xs">
                 <i
                   class="glyphicon"
                   :class="
@@ -109,13 +109,17 @@
             </td>
             <td>
               <button
-                class="btn btn-link"
+                class="btn btn-link btn-xs"
                 @click="file.isdir && selectDir(currentPath + file.name + '/')"
               >
                 {{ file.name }}{{ file.isdir ? "/" : "" }}
               </button>
             </td>
-            <td>{{ !file.isdir ? file.size : "" }}</td>
+            <td>
+                <button class="btn btn-link btn-xs">
+                    {{ !file.isdir ? file.size : "" }}
+                </button>
+            </td>
             <td>
               <button class="btn btn-danger btn-xs" @click="remove(file)">
                 <i class="glyphicon glyphicon-trash"></i>
@@ -123,30 +127,32 @@
             </td>
           </tr>
         </tbody>
-        <tfoot>
-          <tr>
-            <td colspan="4">
-              <div v-if="stats.status == 'Ok'">
-                Total: {{ stats.total }}&nbsp;&nbsp;|&nbsp;&nbsp;Used:
-                {{ spiffs.used }}&nbsp;&nbsp;|&nbsp;&nbsp;Occupation:
-                <meter
-                  min="0"
-                  max="100"
-                  high="90"
-                  :value="stats.occupation"
-                ></meter>
-                &nbsp;{{ stats.occupation }}%
-              </div>
-              <div
-                class="panel-footer panel-footer1"
-                v-if="stats.status != 'Ok'"
-              >
-                {{ stats.status }}
-              </div>
-            </td>
-          </tr>
-        </tfoot>
       </table>
+    </div>
+    <div class="panel-footer">
+      <span>
+        <span v-t>Total:</span>&nbsp;
+        <span>{{ stats.total }}</span>
+      </span>
+      <span>&nbsp;|&nbsp;</span>
+      <span>
+        <span v-t>Used:</span>&nbsp;
+        <span>{{ stats.used }}</span>
+      </span>
+      <span>&nbsp;</span>
+      <span class="noshowonlowres">| &nbsp;</span>
+      <span>
+        <span v-t>Occupation:</span>
+        <meter
+          style="width: 150px"
+          min="0"
+          max="100"
+          high="90"
+          :value="stats.occupation"
+        ></meter>
+      </span>
+      <span>{{ stats.occupation }}</span>
+      <span>%</span>
     </div>
   </div>
 </template>
