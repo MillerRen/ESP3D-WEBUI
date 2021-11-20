@@ -8,8 +8,7 @@ import Status from './status'
 import Files from './files'
 import Websocket from './websocket'
 
-import { Checker, Extractor, StatusExtractor, constants} from '../../lib/grbl'
-
+import { Checker, Extractor, StatusExtractor, constants } from '../../lib/grbl'
 
 import {
   MACROS_FILE_NAME,
@@ -136,23 +135,25 @@ export default class Grbl {
   }
 
   sendCommand (cmd) {
-    return http.sendGetHttp(COMMAND_URL, {
-      plain: cmd
-    })
-    .catch(err => {
-      this.message = 'send command failed'
-      throw new Error(err)
-    })
+    return http
+      .sendGetHttp(COMMAND_URL, {
+        plain: cmd
+      })
+      .catch(err => {
+        this.message = 'send command failed'
+        throw new Error(err)
+      })
   }
 
   sendCommandText (cmd) {
-    return http.sendGetHttp(COMMAND_URL, {
-      commandText: cmd
-    })
-    .catch(err => {
-      this.message = 'send command text failed'
-      throw new Error(err)
-    })
+    return http
+      .sendGetHttp(COMMAND_URL, {
+        commandText: cmd
+      })
+      .catch(err => {
+        this.message = 'send command text failed'
+        throw new Error(err)
+      })
   }
 
   sendCustomCommand (cmd) {
@@ -267,8 +268,7 @@ export default class Grbl {
   }
 
   scanWifi () {
-    return this.sendCommand('[ESP410]')
-      .then(response=>response.AP_LIST)
+    return this.sendCommand('[ESP410]').then(response => response.AP_LIST)
   }
 
   getPreferences () {
@@ -321,7 +321,7 @@ export default class Grbl {
       var macros
       if (typeof response == 'string' && response.indexOf('<HTML>') != -1) {
         macros = []
-        for(let i=0;i<9;i++) {
+        for (let i = 0; i < 9; i++) {
           macros.push({
             name: '',
             glyph: '',
@@ -329,7 +329,7 @@ export default class Grbl {
             target: '',
             class: '',
             index: i
-        })
+          })
         }
       } else {
         macros = response
@@ -437,12 +437,23 @@ export default class Grbl {
     if (checkPositionTimer) {
       clearInterval(checkPositionTimer)
     }
-    if (!this.enableAutoCheckPosition || !this.preferences.interval_positions) return
+    if (!this.enableAutoCheckPosition || !this.preferences.interval_positions)
+      return
     checkPositionTimer = setInterval(() => {
       if (!this.preferences.interval_positions) {
         clearInterval(checkPositionTimer)
       }
       this.getPosition()
     }, this.preferences.interval_positions * 1000)
+  }
+
+  startProbeProcess () {
+    this.probeStatus = true
+    var cmd =
+      'G38.2 G91 Z-' +
+      this.preferences.probemaxtravel +
+      ' F' +
+      this.preferences.probefeedrate
+    return this.sendCustomCommand(cmd)
   }
 }

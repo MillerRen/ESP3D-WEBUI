@@ -66,7 +66,10 @@
               </table>
             </td>
             <td>
-              <div class="btn-toolbar pull-right" v-if="report&&report.data&&report.data.status">
+              <div
+                class="btn-toolbar pull-right"
+                v-if="report && report.data && report.data.status"
+              >
                 <button
                   v-if="report.data.status.state == 'Run'"
                   class="btn btn-default btn-sm"
@@ -333,120 +336,70 @@
                 class="tabcontent"
                 style="margin: auto"
               >
-                <table>
-                  <tr>
-                    <td>
-                      <div class="input-group">
-                        <span class="input-group-addon form_control">
-                          <span v-t>Max travel</span>:
-                        </span>
-                        <input
-                          class="form-control w4"
-                          type="number"
-                          min="1"
-                          v-model="preferences.probemaxtravel"
-                          onchange="onprobemaxtravelChange()"
-                        />
-                        <span class="input-group-addon form_control" v-t
-                          >mm</span
-                        >
-                      </div>
-                    </td>
-                  </tr>
-                </table>
-                <br />
-                <table>
-                  <tr>
-                    <td>
-                      <div class="input-group">
-                        <span class="input-group-addon form_control">
-                          <span v-t>Feed rate</span>:
-                        </span>
-                        <input
-                          class="form-control w4"
-                          type="number"
-                          min="1"
-                          v-model="preferences.probefeedrate"
-                        />
-                        <span class="input-group-addon form_control" v-t
-                          >mm/min</span
-                        >
-                      </div>
-                    </td>
-                  </tr>
-                </table>
-                <br />
-                <table>
-                  <tr>
-                    <td>
-                      <div class="input-group">
-                        <span class="input-group-addon form_control">
-                          <span v-t>Plate thickness</span>:
-                        </span>
-                        <input
-                          class="form-control w5"
-                          type="number"
-                          min="0"
-                          v-model="preferences.probetouchplatethickness"
-                          onchange="onprobetouchplatethicknessChange()"
-                        />
-                        <span class="input-group-addon form_control" v-t
-                          >mm</span
-                        >
-                      </div>
-                    </td>
-                  </tr>
-                </table>
-                <br />
-                <table>
-                  <tr>
-                    <td nowrap translate style="vertical-align: middle">
-                      <span v-t>Touch status</span>:
-                    </td>
-                    <td>
-                      <i
-                        class="glyphicon"
-                        :class="
-                          probeStatus
-                            ? 'glyphicon-ok-circle'
-                            : 'glyphicon-record'
-                        "
-                      ></i>
-                    </td>
-                    <td width="100%">&nbsp;</td>
-                    <td>
-                      <span class="hidden">
-                        <table>
-                          <tr>
-                            <td>
-                              <span v-t>Probing...</span>
-                            </td>
-                            <td>
-                              <div
-                                class="loader"
-                                style="width: 2em; height: 2em"
-                              ></div>
-                            </td>
-                          </tr>
-                        </table>
-                      </span>
-                      <button
-                        class="btn btn-primary"
-                        @click="startProbeProcess()"
-                        v-t
-                      >
-                        Start Probe
-                      </button>
-                    </td>
-                  </tr>
-                </table>
+                <div class="form-group">
+                  <div class="input-group input-group-sm">
+                    <span class="input-group-addon form_control">
+                      <span v-t>Max travel</span>:
+                    </span>
+                    <input
+                      class="form-control "
+                      type="number"
+                      min="1"
+                      v-model="preferences.probemaxtravel"
+                      onchange="onprobemaxtravelChange()"
+                    />
+                    <span class="input-group-addon form_control" v-t>mm</span>
+                  </div>
+                </div>
+                <div class="form-group input-group-sm">
+                  <div class="input-group input-group-sm">
+                    <span class="input-group-addon form_control">
+                      <span v-t>Feed rate</span>:
+                    </span>
+                    <input
+                      class="form-control "
+                      type="number"
+                      min="1"
+                      v-model="preferences.probefeedrate"
+                    />
+                    <span class="input-group-addon form_control" v-t
+                      >mm/min</span
+                    >
+                  </div>
+                </div>
+                <div class="form-group input-group-sm">
+                  <div class="input-group input-group-sm">
+                    <span class="input-group-addon form_control">
+                      <span v-t>Plate thickness</span>:
+                    </span>
+                    <input
+                      class="form-control "
+                      type="number"
+                      min="0"
+                      v-model="preferences.probetouchplatethickness"
+                      onchange="onprobetouchplatethicknessChange()"
+                    />
+                    <span class="input-group-addon form_control" v-t>mm</span>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <button
+                    :disabled="probing"
+                    class="btn btn-primary btn-sm"
+                    @click="startProbeProcess()"
+                    v-t
+                  >
+                    Start Probe
+                  </button>
+                  <span v-if="probing" v-t>Probing...</span>
+                </div>
               </div>
               <div
                 v-if="tab == 'surfacing'"
                 class="tabcontent"
                 style="margin: auto"
               >
-                <div class="input-group">
+                <div class="input-group input-group-sm">
                   <span
                     style="width: 150px"
                     class="input-group-addon form_control"
@@ -454,7 +407,7 @@
                     <span v-t>Width (X)</span>:
                   </span>
                   <input
-                    class="form-control w4"
+                    class="form-control "
                     style="text-align: right"
                     type="number"
                     min="1"
@@ -468,7 +421,7 @@
                     >mm</span
                   >
                 </div>
-                <div class="input-group">
+                <div class="input-group input-group-sm">
                   <span
                     style="width: 150px"
                     class="input-group-addon form_control"
@@ -476,7 +429,7 @@
                     <span v-t>Length (Y)</span>:
                   </span>
                   <input
-                    class="form-control w4"
+                    class="form-control "
                     style="text-align: right"
                     type="number"
                     min="1"
@@ -490,7 +443,7 @@
                     >mm</span
                   >
                 </div>
-                <div class="input-group">
+                <div class="input-group input-group-sm">
                   <span
                     style="width: 150px"
                     class="input-group-addon form_control"
@@ -498,7 +451,7 @@
                     <span v-t>Skim Depth (Z-)</span>:
                   </span>
                   <input
-                    class="form-control w4"
+                    class="form-control "
                     style="text-align: right"
                     type="number"
                     min="0.1"
@@ -512,7 +465,7 @@
                     >mm</span
                   >
                 </div>
-                <div class="input-group">
+                <div class="input-group input-group-sm">
                   <span
                     style="width: 150px"
                     class="input-group-addon form_control"
@@ -520,7 +473,7 @@
                     <span v-t>Bit Diameter</span>:
                   </span>
                   <input
-                    class="form-control w4"
+                    class="form-control "
                     style="text-align: right"
                     type="number"
                     min="0.1"
@@ -534,7 +487,7 @@
                     >mm</span
                   >
                 </div>
-                <div class="input-group">
+                <div class="input-group input-group-sm">
                   <span
                     style="width: 150px"
                     class="input-group-addon form_control"
@@ -542,7 +495,7 @@
                     <span v-t>Stepover</span>:
                   </span>
                   <input
-                    class="form-control w4"
+                    class="form-control "
                     style="text-align: right"
                     type="number"
                     min="0"
@@ -556,7 +509,7 @@
                     >%</span
                   >
                 </div>
-                <div class="input-group">
+                <div class="input-group input-group-sm">
                   <span
                     style="width: 150px"
                     class="input-group-addon form_control"
@@ -564,7 +517,7 @@
                     <span v-t>Feedrate</span>:
                   </span>
                   <input
-                    class="form-control w4"
+                    class="form-control "
                     style="text-align: right"
                     type="number"
                     min="500"
@@ -578,7 +531,7 @@
                     >mm/min</span
                   >
                 </div>
-                <div class="input-group">
+                <div class="input-group input-group-sm">
                   <span
                     style="width: 150px"
                     class="input-group-addon form_control"
@@ -586,7 +539,7 @@
                     <span v-t>Spindle RPM</span>:
                   </span>
                   <input
-                    class="form-control w4"
+                    class="form-control "
                     style="text-align: right"
                     type="number"
                     min="500"
@@ -620,7 +573,7 @@
                         </table>
                       </span>
                       <button
-                        class="btn btn-primary"
+                        class="btn btn-primary btn-sm"
                         @click="StartSurfaceProcess()"
                         v-t
                       >
@@ -677,6 +630,7 @@ export default {
   data() {
     return {
       tab: "override",
+      probing: false,
     };
   },
   computed: {
@@ -707,12 +661,8 @@ export default {
       this.$store.resetGrbl();
     },
     startProbeProcess() {
-      var cmd =
-        "G38.2 G91 Z-" +
-        this.preferences.probemaxtravel +
-        " F" +
-        this.preferences.probefeedrate;
-      return this.$store.sendCustomCommand(cmd);
+      this.probing = true;
+      this.$store.startProbeProcess();
     },
     opentab(tab) {
       this.tab = tab;
