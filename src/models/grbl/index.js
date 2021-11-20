@@ -8,10 +8,8 @@ import Status from './status'
 import Files from './files'
 import Websocket from './websocket'
 
-const constants = require('grbl-parser/lib/constants')
-const Checker = require('grbl-parser/lib/checker')
-const StatusExtractor = require('grbl-parser/lib/status_extractor')
-const Extractor = require('grbl-parser/lib/extractor')
+import { Checker, Extractor, StatusExtractor, constants} from '../../lib/grbl'
+
 
 import {
   MACROS_FILE_NAME,
