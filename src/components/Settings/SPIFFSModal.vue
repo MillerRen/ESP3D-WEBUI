@@ -72,8 +72,8 @@
               <td>
                 <button class="btn btn-link" @click="selectDir('/')">/</button>
               </td>
-              <td v-for="p in paths" :key="p">
-                <button class="btn btn-link" @click="gotoDir(p)">{{ p }}</button
+              <td v-for="(p, index) in paths" :key="index">
+                <button class="btn btn-link" @click="gotoDir(index)">{{ p }}</button
                 >/
               </td>
             </tr>
@@ -86,7 +86,10 @@
           v-if="loading"
         ></div>
       </div>
-      <table class="table table-striped table-condensed" style="margin-bottom: 0px">
+      <table
+        class="table table-striped table-condensed"
+        style="margin-bottom: 0px"
+      >
         <thead>
           <tr>
             <th width="0%" v-t>Type</th>
@@ -110,15 +113,15 @@
             <td>
               <button
                 class="btn btn-link btn-xs"
-                @click="file.isdir && selectDir(currentPath + file.name + '/')"
+                @click="file.isdir && selectDir(file.name + '/')"
               >
                 {{ file.name }}{{ file.isdir ? "/" : "" }}
               </button>
             </td>
             <td>
-                <button class="btn btn-link btn-xs">
-                    {{ !file.isdir ? file.size : "" }}
-                </button>
+              <button class="btn btn-link btn-xs">
+                {{ !file.isdir ? file.size : "" }}
+              </button>
             </td>
             <td>
               <button class="btn btn-danger btn-xs" @click="remove(file)">
@@ -260,13 +263,10 @@ export default {
       });
     },
     selectDir(path) {
-      this.loading = true;
-      this.currentPath = path;
-      this.getFiles(path).catch(this.spiffsFailed);
+      this.getFiles(this.currentPath + path).catch(this.spiffsFailed);
     },
-    gotoDir(path) {
-      let index = this.paths.indexOf(path);
-      this.selectDir("/" + this.paths.slice(0, index + 1).join("/") + "/");
+    gotoDir(index) {
+      this.getFiles("/" + this.paths.slice(0, index + 1).join("/") + "/");
     },
     checkFiles() {
       this.uploads = this.$refs.fileinput.files;
@@ -286,6 +286,7 @@ export default {
         });
     },
     getFiles(path) {
+      console.log(path);
       this.loading = true;
       return this.$store
         .listSPIFFS(SPIFFS_URL, {
@@ -294,6 +295,7 @@ export default {
         .then((response) => {
           this.loading = false;
           this.spiffs = response;
+          this.currentPath = path;
         })
         .catch(this.spiffsFailed);
     },
