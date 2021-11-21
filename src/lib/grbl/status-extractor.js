@@ -10,7 +10,7 @@ StatusExtractor.prototype.statusReport = function (message) {
   var report = {}
   // <Hold:0|MPos:0.000,0.000,0.000|Bf:15,128|FS:675.5,24000|Ov:120,100,100|WCO:0.000,-5.200,306.351|A:SFM>
   // <Idle,MPos:0.000,0.000,0.000,WPos:0.000,0.000,0.000>
-  var match = message.match(/^<(.*)>$/)[1]
+  var match = message.match(/^<(.*)>/)[1]
   // Hold:0|MPos:0.000,0.000,0.000|Bf:15,128|FS:0,0|WCO:0.000,0.000,306.351
   // Idle,MPos:0.000,0.000,0.000,WPos:0.000,0.000,0.000
 

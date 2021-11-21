@@ -1,7 +1,7 @@
 var Checker = function() {}
 
 Checker.prototype.isStatusReport = function(data) {
-  return /^<.*>$/.test(data)
+  return /^<.*>/.test(data)
 }
 
 Checker.prototype.isSuccessResponse = function(data) {
