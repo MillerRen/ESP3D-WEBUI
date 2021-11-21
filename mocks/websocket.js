@@ -1,6 +1,8 @@
 const constants = require('../mocks/data/spec_constants')
-const message = constants.validStrings.status[7]
+const message = constants.validStrings.status[0]
 // const message = constants.validStrings.alarm[0]
+// const message = constants.validStrings.error[0]
+// const message = constants.validStrings.probeResult[0]
 
 function str2bf (str) {
     var bf = new ArrayBuffer(str.length)
