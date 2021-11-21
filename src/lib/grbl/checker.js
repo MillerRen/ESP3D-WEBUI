@@ -13,7 +13,7 @@ Checker.prototype.isGrblInitialization = function(data) {
   }
 
 Checker.prototype.isAlarm = function(data) {
-    return /^ALARM:.+$/.test(data)
+    return /^ALARM:.+/.test(data)
   }
 
 Checker.prototype.isError = function(data) {

@@ -17,7 +17,7 @@
                       class="btn btn-default btn-xs"
                       @click="disableAlarm"
                       style="padding: 5px 5px 0 5px"
-                      v-if="report.type == 'alarm'"
+                      v-if="report.type == 'alarm'||(report.type=='status'&&report.data.status&&report.data.status.state=='Alarm')"
                     >
                       <svg
                         width="2em"
@@ -54,7 +54,7 @@
                   </td>
                   <td colspan="2" class="text-danger">
                     <span
-                      v-if="report.type == 'alarm' || report.type == 'error'"
+                      v-if="report.data&&report.data.message"
                       v-t="report.input"
                     >
                       {{ report.data.message }}
