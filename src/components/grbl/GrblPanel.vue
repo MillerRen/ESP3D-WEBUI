@@ -49,18 +49,16 @@
                       </svg>
                     </button>
                   </td>
-                  <td style="text-align: left; width: 100%; height: 30px">
-                    <div class="status_text">{{ reportType }}</div>
+                  <td>
+                    <b>{{ grblStatus.state }}</b>
                   </td>
-                </tr>
-                <tr>
-                  <td
-                    colspan="2"
-                    style="text-align: left; height: 20px"
-                    v-if="report.type == 'alarm'"
-                    v-t="report.input"
-                  >
-                    {{ report.data.message }}
+                  <td colspan="2" class="text-danger">
+                    <span
+                      v-if="report.type == 'alarm' || report.type == 'error'"
+                      v-t="report.input"
+                    >
+                      {{ report.data.message }}
+                    </span>
                   </td>
                 </tr>
               </table>
@@ -342,7 +340,7 @@
                       <span v-t>Max travel</span>:
                     </span>
                     <input
-                      class="form-control "
+                      class="form-control"
                       type="number"
                       min="1"
                       v-model="preferences.probemaxtravel"
@@ -357,7 +355,7 @@
                       <span v-t>Feed rate</span>:
                     </span>
                     <input
-                      class="form-control "
+                      class="form-control"
                       type="number"
                       min="1"
                       v-model="preferences.probefeedrate"
@@ -373,7 +371,7 @@
                       <span v-t>Plate thickness</span>:
                     </span>
                     <input
-                      class="form-control "
+                      class="form-control"
                       type="number"
                       min="0"
                       v-model="preferences.probetouchplatethickness"
@@ -407,7 +405,7 @@
                     <span v-t>Width (X)</span>:
                   </span>
                   <input
-                    class="form-control "
+                    class="form-control"
                     style="text-align: right"
                     type="number"
                     min="1"
@@ -429,7 +427,7 @@
                     <span v-t>Length (Y)</span>:
                   </span>
                   <input
-                    class="form-control "
+                    class="form-control"
                     style="text-align: right"
                     type="number"
                     min="1"
@@ -451,7 +449,7 @@
                     <span v-t>Skim Depth (Z-)</span>:
                   </span>
                   <input
-                    class="form-control "
+                    class="form-control"
                     style="text-align: right"
                     type="number"
                     min="0.1"
@@ -473,7 +471,7 @@
                     <span v-t>Bit Diameter</span>:
                   </span>
                   <input
-                    class="form-control "
+                    class="form-control"
                     style="text-align: right"
                     type="number"
                     min="0.1"
@@ -495,7 +493,7 @@
                     <span v-t>Stepover</span>:
                   </span>
                   <input
-                    class="form-control "
+                    class="form-control"
                     style="text-align: right"
                     type="number"
                     min="0"
@@ -517,7 +515,7 @@
                     <span v-t>Feedrate</span>:
                   </span>
                   <input
-                    class="form-control "
+                    class="form-control"
                     style="text-align: right"
                     type="number"
                     min="500"
@@ -539,7 +537,7 @@
                     <span v-t>Spindle RPM</span>:
                   </span>
                   <input
-                    class="form-control "
+                    class="form-control"
                     style="text-align: right"
                     type="number"
                     min="500"
@@ -629,7 +627,7 @@ export default {
   },
   data() {
     return {
-      tab: "override"
+      tab: "override",
     };
   },
   computed: {
@@ -643,10 +641,8 @@ export default {
     report() {
       return this.$store.report;
     },
-    reportType() {
-      return this.$store.report.type == "status"
-        ? this.$store.report.data.status.state
-        : this.$store.report.type;
+    grblStatus() {
+      return this.$store.grblStatus;
     },
     probeStatus() {
       return this.$store.probeStatus;
