@@ -63,6 +63,7 @@ export default class Grbl {
     }
     this.grblStatus = {}
     this.probeStatus = false
+    this.grblErrorMessage = ''
     this.enableAutoCheckPosition = true
     this.message = ''
   }
@@ -90,14 +91,25 @@ export default class Grbl {
       Object.assign(this.MPos, report.data.machinePosition)
       Object.assign(this.WPos, report.data.workPosition)
       Object.assign(this.grblStatus, report.data.status)
+      if(report.data.status.state=='Hold') {
+        this.grblErrorMessage = report.data.status.state+':'+report.data.status.code
+      }
+      if(report.data.status.state=='Idle') {
+        this.grblErrorMessage = ''
+      }
+      if(report.data.status.state=='Run') {
+        this.grblErrorMessage = ''
+      }
     } else if (checker.isSuccessResponse(data)) {
       report = extractor.successReport(data)
     } else if (checker.isGrblInitialization(data)) {
       report = extractor.grblInitReport(data)
     } else if (checker.isAlarm(data)) {
       report = extractor.alarmReport(data)
+      this.grblErrorMessage = report.input
     } else if (checker.isError(data)) {
       report = extractor.errorReport(data)
+      this.grblErrorMessage = report.input
     } else if (checker.isGrblSetting(data.substr(0, 4))) {
       report = extractor.settingsReport(data)
       this.config = Config.parseConfig(data)
