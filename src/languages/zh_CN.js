@@ -141,7 +141,7 @@ export default {
   'Value | Target': '当前值 | 预设值',
   Value: '值',
   'Wrong data': '错误的数据',
-  Yes: 'Yes',
+  Yes: '是的',
   Light: '灯',
   None: '无',
   Modem: '调制解调器',

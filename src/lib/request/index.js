@@ -15,7 +15,8 @@ function request (config) {
       if (xhr.status >= 400)
         return reject({
           status: xhr.status,
-          statusText: xhr.statusText
+          statusText: xhr.statusText,
+          responseText: xhr.responseText
         })
       let res = 'response' in xhr ? xhr.response : xhr.responseText
       if (res && typeOf(res) == 'String' && res.indexOf('<')!=0) {
