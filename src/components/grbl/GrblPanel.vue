@@ -50,7 +50,7 @@
                     </button>
                   </td>
                   <td>
-                    <b>{{ grblStatus.state }}</b>
+                    <b>{{ grblStatus.state }} </b>
                   </td>
                   <td colspan="2" class="text-danger">
                     <span

@@ -106,7 +106,7 @@ export default class Grbl {
       report = extractor.grblInitReport(data)
     } else if (checker.isAlarm(data)) {
       report = extractor.alarmReport(data)
-      this.grblErrorMessage = report.input
+      this.grblErrorMessage = report.input.split('\r')[0]
     } else if (checker.isError(data)) {
       report = extractor.errorReport(data)
       this.grblErrorMessage = report.input
