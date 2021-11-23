@@ -331,6 +331,8 @@ export default {
   Mist: '冷却喷雾',
   Flood: '冷却液',
   Spindle: '主轴',
+  Override: '覆盖',
+  Surfacing: '平面',
   'Connection monitoring': '连接监视',
   'XY Feedrate value must be at least 1 mm/min!':
     'XY Feedrate value must be at least 1 毫米/分钟!',
