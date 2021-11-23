@@ -17,8 +17,14 @@
         ref="monitor"
         style="height: 350px"
         :style="{ scrollTop: scrollTop }"
-        >{{ messages }}</pre
       >
+        <p
+  v-for="(message,index) in messages"
+  :key="index"
+  :class="{ 'text-danger': message.type == 'error', 'text-warning': message.type == 'alarm' }"
+  v-t
+>{{ message.input }}</p>
+        </pre>
     </div>
     <div class="panel-footer">
       <div class="panel-flex-row">
@@ -79,7 +85,7 @@ export default {
       return this.$store.preferences;
     },
     messages() {
-      return this.$store.messages.map((item) => item.msg).join("\n");
+      return this.$store.messages;
     },
   },
   methods: {

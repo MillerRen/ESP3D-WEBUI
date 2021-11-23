@@ -137,7 +137,7 @@ export default class Grbl {
     }
 
     if (this.preferences.enable_verbose_mode || report.type != 'status') {
-      this.messages.push(msg)
+      this.messages.push(report)
     }
     console.log(report)
     this.report = report
