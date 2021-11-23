@@ -428,6 +428,10 @@ export default class Grbl {
     return this.sendCommandText(command).then(() => this.getPosition)
   }
 
+  motorsOff () {
+    return this.sendCommandText('$MD')
+  }
+
   disableAlarm () {
     return this.sendCommandText('$X')
   }

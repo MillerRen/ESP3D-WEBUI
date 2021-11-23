@@ -152,8 +152,8 @@ export default {
     }
   },
   methods: {
-    motorOff() {
-      return this.$store.motorOff()
+    motorsOff() {
+      return this.$store.motorsOff()
     },
     openMacroModal() {
       var macroModal = this.$modal({
