@@ -3,7 +3,7 @@
     <div class="toaster-content" v-if="message">
       <button type="button" class="close" @click="close"><span>&times;</span></button>
       <div class="alert alert-warning">
-      <span>{{message}}</span>
+      <span v-t>{{message}}</span>
       </div>
     </div>
   </div>
