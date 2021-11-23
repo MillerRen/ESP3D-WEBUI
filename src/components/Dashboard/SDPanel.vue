@@ -208,11 +208,12 @@
                 <table>
                   <tr>
                     <td>
-                      <a
-                        href="###"
-                        @click="selectDir(file.name)"
+                      <a href
+                        @click.prevent="file.isdir&&selectDir(file.name)"
                         class="btn btn-xs btn-link"
-                        >{{ file.sdname||file.name }}</a
+                        >{{ file.sdname||file.name }}
+                          <span v-if="file.isdir">/</span>
+                        </a
                       >
                     </td>
                   </tr>
@@ -233,7 +234,7 @@
                   </button>
                   <button
                     class="btn btn-xs btn-danger"
-                    @click="deleteFile(file)"
+                    @click="file.isdir?deleteDir(file):deleteFile(file)"
                   >
                     <i class="glyphicon glyphicon-trash"></i>
                   </button>
