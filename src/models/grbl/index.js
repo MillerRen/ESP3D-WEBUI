@@ -200,7 +200,7 @@ export default class Grbl {
   sendCommand (cmd) {
     return http
       .sendGetHttp(COMMAND_URL, {
-        plain: cmd
+        plain: encodeURIComponent(cmd)
       })
       .catch(err => {
         this.message = err.responseText || 'send command failed'

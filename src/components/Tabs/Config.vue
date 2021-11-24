@@ -164,15 +164,15 @@ export default {
       return this.$store
         .updateConfig(item.cmd + item.value)
         .then(() => {
-          item.defaultValue = item.value
+          item.defaultvalue = item.value
           item.success = true
         })
-        .catch((err) => {
-          this.$modal({
-            title: "Set failed",
-            message: "Error" + err.message,
-          });
-        })
+        // .catch((err) => {
+        //   this.$modal({
+        //     title: "Set failed",
+        //     message: "Error" + err.message,
+        //   });
+        // })
         .finally(() => {
           this.loading = false;
         });
