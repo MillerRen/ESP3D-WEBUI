@@ -63,8 +63,17 @@
               </table>
             </td>
             <td>
-              <div v-if="sd&&sd.progress" class="pull-left" style="line-height:30px">
-                {{sd.fileName}}&nbsp;<progress :value="sd.progress" max="100" style="width:96px"></progress>{{sd.progress}}%
+              <div
+                v-if="sd && sd.progress"
+                class="pull-left"
+                style="line-height: 30px"
+              >
+                {{ sd.fileName }}&nbsp;<progress
+                  :value="sd.progress"
+                  max="100"
+                  style="width: 96px"
+                ></progress
+                >{{ sd.progress }}%
               </div>
               <div
                 class="btn-toolbar pull-right"
@@ -327,30 +336,30 @@
                 <table class="table">
                   <tr>
                     <td class="text-center clearfix">
-                      <label
-                        class="label"
-                        :class="{
-                          'label-warning': pins[pin],
-                          'label-default': !pins[pin],
-                        }"
-                        v-for="pin in [
-                          'X',
-                          'Y',
-                          'Z',
-                          'A',
-                          'B',
-                          'C',
-                          'P',
-                          'D',
-                          'H',
-                          'R',
-                          'S',
-                        ]"
-                        :key="pin"
-                        style="margin: 2px;float:left"
-                      >
-                        P{{ pin.toLowerCase() }}
-                      </label>
+                        <label
+                          class="label"
+                          :class="{
+                            'label-warning': pins[pin],
+                            'label-default': !pins[pin],
+                          }"
+                          v-for="pin in [
+                            'X',
+                            'Y',
+                            'Z',
+                            'A',
+                            'B',
+                            'C',
+                            'P',
+                            'D',
+                            'H',
+                            'R',
+                            'S',
+                          ]"
+                          :key="pin"
+                          style="margin: 2px; display:inline-block"
+                        >
+                          P{{ pin.toLowerCase() }}
+                        </label>
                     </td>
                   </tr>
                 </table>
@@ -386,9 +395,7 @@
                       min="1"
                       v-model="preferences.probefeedrate"
                     />
-                    <span class="input-group-addon" v-t
-                      >mm/min</span
-                    >
+                    <span class="input-group-addon" v-t>mm/min</span>
                   </div>
                 </div>
                 <div class="form-group input-group-sm">
@@ -424,10 +431,7 @@
                 style="margin: auto"
               >
                 <div class="input-group input-group-sm">
-                  <span
-                    style="width: 150px"
-                    class="input-group-addon"
-                  >
+                  <span style="width: 150px" class="input-group-addon">
                     <span v-t>Width (X)</span>:
                   </span>
                   <input
@@ -438,18 +442,12 @@
                     max="9999"
                     v-model="preferences.surfacewidth"
                   />
-                  <span
-                    style="width: 80px"
-                    class="input-group-addon"
-                    v-t
+                  <span style="width: 80px" class="input-group-addon" v-t
                     >mm</span
                   >
                 </div>
                 <div class="input-group input-group-sm">
-                  <span
-                    style="width: 150px"
-                    class="input-group-addon"
-                  >
+                  <span style="width: 150px" class="input-group-addon">
                     <span v-t>Length (Y)</span>:
                   </span>
                   <input
@@ -460,18 +458,12 @@
                     max="9999"
                     v-model="preferences.surfacelength"
                   />
-                  <span
-                    style="width: 80px"
-                    class="input-group-addon"
-                    v-t
+                  <span style="width: 80px" class="input-group-addon" v-t
                     >mm</span
                   >
                 </div>
                 <div class="input-group input-group-sm">
-                  <span
-                    style="width: 150px"
-                    class="input-group-addon"
-                  >
+                  <span style="width: 150px" class="input-group-addon">
                     <span v-t>Skim Depth (Z-)</span>:
                   </span>
                   <input
@@ -482,18 +474,12 @@
                     max="999"
                     v-model="preferences.surfacezdepth"
                   />
-                  <span
-                    style="width: 80px"
-                    class="input-group-addon"
-                    v-t
+                  <span style="width: 80px" class="input-group-addon" v-t
                     >mm</span
                   >
                 </div>
                 <div class="input-group input-group-sm">
-                  <span
-                    style="width: 150px"
-                    class="input-group-addon"
-                  >
+                  <span style="width: 150px" class="input-group-addon">
                     <span v-t>Bit Diameter</span>:
                   </span>
                   <input
@@ -504,18 +490,12 @@
                     max="999"
                     v-model="preferences.surfacebitdiam"
                   />
-                  <span
-                    style="width: 80px"
-                    class="input-group-addon"
-                    v-t
+                  <span style="width: 80px" class="input-group-addon" v-t
                     >mm</span
                   >
                 </div>
                 <div class="input-group input-group-sm">
-                  <span
-                    style="width: 150px"
-                    class="input-group-addon"
-                  >
+                  <span style="width: 150px" class="input-group-addon">
                     <span v-t>Stepover</span>:
                   </span>
                   <input
@@ -526,18 +506,12 @@
                     max="99"
                     v-model="preferences.surfacestepover"
                   />
-                  <span
-                    style="width: 80px"
-                    class="input-group-addon"
-                    v-t
+                  <span style="width: 80px" class="input-group-addon" v-t
                     >%</span
                   >
                 </div>
                 <div class="input-group input-group-sm">
-                  <span
-                    style="width: 150px"
-                    class="input-group-addon"
-                  >
+                  <span style="width: 150px" class="input-group-addon">
                     <span v-t>Feedrate</span>:
                   </span>
                   <input
@@ -548,18 +522,12 @@
                     max="10000"
                     v-model="preferences.surfacefeedrate"
                   />
-                  <span
-                    style="width: 80px"
-                    class="input-group-addon"
-                    v-t
+                  <span style="width: 80px" class="input-group-addon" v-t
                     >mm/min</span
                   >
                 </div>
                 <div class="input-group input-group-sm">
-                  <span
-                    style="width: 150px"
-                    class="input-group-addon"
-                  >
+                  <span style="width: 150px" class="input-group-addon">
                     <span v-t>Spindle RPM</span>:
                   </span>
                   <input
@@ -570,10 +538,7 @@
                     max="50000"
                     v-model="preferences.surfacespindle"
                   />
-                  <span
-                    style="width: 80px"
-                    class="input-group-addon"
-                    v-t
+                  <span style="width: 80px" class="input-group-addon" v-t
                     >RPM</span
                   >
                 </div>
@@ -674,8 +639,8 @@ export default {
       return this.$store.pins;
     },
     sd() {
-      return this.$store.sd
-    }
+      return this.$store.sd;
+    },
   },
   methods: {
     disableAlarm() {
