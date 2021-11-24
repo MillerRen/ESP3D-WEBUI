@@ -17,7 +17,9 @@
                       class="btn btn-default btn-xs"
                       @click="disableAlarm"
                       style="padding: 5px 5px 0 5px"
-                      v-if="report.type == 'alarm'||grblStatus.state=='Alarm'"
+                      v-if="
+                        report.type == 'alarm' || grblStatus.state == 'Alarm'
+                      "
                     >
                       <svg
                         width="2em"
@@ -53,10 +55,7 @@
                     <b>{{ grblStatus.state }} </b>
                   </td>
                   <td colspan="2" class="text-danger">
-                    <span
-                      v-if="grblErrorMessage"
-                      v-t
-                    >
+                    <span v-if="grblErrorMessage" v-t>
                       {{ grblErrorMessage }}
                     </span>
                   </td>
@@ -130,7 +129,7 @@
           <div class="panel-body panel-flex-main">
             <div>
               <div v-if="tab == 'override'" class="tabcontent">
-                <table width="100%">
+                <table class="table">
                   <tr>
                     <td class="text-center">
                       <button
@@ -276,11 +275,8 @@
                       </button>
                     </td>
                   </tr>
-                  <tr>
-                    <td style="height: 10px"></td>
-                  </tr>
                 </table>
-                <table width="100%">
+                <table class="table">
                   <tr>
                     <td class="text-center" width="33%">
                       <button
@@ -325,6 +321,23 @@
                         <i class="glyphicon glyphicon-cloud"></i>
                         <span class="button_txt" v-t>Mist</span>
                       </button>
+                    </td>
+                  </tr>
+                </table>
+                <hr>
+                <table class="table">
+                  <tr>
+                    <td class="text-center">
+                      <label
+                        class="label" 
+                        :class="{'label-warning':pin.on,'label-default':!pin.on}"
+                        v-for="pin in pins"
+                        :key="pin.pin"
+                        style="margin:0 2px"
+                        :title="pin.label"
+                      >
+                        P{{pin.pin.toLowerCase()}}
+                      </label>
                     </td>
                   </tr>
                 </table>
@@ -632,7 +645,7 @@ export default {
   },
   computed: {
     grblErrorMessage() {
-      return this.$store.grblErrorMessage
+      return this.$store.grblErrorMessage;
       // return ["alarm", "hold", "error", "door"].indexOf(
       //   this.$store.report.type
       // ) > -1
@@ -647,6 +660,9 @@ export default {
     },
     probeStatus() {
       return this.$store.probeStatus;
+    },
+    pins() {
+      return this.$store.pins;
     },
   },
   methods: {

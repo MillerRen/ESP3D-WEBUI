@@ -61,6 +61,7 @@ export default class Grbl {
       d: 0,
       e: 0
     }
+    this.pins = []
     this.grblStatus = {}
     this.probeStatus = false
     this.grblErrorMessage = ''
@@ -132,6 +133,7 @@ export default class Grbl {
       Object.assign(this.MPos, report.data.machinePosition)
       Object.assign(this.WPos, report.data.workPosition)
       Object.assign(this.grblStatus, report.data.status)
+      Object.assign(this.pins, report.data.pins)
       if(report.data.status.state=='Hold') {
         this.grblErrorMessage = report.data.status.state+':'+report.data.status.code
       }
