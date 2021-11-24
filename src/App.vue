@@ -60,6 +60,8 @@ export default {
   },
   methods: {
     openDiableModal () {
+      this.$store.enableAutoCheckPosition = false
+      this.$store.autoCheckPosition()
       this.$modal({
         title: 'You are disconnected',
         message: 'Looks like you are connected from another place, so this page is now disconnected',
