@@ -219,11 +219,11 @@
                   </tr>
                 </table>
               </div>
-              <div class="col-md-2 col-sm2">
+              <div class="col-md-2 col-sm-2">
                 {{ file.size != -1 ? file.size : "" }}
               </div>
               <div class="col-md-3 col-sm-3">{{ file.datetime }}</div>
-              <div class="col-md-2 col-sm2">
+              <div class="col-md-2 col-sm-2">
                 <div class="btn-toolbar pull-right">
                   <button
                     class="btn btn-xs btn-success"

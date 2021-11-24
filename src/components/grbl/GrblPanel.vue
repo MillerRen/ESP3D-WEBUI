@@ -64,7 +64,7 @@
             </td>
             <td>
               <div v-if="sd&&sd.progress" class="pull-left" style="line-height:30px">
-                {{sd.fileName}}&nbsp;<progress :value="sd.progress" max="100" style="width:100px"></progress>{{sd.progress}}%
+                {{sd.fileName}}&nbsp;<progress :value="sd.progress" max="100" style="width:96px"></progress>{{sd.progress}}%
               </div>
               <div
                 class="btn-toolbar pull-right"
