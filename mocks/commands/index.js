@@ -10,6 +10,7 @@ module.exports = function (app) {
     require('./❓'),
     require('./$$'),
     require('./$X'),
+    require('./$n=x'),
     require('./probe'),
     require('../notfound')
   )
