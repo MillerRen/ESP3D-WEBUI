@@ -7,8 +7,8 @@
                 <span class="icon-bar"></span>
             </button>
             <a class="navbar-brand" @click.prevent="creditsdlg()" href>
-                <span v-t>ESP3D for </span>
-                <span>{{ fwName }}</span>
+                <span v-t>ESP3D</span>
+                <span class="hidden-xs">&nbsp;for&nbsp;{{ fwName }}</span>
             </a>
         </div>
         <div class="collapse navbar-collapse" :style="{display:collapsed?'none':'block'}">
