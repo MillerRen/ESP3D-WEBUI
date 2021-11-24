@@ -163,10 +163,8 @@ export default {
       this.loading = true;
       return this.$store
         .updateConfig(item.cmd + item.value)
-        .then((reponse) => {
-          if (reponse == "ok") {
-            item.defaultValue = item.value;
-          }
+        .then(() => {
+          item.defaultValue = item.value;
         })
         .catch((err) => {
           this.$modal({
