@@ -211,7 +211,9 @@
                       <a href
                         @click.prevent="file.isdir&&selectDir(file.name)"
                         class="btn btn-xs btn-link"
-                        >{{ file.sdname||file.name }}
+                        >
+                        <i class="glyphicon" :class="'glyphicon-'+(file.isdir?'folder-open':'file')"></i>
+                        {{ file.sdname||file.name }}
                           <span v-if="file.isdir">/</span>
                         </a
                       >
