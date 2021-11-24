@@ -87,42 +87,42 @@ export default class Grbl {
   }
 
   processText (msg) {
-    var tval = msg.split(":");
-      if (tval.length >= 2) {
-        if (tval[0] == "CURRENT_ID") {
-          this.page_id = tval[1];
-          console.log("connection id = " + this.page_id);
-        }
-        if (this.preferences.enable_ping) {
-          if (tval[0] == "PING") {
-            this.page_id = tval[1];
-            console.log("ping from id = " + this.page_id);
-            // if (interval_ping == -1)
-            //   interval_ping = setInterval(function () {
-            //     check_ping();
-            //   }, 10 * 1000);
-          }
-        }
-        if (tval[0] == "ACTIVE_ID") {
-          if (this.page_id != tval[1]) {
-            this.disableUI = true
-          }
-        }
-        if (tval[0] == "DHT") {
-          // Handle_DHT(tval[1]);
-        }
-        if (tval[0] == "ERROR") {
-          // esp_error_message = tval[2];
-          // esp_error_code = tval[1];
-          console.log("ERROR: " + tval[2] + " code:" + tval[1]);
-          // CancelCurrentUpload();
-        }
-        if (tval[0] == "MSG") {
-          // var error_message = tval[2];
-          // var error_code = tval[1];
-          console.log("MSG: " + tval[2] + " code:" + tval[1]);
+    var tval = msg.split(':')
+    if (tval.length >= 2) {
+      if (tval[0] == 'CURRENT_ID') {
+        this.page_id = tval[1]
+        console.log('connection id = ' + this.page_id)
+      }
+      if (this.preferences.enable_ping) {
+        if (tval[0] == 'PING') {
+          this.page_id = tval[1]
+          console.log('ping from id = ' + this.page_id)
+          // if (interval_ping == -1)
+          //   interval_ping = setInterval(function () {
+          //     check_ping();
+          //   }, 10 * 1000);
         }
       }
+      if (tval[0] == 'ACTIVE_ID') {
+        if (this.page_id != tval[1]) {
+          this.disableUI = true
+        }
+      }
+      if (tval[0] == 'DHT') {
+        // Handle_DHT(tval[1]);
+      }
+      if (tval[0] == 'ERROR') {
+        // esp_error_message = tval[2];
+        // esp_error_code = tval[1];
+        console.log('ERROR: ' + tval[2] + ' code:' + tval[1])
+        // CancelCurrentUpload();
+      }
+      if (tval[0] == 'MSG') {
+        // var error_message = tval[2];
+        // var error_code = tval[1];
+        console.log('MSG: ' + tval[2] + ' code:' + tval[1])
+      }
+    }
   }
 
   processStream (msg) {
@@ -130,17 +130,24 @@ export default class Grbl {
     var report = {}
     if (checker.isStatusReport(data)) {
       report = statusExtractor.statusReport(data)
-      Object.assign(this.MPos, report.data.machinePosition)
-      Object.assign(this.WPos, report.data.workPosition)
-      Object.assign(this.grblStatus, report.data.status)
-      Object.assign(this.pins, report.data.pins)
-      if(report.data.status.state=='Hold') {
-        this.grblErrorMessage = report.data.status.state+':'+report.data.status.code
+      this.MPos = report.data.machinePosition || {}
+      this.WPos = report.data.workPosition || {}
+      this.grblStatus = report.data.status || {}
+      this.pins = report.data.pins
+        ? report.data.pins.reduce(
+            (a, b) => Object.assign(a, { [b.pin]: b }),
+            {}
+          )
+        : []
+
+      if (report.data.status.state == 'Hold') {
+        this.grblErrorMessage =
+          report.data.status.state + ':' + report.data.status.code
       }
-      if(report.data.status.state=='Idle') {
+      if (report.data.status.state == 'Idle') {
         this.grblErrorMessage = ''
       }
-      if(report.data.status.state=='Run') {
+      if (report.data.status.state == 'Run') {
         this.grblErrorMessage = ''
       }
     } else if (checker.isSuccessResponse(data)) {
@@ -196,7 +203,7 @@ export default class Grbl {
         plain: cmd
       })
       .catch(err => {
-        this.message = err.responseText||'send command failed'
+        this.message = err.responseText || 'send command failed'
         throw new Error(err)
       })
   }
@@ -208,7 +215,7 @@ export default class Grbl {
       })
       .catch(err => {
         console.log(err)
-        this.message = err.responseText||'send command text failed'
+        this.message = err.responseText || 'send command text failed'
         throw new Error(err)
       })
   }

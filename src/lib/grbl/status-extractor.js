@@ -86,7 +86,7 @@ StatusExtractor.prototype.statusReport = function (message) {
 }
 
 StatusExtractor.prototype.parsePins = function (pins) {
-  var data = {}
+  var data = []
   var limitPinMap = {
     0: 'limit-x',
     1: 'limit-y',
@@ -140,16 +140,10 @@ StatusExtractor.prototype.parsePins = function (pins) {
       S: 'cycle-start'
     }
     var pinData = pins.split('')
-    var map = {}
 
     pinData.forEach(function (pin) {
-      map[pin] = true
-      // data.push({ label: grbl11pinMap[pin], on: true, pin: pin })
+      data.push({ label: grbl11pinMap[pin], on: true, pin: pin })
     })
-    data = Object.keys(grbl11pinMap)
-      .map(pin => {
-        return {label: grbl11pinMap[pin], on: map[pin], pin: pin}
-      })
   }
   return data
 }

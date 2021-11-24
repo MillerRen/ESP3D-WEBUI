@@ -330,13 +330,12 @@
                     <td class="text-center">
                       <label
                         class="label" 
-                        :class="{'label-warning':pin.on,'label-default':!pin.on}"
-                        v-for="pin in pins"
-                        :key="pin.pin"
+                        :class="{'label-warning':pins[pin],'label-default':!pins[pin]}"
+                        v-for="pin in ['X','Y', 'Z', 'A', 'B','C','P','D','H','R','S']"
+                        :key="pin"
                         style="margin:0 2px"
-                        :title="pin.label"
                       >
-                        P{{pin.pin.toLowerCase()}}
+                        P{{pin.toLowerCase()}}
                       </label>
                     </td>
                   </tr>
