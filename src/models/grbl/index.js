@@ -502,6 +502,10 @@ export default class Grbl {
     )
   }
 
+  toggleSpindle (on) {
+    return on ? this.sendCommandText('M3 S1000') : this.sendCommandText('M5')
+  }
+
   autoCheckPosition () {
     if (checkPositionTimer) {
       clearInterval(checkPositionTimer)

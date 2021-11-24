@@ -281,11 +281,7 @@
                     <td class="text-center" width="33%">
                       <button
                         class="btn btn-default"
-                        @click="
-                          $store.sendRealtimeCommand(
-                            String.fromCharCode(0x9e, 0x0)
-                          )
-                        "
+                        @click="toggleSpindle()"
                         style="padding: 5px 4px 0 5px"
                       >
                         <i class="glyphicon glyphicon-record"></i>
@@ -324,18 +320,33 @@
                     </td>
                   </tr>
                 </table>
-                <hr>
+                <hr />
                 <table class="table">
                   <tr>
                     <td class="text-center">
                       <label
-                        class="label" 
-                        :class="{'label-warning':pins[pin],'label-default':!pins[pin]}"
-                        v-for="pin in ['X','Y', 'Z', 'A', 'B','C','P','D','H','R','S']"
+                        class="label"
+                        :class="{
+                          'label-warning': pins[pin],
+                          'label-default': !pins[pin],
+                        }"
+                        v-for="pin in [
+                          'X',
+                          'Y',
+                          'Z',
+                          'A',
+                          'B',
+                          'C',
+                          'P',
+                          'D',
+                          'H',
+                          'R',
+                          'S',
+                        ]"
                         :key="pin"
-                        style="margin:0 2px"
+                        style="margin: 0 2px"
                       >
-                        P{{pin.toLowerCase()}}
+                        P{{ pin.toLowerCase() }}
                       </label>
                     </td>
                   </tr>
@@ -640,16 +651,12 @@ export default {
   data() {
     return {
       tab: "override",
+      spindleOn: false,
     };
   },
   computed: {
     grblErrorMessage() {
       return this.$store.grblErrorMessage;
-      // return ["alarm", "hold", "error", "door"].indexOf(
-      //   this.$store.report.type
-      // ) > -1
-      //   ? this.$store.report.data.message
-      //   : "";
     },
     report() {
       return this.$store.report;
@@ -679,6 +686,14 @@ export default {
     },
     autoCheckPosition() {
       this.$store.autoCheckPosition();
+    },
+    toggleSpindle() {
+      if (this.grblStatus.state == "Hold") {
+        this.$store.sendRealtimeCommand(String.fromCharCode(0x9e, 0x0));
+      } else {
+        this.spindleOn = !this.spindleOn;
+        this.$store.toggleSpindle(this.spindleOn);
+      }
     },
   },
 };
