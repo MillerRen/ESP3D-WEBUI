@@ -79,35 +79,35 @@
                     <tbody>
                       <tr>
                         <td>
-                          <div
-                            :class="{
-                              'has-warning': item.defaultvalue != item.value,
-                            }"
-                          >
-                            <div class="input-group">
-                              <span class="input-group-btn">
-                                <button
-                                  class="btn btn-default btn-svg"
-                                  @click="item.value = item.defaultvalue"
-                                >
-                                  <i class="glyphicon glyphicon-repeat"></i>
-                                </button>
-                              </span>
-                              <input
-                                type="text"
-                                class="form-control w6"
-                                v-model="item.value"
-                              />
-                              <span class="input-group-btn">
-                                <button
-                                  class="btn btn-default"
-                                  @click="updateConfig(item)"
-                                  v-t
-                                >
-                                  Set</button
-                                >&nbsp;
-                              </span>
-                            </div>
+                          <div class="input-group">
+                            <span class="input-group-btn">
+                              <button
+                                class="btn btn-default btn-svg"
+                                @click="item.value = item.defaultvalue"
+                              >
+                                <i class="glyphicon glyphicon-repeat"></i>
+                              </button>
+                            </span>
+                            <input
+                              type="text"
+                              class="form-control w6"
+                              v-model="item.value"
+                            />
+                            <span class="input-group-btn">
+                              <button
+                                class="btn btn-default"
+                                @click="updateConfig(item)"
+                                :disabled="item.defaultvalue == item.value"
+                                :class="{
+                                  'btn-warning':
+                                    item.defaultvalue != item.value,
+                                  'btn-success': item.success,
+                                }"
+                                v-t
+                              >
+                                Set</button
+                              >&nbsp;
+                            </span>
                           </div>
                         </td>
                       </tr>
@@ -164,7 +164,8 @@ export default {
       return this.$store
         .updateConfig(item.cmd + item.value)
         .then(() => {
-          item.defaultValue = item.value;
+          item.defaultValue = item.value
+          item.success = true
         })
         .catch((err) => {
           this.$modal({

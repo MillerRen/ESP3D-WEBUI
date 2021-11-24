@@ -91,7 +91,8 @@ function create_config_entry(sentry, vindex) {
             help: shelp,
             defaultvalue: svalue,
             value: svalue,
-            cmd: scmd
+            cmd: scmd,
+            success: false
         }
     }
 
