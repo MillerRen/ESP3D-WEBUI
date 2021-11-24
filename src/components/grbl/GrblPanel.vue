@@ -63,6 +63,9 @@
               </table>
             </td>
             <td>
+              <div v-if="sd&&sd.progress" class="pull-left" style="line-height:30px">
+                {{sd.fileName}}&nbsp;<progress :value="sd.progress" max="100" style="width:120px"></progress>{{sd.progress}}%
+              </div>
               <div
                 class="btn-toolbar pull-right"
                 v-if="report && report.data && report.data.status"
@@ -670,6 +673,9 @@ export default {
     pins() {
       return this.$store.pins;
     },
+    sd() {
+      return this.$store.sd
+    }
   },
   methods: {
     disableAlarm() {

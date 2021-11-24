@@ -117,5 +117,6 @@ module.exports.statusMap = {
   "Pn": "pins",
   "Pin": "pins",
   "WCO": "workcoordinateOffset",
-  "WPos": "workPosition"
+  "WPos": "workPosition",
+  "SD": "sd"
 }

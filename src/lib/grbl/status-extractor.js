@@ -78,6 +78,10 @@ StatusExtractor.prototype.statusReport = function (message) {
     report.pins = this.parsePins(report.pins)
   }
 
+  if(report.sd) {
+    report.sd = this.parseSD(report.sd)
+  }
+
   return {
     data: report,
     type: messageTypes.status,
@@ -211,6 +215,14 @@ StatusExtractor.prototype.parseOverride = function (override) {
     feeds: parseFloat(overrideData[0]),
     rapids: parseFloat(overrideData[1]),
     spindle: parseFloat(overrideData[2])
+  }
+}
+
+StatusExtractor.prototype.parseSD = function (sd) {
+  var sdData = sd.split(',')
+  return {
+    progress: sdData[0],
+    fileName: sdData[1]
   }
 }
 

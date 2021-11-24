@@ -39,7 +39,7 @@ export default class Grbl {
     this.uploadingProgress = 0
     this.messages = []
     this.spiffs = {}
-    this.sdfs = {}
+    this.sd = {}
     this.report = {}
     this.MPos = {
       x: 0,
@@ -62,6 +62,7 @@ export default class Grbl {
       e: 0
     }
     this.pins = []
+    this.sd = {}
     this.grblStatus = {}
     this.probeStatus = false
     this.grblErrorMessage = ''
@@ -139,7 +140,8 @@ export default class Grbl {
             {}
           )
         : []
-
+      console.log(report.data)
+      this.sd = report.data.sd
       if (report.data.status.state == 'Hold') {
         this.grblErrorMessage =
           report.data.status.state + ':' + report.data.status.code
