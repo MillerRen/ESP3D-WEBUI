@@ -114,7 +114,9 @@
                     </tbody>
                   </table>
                 </td>
-                <td style="vertical-align: middle" v-t>{{ item.help }}</td>
+                <td style="vertical-align: middle">
+                  <span class="text-muted" v-t>{{ item.help }}</span>
+                </td>
               </tr>
             </tbody>
           </table>
@@ -161,21 +163,23 @@ export default {
     },
     updateConfig(item) {
       this.loading = true;
-      return this.$store
-        .updateConfig(item.cmd + item.value)
-        .then(() => {
-          item.defaultvalue = item.value
-          item.success = true
-        })
-        // .catch((err) => {
-        //   this.$modal({
-        //     title: "Set failed",
-        //     message: "Error" + err.message,
-        //   });
-        // })
-        .finally(() => {
-          this.loading = false;
-        });
+      return (
+        this.$store
+          .updateConfig(item.cmd + item.value)
+          .then(() => {
+            item.defaultvalue = item.value;
+            item.success = true;
+          })
+          // .catch((err) => {
+          //   this.$modal({
+          //     title: "Set failed",
+          //     message: "Error" + err.message,
+          //   });
+          // })
+          .finally(() => {
+            this.loading = false;
+          })
+      );
     },
   },
   mounted() {

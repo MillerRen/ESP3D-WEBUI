@@ -65,10 +65,10 @@
             <div class="item-flex-row-wrap">
               <button
                 class="btn btn-xs btn-primary"
-                onclick="files_filter_button(this);"
+                @click="isFilter=!isFilter"
               >
                 <span style="position: relative; top: 2px">
-                  <i class="glyphicon glyphicon-filter"></i>
+                  <i class="glyphicon" :class="'glyphicon-'+(isFilter?'list-alt':'filter')"></i>
                 </span>
               </button>
               &nbsp;
@@ -223,8 +223,8 @@
                 {{ file.size != -1 ? file.size : "" }}
               </div>
               <div class="col-md-3 col-sm-3">{{ file.datetime }}</div>
-              <div class="col-md-2 col-sm2" style="text-align: right">
-                <div class="btn-toolbar">
+              <div class="col-md-2 col-sm2">
+                <div class="btn-toolbar pull-right">
                   <button
                     class="btn btn-xs btn-success"
                     v-if="file.isprintable"
@@ -311,6 +311,7 @@ export default {
       uploading: false,
       uploads: [],
       currentPath: "/",
+      isFilter: false
     };
   },
   computed: {
@@ -320,7 +321,7 @@ export default {
         : UPLOAD_URL;
     },
     files() {
-      return this.sdfs.files;
+      return !this.isFilter?this.sdfs.files:this.sdfs.files.filter(item=>item.isprintable)
     },
     preferences() {
       return this.$store.preferences;
