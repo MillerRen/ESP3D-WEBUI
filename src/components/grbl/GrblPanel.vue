@@ -323,7 +323,7 @@
                 <hr />
                 <table class="table">
                   <tr>
-                    <td class="text-center">
+                    <td class="text-center clearfix">
                       <label
                         class="label"
                         :class="{
@@ -344,7 +344,7 @@
                           'S',
                         ]"
                         :key="pin"
-                        style="margin: 0 2px"
+                        style="margin: 2px;float:left"
                       >
                         P{{ pin.toLowerCase() }}
                       </label>
