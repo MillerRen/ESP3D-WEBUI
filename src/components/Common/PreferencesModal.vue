@@ -120,7 +120,7 @@
                   max="99"
                   v-model="preferences.interval_positions"
                 />
-                <span class="input-group-addon form_control" v-t>sec</span>
+                <span class="input-group-addon" v-t>sec</span>
               </div>
             </td>
           </tr>
@@ -136,7 +136,7 @@
                   min="1"
                   v-model="preferences.xy_feedrate"
                 />
-                <span class="input-group-addon form_control" v-t>mm/min</span>
+                <span class="input-group-addon" v-t>mm/min</span>
               </div>
             </td>
           </tr>
@@ -154,7 +154,7 @@
                   min="1"
                   v-model="preferences[axis + '_feedrate']"
                 />
-                <span class="input-group-addon form_control" v-t>mm/min</span>
+                <span class="input-group-addon" v-t>mm/min</span>
               </div>
             </td>
           </tr>
@@ -194,7 +194,7 @@
                     max="99"
                     v-model="preferences.interval_temperatures"
                   />
-                  <span class="input-group-addon form_control" v-t>sec</span>
+                  <span class="input-group-addon" v-t>sec</span>
                 </div>
               </td>
             </tr>
@@ -279,7 +279,7 @@
                     max="9999"
                     v-model="preferences.e_distance"
                   />
-                  <span class="input-group-addon form_control" v-t>mm</span>
+                  <span class="input-group-addon" v-t>mm</span>
                 </div>
               </td>
             </tr>
@@ -301,7 +301,7 @@
                     max="9999"
                     v-model="preferences.e_feedrate"
                   />
-                  <span class="input-group-addon form_control" v-t>mm/min</span>
+                  <span class="input-group-addon" v-t>mm/min</span>
                 </div>
               </td>
             </tr>
@@ -383,7 +383,7 @@
                     max="99"
                     v-model="preferences.interval_status"
                   />
-                  <span class="input-group-addon form_control" v-t>sec</span>
+                  <span class="input-group-addon" v-t>sec</span>
                 </div>
               </td>
             </tr>
@@ -422,7 +422,7 @@
                       max="99999"
                       v-model="preferences.probemaxtravel"
                     />
-                    <span class="input-group-addon form_control" v-t>mm</span>
+                    <span class="input-group-addon" v-t>mm</span>
                   </div>
                 </td>
               </tr>
@@ -439,7 +439,7 @@
                       max="99999"
                       v-model="preferences.probefeedrate"
                     />
-                    <span class="input-group-addon form_control" v-t
+                    <span class="input-group-addon" v-t
                       >mm/min</span
                     >
                   </div>
@@ -458,7 +458,7 @@
                       max="99999"
                       v-model="preferences.probetouchplatethickness"
                     />
-                    <span class="input-group-addon form_control" v-t>mm</span>
+                    <span class="input-group-addon" v-t>mm</span>
                   </div>
                 </td>
               </tr>
@@ -498,7 +498,7 @@
                       max="99999"
                       v-model="preferences.surfacewidth"
                     />
-                    <span class="input-group-addon form_control" v-t>mm</span>
+                    <span class="input-group-addon" v-t>mm</span>
                   </div>
                 </td>
               </tr>
@@ -515,7 +515,7 @@
                       max="99999"
                       v-model="preferences.surfacelength"
                     />
-                    <span class="input-group-addon form_control" v-t>mm</span>
+                    <span class="input-group-addon" v-t>mm</span>
                   </div>
                 </td>
               </tr>
@@ -532,7 +532,7 @@
                       max="9999"
                       v-model="preferences.surfacezdepth"
                     />
-                    <span class="input-group-addon form_control" v-t>mm</span>
+                    <span class="input-group-addon" v-t>mm</span>
                   </div>
                 </td>
               </tr>
@@ -549,7 +549,7 @@
                       max="999"
                       v-model="preferences.surfacebitdiam"
                     />
-                    <span class="input-group-addon form_control" v-t>mm</span>
+                    <span class="input-group-addon" v-t>mm</span>
                   </div>
                 </td>
               </tr>
@@ -566,7 +566,7 @@
                       max="100"
                       v-model="preferences.surfacestepover"
                     />
-                    <span class="input-group-addon form_control" v-t>mm</span>
+                    <span class="input-group-addon" v-t>mm</span>
                   </div>
                 </td>
               </tr>
@@ -583,7 +583,7 @@
                       max="99999"
                       v-model="preferences.surfacefeedrate"
                     />
-                    <span class="input-group-addon form_control" v-t>mm</span>
+                    <span class="input-group-addon" v-t>mm</span>
                   </div>
                 </td>
               </tr>
@@ -600,7 +600,7 @@
                       max="99999"
                       v-model="preferences.surfacespindle"
                     />
-                    <span class="input-group-addon form_control" v-t>mm</span>
+                    <span class="input-group-addon" v-t>mm</span>
                   </div>
                 </td>
               </tr>

@@ -36,7 +36,7 @@
                                             v-model="preferences.tempInterval_check"
                                             onchange="onTempIntervalChange()"
                                         />
-                                        <span class="input-group-addon form_control" v-t>sec</span>
+                                        <span class="input-group-addon" v-t>sec</span>
                                     </td>
                                 </tr>
                             </table>
@@ -91,7 +91,7 @@
                                             <div class="input-group">
                                                 <input class="hidden" />
                                                 <span
-                                                    class="input-group-addon form_control"
+                                                    class="input-group-addon"
                                                     translate
                                                 >&deg;C</span>
                                             </div>
@@ -179,7 +179,7 @@
                                             <div class="input-group">
                                                 <input class="hidden" />
                                                 <span
-                                                    class="input-group-addon form_control"
+                                                    class="input-group-addon"
                                                     translate
                                                 >&deg;C</span>
                                             </div>
@@ -270,7 +270,7 @@
                                             <div class="input-group">
                                                 <input class="hidden" />
                                                 <span
-                                                    class="input-group-addon form_control"
+                                                    class="input-group-addon"
                                                     translate
                                                 >&deg;C</span>
                                             </div>
@@ -340,7 +340,7 @@
                                             <div class="input-group">
                                                 <input class="hidden" />
                                                 <span
-                                                    class="input-group-addon form_control"
+                                                    class="input-group-addon"
                                                     translate
                                                 >&deg;C</span>
                                             </div>

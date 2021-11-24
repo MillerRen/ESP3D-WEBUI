@@ -153,7 +153,7 @@
                                             <div class="input-group">
                                                 <input class="hidden" />
                                                 <span
-                                                    class="input-group-addon form_control"
+                                                    class="input-group-addon"
                                                     translate
                                                 >&#37;</span>
                                             </div>
@@ -213,7 +213,7 @@
                                             <div class="input-group">
                                                 <input class="hidden" />
                                                 <span
-                                                    class="input-group-addon form_control"
+                                                    class="input-group-addon"
                                                     translate
                                                 >&#37;</span>
                                             </div>
@@ -271,7 +271,7 @@
                                             <div class="input-group">
                                                 <input class="hidden" />
                                                 <span
-                                                    class="input-group-addon form_control"
+                                                    class="input-group-addon"
                                                     translate
                                                 >&#37;</span>
                                             </div>
@@ -300,7 +300,7 @@
                     <tr>
                         <td>
                             <div class="input-group">
-                                <span class="input-group-addon form_control" v-t>Extrude</span>
+                                <span class="input-group-addon" v-t>Extrude</span>
                                 <input class="hidden" />
                             </div>
                         </td>
@@ -322,7 +322,7 @@
                         <td>
                             <div class="input-group">
                                 <input class="hidden" />
-                                <span class="input-group-addon form_control" v-t>mm</span>
+                                <span class="input-group-addon" v-t>mm</span>
                             </div>
                         </td>
                     </tr>
@@ -331,7 +331,7 @@
                     <tr>
                         <td>
                             <div class="input-group">
-                                <span class="input-group-addon form_control">@</span>
+                                <span class="input-group-addon">@</span>
                                 <input class="hidden" />
                             </div>
                         </td>
@@ -352,7 +352,7 @@
                         <td>
                             <div class="input-group">
                                 <input class="hidden" />
-                                <span class="input-group-addon form_control" v-t>mm/min</span>
+                                <span class="input-group-addon" v-t>mm/min</span>
                             </div>
                         </td>
                     </tr>

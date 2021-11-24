@@ -64,7 +64,7 @@
             </td>
             <td>
               <div v-if="sd&&sd.progress" class="pull-left" style="line-height:30px">
-                {{sd.fileName}}&nbsp;<progress :value="sd.progress" max="100" style="width:120px"></progress>{{sd.progress}}%
+                {{sd.fileName}}&nbsp;<progress :value="sd.progress" max="100" style="width:100px"></progress>{{sd.progress}}%
               </div>
               <div
                 class="btn-toolbar pull-right"
@@ -362,7 +362,7 @@
               >
                 <div class="form-group">
                   <div class="input-group input-group-sm">
-                    <span class="input-group-addon form_control">
+                    <span class="input-group-addon">
                       <span v-t>Max travel</span>:
                     </span>
                     <input
@@ -372,12 +372,12 @@
                       v-model="preferences.probemaxtravel"
                       onchange="onprobemaxtravelChange()"
                     />
-                    <span class="input-group-addon form_control" v-t>mm</span>
+                    <span class="input-group-addon" v-t>mm</span>
                   </div>
                 </div>
                 <div class="form-group input-group-sm">
                   <div class="input-group input-group-sm">
-                    <span class="input-group-addon form_control">
+                    <span class="input-group-addon">
                       <span v-t>Feed rate</span>:
                     </span>
                     <input
@@ -386,14 +386,14 @@
                       min="1"
                       v-model="preferences.probefeedrate"
                     />
-                    <span class="input-group-addon form_control" v-t
+                    <span class="input-group-addon" v-t
                       >mm/min</span
                     >
                   </div>
                 </div>
                 <div class="form-group input-group-sm">
                   <div class="input-group input-group-sm">
-                    <span class="input-group-addon form_control">
+                    <span class="input-group-addon">
                       <span v-t>Plate thickness</span>:
                     </span>
                     <input
@@ -403,7 +403,7 @@
                       v-model="preferences.probetouchplatethickness"
                       onchange="onprobetouchplatethicknessChange()"
                     />
-                    <span class="input-group-addon form_control" v-t>mm</span>
+                    <span class="input-group-addon" v-t>mm</span>
                   </div>
                 </div>
                 <div class="form-group">
@@ -426,7 +426,7 @@
                 <div class="input-group input-group-sm">
                   <span
                     style="width: 150px"
-                    class="input-group-addon form_control"
+                    class="input-group-addon"
                   >
                     <span v-t>Width (X)</span>:
                   </span>
@@ -440,7 +440,7 @@
                   />
                   <span
                     style="width: 80px"
-                    class="input-group-addon form_control"
+                    class="input-group-addon"
                     v-t
                     >mm</span
                   >
@@ -448,7 +448,7 @@
                 <div class="input-group input-group-sm">
                   <span
                     style="width: 150px"
-                    class="input-group-addon form_control"
+                    class="input-group-addon"
                   >
                     <span v-t>Length (Y)</span>:
                   </span>
@@ -462,7 +462,7 @@
                   />
                   <span
                     style="width: 80px"
-                    class="input-group-addon form_control"
+                    class="input-group-addon"
                     v-t
                     >mm</span
                   >
@@ -470,7 +470,7 @@
                 <div class="input-group input-group-sm">
                   <span
                     style="width: 150px"
-                    class="input-group-addon form_control"
+                    class="input-group-addon"
                   >
                     <span v-t>Skim Depth (Z-)</span>:
                   </span>
@@ -484,7 +484,7 @@
                   />
                   <span
                     style="width: 80px"
-                    class="input-group-addon form_control"
+                    class="input-group-addon"
                     v-t
                     >mm</span
                   >
@@ -492,7 +492,7 @@
                 <div class="input-group input-group-sm">
                   <span
                     style="width: 150px"
-                    class="input-group-addon form_control"
+                    class="input-group-addon"
                   >
                     <span v-t>Bit Diameter</span>:
                   </span>
@@ -506,7 +506,7 @@
                   />
                   <span
                     style="width: 80px"
-                    class="input-group-addon form_control"
+                    class="input-group-addon"
                     v-t
                     >mm</span
                   >
@@ -514,7 +514,7 @@
                 <div class="input-group input-group-sm">
                   <span
                     style="width: 150px"
-                    class="input-group-addon form_control"
+                    class="input-group-addon"
                   >
                     <span v-t>Stepover</span>:
                   </span>
@@ -528,7 +528,7 @@
                   />
                   <span
                     style="width: 80px"
-                    class="input-group-addon form_control"
+                    class="input-group-addon"
                     v-t
                     >%</span
                   >
@@ -536,7 +536,7 @@
                 <div class="input-group input-group-sm">
                   <span
                     style="width: 150px"
-                    class="input-group-addon form_control"
+                    class="input-group-addon"
                   >
                     <span v-t>Feedrate</span>:
                   </span>
@@ -550,7 +550,7 @@
                   />
                   <span
                     style="width: 80px"
-                    class="input-group-addon form_control"
+                    class="input-group-addon"
                     v-t
                     >mm/min</span
                   >
@@ -558,7 +558,7 @@
                 <div class="input-group input-group-sm">
                   <span
                     style="width: 150px"
-                    class="input-group-addon form_control"
+                    class="input-group-addon"
                   >
                     <span v-t>Spindle RPM</span>:
                   </span>
@@ -572,7 +572,7 @@
                   />
                   <span
                     style="width: 80px"
-                    class="input-group-addon form_control"
+                    class="input-group-addon"
                     v-t
                     >RPM</span
                   >
@@ -634,7 +634,7 @@
             v-model="preferences.interval_positions"
             @change="autoCheckPosition"
           />
-          <span class="input-group-addon form_control" v-t>sec</span>
+          <span class="input-group-addon" v-t>sec</span>
         </div>
       </div>
     </div>
