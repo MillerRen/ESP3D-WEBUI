@@ -66,6 +66,8 @@ export default class Grbl {
     this.grblErrorMessage = ''
     this.enableAutoCheckPosition = true
     this.message = ''
+    this.page_id = 0
+    this.disableUI = false
   }
 
   startSocket () {
@@ -78,9 +80,48 @@ export default class Grbl {
       protocols: ['arduino'],
       onmessage (e) {
         var msg = Websocket.parseMessage(e)
-        msg.type == 'stream' ? that.processStream(msg) : console.log(msg)
+        msg.type == 'stream' ? that.processStream(msg) : that.processText(msg)
       }
     })
+  }
+
+  processText (msg) {
+    var tval = msg.split(":");
+      if (tval.length >= 2) {
+        if (tval[0] == "CURRENT_ID") {
+          this.page_id = tval[1];
+          console.log("connection id = " + this.page_id);
+        }
+        if (this.preferences.enable_ping) {
+          if (tval[0] == "PING") {
+            this.page_id = tval[1];
+            console.log("ping from id = " + this.page_id);
+            // if (interval_ping == -1)
+            //   interval_ping = setInterval(function () {
+            //     check_ping();
+            //   }, 10 * 1000);
+          }
+        }
+        if (tval[0] == "ACTIVE_ID") {
+          if (this.page_id != tval[1]) {
+            this.disableUI = true
+          }
+        }
+        if (tval[0] == "DHT") {
+          // Handle_DHT(tval[1]);
+        }
+        if (tval[0] == "ERROR") {
+          // esp_error_message = tval[2];
+          // esp_error_code = tval[1];
+          console.log("ERROR: " + tval[2] + " code:" + tval[1]);
+          // CancelCurrentUpload();
+        }
+        if (tval[0] == "MSG") {
+          // var error_message = tval[2];
+          // var error_code = tval[1];
+          console.log("MSG: " + tval[2] + " code:" + tval[1]);
+        }
+      }
   }
 
   processStream (msg) {

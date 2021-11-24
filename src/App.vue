@@ -48,9 +48,30 @@ export default {
     },
     preferences () {
       return this.$store.preferences
+    },
+    disableUI () {
+      return this.$store.disableUI
+    }
+  },
+  watch: {
+    disableUI () {
+      this.openDiableModal()
     }
   },
   methods: {
+    openDiableModal () {
+      this.$modal({
+        title: 'You are disconnected',
+        message: 'Looks like you are connected from another place, so this page is now disconnected',
+        okText: 'Please reconnect me',
+        closeable: false,
+        callback (val) {
+          if(val) {
+            location.reload()
+          }
+        }
+      })
+    },
     // boot step 1
     getFWData () {
       this.connectModal.data.bootStep = 1
