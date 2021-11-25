@@ -190,7 +190,7 @@ export default class Grbl {
       report = extractor.gcodeSystemReport(data)
     } else if (checker.isProbeResult(data)) {
       report = extractor.probeResultReport(data)
-      this.sendCommandText(`G53 G0 Z${this.report.data.location.z}`)
+      this.sendCommandText(`G53 G0 Z${report.data.location.z}`)
       this.sendCommandText(`G10 L20 P0 Z${this.preferences.probetouchplatethickness}`)
       this.sendCommandText('G90')
       this.probeStatus = false
