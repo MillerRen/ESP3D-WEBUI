@@ -408,7 +408,6 @@
                       type="number"
                       min="0"
                       v-model="preferences.probetouchplatethickness"
-                      onchange="onprobetouchplatethicknessChange()"
                     />
                     <span class="input-group-addon" v-t>mm</span>
                   </div>

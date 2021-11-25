@@ -61,6 +61,16 @@ export default class Grbl {
       d: 0,
       e: 0
     }
+    this.WCO = {
+      x: 0,
+      y: 0,
+      z: 0,
+      a: 0,
+      b: 0,
+      c: 0,
+      d: 0,
+      e: 0
+    }
     this.pins = []
     this.sd = {}
     this.grblStatus = {}
@@ -131,16 +141,17 @@ export default class Grbl {
     var report = {}
     if (checker.isStatusReport(data)) {
       report = statusExtractor.statusReport(data)
-      this.MPos = report.data.machinePosition || {}
-      this.WPos = report.data.workPosition || {}
-      this.grblStatus = report.data.status || {}
+      this.WCO = report.data.workcoordinateOffset || this.WCO
+      this.MPos = report.data.machinePosition || this.MPos
+      this.WPos = report.data.workPosition || this.WPos
+      this.grblStatus = report.data.status || this.grblStatus
       this.pins = report.data.pins
         ? report.data.pins.reduce(
             (a, b) => Object.assign(a, { [b.pin]: b }),
             {}
           )
         : []
-      console.log(report.data)
+      
       this.sd = report.data.sd
       if (report.data.status.state == 'Hold') {
         this.grblErrorMessage =
@@ -179,6 +190,9 @@ export default class Grbl {
       report = extractor.gcodeSystemReport(data)
     } else if (checker.isProbeResult(data)) {
       report = extractor.probeResultReport(data)
+      this.sendCommandText(`G53 G0 Z${this.report.data.location.z}`)
+      this.sendCommandText(`G10 L20 P0 Z${this.preferences.probetouchplatethickness}`)
+      this.sendCommandText('G90')
       this.probeStatus = false
     } else if (checker.isEcho(data)) {
       report = extractor.echoReport(data)
@@ -191,7 +205,7 @@ export default class Grbl {
     if (this.preferences.enable_verbose_mode || report.type != 'status') {
       this.messages.push(report)
     }
-    console.log(report)
+    console.log(data)
     this.report = report
   }
 
