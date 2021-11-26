@@ -319,6 +319,10 @@ export default class Grbl {
   printFile (filename) {
     let cmd = `[ESP220]${filename}`
     return this.sendCommandText(cmd)
+      .then((response) => {
+        this.autoCheckPosition()
+        return response
+      })
   }
 
   checkLogin () {
