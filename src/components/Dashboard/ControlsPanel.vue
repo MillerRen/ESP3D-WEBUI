@@ -47,10 +47,10 @@
       </div>
       <br />
       <div
-        class="position-container"
+        class="clearfix"
         v-if="fwData.target_firmware == 'grbl' || fwData.target_firmware == 'grbl-embedded'"
       >
-        <div class="position_text" v-for="axes in axis" :key="axes">
+        <div class="position_text" style="float:left;margin-right:6px" v-for="axes in axis" :key="axes">
           <table>
             <tr>
               <td>
