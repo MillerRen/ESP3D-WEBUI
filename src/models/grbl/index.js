@@ -205,7 +205,6 @@ export default class Grbl {
     if (this.preferences.enable_verbose_mode || report.type != 'status') {
       this.messages.push(report)
     }
-    console.log(data)
     this.report = report
   }
 
