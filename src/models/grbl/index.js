@@ -143,7 +143,7 @@ export default class Grbl {
       report = statusExtractor.statusReport(data)
       this.WCO = report.data.workcoordinateOffset || this.WCO
       if(report.data.machinePosition) {
-        this.WPos = report.data.workPosition
+        this.MPos = report.data.machinePosition
         this.WPos.x -= this.WCO.x
         this.WPos.y -= this.WCO.y
         this.WPos.z -= this.WCO.z
@@ -152,7 +152,7 @@ export default class Grbl {
         this.WPos.c -= this.WCO.c
       }
       if(report.data.workPosition) {
-        this.MPos = report.data.machinePosition
+        this.WPos = report.data.workPosition
         this.MPos.x += this.WCO.x
         this.MPos.y += this.WCO.y
         this.MPos.z += this.WCO.z
