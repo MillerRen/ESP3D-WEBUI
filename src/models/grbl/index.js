@@ -123,14 +123,11 @@ export default class Grbl {
         // Handle_DHT(tval[1]);
       }
       if (tval[0] == 'ERROR') {
-        // esp_error_message = tval[2];
-        // esp_error_code = tval[1];
+        this.message = tval[2]
         console.log('ERROR: ' + tval[2] + ' code:' + tval[1])
-        // CancelCurrentUpload();
       }
       if (tval[0] == 'MSG') {
-        // var error_message = tval[2];
-        // var error_code = tval[1];
+        this.message = tval[2]
         console.log('MSG: ' + tval[2] + ' code:' + tval[1])
       }
     }
