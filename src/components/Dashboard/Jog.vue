@@ -40,10 +40,17 @@
         fill="DarkSeaGreen"
       />
       <use x="217" y="217" width="20" height="18" xlink:href="#HomeIcon" />
-      <text x="202" y="232" class="home">{{selectAxis}}</text>
+      <text x="202" y="232" class="home">{{ selectAxis }}</text>
     </g>
 
-    <g id="Jog100" fill="#c0c0c0" class="std" transform="translate(10, 10)">
+    <g
+      id="Jog100"
+      fill="#c0c0c0"
+      class="std"
+      transform="translate(10, 10)"
+      @mouseenter="opacity['100'] = 1"
+      @mouseout="opacity['100'] = 0.2"
+    >
       <g id="Y+100" @click="jogXYClick('Y100')" transform="translate(120 120)">
         <path
           class="std"
@@ -70,7 +77,13 @@
       </g>
     </g>
 
-    <g id="Jog10" fill="#d0d0d0" transform="translate(10, 10)">
+    <g
+      id="Jog10"
+      fill="#d0d0d0"
+      transform="translate(10, 10)"
+      @mouseenter="opacity['10'] = 1"
+      @mouseout="opacity['10'] = 0.2"
+    >
       <g id="Y+10" @click="jogXYClick('Y10')" transform="translate(120 120)">
         <path
           class="std"
@@ -97,7 +110,13 @@
       </g>
     </g>
 
-    <g id="Jog1" fill="#e0e0e0" transform="translate(10, 10)">
+    <g
+      id="Jog1"
+      fill="#e0e0e0"
+      transform="translate(10, 10)"
+      @mouseenter="opacity['1'] = 1"
+      @mouseout="opacity['1'] = 0.2"
+    >
       <g id="Y+1" @click="jogXYClick('Y1')" transform="translate(120 120)">
         <path
           class="std"
@@ -124,56 +143,145 @@
       </g>
     </g>
 
-    <g id="Jog0_1" fill="#f0f0f0" transform="translate(10, 10)">
+    <g
+      id="Jog0_1"
+      fill="#f0f0f0"
+      transform="translate(10, 10)"
+      @mouseenter="opacity['01'] = 1"
+      @mouseout="opacity['01'] = 0.2"
+    >
       <g id="Y+0.1" @click="jogXYClick('Y0.1')" transform="translate(120 120)">
-        <path class="std" d="M-28.09 -35.16 A45,45 0 0,1 29.09,-35.16 L0,-7.07 z" />
+        <path
+          class="std"
+          d="M-28.09 -35.16 A45,45 0 0,1 29.09,-35.16 L0,-7.07 z"
+        />
       </g>
       <g id="X+0.1" @click="jogXYClick('X0.1')" transform="translate(120 120)">
-        <path class="std" d="M35.16 -28.09 A45,45 0 0,1 35.16,28.09 L7.07,0 z" />
+        <path
+          class="std"
+          d="M35.16 -28.09 A45,45 0 0,1 35.16,28.09 L7.07,0 z"
+        />
       </g>
       <g id="Y-0.1" @click="jogXYClick('Y-0.1')" transform="translate(120 120)">
-        <path class="std" d="M-28.09 35.16 A45,45 0 0,0 29.09,35.16 L0,7.07 z" />
+        <path
+          class="std"
+          d="M-28.09 35.16 A45,45 0 0,0 29.09,35.16 L0,7.07 z"
+        />
       </g>
       <g id="X-0.1" @click="jogXYClick('X-0.1')" transform="translate(120 120)">
-        <path class="std" d="M-35.16 -28.09 A45,45 0 0,0 -35.16,28.09 L-7.07,0 z" />
+        <path
+          class="std"
+          d="M-35.16 -28.09 A45,45 0 0,0 -35.16,28.09 L-7.07,0 z"
+        />
       </g>
     </g>
 
-    <g id="+Z" fill="#b0b0b0" transform="translate(270, 10)" pointer-events="none">
-      <path class="std" d=" M5,0 h30 a5,5 0 0,1 5,5 v27 h-40 v-27 a5,5 0 0,1 5,-5 z" />
-      <path class="std" d="M20,2 l17,17 h-10 v11 h-14 v-11 h-10 z" fill="DarkSeaGreen" />
-      <text x="11" y="18" font-size="12">+{{selectAxis}}</text>
+    <g
+      id="+Z"
+      fill="#b0b0b0"
+      transform="translate(270, 10)"
+      pointer-events="none"
+    >
+      <path
+        class="std"
+        d=" M5,0 h30 a5,5 0 0,1 5,5 v27 h-40 v-27 a5,5 0 0,1 5,-5 z"
+      />
+      <path
+        class="std"
+        d="M20,2 l17,17 h-10 v11 h-14 v-11 h-10 z"
+        fill="DarkSeaGreen"
+      />
+      <text x="11" y="18" font-size="12">+{{ selectAxis }}</text>
     </g>
-    <g id="-Z" fill="#b0b0b0" transform="translate(270, 10)" pointer-events="none">
-      <path class="std" d=" M0,208 h40 v27 a5,5 0 0,1 -5,5 h-30 a5,5 0 0,1 -5,-5 z" />
-      <path class="std" d="M20,238 l-17,-17 h10 v-11 h14 v11 h10 z" fill="DarkSeaGreen" />
-      <text x="13" y="230" font-size="12">-{{selectAxis}}</text>
+    <g
+      id="-Z"
+      fill="#b0b0b0"
+      transform="translate(270, 10)"
+      pointer-events="none"
+    >
+      <path
+        class="std"
+        d=" M0,208 h40 v27 a5,5 0 0,1 -5,5 h-30 a5,5 0 0,1 -5,-5 z"
+      />
+      <path
+        class="std"
+        d="M20,238 l-17,-17 h10 v-11 h14 v11 h10 z"
+        fill="DarkSeaGreen"
+      />
+      <text x="13" y="230" font-size="12">-{{ selectAxis }}</text>
     </g>
-    <g id="Z+10" @click="jogZClick('Z10')" fill="#d0d0d0" transform="translate(270, 10)">
+    <g
+      id="Z+10"
+      @click="jogZClick('Z10')"
+      fill="#d0d0d0"
+      transform="translate(270, 10)"
+      @mouseenter="opacity['z10'] = 1"
+      @mouseout="opacity['z10'] = 0.2"
+    >
       <rect class="std" x="0" y="32" width="40" height="30" />
-      <circle class="scl" cx="20" cy="47" r="13" />
+      <circle class="scl" cx="20" cy="47" r="13" :opacity="opacity['z10']" />
       <text class="scl" x="9" y="53" font-size="18">10</text>
     </g>
-    <g id="Z+1" @click="jogZClick('Z1')" fill="#e0e0e0" transform="translate(270, 10)">
+    <g
+      id="Z+1"
+      @click="jogZClick('Z1')"
+      fill="#e0e0e0"
+      transform="translate(270, 10)"
+      @mouseenter="opacity['z1'] = 1"
+      @mouseout="opacity['z1'] = 0.2"
+    >
       <rect class="std" x="0" y="62" width="40" height="26" />
-      <circle class="scl" cx="20" cy="75" r="11" />
+      <circle class="scl" cx="20" cy="75" r="11" :opacity="opacity['z1']" />
       <text class="scl" x="15" y="81.5" font-size="18">1</text>
     </g>
-    <g id="Z+0.1" @click="jogZClick('Z0.1')" fill="#f0f0f0" transform="translate(270, 10)">
+    <g
+      id="Z+0.1"
+      @click="jogZClick('Z0.1')"
+      fill="#f0f0f0"
+      transform="translate(270, 10)"
+      @mouseenter="opacity['z01'] = 1"
+      @mouseout="opacity['z01'] = 0.2"
+    >
       <rect class="std" x="0" y="88" width="40" height="24" />
-      <circle class="scl" cx="20" cy="100" r="9.5" />
+      <circle class="scl" cx="20" cy="100" r="9.5" :opacity="opacity['z01']" />
       <text class="scl" x="13" y="103.5" font-size="10">0.1</text>
     </g>
-    <g id="Z-10" @click="jogZClick('Z-10')" fill="#d0d0d0" transform="translate(270, 10)">
+    <g
+      id="Z-10"
+      @click="jogZClick('Z-10')"
+      fill="#d0d0d0"
+      transform="translate(270, 10)"
+      @mouseenter="opacity['z10'] = 1"
+      @mouseout="opacity['z10'] = 0.2"
+    >
       <rect class="std" x="0" y="178" width="40" height="30" />
     </g>
-    <g id="Z-1" @click="jogZClick('Z-1')" fill="#e0e0e0" transform="translate(270, 10)">
+    <g
+      id="Z-1"
+      @click="jogZClick('Z-1')"
+      fill="#e0e0e0"
+      transform="translate(270, 10)"
+      @mouseenter="opacity['z1'] = 1"
+      @mouseout="opacity['z1'] = 0.2"
+    >
       <rect class="std" x="0" y="152" width="40" height="26" />
     </g>
-    <g id="Z-0.1" @click="jogZClick('Z-0.1')" fill="#f0f0f0" transform="translate(270, 10)">
+    <g
+      id="Z-0.1"
+      @click="jogZClick('Z-0.1')"
+      fill="#f0f0f0"
+      transform="translate(270, 10)"
+      @mouseenter="opacity['z01'] = 1"
+      @mouseout="opacity['z01'] = 0.2"
+    >
       <rect class="std" x="0" y="128" width="40" height="24" />
     </g>
-    <g id="ZSpace" fill="#000000" transform="translate(270, 10)" pointer-events="none">
+    <g
+      id="ZSpace"
+      fill="#000000"
+      transform="translate(270, 10)"
+      pointer-events="none"
+    >
       <rect class="std" x="0" y="112" width="40" height="16" />
     </g>
 
@@ -186,22 +294,87 @@
 
       <symbol id="HomeIcon" viewBox="0 0 20 18" pointer-events="none">
         <desc>HomeIcon - house</desc>
-        <path class="home" d="M3,18 v-8 l7,-6 l7,6 v8 h-5 v-6 h-4 v6 z" fill="black" />
-        <path class="home" d="M0,10 l10-8.5 l10,8.5" stroke-width="1.5" fill="none" />
+        <path
+          class="home"
+          d="M3,18 v-8 l7,-6 l7,6 v8 h-5 v-6 h-4 v6 z"
+          fill="black"
+        />
+        <path
+          class="home"
+          d="M0,10 l10-8.5 l10,8.5"
+          stroke-width="1.5"
+          fill="none"
+        />
         <path class="home" d="M15,3 v2.8 l1,.8 v-3.6 z" />
       </symbol>
 
       <symbol id="JogRose" viewBox="20 -10 260 260">
         <g id="RoseScale">
           <g>
-            <circle class="scl" cx="144" cy="96" r="9.5" />
-            <circle class="scl" cx="159.5" cy="80.5" r="10.5" />
-            <circle class="scl" cx="175" cy="65" r="12" />
-            <circle class="scl" cx="195" cy="45" r="15" />
-            <text class="scl" x="137" y="99" font-size="10">0.1</text>
-            <text class="scl" x="155" y="85" font-size="14">1</text>
-            <text class="scl" x="166" y="70" font-size="15">10</text>
-            <text class="scl" x="182" y="50" font-size="15">100</text>
+            <circle
+              class="scl"
+              cx="144"
+              cy="96"
+              r="9.5"
+              :opacity="opacity['01']"
+            />
+            <circle
+              class="scl"
+              cx="159.5"
+              cy="80.5"
+              r="10.5"
+              :opacity="opacity['1']"
+            />
+            <circle
+              class="scl"
+              cx="175"
+              cy="65"
+              r="12"
+              :opacity="opacity['10']"
+            />
+            <circle
+              class="scl"
+              cx="195"
+              cy="45"
+              r="15"
+              :opacity="opacity['100']"
+            />
+            <text
+              class="scl"
+              x="137"
+              y="99"
+              font-size="10"
+              :opacity="opacity['01']"
+            >
+              0.1
+            </text>
+            <text
+              class="scl"
+              x="155"
+              y="85"
+              font-size="14"
+              :opacity="opacity['1']"
+            >
+              1
+            </text>
+            <text
+              class="scl"
+              x="166"
+              y="70"
+              font-size="15"
+              :opacity="opacity['10']"
+            >
+              10
+            </text>
+            <text
+              class="scl"
+              x="182"
+              y="50"
+              font-size="15"
+              :opacity="opacity['100']"
+            >
+              100
+            </text>
           </g>
         </g>
         <g
@@ -211,13 +384,29 @@
           font-size="11"
           fill-opacity="0.6"
         >
-          <path class="std" d="M120,20 l17,17 h-10 v11 h-14 v-11 h-10 z" fill="SteelBlue" />
+          <path
+            class="std"
+            d="M120,20 l17,17 h-10 v11 h-14 v-11 h-10 z"
+            fill="SteelBlue"
+          />
           <!-- y pos arrow -->
-          <path class="std" d="M120,220 l17,-17 h-10 v-11 h-14 v11 h-10 z" fill="SteelBlue" />
+          <path
+            class="std"
+            d="M120,220 l17,-17 h-10 v-11 h-14 v11 h-10 z"
+            fill="SteelBlue"
+          />
           <!-- y neg arrow -->
-          <path class="std" d="M20,120 l17,17 v-10 h11 v-14 h-11 v-10 z" fill="Khaki" />
+          <path
+            class="std"
+            d="M20,120 l17,17 v-10 h11 v-14 h-11 v-10 z"
+            fill="Khaki"
+          />
           <!-- x neg arrow -->
-          <path class="std" d="M220,120 l-17,-17 v10 h-11 v14 h11 v10 z" fill="Khaki" />
+          <path
+            class="std"
+            d="M220,120 l-17,-17 v10 h-11 v14 h11 v10 z"
+            fill="Khaki"
+          />
           <!-- x pos arrow -->
           <text x="113" y="37">+Y</text>
           <text x="113" y="212">-Y</text>
@@ -241,30 +430,50 @@ export default {
   props: {
     selectAxis: {
       type: String,
-      default: 'z'
-    }
+      default: "z",
+    },
+  },
+  data() {
+    return {
+      opacity: {
+        "01": 0.2,
+        1: 0.2,
+        10: 0.2,
+        100: 0.2,
+        z01: 0.2,
+        z1: 0.2,
+        z10: 0.2,
+        z100: 0.2
+      },
+    };
   },
   methods: {
     homeAll() {
-      return this.$store.homeAll()
+      return this.$store.homeAll();
     },
     homeX() {
-      return this.$store.homeX()
+      return this.$store.homeX();
     },
     homeY() {
-      return this.$store.homeY()
+      return this.$store.homeY();
     },
     homeZ() {
-      return this.$store.homeZ()
+      return this.$store.homeZ();
     },
     jogXYClick(cmd) {
-      return this.$store.jog(cmd, this.$store.preferences.xy_feedrate)
+      return this.$store.jog(cmd, this.$store.preferences.xy_feedrate);
     },
     jogZClick(cmd) {
-      return this.$store.jog(cmd.replace('Z', this.selectAxis), this.$store.preferences[this.selectAxis.toLowerCase()+'_feedrate'])
-    }
-  }
-}
+      return this.$store.jog(
+        cmd.replace("Z", this.selectAxis),
+        this.$store.preferences[this.selectAxis.toLowerCase() + "_feedrate"]
+      );
+    },
+    mouseenter() {
+      console.log("----------------");
+    },
+  },
+};
 </script>
 
 <style type="text/css">
