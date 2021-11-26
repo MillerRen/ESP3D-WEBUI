@@ -55,7 +55,8 @@ function parseSettings(settings) {
             min_val: min,
             max_val: max,
             type: sentry.T,
-            pos: sentry.P
+            pos: sentry.P,
+            success: false
         };
         setting_configList.push(config_entry);
     }

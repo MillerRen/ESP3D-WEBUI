@@ -50,12 +50,7 @@
           >
             <td v-t>{{ setting.label }}</td>
             <td>
-              <form
-                @submit.prevent.stop="setValue(setting)"
-                :class="{
-                  'has-warning': setting.value != setting.defaultvalue,
-                }"
-              >
+              <form @submit.prevent.stop="setValue(setting)">
                 <div class="input-group">
                   <span class="input-group-btn">
                     <button
@@ -103,7 +98,7 @@
                     <option value="0" v-t>Enable</option>
                   </select>
                   <span class="input-group-btn">
-                    <button class="btn btn-default" type="submit">set</button>
+                    
                     <button
                       class="btn btn-default"
                       type="button"
@@ -113,6 +108,17 @@
                       "
                     >
                       <i class="glyphicon glyphicon-search"></i>
+                    </button>
+                    <button
+                      class="btn btn-default"
+                      :class="{
+                        'btn-warning': setting.defaultvalue != setting.value,
+                        'btn-success': setting.success,
+                      }"
+                      :disabled="setting.defaultvalue==setting.value"
+                      type="submit"
+                    >
+                      set
                     </button>
                   </span>
                 </div>
@@ -152,6 +158,7 @@ export default {
           this.loading = false;
           if (response == "ok") {
             setting.defaultvalue = setting.value;
+            setting.success = true;
           }
         })
         .catch((err) => {
