@@ -24,7 +24,7 @@
                 ></i>
               </td>
               <td>
-                  <button class="btn btn-sm btn-success" @click="join(wifi)">
+                  <button class="btn btn-xs btn-success" @click="join(wifi)">
                       <i class="glyphicon glyphicon-ok"></i>
                   </button>
               </td>
