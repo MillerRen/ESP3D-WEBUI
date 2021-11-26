@@ -142,8 +142,24 @@ export default class Grbl {
     if (checker.isStatusReport(data)) {
       report = statusExtractor.statusReport(data)
       this.WCO = report.data.workcoordinateOffset || this.WCO
-      this.MPos = report.data.machinePosition || this.MPos
-      this.WPos = report.data.workPosition || this.WPos
+      if(report.data.machinePosition) {
+        this.WPos = report.data.workPosition
+        this.WPos.x -= this.WCO.x
+        this.WPos.y -= this.WCO.y
+        this.WPos.z -= this.WCO.z
+        this.WPos.a -= this.WCO.a
+        this.WPos.b -= this.WCO.b
+        this.WPos.c -= this.WCO.c
+      }
+      if(report.data.workPosition) {
+        this.MPos = report.data.machinePosition
+        this.MPos.x += this.WCO.x
+        this.MPos.y += this.WCO.y
+        this.MPos.z += this.WCO.z
+        this.MPos.a += this.WCO.a
+        this.MPos.b += this.WCO.b
+        this.MPos.c += this.WCO.c
+      }
       this.grblStatus = report.data.status || this.grblStatus
       this.pins = report.data.pins
         ? report.data.pins.reduce(
@@ -153,14 +169,7 @@ export default class Grbl {
         : []
       
       this.sd = report.data.sd
-      if(report.data.workcoordinateOffset) {
-        this.WPos.x -= this.WCO.x
-        this.WPos.y -= this.WCO.y
-        this.WPos.z -= this.WCO.z
-        this.WPos.a -= this.WCO.a
-        this.WPos.b -= this.WCO.b
-        this.WPos.c -= this.WCO.c
-      }
+      
       if (report.data.status.state == 'Hold') {
         this.grblErrorMessage =
           report.data.status.state + ':' + report.data.status.code
