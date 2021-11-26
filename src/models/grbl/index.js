@@ -144,21 +144,21 @@ export default class Grbl {
       this.WCO = report.data.workcoordinateOffset || this.WCO
       if(report.data.machinePosition) {
         this.MPos = report.data.machinePosition
-        this.WPos.x -= this.WCO.x
-        this.WPos.y -= this.WCO.y
-        this.WPos.z -= this.WCO.z
-        this.WPos.a -= this.WCO.a
-        this.WPos.b -= this.WCO.b
-        this.WPos.c -= this.WCO.c
+        this.WPos.x = this.MPos.x - this.WCO.x
+        this.WPos.y = this.MPos.y - this.WCO.y
+        this.WPos.z = this.MPos.z - this.WCO.z
+        this.WPos.a = this.MPos.a - this.WCO.a
+        this.WPos.b = this.MPos.b - this.WCO.b
+        this.WPos.c = this.MPos.c - this.WCO.c
       }
       if(report.data.workPosition) {
         this.WPos = report.data.workPosition
-        this.MPos.x += this.WCO.x
-        this.MPos.y += this.WCO.y
-        this.MPos.z += this.WCO.z
-        this.MPos.a += this.WCO.a
-        this.MPos.b += this.WCO.b
-        this.MPos.c += this.WCO.c
+        this.MPos.x = this.WPos.x + this.WCO.x
+        this.MPos.y = this.WPos.y + this.WCO.y
+        this.MPos.z = this.WPos.z + this.WCO.z
+        this.MPos.a = this.WPos.a + this.WCO.a
+        this.MPos.b = this.WPos.b + this.WCO.b
+        this.MPos.c = this.WPos.c + this.WCO.c
       }
       this.grblStatus = report.data.status || this.grblStatus
       this.pins = report.data.pins
