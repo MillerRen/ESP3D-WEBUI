@@ -4,6 +4,7 @@
     xmlns="http://www.w3.org/2000/svg"
     version="1.1"
     xmlns:xlink="http://www.w3.org/1999/xlink"
+    class="jog-rose"
   >
     <g @click="homeAll" transform="translate(10, 10)">
       <path
@@ -468,10 +469,7 @@ export default {
         cmd.replace("Z", this.selectAxis),
         this.$store.preferences[this.selectAxis.toLowerCase() + "_feedrate"]
       );
-    },
-    mouseenter() {
-      console.log("----------------");
-    },
+    }
   },
 };
 </script>
@@ -533,5 +531,10 @@ rect.std {
 
 rect.std:hover {
   fill: orange;
+}
+
+.jog-rose path,
+.jog-rose rect {
+  cursor: pointer;
 }
 </style>
