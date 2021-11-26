@@ -7,6 +7,7 @@ import Firmware from './firmware'
 import Status from './status'
 import Files from './files'
 import Websocket from './websocket'
+import dht from './dht'
 
 import { Checker, Extractor, StatusExtractor, constants } from '../../lib/grbl'
 
@@ -80,6 +81,10 @@ export default class Grbl {
     this.message = ''
     this.page_id = 0
     this.disableUI = false
+    this.dht = {
+      humidity: '',
+      temperature: ''
+    }
   }
 
   startSocket () {
@@ -108,10 +113,6 @@ export default class Grbl {
         if (tval[0] == 'PING') {
           this.page_id = tval[1]
           console.log('ping from id = ' + this.page_id)
-          // if (interval_ping == -1)
-          //   interval_ping = setInterval(function () {
-          //     check_ping();
-          //   }, 10 * 1000);
         }
       }
       if (tval[0] == 'ACTIVE_ID') {
@@ -120,7 +121,7 @@ export default class Grbl {
         }
       }
       if (tval[0] == 'DHT') {
-        // Handle_DHT(tval[1]);
+        this.dht = dht(tval[1])
       }
       if (tval[0] == 'ERROR') {
         this.message = tval[2]

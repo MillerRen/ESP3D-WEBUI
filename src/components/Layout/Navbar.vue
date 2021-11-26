@@ -13,6 +13,14 @@
         </div>
         <div class="collapse navbar-collapse" :style="{display:collapsed?'none':'block'}">
             <ul class="nav navbar-nav pull-right">
+         <li>
+             <a >{{dht.humidity}}</a>
+         </li>
+         <li>
+             <a id="DHT_temperature">{{dht.temperature}}</a>
+         </li>
+     </ul>
+            <ul class="nav navbar-nav pull-right">
                 <li class="dropdown" v-if="fwData.ESP3D_authentication">
                     <a href="#" class="nav-link">
                         <i class="dropbtn">
@@ -81,6 +89,9 @@ export default {
         },
         fwData() {
             return this.$store.fwData
+        },
+        dht () {
+            return this.$store.dht
         }
     },
     methods: {
