@@ -255,7 +255,8 @@ export default class Grbl {
   sendCustomCommand (cmd) {
     this.messages.push({
       type: 'input',
-      msg: cmd
+      msg: cmd,
+      input: cmd
     })
     return this.sendCommandText(cmd)
   }
