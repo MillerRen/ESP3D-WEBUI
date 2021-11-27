@@ -48,7 +48,7 @@
             :key="index"
             v-show="setting.F == settingsType"
           >
-            <td v-t>{{ setting.label }}</td>
+            <td class="text-muted" v-t>{{ setting.label }}</td>
             <td>
               <form @submit.prevent.stop="setValue(setting)">
                 <div class="input-group">
@@ -98,7 +98,6 @@
                     <option value="0" v-t>Enable</option>
                   </select>
                   <span class="input-group-btn">
-                    
                     <button
                       class="btn btn-default"
                       type="button"
@@ -115,11 +114,10 @@
                         'btn-warning': setting.defaultvalue != setting.value,
                         'btn-success': setting.success,
                       }"
-                      :disabled="setting.defaultvalue==setting.value"
+                      :disabled="setting.defaultvalue == setting.value"
                       type="submit"
-                    >
-                      set
-                    </button>
+                      v-t
+                    >Set</button>
                   </span>
                 </div>
               </form>
