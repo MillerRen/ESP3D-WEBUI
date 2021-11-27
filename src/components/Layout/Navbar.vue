@@ -102,7 +102,7 @@ export default {
         },
         creditsdlg() {
             this.$modal({
-                title: 'About'
+                title: 'Credits'
             }, 'CreditsModal')
         },
         logindlg() {
