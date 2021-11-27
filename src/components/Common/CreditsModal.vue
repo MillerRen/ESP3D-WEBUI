@@ -3,13 +3,17 @@
         
         <ul>
             <li>
+                This UI is open source code
+                <a href="https://github.com/MillerRen/ESP3D-WEBUI" v-t>ESP3D-WEBUI</a>
+            </li>
+            <li>
                 This UI for firmware of 
                 <a  href="https://github.com/luc-github/ESP3D" target="_blank">
                     <span v-t>ESP3D</span>
                 </a>
             </li>
             <li>
-                This UI is open source code 
+                The origin webui source code 
                 <a  href="https://github.com/luc-github/ESP3D-webui" target="_blank">
                     <span v-t>ESP3D-WEBUI</span>
                 </a>
