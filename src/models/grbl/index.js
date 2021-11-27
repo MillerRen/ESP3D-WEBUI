@@ -359,7 +359,7 @@ export default class Grbl {
   getSettings () {
     return this.sendCommand('[ESP400]').then(response => {
       if (!response.EEPROM) {
-        throw new Error('wrong data')
+        throw new Error('Wrong data')
       }
       let settings = Settings.parseSettings(response.EEPROM)
       this.settings = settings
