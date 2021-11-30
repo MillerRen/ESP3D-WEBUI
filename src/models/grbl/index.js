@@ -102,6 +102,10 @@ export default class Grbl {
     })
     this.report = Object.assign({}, this.report, report)
 
+    if(this.report.type == 'settings') {
+      this.config = Config.parseConfig(data)
+    }
+
     if (this.preferences.enable_verbose_mode || report.type != 'status') {
       this.messages.push(report)
     }
