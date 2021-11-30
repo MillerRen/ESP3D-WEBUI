@@ -100,7 +100,7 @@ export default class Grbl {
     var report = GrblPaser.run({
       input: data
     })
-    this.report = Object.assign({}, report)
+    this.report = Object.assign({}, this.report, report)
 
     if (this.preferences.enable_verbose_mode || report.type != 'status') {
       this.messages.push(report)

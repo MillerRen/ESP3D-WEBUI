@@ -1,5 +1,7 @@
 const statusRegex = /^<.*>/
 
+var WCO
+
 export default function (ctx, next) {
   var message = ctx.input
 
@@ -33,11 +35,17 @@ export default function (ctx, next) {
     ctx[type] = value
   })
 
-  if(ctx.MPos&&ctx.WCO) {
-    ctx.WPos = ctx.MPos.map((v,i)=>v-ctx.WCO[i])
+  ctx.Pn = ctx.Pn || []
+
+  if(ctx.WCO) {
+    WCO = ctx.WCO
   }
-  if(ctx.WPos&&ctx.WCO) {
-    ctx.MPos = ctx.WPos.map((v,i)=>v+ctx.WCO[i])
+
+  if(ctx.MPos&&WCO) {
+    ctx.WPos = ctx.MPos.map((v,i)=>v-WCO[i])
+  }
+  if(ctx.WPos&&WCO) {
+    ctx.MPos = ctx.WPos.map((v,i)=>v+WCO[i])
   }
 
   next()
