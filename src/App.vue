@@ -1,9 +1,7 @@
 <template>
   <main v-if="initialized">
     <Toaster />
-    <Navbar :fwData="fwData" />
-    <Tabs v-model="mainTab" :fwData="fwData" />
-    <br />
+    <Navbar :fwData="fwData" v-model="mainTab" />
     <ConfigPanel v-if="mainTab == 'printer'" :fwData="fwData" />
     <DashboardPanel
       v-if="mainTab == 'dashboard'"
@@ -18,7 +16,6 @@
 
 <script>
 import Navbar from './components/Layout/Navbar.vue'
-import Tabs from './components/Layout/Tabs.vue'
 import SettingsPanel from './components/Tabs/Settings.vue'
 import ConfigPanel from './components/Tabs/Config.vue'
 import CameraPanel from './components/Tabs/Camera.vue'
@@ -29,7 +26,6 @@ export default {
   name: 'App',
   components: {
     Navbar,
-    Tabs,
     ConfigPanel,
     DashboardPanel,
     CameraPanel,
