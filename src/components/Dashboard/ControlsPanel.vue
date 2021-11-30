@@ -62,7 +62,7 @@
               <td>
                 <span class="label label-default" style="padding: 5px 5px 3px 5px;">
                   <span>{{ fwData.target_firmware == 'grbl' || fwData.target_firmware == 'grbl-embedded' ? axes.toUpperCase() + 'w' : axes.toUpperCase() }}</span>:
-                  <span v-if="report.WPos">{{ report.WPos[index] }}</span>
+                  <span v-if="report.WPos">{{ report.WPos[index].toFixed(3) }}</span>
                 </span>
               </td>
               <td></td>
@@ -76,7 +76,7 @@
                     <td>
                       <span class="label label-default" style="padding: 5px 5px 3px 5px;">
                         <span>{{ axes.toUpperCase() }}m</span>:
-                        <span v-if="report.MPos">{{ report.MPos[index] }}</span>
+                        <span v-if="report.MPos">{{ report.MPos[index].toFixed(3) }}</span>
                       </span>
                     </td>
                   </tr>
