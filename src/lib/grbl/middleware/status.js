@@ -1,23 +1,8 @@
 const statusRegex = /^<.*>/
-const statusMap = {
-  "A": "accessories",
-  "Bf": "buffer",
-  "Buf": "buffer",
-  "RX": "buffer",
-  "FS": "realtimeFeed",
-  "MPos": "machinePosition",
-  "Ov": "override",
-  "Lim": "pins",
-  "Pn": "pins",
-  "Pin": "pins",
-  "WCO": "workcoordinateOffset",
-  "WPos": "workPosition",
-  "SD": "sd"
-}
 
 export default function (ctx, next) {
   var message = ctx.input
-  
+
   if (!statusRegex.test(message)) {
     return next()
   }
@@ -30,14 +15,23 @@ export default function (ctx, next) {
   ctx.status = status[0]
   ctx.status_code = status[1]
 
-  statusData
-    .map(str => {
+  statusData.map(str => {
     var info = str.split(':')
     var type = info[0]
     var value = info[1].split(',')
-    if(value.length == 1) value = value[0].split('')
-    ctx[statusMap[type]] = value
+    if (value.length == 1) value = value[0].split('')
+    if(type=='MPos'||type=='WPos'||type=='WCO') {
+      value = value.map(v=>parseFloat(v))
+    }
+    ctx[type] = value
   })
+
+  if(ctx.MPos&&ctx.WCO) {
+    ctx.WPos = ctx.MPos.map((v,i)=>v-ctx.WCO[i])
+  }
+  if(ctx.WPos&&ctx.WCO) {
+    ctx.MPos = ctx.WPos.map((v,i)=>v+ctx.WCO[i])
+  }
 
   next()
 }

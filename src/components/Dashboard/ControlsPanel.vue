@@ -50,7 +50,7 @@
         class="clearfix"
         v-if="fwData.target_firmware == 'grbl' || fwData.target_firmware == 'grbl-embedded'"
       >
-        <div class="position_text" style="float:left;margin-right:6px" v-for="axes in axis" :key="axes">
+        <div class="position_text" style="float:left;margin-right:6px" v-for="(axes,index) in axis" :key="axes">
           <table>
             <tr>
               <td>
@@ -62,7 +62,7 @@
               <td>
                 <span class="label label-default" style="padding: 5px 5px 3px 5px;">
                   <span>{{ fwData.target_firmware == 'grbl' || fwData.target_firmware == 'grbl-embedded' ? axes.toUpperCase() + 'w' : axes.toUpperCase() }}</span>:
-                  <span>{{ WPos[axes].toFixed(3) }}</span>
+                  <span v-if="report.WPos">{{ report.WPos[index] }}</span>
                 </span>
               </td>
               <td></td>
@@ -76,7 +76,7 @@
                     <td>
                       <span class="label label-default" style="padding: 5px 5px 3px 5px;">
                         <span>{{ axes.toUpperCase() }}m</span>:
-                        <span>{{ MPos[axes].toFixed(3) }}</span>
+                        <span v-if="report.MPos">{{ report.MPos[index] }}</span>
                       </span>
                     </td>
                   </tr>
@@ -130,11 +130,8 @@ export default {
     }
   },
   computed: {
-    MPos() {
-      return this.$store.MPos
-    },
-    WPos() {
-      return this.$store.WPos
+    report () {
+      return this.$store.report
     },
     axis() {
       return 'xyzabc'.slice(0, this.$store.fwData.grblaxis)

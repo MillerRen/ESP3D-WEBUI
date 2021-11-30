@@ -1,7 +1,7 @@
 const constants = require('../mocks/data/spec_constants')
 // const message = constants.validStrings.status[0]
 // const message = constants.validStrings.alarm[7]
-// const message = constants.validStrings.error[7]
+const message = constants.validStrings.error[7]
 // const message = constants.validStrings.probeResult[0]
 // const message = constants.validStrings.setting[0]
 // const message = constants.validStrings.buildVersion[0]
@@ -10,7 +10,7 @@ const constants = require('../mocks/data/spec_constants')
 // const message = constants.validStrings.echo[0]
 // const message = constants.validStrings.startupLine[0]
 // const message = constants.validStrings.gcodeState[0]
-const message = constants.validStrings.gcodeSystem[0]
+// const message = constants.validStrings.gcodeSystem[0]
 
 function str2bf (str) {
     var bf = new ArrayBuffer(str.length)

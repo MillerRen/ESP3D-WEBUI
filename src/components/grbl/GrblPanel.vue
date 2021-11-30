@@ -18,7 +18,7 @@
                       @click="disableAlarm"
                       style="padding: 5px 5px 0 5px"
                       v-if="
-                        report.type == 'alarm' || grblStatus.state == 'Alarm'
+                        report.type == 'ALARM'
                       "
                     >
                       <svg
@@ -52,11 +52,11 @@
                     </button>
                   </td>
                   <td>
-                    <b>{{ grblStatus.state }} </b>
+                    <b>{{report.status}} </b>
                   </td>
                   <td colspan="2" class="text-danger">
-                    <span v-if="grblErrorMessage" v-t>
-                      {{ grblErrorMessage }}
+                    <span v-if="report.message" v-t>
+                      {{ report.message }}
                     </span>
                   </td>
                 </tr>
@@ -64,30 +64,30 @@
             </td>
             <td>
               <div
-                v-if="sd && sd.progress"
+                v-if="report.SD"
                 class="pull-left"
                 style="line-height: 30px"
               >
-                {{ sd.fileName }}&nbsp;<progress
-                  :value="sd.progress"
+                {{ report.SD[1] }}&nbsp;<progress
+                  :value="report.SD[0]"
                   max="100"
                   style="width: 96px"
                 ></progress
-                >{{ sd.progress }}%
+                >{{ report.SD[0] }}%
               </div>
               <div
                 class="btn-toolbar pull-right"
-                v-if="report && report.data && report.data.status"
+                v-if="report.status"
               >
                 <button
-                  v-if="report.data.status.state == 'Run'"
+                  v-if="report.status == 'Run'"
                   class="btn btn-default btn-sm"
                   @click="$store.sendRealtimeCommand('!')"
                 >
                   <i class="glyphicon glyphicon-pause"></i>
                 </button>
                 <button
-                  v-if="report.data.status.state == 'Hold'"
+                  v-if="report.status == 'Hold'"
                   class="btn btn-default btn-sm"
                   @click="$store.sendRealtimeCommand('~')"
                 >
@@ -95,8 +95,8 @@
                 </button>
                 <button
                   v-if="
-                    report.data.status.state == 'Run' ||
-                    report.data.status.state == 'Hold'
+                    report.status == 'Run' ||
+                    report.status == 'Hold'
                   "
                   class="btn btn-danger btn-sm"
                   @click="resetGrbl()"
@@ -339,26 +339,14 @@
                         <label
                           class="label"
                           :class="{
-                            'label-warning': pins[pin],
-                            'label-default': !pins[pin],
+                            'label-warning': pins[key],
+                            'label-default': !pins[key],
                           }"
-                          v-for="pin in [
-                            'X',
-                            'Y',
-                            'Z',
-                            'A',
-                            'B',
-                            'C',
-                            'P',
-                            'D',
-                            'H',
-                            'R',
-                            'S',
-                          ]"
-                          :key="pin"
+                          v-for="(pin, key) in pins"
+                          :key="key"
                           style="margin: 2px; display:inline-block"
                         >
-                          P{{ pin.toLowerCase() }}
+                          P{{ key.toLowerCase() }}
                         </label>
                     </td>
                   </tr>
@@ -606,6 +594,7 @@
 </template>
 
 <script>
+const axis = 'XYZABCPDHRS'.split('')
 export default {
   props: {
     preferences: {
@@ -622,20 +611,18 @@ export default {
     };
   },
   computed: {
-    grblErrorMessage() {
-      return this.$store.grblErrorMessage;
+    pins () {
+      var map = {}
+      axis.map(a=> {
+        map[a] = false
+      })
+      this.$store.report.Pn && this.$store.report.Pn.map(v=> {
+        map[v] = true
+      })
+      return map
     },
     report() {
       return this.$store.report;
-    },
-    grblStatus() {
-      return this.$store.grblStatus;
-    },
-    probeStatus() {
-      return this.$store.probeStatus;
-    },
-    pins() {
-      return this.$store.pins;
     },
     sd() {
       return this.$store.sd;

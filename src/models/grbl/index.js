@@ -38,41 +38,6 @@ export default class Grbl {
     this.spiffs = {}
     this.sd = {}
     this.report = {}
-    this.MPos = {
-      x: 0,
-      y: 0,
-      z: 0,
-      a: 0,
-      b: 0,
-      c: 0,
-      d: 0,
-      e: 0
-    }
-    this.WPos = {
-      x: 0,
-      y: 0,
-      z: 0,
-      a: 0,
-      b: 0,
-      c: 0,
-      d: 0,
-      e: 0
-    }
-    this.WCO = {
-      x: 0,
-      y: 0,
-      z: 0,
-      a: 0,
-      b: 0,
-      c: 0,
-      d: 0,
-      e: 0
-    }
-    this.pins = []
-    this.sd = {}
-    this.grblStatus = {}
-    this.probeStatus = false
-    this.grblErrorMessage = ''
     this.enableAutoCheckPosition = true
     this.message = ''
     this.page_id = 0
