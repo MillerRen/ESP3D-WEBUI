@@ -16,7 +16,7 @@ export default function (ctx, next) {
 
   ctx.status = status[0]
   ctx.status_code = status[1]
-  if(status[0]=='Hold'||status[0]=='Alarm') {
+  if(status[0]=='Hold'||status[0]=='Door') {
     ctx.message = status[0]+':'+status[1]
   }
 

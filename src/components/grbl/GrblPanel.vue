@@ -18,7 +18,7 @@
                       @click="disableAlarm"
                       style="padding: 5px 5px 0 5px"
                       v-if="
-                        report.type == 'ALARM'
+                        report.type=='ALARM'||report.status=='Alarm'
                       "
                     >
                       <svg
