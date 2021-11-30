@@ -101,14 +101,10 @@ export default class Grbl {
       input: data
     })
     this.report = Object.assign({}, report)
-    
 
-    console.log(this.report)
-
-    // if (this.preferences.enable_verbose_mode || report.type != 'status') {
-    //   this.messages.push(report)
-    // }
-    // this.report = report
+    if (this.preferences.enable_verbose_mode || report.type != 'status') {
+      this.messages.push(report)
+    }
   }
 
   clearMessages () {
