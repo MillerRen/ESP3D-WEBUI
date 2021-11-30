@@ -1,5 +1,6 @@
 import http from '../../lib/http'
 import WS from '../../lib/websocket'
+import GrblPaser from '../../lib/grbl'
 
 import Config from './config'
 import Settings from './settings'
@@ -8,8 +9,6 @@ import Status from './status'
 import Files from './files'
 import Websocket from './websocket'
 import dht from './dht'
-
-import { Checker, Extractor, StatusExtractor, constants } from '../../lib/grbl'
 
 import {
   MACROS_FILE_NAME,
@@ -20,10 +19,7 @@ import {
   DEFAULT_PREFERENCES
 } from '../../constants'
 
-var checker = new Checker()
-var messageTypes = constants.messageTypes
-var statusExtractor = new StatusExtractor()
-var extractor = new Extractor()
+
 
 var checkPositionTimer
 
@@ -136,91 +132,18 @@ export default class Grbl {
 
   processStream (msg) {
     var data = msg.msg.trim()
-    var report = {}
-    if (checker.isStatusReport(data)) {
-      report = statusExtractor.statusReport(data)
-      this.WCO = report.data.workcoordinateOffset || this.WCO
-      if(report.data.machinePosition) {
-        this.MPos = report.data.machinePosition
-        this.WPos.x = this.MPos.x - this.WCO.x
-        this.WPos.y = this.MPos.y - this.WCO.y
-        this.WPos.z = this.MPos.z - this.WCO.z
-        this.WPos.a = this.MPos.a - this.WCO.a
-        this.WPos.b = this.MPos.b - this.WCO.b
-        this.WPos.c = this.MPos.c - this.WCO.c
-      }
-      if(report.data.workPosition) {
-        this.WPos = report.data.workPosition
-        this.MPos.x = this.WPos.x + this.WCO.x
-        this.MPos.y = this.WPos.y + this.WCO.y
-        this.MPos.z = this.WPos.z + this.WCO.z
-        this.MPos.a = this.WPos.a + this.WCO.a
-        this.MPos.b = this.WPos.b + this.WCO.b
-        this.MPos.c = this.WPos.c + this.WCO.c
-      }
-      this.grblStatus = report.data.status || this.grblStatus
-      this.pins = report.data.pins
-        ? report.data.pins.reduce(
-            (a, b) => Object.assign(a, { [b.pin]: b }),
-            {}
-          )
-        : []
-      
-      this.sd = report.data.sd
-      
-      if (report.data.status.state == 'Hold') {
-        this.grblErrorMessage =
-          report.data.status.state + ':' + report.data.status.code
-      }
-      if (report.data.status.state == 'Idle') {
-        this.grblErrorMessage = ''
-      }
-      if (report.data.status.state == 'Run') {
-        this.grblErrorMessage = ''
-      }
-    } else if (checker.isSuccessResponse(data)) {
-      report = extractor.successReport(data)
-    } else if (checker.isGrblInitialization(data)) {
-      report = extractor.grblInitReport(data)
-    } else if (checker.isAlarm(data)) {
-      report = extractor.alarmReport(data)
-      this.grblErrorMessage = report.input.split('\r')[0]
-    } else if (checker.isError(data)) {
-      report = extractor.errorReport(data)
-      this.grblErrorMessage = report.input
-    } else if (checker.isGrblSetting(data.substr(0, 4))) {
-      report = extractor.settingsReport(data)
-      this.config = Config.parseConfig(data)
-    } else if (checker.isFeedbackMessage(data)) {
-      report = extractor.feedbackMessageReport(data)
-    } else if (checker.isBuildVersion(data)) {
-      report = extractor.buildVersionReport(data)
-    } else if (checker.isBuildOptions(data)) {
-      report = extractor.buildOptionsReport(data)
-    } else if (checker.isGcodeState(data)) {
-      report = extractor.gcodeStateReport(data)
-    } else if (checker.isHelpMessage(data)) {
-      report = extractor.helpMessageReport(data)
-    } else if (checker.isGcodeSystem(data)) {
-      report = extractor.gcodeSystemReport(data)
-    } else if (checker.isProbeResult(data)) {
-      report = extractor.probeResultReport(data)
-      this.sendCommandText(`G53 G0 Z${report.data.location.z}`)
-      this.sendCommandText(`G10 L20 P0 Z${this.preferences.probetouchplatethickness}`)
-      this.sendCommandText('G90')
-      this.probeStatus = false
-    } else if (checker.isEcho(data)) {
-      report = extractor.echoReport(data)
-    } else if (checker.isStartupLine(data)) {
-      report = extractor.startupLineReport(data)
-    } else {
-      report = { input: data, type: messageTypes.unknown }
-    }
+    var report = GrblPaser.run({
+      input: data
+    })
+    this.report = Object.assign({}, report)
+    
 
-    if (this.preferences.enable_verbose_mode || report.type != 'status') {
-      this.messages.push(report)
-    }
-    this.report = report
+    console.log(this.report)
+
+    // if (this.preferences.enable_verbose_mode || report.type != 'status') {
+    //   this.messages.push(report)
+    // }
+    // this.report = report
   }
 
   clearMessages () {
