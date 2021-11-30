@@ -14,6 +14,13 @@ export default function (ctx, next) {
 
   ctx.status = status[0]
   ctx.status_code = status[1]
+  if(status[0]=='Hold'||status[0]=='Alarm') {
+    ctx.message = status[0]+':'+status[1]
+  }
+
+  if(status[0]=='Run'||status[0]=='Idle') {
+    ctx.message = ''
+  }
 
   statusData.map(str => {
     var info = str.split(':')
