@@ -19,8 +19,6 @@ import {
   DEFAULT_PREFERENCES
 } from '../../constants'
 
-
-
 var checkPositionTimer
 
 export default class Grbl {
@@ -46,6 +44,7 @@ export default class Grbl {
       humidity: '',
       temperature: ''
     }
+    this.resolveProbe = null
   }
 
   startSocket () {
@@ -102,8 +101,12 @@ export default class Grbl {
     })
     this.report = Object.assign({}, this.report, report)
 
-    if(this.report.type == 'settings') {
+    if (this.report.type == 'settings') {
       this.config = Config.parseConfig(data)
+    }
+
+    if (this.report.type == 'probeResult') {
+      this.resolveProbe && this.resolveProbe(this.report)
     }
 
     if (this.preferences.enable_verbose_mode || report.type != 'status') {
@@ -206,11 +209,10 @@ export default class Grbl {
 
   printFile (filename) {
     let cmd = `[ESP220]${filename}`
-    return this.sendCommandText(cmd)
-      .then((response) => {
-        this.autoCheckPosition()
-        return response
-      })
+    return this.sendCommandText(cmd).then(response => {
+      this.autoCheckPosition()
+      return response
+    })
   }
 
   checkLogin () {
@@ -451,5 +453,19 @@ export default class Grbl {
       ' F' +
       this.preferences.probefeedrate
     return this.sendCustomCommand(cmd)
+      .then(() => {
+        return new Promise((resolve, reject) => {
+          this.resolveProbe = resolve
+          var timer = setTimeout(() => {
+            clearTimeout(timer)
+            reject(new Error('Probe failed'))
+          }, 60 * 1000)
+        })
+      })
+      .then(report => {
+        return this.sendCommandText(`G53 G0 Z${report.location[2]}
+      G10 L20 P0 Z${this.preferences.probetouchplatethickness}
+      G90`)
+      })
   }
 }

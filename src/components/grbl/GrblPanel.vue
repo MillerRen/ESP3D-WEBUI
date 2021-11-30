@@ -17,9 +17,7 @@
                       class="btn btn-default btn-xs"
                       @click="disableAlarm"
                       style="padding: 5px 5px 0 5px"
-                      v-if="
-                        report.type=='ALARM'||report.status=='Alarm'
-                      "
+                      v-if="report.type == 'ALARM' || report.status == 'Alarm'"
                     >
                       <svg
                         width="2em"
@@ -52,7 +50,7 @@
                     </button>
                   </td>
                   <td>
-                    <b>{{report.status}} </b>
+                    <b>{{ report.status }} </b>
                   </td>
                   <td colspan="2" class="text-danger">
                     <span v-if="report.message" v-t>
@@ -63,11 +61,7 @@
               </table>
             </td>
             <td>
-              <div
-                v-if="report.SD"
-                class="pull-left"
-                style="line-height: 30px"
-              >
+              <div v-if="report.SD" class="pull-left" style="line-height: 30px">
                 {{ report.SD[1] }}&nbsp;<progress
                   :value="report.SD[0]"
                   max="100"
@@ -75,10 +69,7 @@
                 ></progress
                 >{{ report.SD[0] }}%
               </div>
-              <div
-                class="btn-toolbar pull-right"
-                v-if="report.status"
-              >
+              <div class="btn-toolbar pull-right" v-if="report.status">
                 <button
                   v-if="report.status == 'Run'"
                   class="btn btn-default btn-sm"
@@ -94,10 +85,7 @@
                   <i class="glyphicon glyphicon-play"></i>
                 </button>
                 <button
-                  v-if="
-                    report.status == 'Run' ||
-                    report.status == 'Hold'
-                  "
+                  v-if="report.status == 'Run' || report.status == 'Hold'"
                   class="btn btn-danger btn-sm"
                   @click="resetGrbl()"
                 >
@@ -336,18 +324,18 @@
                 <table class="table">
                   <tr>
                     <td class="text-center clearfix">
-                        <label
-                          class="label"
-                          :class="{
-                            'label-warning': pins[key],
-                            'label-default': !pins[key],
-                          }"
-                          v-for="(pin, key) in pins"
-                          :key="key"
-                          style="margin: 2px; display:inline-block"
-                        >
-                          P{{ key.toLowerCase() }}
-                        </label>
+                      <label
+                        class="label"
+                        :class="{
+                          'label-warning': pins[key],
+                          'label-default': !pins[key]
+                        }"
+                        v-for="(pin, key) in pins"
+                        :key="key"
+                        style="margin: 2px; display:inline-block"
+                      >
+                        P{{ key.toLowerCase() }}
+                      </label>
                     </td>
                   </tr>
                 </table>
@@ -402,14 +390,14 @@
                 </div>
                 <div class="form-group">
                   <button
-                    :disabled="probeStatus"
+                    :disabled="probebing"
                     class="btn btn-primary btn-sm"
                     @click="startProbeProcess()"
                     v-t
                   >
                     Start Probe
                   </button>
-                  <span v-if="probeStatus" v-t>Probing...</span>
+                  <span v-if="probebing" v-t>Probing...</span>
                 </div>
               </div>
               <div
@@ -599,59 +587,65 @@ export default {
   props: {
     preferences: {
       type: Object,
-      default() {
-        return {};
-      },
-    },
+      default () {
+        return {}
+      }
+    }
   },
-  data() {
+  data () {
     return {
-      tab: "override",
+      tab: 'override',
       spindleOn: false,
-    };
+      probebing: false
+    }
   },
   computed: {
     pins () {
       var map = {}
-      axis.map(a=> {
+      axis.map(a => {
         map[a] = false
       })
-      this.$store.report.Pn && this.$store.report.Pn.map(v=> {
-        map[v] = true
-      })
+      this.$store.report.Pn &&
+        this.$store.report.Pn.map(v => {
+          map[v] = true
+        })
       return map
     },
-    report() {
-      return this.$store.report;
+    report () {
+      return this.$store.report
     },
-    sd() {
-      return this.$store.sd;
-    },
+    sd () {
+      return this.$store.sd
+    }
   },
   methods: {
-    disableAlarm() {
-      this.$store.disableAlarm();
+    disableAlarm () {
+      this.$store.disableAlarm()
     },
-    resetGrbl() {
-      this.$store.resetGrbl();
+    resetGrbl () {
+      this.$store.resetGrbl()
     },
-    startProbeProcess() {
-      this.$store.startProbeProcess();
+    startProbeProcess () {
+      this.probebing = true
+      this.$store.startProbeProcess()
+        .finally(() => {
+          this.probebing = false
+        })
     },
-    opentab(tab) {
-      this.tab = tab;
+    opentab (tab) {
+      this.tab = tab
     },
-    autoCheckPosition() {
-      this.$store.autoCheckPosition();
+    autoCheckPosition () {
+      this.$store.autoCheckPosition()
     },
-    toggleSpindle() {
-      if (this.grblStatus.state == "Hold") {
-        this.$store.sendRealtimeCommand(String.fromCharCode(0x9e, 0x0));
+    toggleSpindle () {
+      if (this.grblStatus.state == 'Hold') {
+        this.$store.sendRealtimeCommand(String.fromCharCode(0x9e, 0x0))
       } else {
-        this.spindleOn = !this.spindleOn;
-        this.$store.toggleSpindle(this.spindleOn);
+        this.spindleOn = !this.spindleOn
+        this.$store.toggleSpindle(this.spindleOn)
       }
-    },
-  },
-};
+    }
+  }
+}
 </script>
