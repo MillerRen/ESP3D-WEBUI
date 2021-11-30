@@ -106,7 +106,13 @@ export default class Grbl {
     }
 
     if (this.report.type == 'probeResult') {
-      this.resolveProbe && this.resolveProbe(this.report)
+      if(this.resolveProbe) {
+        this.resolveProbe({
+          location: report.location,
+          success: report.success
+        })
+        this.resolveProbe = null
+      }
     }
 
     if (this.preferences.enable_verbose_mode || report.type != 'status') {
@@ -458,11 +464,16 @@ export default class Grbl {
           this.resolveProbe = resolve
           var timer = setTimeout(() => {
             clearTimeout(timer)
-            reject(new Error('Probe failed'))
+            this.message = 'Probe failed'
+            reject()
           }, 60 * 1000)
         })
       })
       .then(report => {
+        if(!report.success) {
+          this.message = 'Probe failed'
+          throw new Error(this.message)
+        }
         return this.sendCommandText(`G53 G0 Z${report.location[2]}
       G10 L20 P0 Z${this.preferences.probetouchplatethickness}
       G90`)
