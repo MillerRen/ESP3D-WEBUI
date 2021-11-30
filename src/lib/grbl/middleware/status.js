@@ -30,7 +30,7 @@ export default function (ctx, next) {
     var value = info[1].split(',')
     if (value.length == 1) value = value[0].split('')
     if(type=='MPos'||type=='WPos'||type=='WCO') {
-      value = value.map(v=>parseFloat(v))
+      value = value.map(v=>parseFloat(v).toFixed(3))
     }
     ctx[type] = value
   })
@@ -42,10 +42,10 @@ export default function (ctx, next) {
   }
 
   if(ctx.MPos&&WCO) {
-    ctx.WPos = ctx.MPos.map((v,i)=>v-WCO[i])
+    ctx.WPos = ctx.MPos.map((v,i)=>(v-WCO[i]).toFixed(3))
   }
   if(ctx.WPos&&WCO) {
-    ctx.MPos = ctx.WPos.map((v,i)=>v+WCO[i])
+    ctx.MPos = ctx.WPos.map((v,i)=>(v+WCO[i]).toFixed(3))
   }
 
   next()
