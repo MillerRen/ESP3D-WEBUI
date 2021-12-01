@@ -15,22 +15,18 @@
 </template>
 
 <script>
-import Navbar from './components/Layout/Navbar.vue'
 import SettingsPanel from './components/Tabs/Settings.vue'
 import ConfigPanel from './components/Tabs/Config.vue'
 import CameraPanel from './components/Tabs/Camera.vue'
 import DashboardPanel from './components/Tabs/Dashboard.vue'
-import Toaster from './components/Common/Toaster.vue'
 
 export default {
   name: 'App',
   components: {
-    Navbar,
     ConfigPanel,
     DashboardPanel,
     CameraPanel,
     SettingsPanel,
-    Toaster
   },
   data () {
     return {
