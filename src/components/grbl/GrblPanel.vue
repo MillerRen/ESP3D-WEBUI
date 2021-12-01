@@ -613,16 +613,15 @@ export default {
     },
     report () {
       return this.$store.report
-    },
-    sd () {
-      return this.$store.sd
     }
   },
   methods: {
     disableAlarm () {
+      this.probebing = false
       this.$store.disableAlarm()
     },
     resetGrbl () {
+      this.probebing = false
       this.$store.resetGrbl()
     },
     startProbeProcess () {
