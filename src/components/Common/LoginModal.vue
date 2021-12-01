@@ -33,8 +33,17 @@ export default {
     };
   },
   methods: {
+    checkLogin () {
+      return this.$http.get('/login')
+        .then(user => {
+          console.log(user)
+          if (!user.need_auth) {
+            this.$emit('success')
+          }
+        })
+    },
     submit() {
-      this.$store.login(this.user)
+      this.$http.get('/login', this.user)
         .then(() => {
           this.$emit('success')
         })
@@ -43,5 +52,8 @@ export default {
         })
     },
   },
+  mounted () {
+    this.checkLogin()
+  }
 };
 </script>

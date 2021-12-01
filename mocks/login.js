@@ -1,6 +1,13 @@
-import mock from "./mock"
+module.exports = function (app) {
+    app.get('/login', checkLogin)
+}
 
-mock.onGet('/login').reply(200, {
-    authentication_lvl: 'admin',
-    user: 'miller'
-})
+function checkLogin(req, res, next) {
+  if (!req.query.USER) {
+    return res.status(200).send({
+      authentication_lvl: 'admin',
+      user: 'miller'
+    })
+  }
+  next()
+}

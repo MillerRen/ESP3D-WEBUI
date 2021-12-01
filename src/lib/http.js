@@ -1,7 +1,7 @@
 import request from './request'
 
 
-function sendGetHttp (url, params) {
+function get (url, params) {
   return request({
     method: 'get',
     url,
@@ -10,7 +10,7 @@ function sendGetHttp (url, params) {
   .then(response=>response.data)
 }
 
-function sendPostHttp (url, data, params) {
+function post (url, data, params) {
   return request({
     url,
     method: 'post',
@@ -20,7 +20,7 @@ function sendPostHttp (url, data, params) {
   .then(response=>response.data)
 }
 
-function sendFileHttp (space, files, path, onUploadProgress) {
+function upload (space, files, path, onUploadProgress) {
   var fd = new FormData()
   fd.append('path', path)
   for (var i = 0; i < files.length; i++) {
@@ -39,8 +39,15 @@ function sendFileHttp (space, files, path, onUploadProgress) {
     .then(response => response.data)
 }
 
+function sendCommand (command) {
+  return get('/command', {
+    plain: command
+  })
+}
+
 export default {
-  sendGetHttp,
-  sendPostHttp,
-  sendFileHttp
+  get,
+  post,
+  upload,
+  sendCommand
 }
