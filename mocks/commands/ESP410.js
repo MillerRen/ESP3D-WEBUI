@@ -16,7 +16,7 @@ var response = {
 }
 
 module.exports = function (req, res, next) {
-  if (req.query.plain == '[ESP410]') {
+  if (req.query.cmd == '[ESP410]') {
     return res.json(response)
   }
   next()

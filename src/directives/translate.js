@@ -1,18 +1,10 @@
 // simple translate directive
-const lang = process.env.VUE_APP_LANG
-const messages = require(`../languages/${lang}`).default
+import Vue from 'vue'
 
-function translate (el, binding) {
+Vue.prototype.$messages = {}
+
+export default function (el, binding, vnode) {
   let key = binding.value || el.textContent
   key = key.trim()
-  el.textContent = messages[key] || key // translate and fallback
-}
-
-export default {
-  bind () {
-    translate.apply(this,arguments)
-  },
-  update() {
-    translate.apply(this,arguments)
-  }
+  el.textContent = vnode.context.$messages[key] || key // translate and fallback
 }

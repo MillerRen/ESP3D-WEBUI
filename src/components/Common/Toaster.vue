@@ -10,15 +10,20 @@
 </template>
 <script>
 export default {
-  computed: {
-    message () {
-      return this.$store.message
+  data () {
+    return {
+      message: ''
     }
   },
   methods:{
     close() {
-      this.$store.message = ''
+      this.message = ''
     }
+  },
+  mounted () {
+    this.$bus.$on('toast', (message) => {
+      this.message = message
+    })
   }
 }
 </script>

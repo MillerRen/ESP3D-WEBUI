@@ -1,13 +1,11 @@
 import request from './request'
 
-
 function get (url, params) {
   return request({
     method: 'get',
     url,
     params
-  })
-  .then(response=>response.data)
+  }).then(response => response.data)
 }
 
 function post (url, data, params) {
@@ -16,8 +14,7 @@ function post (url, data, params) {
     method: 'post',
     data,
     params
-  })
-  .then(response=>response.data)
+  }).then(response => response.data)
 }
 
 function upload (space, files, path, onUploadProgress) {
@@ -31,17 +28,16 @@ function upload (space, files, path, onUploadProgress) {
     fd.append('myfile[]', file, fileName)
   }
   return request({
-      url: space,
-      method: 'post',
-      data: fd,
-      onUploadProgress
-    })
-    .then(response => response.data)
+    url: space,
+    method: 'post',
+    data: fd,
+    onUploadProgress
+  }).then(response => response.data)
 }
 
 function sendCommand (command) {
   return get('/command', {
-    plain: command
+    cmd: command
   })
 }
 

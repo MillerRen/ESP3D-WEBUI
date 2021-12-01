@@ -169,7 +169,7 @@ const response = {
 }
 
 module.exports = function (req, res, next) {
-  if (req.query.plain == '[ESP400]') {
+  if (req.query.cmd == '[ESP400]') {
     return res.json(response)
   }
   next()

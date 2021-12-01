@@ -1,7 +1,7 @@
 <template>
-  <main v-if="initialized">
-    <!-- <Toaster /> -->
-    <Navbar v-model="mainTab" />
+  <main>
+    <Toaster />
+    <!-- <Navbar v-model="mainTab" />
     <ConfigPanel v-if="mainTab == 'printer'" />
     <DashboardPanel
       v-if="mainTab == 'dashboard'"
@@ -10,15 +10,16 @@
     />
     <CameraPanel v-if="mainTab == 'camera'" />
     <UpdatePanel v-if="mainTab == 'update'" />
-    <SettingsPanel v-if="mainTab == 'settings'" />
+    <SettingsPanel v-if="mainTab == 'settings'" /> -->
   </main>
 </template>
 
 <script>
-import SettingsPanel from "./components/Tabs/Settings.vue";
-import ConfigPanel from "./components/Tabs/Config.vue";
-import CameraPanel from "./components/Tabs/Camera.vue";
-import DashboardPanel from "./components/Tabs/Dashboard.vue";
+import DEFAULT_PREFERENCES from './assets/preferences.json';
+// import SettingsPanel from "./components/Tabs/Settings.vue";
+// import ConfigPanel from "./components/Tabs/Config.vue";
+// import CameraPanel from "./components/Tabs/Camera.vue";
+// import DashboardPanel from "./components/Tabs/Dashboard.vue";
 
 export default {
   name: "App",
@@ -26,22 +27,24 @@ export default {
     return {
       fwData: this.fwData,
       preferences: this.preferences,
-      settings: this.settings,
     };
   },
   components: {
-    ConfigPanel,
-    DashboardPanel,
-    CameraPanel,
-    SettingsPanel,
+    // ConfigPanel,
+    // DashboardPanel,
+    // CameraPanel,
+    // SettingsPanel,
   },
   data() {
     return {
       fwData: null,
       preferences: null,
-      settings: null,
-      mainTab: "dashboard",
+      // mainTab: "dashboard",
       initialized: false,
+      bootInfo: {
+        error: '',
+      step: NaN,
+      }
     };
   },
   methods: {
@@ -79,32 +82,52 @@ export default {
     },
 
     boot() {
-      var that = this;
-      var modal = this.$modal(
+      this.bootInfo.step = 1
+      this.connectModal = this.$modal(
         {
           title: "Connecting ESP3D...",
           closeable: false,
           autoClose: false,
-          data: {
-            fwData: this.context.fwData,
-          },
-          events: {
-            fwData(fwData) {
-              that.context.fwData = fwData;
-            },
-            success() {
-              that.initialized = true;
-              modal.close();
-            },
-            needAuth() {
-              modal.close();
-              that.login();
-            },
-          },
+          data: this.bootInfo
         },
         "ConnectModal"
       );
+      this.getFWData()
+        .then((fwData) => {
+          this.bootInfo.step = 2
+          this.fwData = fwData
+        })
+        .then(() => {
+          return this.getPreferences()
+        })
+        .then((preferences) => {
+          this.bootInfo.step = 3
+          this.preferences = preferences
+          this.connectModal.close()
+        })
+        .catch((err) => {
+          this.$bus.$emit('toast', err)
+        })
     },
+    getFWData() {
+      if (this.fwData) {
+        return Promise.resolve(this.fwData);
+      }
+      return this.$http.sendCommand("[ESP800]").then((fwData) => {
+        this.fwData = fwData;
+        if (fwData.ESP3D_authentication) {
+          this.connectModal.close();
+          this.login();
+          return Promise.reject();
+        }
+      });
+    },
+    getPreferences () {
+      return this.$http.get('/preferences.json')
+        .catch(() => {
+          return DEFAULT_PREFERENCES
+        })
+    }
   },
   mounted() {
     this.boot();
