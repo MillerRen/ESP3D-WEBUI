@@ -1,6 +1,21 @@
-import buildURL from './buildURL'
-import { typeOf } from './utils'
-import defaults from './defaults'
+const defaults = {
+  baseURL: '',
+  method: 'get',
+  url: '',
+  params: {},
+  body: null,
+  timeout: 0,
+  serialize: function (obj) {
+    return Object.keys(obj)
+      .map(k => `${k}=${obj[k]}`)
+      .join('&')
+  }
+}
+
+function buildURL(url, params, serialize) {
+  if(typeof params == 'undefined') return url
+  return url + '?' + serialize(params)
+}
 
 function request (config) {
   config = Object.assign({}, defaults, config)
@@ -19,7 +34,7 @@ function request (config) {
           responseText: xhr.responseText
         })
       let res = 'response' in xhr ? xhr.response : xhr.responseText
-      if (res && typeOf(res) == 'String' && res.indexOf('<')!=0) {
+      if ((typeof res == 'string') && res.indexOf('<')!=0) {
         try {
           res = JSON.parse(res)
         } catch (e) {
@@ -43,10 +58,10 @@ function request (config) {
     xhr.ontimeout = function () {
       reject(new Error('request abort'))
     }
-    if (typeOf(config.onDownloadProgress) == 'Function') {
+    if (config.onDownloadProgress) {
       xhr.onprogress = config.onDownloadProgress
     }
-    if (typeOf(config.onUploadProgress) == 'Function') {
+    if (config.onUploadProgress) {
       xhr.upload.onprogress = config.onUploadProgress
     }
 
