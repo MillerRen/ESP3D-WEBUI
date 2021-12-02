@@ -1,41 +1,5 @@
 <template>
   <div class="modal-body panel-scroll">
-    <!-- <center>
-      <select v-model="preferences.language" class="form-control">
-        <option :value="lang[0]" v-for="lang in languages" :key="lang[0]" v-html="lang[1]"></option>
-      </select>
-    </center>
-    <br /> -->
-    <div class="panel panel-default">
-      <div class="panel-heading">
-        <div class="checkbox">
-          <label>
-            <input
-              type="checkbox"
-              v-model="preferences.enable_lock_UI"
-              true-value="true"
-              false-value="false"
-            />
-            <span v-t>Enable lock interface</span>
-          </label>
-        </div>
-      </div>
-    </div>
-    <div class="panel panel-default">
-      <div class="panel-heading">
-        <div class="checkbox">
-          <label>
-            <input
-              type="checkbox"
-              v-model="preferences.enable_ping"
-              true-value="true"
-              false-value="false"
-            />
-            <span v-t>Connection monitoring</span>
-          </label>
-        </div>
-      </div>
-    </div>
     <div class="panel panel-default">
       <div class="panel-heading">
         <div class="checkbox">

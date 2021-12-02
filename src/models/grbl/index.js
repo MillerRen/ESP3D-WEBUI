@@ -69,11 +69,9 @@ export default class Grbl {
         this.page_id = tval[1]
         console.log('connection id = ' + this.page_id)
       }
-      if (this.preferences.enable_ping) {
-        if (tval[0] == 'PING') {
-          this.page_id = tval[1]
-          console.log('ping from id = ' + this.page_id)
-        }
+      if (tval[0] == 'PING') {
+        this.page_id = tval[1]
+        console.log('ping from id = ' + this.page_id)
       }
       if (tval[0] == 'ACTIVE_ID') {
         if (this.page_id != tval[1]) {
@@ -106,7 +104,7 @@ export default class Grbl {
     }
 
     if (this.report.type == 'probeResult') {
-      if(this.resolveProbe) {
+      if (this.resolveProbe) {
         this.resolveProbe({
           location: report.location,
           success: report.success
@@ -470,7 +468,7 @@ export default class Grbl {
         })
       })
       .then(report => {
-        if(!report.success) {
+        if (!report.success) {
           this.message = 'Probe failed'
           throw new Error(this.message)
         }
