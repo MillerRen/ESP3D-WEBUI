@@ -1,6 +1,5 @@
 import Vue from 'vue'
 import './directives'
-import './components'
 import './plugins'
 
 import App from './App.vue'
