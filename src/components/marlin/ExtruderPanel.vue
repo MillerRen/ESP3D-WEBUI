@@ -82,14 +82,14 @@
                 <div class="form-group">
                   <button
                     onclick="Extrude_cmd('T0', 1)"
-                    class="btn btn-primary"
+                    class="btn btn-primary btn-sm"
                     v-t
                   >
                     Extrude
                   </button>
                   <button
                     @click="Extrude_cmd('T0', -1)"
-                    class="btn btn-info"
+                    class="btn btn-info btn-sm"
                     v-t
                   >
                     Reverse
@@ -109,14 +109,14 @@
                 <div class="form-group">
                   <button
                     @click="Extrude_cmd('T1', 1)"
-                    class="btn btn-primary"
+                    class="btn btn-primary btn-sm"
                     v-t
                   >
                     Extrude
                   </button>
                   <button
                     onclick="Extrude_cmd('T1', -1)"
-                    class="btn btn-info"
+                    class="btn btn-info btn-sm"
                     v-t
                   >
                     Reverse
