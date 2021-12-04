@@ -4,34 +4,9 @@
       <div class="row">
         <div class="col-md-12">
           <div class="pull-left">
-            <b>
+            <h3 class="panel-title">
               <span v-t>Temperatures</span>
-            </b>
-          </div>
-          <div class="pull-right">
-            <div class="panel-flex-row">
-              <div class="input-group input-group-sm">
-                <label class="input-group-addon">
-                  <input
-                    type="checkbox"
-                    v-model="preferences.enable_auto_check_temperature"
-                    @click="autocheckTemperature()"
-                  />
-                  <span v-t>auto-check every:</span>
-                </label>
-                <input
-                  class="form-control w4"
-                  type="number"
-                  min="1"
-                  max="99"
-                  v-model="preferences.interval_temperatures"
-                  @change="onTempIntervalChange()"
-                />
-                <span class="input-group-addon form_control" translate
-                  >sec</span
-                >
-              </div>
-            </div>
+            </h3>
           </div>
         </div>
       </div>
@@ -189,6 +164,31 @@
           </div>
         </li>
       </ul>
+    </div>
+    <div class="panel-footer">
+        <div class="panel-flex-row">
+              <div class="input-group input-group-sm">
+                <label class="input-group-addon">
+                  <input
+                    type="checkbox"
+                    v-model="preferences.enable_auto_check_temperature"
+                    @click="autocheckTemperature()"
+                  />
+                  <span v-t>auto-check every:</span>
+                </label>
+                <input
+                  class="form-control w4"
+                  type="number"
+                  min="1"
+                  max="99"
+                  v-model="preferences.interval_temperatures"
+                  @change="onTempIntervalChange()"
+                />
+                <span class="input-group-addon form_control" translate
+                  >sec</span
+                >
+              </div>
+            </div>
     </div>
   </div>
 </template>

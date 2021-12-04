@@ -4,9 +4,9 @@
       <div class="row">
         <div class="col-md-12">
           <div class="pull-left">
-            <b>
+            <h3 class="panel-title">
               <span v-t>Extruders</span>
-            </b>
+            </h3>
           </div>
         </div>
       </div>
