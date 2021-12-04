@@ -27,6 +27,7 @@ function createParser(fw) {
     case 'grbl-embedded':
       return Grbl
     case 'marlin':
+    case 'marlin-embedded':
       return Marlin
   }
 }
@@ -57,7 +58,6 @@ export default class Model {
       temperature: ''
     }
     this.resolveProbe = null
-    console.log(this)
   }
 
   startSocket () {
@@ -108,7 +108,6 @@ export default class Model {
   processStream (msg) {
     var data = msg.msg.trim()
     var Parser = createParser(this.fwData.target_firmware)
-    console.log(Parser)
     if(Parser) {
       var report = Parser.run({
         input: data
