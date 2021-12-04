@@ -1,8 +1,8 @@
 <template>
   <main>
     <Toaster />
-    <!-- <Navbar v-model="mainTab" />
-    <ConfigPanel v-if="mainTab == 'printer'" />
+    <Navbar v-model="mainTab" />
+    <!-- <ConfigPanel v-if="mainTab == 'printer'" />
     <DashboardPanel
       v-if="mainTab == 'dashboard'"
       :fwData="fwData"
@@ -16,10 +16,6 @@
 
 <script>
 import DEFAULT_PREFERENCES from './assets/preferences.json';
-// import SettingsPanel from "./components/Tabs/Settings.vue";
-// import ConfigPanel from "./components/Tabs/Config.vue";
-// import CameraPanel from "./components/Tabs/Camera.vue";
-// import DashboardPanel from "./components/Tabs/Dashboard.vue";
 
 export default {
   name: "App",
@@ -28,12 +24,6 @@ export default {
       fwData: this.fwData,
       preferences: this.preferences,
     };
-  },
-  components: {
-    // ConfigPanel,
-    // DashboardPanel,
-    // CameraPanel,
-    // SettingsPanel,
   },
   data() {
     return {

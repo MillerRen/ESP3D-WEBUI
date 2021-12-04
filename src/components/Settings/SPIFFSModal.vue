@@ -161,7 +161,7 @@
 </template>
 
 <script>
-import { SPIFFS_URL } from "../../constants";
+const SPIFFS_URL = '/files'
 export default {
   data() {
     return {
