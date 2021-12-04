@@ -39,16 +39,8 @@
 </template>
 
 <script>
-import Settings from "../Settings/Settings.vue";
-import SPIFFSModal from "../Settings/SPIFFSModal.vue";
-import UpdateModal from "../Settings/UpdateModal.vue";
-import StatusModal from "../Settings/StatusModal.vue";
-import RestartModal from "../Settings/RestartModal.vue";
 
 export default {
-  components: {
-    Settings,
-  },
   data() {
     return {
       tab: "settings",
@@ -79,7 +71,7 @@ export default {
           title: "Restarting ESP3D",
           closeable: false,
         },
-        RestartModal
+        'RestartModal'
       );
     },
     showStatusModal() {
@@ -92,7 +84,7 @@ export default {
             },
           },
         },
-        StatusModal
+        'StatusModal'
       );
     },
     showSPIFFSModal() {
@@ -100,7 +92,7 @@ export default {
         {
           title: "ESP3D Filesystem",
         },
-        SPIFFSModal
+        'SPIFFSModal'
       );
     },
     showUpdateModal() {
@@ -108,7 +100,7 @@ export default {
         {
           title: "ESP3D Update",
         },
-        UpdateModal
+        'UpdateModal'
       );
     },
     showPreferencesModal() {

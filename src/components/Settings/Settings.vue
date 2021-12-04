@@ -130,7 +130,6 @@
 </template>
 
 <script>
-import WiFiModal from "./WiFiModal.vue";
 export default {
   data() {
     return {
@@ -192,7 +191,7 @@ export default {
             },
           },
         },
-        WiFiModal
+        'WiFiModal'
       );
     },
   },

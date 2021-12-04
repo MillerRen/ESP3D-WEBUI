@@ -20,31 +20,17 @@
       :style="{ display: collapsed ? 'none' : 'block' }"
     >
       <ul class="nav navbar-nav">
-        <li :class="{ active: value == 'dashboard' }">
-          <a href=" " @click.prevent="opentab('dashboard')">
-            <i class="glyphicon glyphicon-dashboard"></i>
-            <span v-t>Dashboard</span>
-          </a>
-        </li>
         <li
-          v-if="preferences.enable_camera == 'true'"
-          :class="{ active: value == 'camera' }"
+          :class="{ active: value == tab.tab }"
+          v-for="tab in tabs"
+          :key="tab.tab"
         >
-          <a href=" " @click.prevent="opentab('camera')">
-            <i class="glyphicon glyphicon-camera"></i>
-            <span v-t>Camera</span>
-          </a>
-        </li>
-        <li :class="{ active: value == 'printer' }">
-          <a href=" " @click.prevent="opentab('printer')">
-            <i class="glyphicon glyphicon-wrench"></i>
-            <span v-t>Configuration</span>
-          </a>
-        </li>
-        <li :class="{ active: value == 'settings' }">
-          <a href=" " @click.prevent="opentab('settings')">
-            <i class="glyphicon glyphicon-tasks"></i>
-            <span v-t>ESP3D</span>
+          <a href=" " @click.prevent="opentab(tab.tab)">
+            <i
+              class="glyphicon"
+              :class="'glyphicon-' + (tab.icon || tab.tab.toLowerCase())"
+            ></i>
+            <span v-t>{{ tab.tab }}</span>
           </a>
         </li>
       </ul>
@@ -76,7 +62,7 @@
               </a>
             </li>
             <li>
-              <a href="#" @click="logindlg()">
+              <a href @click="logindlg()">
                 <span class="pull-right" v-t>Login</span>
                 <span class="pull-left">
                   <i class="glyphicon glyphicon-login"></i>
@@ -86,17 +72,7 @@
             </li>
             <li class="divider"></li>
             <li>
-              <a
-                href="#"
-                @click="
-                  confirmdlg(
-                    translate_text_item('Disconnection requested'),
-                    translate_text_item('Please confirm disconnection.'),
-                    DisconnectLogin
-                  )
-                "
-                class="hidden"
-              >
+              <a href="#" @click="confirmdlg()" class="hidden">
                 <span class="pull-right" v-t>Log out</span>
                 <span class="pull-left">
                   <i class="glyphicon glyphicon-logout"></i>
@@ -114,29 +90,41 @@
 <script>
 import { FIRMWARE_NAMES } from "../../constants";
 export default {
+  name: "Navbar",
+  inject: ["fwData"],
   props: {
     value: {
       type: String,
-      default: "dashboard",
+      default: "Dashboard",
     },
   },
   data() {
     return {
       collapsed: true,
+      tabs: [
+        {
+          tab: "Dashboard",
+        },
+        {
+          tab: "Camera",
+        },
+        {
+          tab: "Config",
+          icon: "wrench",
+        },
+        {
+          tab: "ESP",
+          icon: "tasks",
+        },
+      ],
     };
   },
   computed: {
     fwName() {
-      return FIRMWARE_NAMES[this.$store.fwData.target_firmware];
-    },
-    fwData() {
-      return this.$store.fwData;
+      return FIRMWARE_NAMES[this.fwData.target_firmware];
     },
     dht() {
       return this.$store.dht;
-    },
-    preferences() {
-      return this.$store.preferences;
     },
   },
   methods: {
