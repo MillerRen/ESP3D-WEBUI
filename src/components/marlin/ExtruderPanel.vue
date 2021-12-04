@@ -56,12 +56,12 @@
                                     <button
                                         onclick="Extrude_cmd(current_active_extruder, 1)"
                                         class="btn btn-primary"
-                                        translate
+                                        v-t
                                     >Extrude</button>
                                     <button
                                         onclick="Extrude_cmd(current_active_extruder, -1)"
                                         class="btn btn-info"
-                                        translate
+                                        v-t
                                     >Reverse</button>
                                 </div>
                             </div>
@@ -79,12 +79,12 @@
                                     <button
                                         onclick="Extrude_cmd('T0', 1)"
                                         class="btn btn-primary"
-                                        translate
+                                        v-t
                                     >Extrude</button>
                                     <button
-                                        onclick="Extrude_cmd('T0', -1)"
+                                        @click="Extrude_cmd('T0', -1)"
                                         class="btn btn-info"
-                                        translate
+                                        v-t
                                     >Reverse</button>
                                 </div>
                             </div>
@@ -100,14 +100,14 @@
                             <div class="form-inline">
                                 <div class="form-group">
                                     <button
-                                        onclick="Extrude_cmd('T1', 1)"
+                                        @click="Extrude_cmd('T1', 1)"
                                         class="btn btn-primary"
                                         translate
                                     >Extrude</button>
                                     <button
                                         onclick="Extrude_cmd('T1', -1)"
                                         class="btn btn-info"
-                                        translate
+                                        v-t
                                     >Reverse</button>
                                 </div>
                             </div>
