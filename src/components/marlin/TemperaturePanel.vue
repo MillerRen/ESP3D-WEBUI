@@ -52,7 +52,7 @@
             </td>
             <td>
               <div class="panel-flex-row">
-                <div class="input-group">
+                <div class="input-group input-group-sm">
                   <span class="input-group-btn">
                     <button
                       onclick="temperature_heatOff('T0')"
@@ -135,7 +135,7 @@
             </td>
             <td>
               <div class="panel-flex-row">
-                <div class="input-group">
+                <div class="input-group input-group-sm">
                   <span class="input-group-btn">
                     <button
                       onclick="temperature_heatOff('T0')"
