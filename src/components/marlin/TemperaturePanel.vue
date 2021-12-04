@@ -50,7 +50,7 @@
                       onclick="temperature_heatSet('T0')"
                       class="btn btn-warning"
                     >
-                      <i class="glyphicon glyphicon-check"></i>
+                      <i class="glyphicon glyphicon-ok"></i>
                     </button>
                   </span>
                 </div>
@@ -133,7 +133,7 @@
                       onclick="temperature_heatSet('T0')"
                       class="btn btn-warning"
                     >
-                      <i class="glyphicon glyphicon-check"></i>
+                      <i class="glyphicon glyphicon-ok"></i>
                     </button>
                   </span>
                 </div>
