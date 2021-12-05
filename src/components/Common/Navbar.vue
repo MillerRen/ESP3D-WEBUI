@@ -24,13 +24,14 @@
           :class="{ active: value == tab.tab }"
           v-for="tab in tabs"
           :key="tab.tab"
+          v-show="!tab.hidden"
         >
           <a href=" " @click.prevent="opentab(tab.tab)">
             <i
               class="glyphicon"
               :class="'glyphicon-' + (tab.icon || tab.tab.toLowerCase())"
             ></i>
-            <span v-t>{{ tab.tab }}</span>
+            <span v-t>{{ tab.label || tab.tab }}</span>
           </a>
         </li>
       </ul>
@@ -91,7 +92,7 @@
 import { FIRMWARE_NAMES } from "../../constants";
 export default {
   name: "Navbar",
-  inject: ["fwData"],
+  inject: ["fwData", "preferences"],
   props: {
     value: {
       type: String,
@@ -106,15 +107,18 @@ export default {
           tab: "Dashboard",
         },
         {
+          hidden: this.preferences.enable_camera != 'true',
           tab: "Camera",
         },
         {
           tab: "Config",
           icon: "wrench",
+          label: "Configuration"
         },
         {
           tab: "ESP",
           icon: "tasks",
+          label: "ESP3D"
         },
       ],
     };
