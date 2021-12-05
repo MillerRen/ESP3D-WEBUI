@@ -109,32 +109,14 @@
 </template>
 
 <script>
-import Jog from "./Jog.vue";
-
 export default {
-  components: {
-    Jog,
-  },
-  props: {
-    fwData: {
-      type: Object,
-      default() {
-        return {}
-      }
-    },
-    preferences: {
-      type: Object,
-      default() {
-        return {}
-      }
-    }
-  },
+  inject: ['fwData', 'preferences'],
   computed: {
     report () {
       return this.$store.report
     },
     axis() {
-      return 'xyzabc'.slice(0, this.$store.fwData.grblaxis)
+      return 'xyzabc'.slice(0, this.fwData.grblaxis)
     },
     zeroAxes() {
       return this.axis.split('').map(item => item.toUpperCase() + '0').join(' ')

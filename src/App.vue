@@ -87,6 +87,7 @@ export default {
           return this.getPreferences()
         })
         .then(preferences => {
+          console.log(preferences.settings)
           this.bootInfo.step = 3
           Object.assign(this.preferences, preferences.settings)
           this.connectModal.close()
