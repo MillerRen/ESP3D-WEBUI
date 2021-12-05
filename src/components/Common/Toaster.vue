@@ -21,7 +21,7 @@ export default {
     }
   },
   mounted () {
-    this.$bus.$on('toast', (message) => {
+    this.$root.$on('toast', (message) => {
       this.message = message
     })
   }

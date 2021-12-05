@@ -96,7 +96,7 @@ export default {
           this.startWebsocket()
         })
         .catch(err => {
-          this.$bus.$emit('toast', err)
+          this.$root.$emit('toast', err)
         })
     },
     getFWData () {
@@ -117,7 +117,7 @@ export default {
       var url = `ws://${document.location.hostname}:${this.fwData.WebSocketport}${path}`
       this.ws = startWebsocket(url, (msg) => {
         console.log('ws:', msg)
-        this.$bus.$emit('ws', msg)
+        this.$root.$emit('ws', msg)
       })
     }
   },

@@ -100,7 +100,7 @@ export default {
   },
   mounted() {
     this.$watch("messages", this.scrollTop);
-    this.$bus.$on("ws", (msg) => {
+    this.$root.$on("ws", (msg) => {
       this.messages.push(msg);
     });
   },
