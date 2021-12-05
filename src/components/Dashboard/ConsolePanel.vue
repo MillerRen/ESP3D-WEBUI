@@ -23,7 +23,7 @@
   :key="index"
   :class="{ 'text-danger': message.type == 'error', 'text-warning': message.type == 'alarm' }"
   v-t
->{{ message.input }}</p>
+>{{ message.msg }}</p>
         </pre>
     </div>
     <div class="panel-footer">
@@ -75,22 +75,22 @@
 
 <script>
 export default {
-  name: 'ConsolePanel',
-  inject: ['preferences'],
+  name: "ConsolePanel",
+  inject: ["preferences", "Commands"],
   data() {
     return {
       cmd: "",
-      messages: []
+      messages: [],
     };
   },
   methods: {
     sendCustomCommand() {
-      this.$store.sendCustomCommand(this.cmd).then(() => {
+      this.Commands.sendCommand(this.cmd).then(() => {
         this.cmd = "";
       });
     },
     clearConsole() {
-      this.$store.clearMessages();
+      this.messages = [];
     },
     onKeyup() {},
     scrollTop() {
@@ -100,7 +100,9 @@ export default {
   },
   mounted() {
     this.$watch("messages", this.scrollTop);
-    // this.$refs.monitor
+    this.$bus.$on("ws", (msg) => {
+      this.messages.push(msg);
+    });
   },
 };
 </script>

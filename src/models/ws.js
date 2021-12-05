@@ -29,7 +29,7 @@ function parseText (data) {
       response.error_code = arr[1]
       response.msg = arr[2]
   }
-  return data
+  return response
 }
 
 export default function startWebsocket (url, onmessage) {
