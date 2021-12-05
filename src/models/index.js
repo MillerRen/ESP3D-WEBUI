@@ -153,7 +153,6 @@ export default class Model {
   }
 
   sendRealtimeCommand (cmd) {
-    console.log(cmd)
     return this.sendCommandText(cmd)
   }
 
@@ -420,7 +419,8 @@ export default class Model {
   }
 
   getPosition () {
-    return this.sendCommandText('?')
+    var cmd = this.fwData.target_firmware.indexOf('grbl')>-1?'?':'M114'
+    return this.sendCommandText(cmd)
   }
 
   sendZeroCommand (axis) {

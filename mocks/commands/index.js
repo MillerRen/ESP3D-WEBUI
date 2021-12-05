@@ -12,6 +12,7 @@ module.exports = function (app) {
     require('./$X'),
     require('./$n=x'),
     require('./probe'),
+    require('./M114'),
     require('../notfound')
   )
 }
