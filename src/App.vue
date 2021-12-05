@@ -118,6 +118,19 @@ export default {
 </script>
 
 <style>
+.w4 {
+  width: 4em !important;
+}
+.w5 {
+  width: 5em !important;
+}
+.w6 {
+  width: 6em !important;
+}
+.w8 {
+  width: 8em !important;
+}
+
 /* 滚动槽 */
 ::-webkit-scrollbar {
   width: 6px;

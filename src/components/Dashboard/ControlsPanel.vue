@@ -122,7 +122,8 @@ export default {
   data () {
     return {
       selectAxis: 'z',
-      report: {}
+      report: {},
+      macros: []
     }
   },
   methods: {
