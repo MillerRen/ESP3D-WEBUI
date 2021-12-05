@@ -1,5 +1,6 @@
 // simple translate directive
 import Vue from 'vue'
+// import messages from '../languages/zh_CN'
 
 Vue.prototype.$messages = {}
 

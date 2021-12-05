@@ -1,26 +1,29 @@
 <template>
   <main v-if="initialized">
-    <Toaster :message="message" @close="message=''" />
+    <Toaster />
     <Navbar v-model="mainTab" />
     <component :is="mainTab" />
   </main>
 </template>
 
 <script>
-import DEFAULT_PREFERENCES from './assets/preferences.json'
+import Commands from './models/commands'
+import Files from './models/files'
 
 export default {
   name: 'App',
   provide () {
     return {
       fwData: this.fwData,
-      preferences: this.preferences
+      preferences: this.preferences,
+      Commands,
+      Files
     }
   },
   data () {
     return {
-      fwData: null,
-      preferences: null,
+      fwData: {},
+      preferences: {},
       message: '',
       mainTab: "Dashboard",
       initialized: false,
@@ -78,15 +81,14 @@ export default {
       this.getFWData()
         .then(fwData => {
           this.bootInfo.step = 2
-          this.fwData = fwData
+          Object.assign(this.fwData, fwData)
         })
         .then(() => {
           return this.getPreferences()
         })
         .then(preferences => {
-          console.log(preferences)
           this.bootInfo.step = 3
-          this.preferences = preferences
+          Object.assign(this.preferences, preferences.settings)
           this.connectModal.close()
           this.initialized = true
         })
@@ -95,12 +97,7 @@ export default {
         })
     },
     getFWData () {
-      if (this.fwData) {
-        return Promise.resolve(this.fwData)
-      }
-      return this.$http.get('/command', {
-        cmd: '[ESP800]'
-      }).then(fwData => {
+      return Commands.getFWData().then(fwData => {
         this.fwData = fwData
         if (fwData.ESP3D_authentication) {
           this.connectModal.close()
@@ -110,12 +107,7 @@ export default {
       })
     },
     getPreferences () {
-      if(this.preferences) {
-        return Promise.resolve(this.preferences)
-      }
-      return this.$http.get('/preferences.json').catch(() => {
-        return DEFAULT_PREFERENCES
-      })
+      return Files.getPreferences()
     }
   },
   mounted () {

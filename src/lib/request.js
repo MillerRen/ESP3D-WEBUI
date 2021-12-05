@@ -34,7 +34,7 @@ function request (config) {
           responseText: xhr.responseText
         })
       let res = 'response' in xhr ? xhr.response : xhr.responseText
-      if ((typeof res == 'string') && res.indexOf('<')!=0) {
+      if (res && (typeof res == 'string') && res.indexOf('<')!=0) {
         try {
           res = JSON.parse(res)
         } catch (e) {

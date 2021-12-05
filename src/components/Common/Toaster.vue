@@ -10,11 +10,20 @@
 </template>
 <script>
 export default {
-  props: ['message'],
+  data () {
+    return {
+      message: ''
+    }
+  },
   methods:{
     close() {
-      this.$emit('close')
+      this.message = ''
     }
+  },
+  mounted () {
+    this.$bus.$on('toast', (message) => {
+      this.message = message
+    })
   }
 }
 </script>
