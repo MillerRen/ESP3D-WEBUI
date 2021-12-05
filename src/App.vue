@@ -9,6 +9,7 @@
 <script>
 import Commands from './models/commands'
 import Files from './models/files'
+import startWebsocket from './models/ws'
 
 export default {
   name: 'App',
@@ -78,7 +79,7 @@ export default {
         },
         'ConnectModal'
       )
-      this.getFWData()
+      return this.getFWData()
         .then(fwData => {
           this.bootInfo.step = 2
           Object.assign(this.fwData, fwData)
@@ -92,6 +93,7 @@ export default {
           Object.assign(this.preferences, preferences.settings)
           this.connectModal.close()
           this.initialized = true
+          this.startWebsocket()
         })
         .catch(err => {
           this.$bus.$emit('toast', err)
@@ -109,6 +111,14 @@ export default {
     },
     getPreferences () {
       return Files.getPreferences()
+    },
+    startWebsocket () {
+      var path = this.fwData.WebCommunication === "Synchronous" ? '' : '/ws'
+      var url = `ws://${document.location.hostname}:${this.fwData.WebSocketport}${path}`
+      this.ws = startWebsocket(url, (msg) => {
+        console.log('ws:', msg)
+        this.$bus.$emit('ws', msg)
+      })
     }
   },
   mounted () {

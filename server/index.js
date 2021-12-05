@@ -195,8 +195,8 @@ module.exports = function (app) {
   wss = new WebSocketServer({ port: 81 });
 
   wss.on("connection", (socket, request) => {
-    console.log(wscolor("[ws] New connection"));
-    console.log(wscolor(`[ws] currentID:${currentID}`));
+    console.log(("[ws] New connection"));
+    console.log((`[ws] currentID:${currentID}`));
     socket.send(`currentID:${currentID}`);
     wss.clients.forEach(function each(client) {
       if (client.readyState === WebSocket.OPEN) {
