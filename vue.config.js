@@ -1,5 +1,5 @@
 const HtmlWebpackInlineSourcePlugin = require('html-webpack-inline-source-plugin')
-const mock = require('./mocks')
+const mock = require('./server')
 
 process.env.VUE_APP_UI_VERSION = process.env.npm_package_version
 

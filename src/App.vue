@@ -21,7 +21,7 @@ export default {
     return {
       fwData: null,
       preferences: null,
-      // mainTab: "dashboard",
+      mainTab: "Dashboard",
       initialized: false,
       bootInfo: {
         error: '',
@@ -108,6 +108,9 @@ export default {
       })
     },
     getPreferences () {
+      if(this.preferences) {
+        return Promise.resolve(this.preferences)
+      }
       return this.$http.get('/preferences.json').catch(() => {
         return DEFAULT_PREFERENCES
       })
