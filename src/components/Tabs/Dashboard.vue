@@ -1,7 +1,7 @@
 <template>
     <div class="container-fluid">
             <div class="grid-container">
-                <ControlsPanel
+                <!-- <ControlsPanel
                     v-if="preferences.enable_control_panel == 'true'"
                     :preferences="preferences"
                     :fwData="fwData"
@@ -21,39 +21,43 @@
                     :fwData="fwData"
                 />
                 <SDPanel v-if="preferences.enable_files_panel == 'true'" :fwData="fwData" />
-                <ConsolePanel v-if="preferences.enable_commands_panel == 'true'" :fwData="fwData" />
+                <ConsolePanel v-if="preferences.enable_commands_panel == 'true'" :fwData="fwData" /> -->
             </div>
+            <template v-for="panel in panels">
+                <component :is="panel.name" v-if="panel.enable" />
+            </template>
     </div>
 </template>
 
 <script>
-import ControlsPanel from "../Dashboard/ControlsPanel.vue"
-import ConsolePanel from '../Dashboard/ConsolePanel.vue'
-import SDPanel from "../Dashboard/SDPanel.vue"
 
 export default {
-    components: {
-        ControlsPanel,
-        ConsolePanel,
-        SDPanel,
-    },
-    props: {
-        fwData: {
-            type: Object,
-            default() {
-                return {}
-            }
-        },
-        preferences: {
-            type: Object,
-            default() {
-                return {}
-            }
-        }
-    },
-    computed: {
-        isGrbl() {
-            return this.fwData.target_firmware == 'grbl' || this.fwData.target_firmware == 'grbl-embedded'
+    name: 'Dashboard',
+    inject: ['fwData', 'preferences'],
+    data () {
+        return {
+            panels: [
+                {
+                    name: 'GrblPanel',
+                    enable: true
+                },
+                 {
+                    name: 'TemperaturePanel',
+                    enable: true
+                },
+                 {
+                    name: 'ExtruderPanel',
+                    enable: true
+                },
+                 {
+                    name: 'SDPanel',
+                    enable: true
+                },
+                 {
+                    name: 'ConsolePanel',
+                    enable: true
+                },
+            ]
         }
     }
 }
