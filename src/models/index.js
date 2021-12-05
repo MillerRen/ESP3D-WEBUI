@@ -112,7 +112,7 @@ export default class Model {
       var report = Parser.run({
         input: data
       })
-      Object.assign(this.report, report)
+      this.report = Object.assign({},this.report, report)
     }
   }
 
