@@ -85,6 +85,10 @@ export default {
   },
   methods: {
     sendCustomCommand() {
+      this.messages.push({
+        type: 'input',
+        msg: this.cmd
+      })
       this.Commands.sendCommand(this.cmd).then(() => {
         this.cmd = "";
       });
@@ -100,7 +104,7 @@ export default {
   },
   mounted() {
     this.$watch("messages", this.scrollTop);
-    this.$root.$on("ws", (msg) => {
+    this.$root.$on("stream", (msg) => {
       this.messages.push(msg);
     });
   },

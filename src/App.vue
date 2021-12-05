@@ -117,7 +117,7 @@ export default {
       var url = `ws://${document.location.hostname}:${this.fwData.WebSocketport}${path}`
       this.ws = startWebsocket(url, (msg) => {
         console.log('ws:', msg)
-        this.$root.$emit('ws', msg)
+        this.$root.$emit(msg.type, msg)
       })
     }
   },
