@@ -12,7 +12,6 @@
       </button>
       <a class="navbar-brand" @click.prevent="creditsdlg()" href>
         <span v-t>ESP3D</span>
-        <span class="hidden-xs">&nbsp;for&nbsp;{{ fwName }}</span>
       </a>
     </div>
     <div
@@ -127,18 +126,9 @@ export default {
     };
   },
   computed: {
-    // fwName() {
-    //   return this.$store.fwData.target_firmware;
-    // },
-    // fwData() {
-    //   return this.$store.fwData;
-    // },
-    // dht() {
-    //   return this.$store.dht;
-    // },
-    // preferences() {
-    //   return this.$store.preferences;
-    // },
+    fwName() {
+      return this.fwData.target_firmware;
+    }
   },
   methods: {
     passworddlg() {

@@ -1,6 +1,6 @@
 <template>
   <main v-if="initialized">
-    <Toaster />
+    <Toaster :message="message" @close="message=''" />
     <Navbar v-model="mainTab" />
     <component :is="mainTab" />
   </main>
@@ -21,6 +21,7 @@ export default {
     return {
       fwData: null,
       preferences: null,
+      message: '',
       mainTab: "Dashboard",
       initialized: false,
       bootInfo: {
@@ -83,6 +84,7 @@ export default {
           return this.getPreferences()
         })
         .then(preferences => {
+          console.log(preferences)
           this.bootInfo.step = 3
           this.preferences = preferences
           this.connectModal.close()

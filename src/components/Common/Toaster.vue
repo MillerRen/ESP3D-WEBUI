@@ -10,14 +10,10 @@
 </template>
 <script>
 export default {
-  computed: {
-    message () {
-      return this.$store.message
-    }
-  },
+  props: ['message'],
   methods:{
     close() {
-      this.$store.message = ''
+      this.$emit('close')
     }
   }
 }
