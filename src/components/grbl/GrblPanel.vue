@@ -73,14 +73,14 @@
                 <button
                   v-if="report.status == 'Run'"
                   class="btn btn-default btn-sm"
-                  @click="$store.sendRealtimeCommand('!')"
+                  @click="sendRealtimeCommand('!')"
                 >
                   <i class="glyphicon glyphicon-pause"></i>
                 </button>
                 <button
                   v-if="report.status == 'Hold'"
                   class="btn btn-default btn-sm"
-                  @click="$store.sendRealtimeCommand('~')"
+                  @click="sendRealtimeCommand('~')"
                 >
                   <i class="glyphicon glyphicon-play"></i>
                 </button>
@@ -562,7 +562,7 @@
             <span v-t>auto-check every:</span>
             <input
               type="checkbox"
-              v-model="$store.enableAutoCheckPosition"
+              v-model="enableAutoCheckPosition"
               @change="autoCheckPosition"
             />
           </span>
@@ -584,19 +584,16 @@
 <script>
 const axis = 'XYZABCPDHRS'.split('')
 export default {
-  props: {
-    preferences: {
-      type: Object,
-      default () {
-        return {}
-      }
-    }
-  },
+  inject: ['preferences'],
   data () {
     return {
       tab: 'override',
       spindleOn: false,
-      probebing: false
+      probebing: false,
+      report: {
+        Pn: []
+      },
+      enableAutoCheckPosition: true
     }
   },
   computed: {
@@ -605,14 +602,11 @@ export default {
       axis.map(a => {
         map[a] = false
       })
-      this.$store.report.Pn &&
-        this.$store.report.Pn.map(v => {
+      this.report.Pn &&
+        this.report.Pn.map(v => {
           map[v] = true
         })
       return map
-    },
-    report () {
-      return this.$store.report
     }
   },
   methods: {

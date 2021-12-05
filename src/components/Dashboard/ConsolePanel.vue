@@ -75,18 +75,13 @@
 
 <script>
 export default {
+  name: 'ConsolePanel',
+  inject: ['preferences'],
   data() {
     return {
       cmd: "",
+      messages: []
     };
-  },
-  computed: {
-    preferences() {
-      return this.$store.preferences;
-    },
-    messages() {
-      return this.$store.messages;
-    },
   },
   methods: {
     sendCustomCommand() {

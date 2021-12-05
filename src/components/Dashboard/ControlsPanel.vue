@@ -112,22 +112,17 @@
 export default {
   inject: ['fwData', 'preferences'],
   computed: {
-    report () {
-      return this.$store.report
-    },
     axis() {
       return 'xyzabc'.slice(0, this.fwData.grblaxis)
     },
     zeroAxes() {
       return this.axis.split('').map(item => item.toUpperCase() + '0').join(' ')
-    },
-    macros() {
-      return this.$store.macros
     }
   },
   data () {
     return {
-      selectAxis: 'z'
+      selectAxis: 'z',
+      report: {}
     }
   },
   methods: {

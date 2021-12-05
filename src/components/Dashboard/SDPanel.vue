@@ -293,17 +293,7 @@
 <script>
 const UPLOAD_URL = '/upload'
 export default {
-  props: {
-    fwData: {
-      type: Object,
-      default() {
-        return {
-          primary_sd: "",
-          secondary_sd: "",
-        };
-      },
-    },
-  },
+  inject: ['fwData', 'preferences'],
   data() {
     return {
       sdfs: {
@@ -313,7 +303,8 @@ export default {
       uploading: false,
       uploads: [],
       currentPath: "/",
-      isFilter: false
+      isFilter: false,
+      uploadingProgress: 0
     };
   },
   computed: {
@@ -324,13 +315,7 @@ export default {
     },
     files() {
       return !this.isFilter?this.sdfs.files:this.sdfs.files.filter(item=>item.isprintable)
-    },
-    preferences() {
-      return this.$store.preferences;
-    },
-    uploadingProgress() {
-      return this.$store.uploadingProgress;
-    },
+    }
   },
   methods: {
     deleteFile(file) {
