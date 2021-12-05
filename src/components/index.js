@@ -1,7 +1,5 @@
 import Vue from 'vue'
 
-// require(`./${process.env.VUE_APP_TARGET_ENV}`)
-
 const basename = (path, extension = '') =>
   path
     .split('/')

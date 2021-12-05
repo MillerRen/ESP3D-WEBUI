@@ -2,12 +2,10 @@ import 'bootstrap/dist/css/bootstrap.css'
 import Vue from 'vue'
 import './directives'
 import './components'
+import './plugins'
 // import './store'
-import VueModalBootstrap from './plugins/modal'
 
 import App from './App.vue'
-
-Vue.use(VueModalBootstrap)
 
 Vue.config.productionTip = false
 

@@ -35,15 +35,8 @@ function upload (space, files, path, onUploadProgress) {
   }).then(response => response.data)
 }
 
-function sendCommand (command) {
-  return get('/command', {
-    cmd: command
-  })
-}
-
 export default {
   get,
   post,
-  upload,
-  sendCommand
+  upload
 }
