@@ -19,6 +19,7 @@ class CleanWebpackPlugin {
 }
 
 module.exports = {
+  
   devServer: {
     setup: function (app) {
       mock(app)
