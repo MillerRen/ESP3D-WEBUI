@@ -1,3 +1,4 @@
+// import 'core-js' 可以再这里按需引入polyfill
 import 'bootstrap/dist/css/bootstrap.css'
 import Vue from 'vue'
 import './directives'

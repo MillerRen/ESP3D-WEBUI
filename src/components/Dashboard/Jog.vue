@@ -6,7 +6,7 @@
     xmlns:xlink="http://www.w3.org/1999/xlink"
     class="jog-rose"
   >
-    <g @click="homeAll" transform="translate(10, 10)">
+    <g @click="home('')" transform="translate(10, 10)">
       <path
         class="std"
         d="M10 182.5 h-10 v57.5 h57.5 v-10 a 125,125 0 0,1 -47.5 -47.5 Z"
@@ -15,7 +15,7 @@
       <use x="3" y="217" width="20" height="18" xlink:href="#HomeIcon" />
     </g>
 
-    <g @click="homeX" transform="translate(10, 10)">
+    <g @click="home('X')" transform="translate(10, 10)">
       <path
         class="std"
         d="M10 57.50 h-10 v-57.5 h57.5 v10 a 125,125 0 0,0 -47.5 47.5 Z"
@@ -24,7 +24,7 @@
       <use x="3" y="5" width="20" height="18" xlink:href="#HomeIcon" />
       <text x="25" y="20" class="home">X</text>
     </g>
-    <g @click="homeY" transform="translate(10, 10)">
+    <g @click="home('Y')" transform="translate(10, 10)">
       <path
         class="std"
         d="M230 57.50 h10 v-57.5 h-57.5 v10 a 125,125 0 0,1 47.5 47.5 z"
@@ -34,7 +34,7 @@
       <text x="202" y="20" class="home">Y</text>
     </g>
 
-    <g @click="homeZ" transform="translate(10, 10)">
+    <g @click="home(selectAxis)" transform="translate(10, 10)">
       <path
         class="std"
         d="M230 182.5 h10 v57.5 h-57.5 v-10 a 125,125 0 0,0 47.5 -47.5 z"
@@ -449,17 +449,8 @@ export default {
     };
   },
   methods: {
-    homeAll() {
-      return this.$store.homeAll();
-    },
-    homeX() {
-      return this.$store.homeX();
-    },
-    homeY() {
-      return this.$store.homeY();
-    },
-    homeZ() {
-      return this.$store.homeZ();
+    home(axis) {
+      return this.$store.home(axis);
     },
     jogXYClick(cmd) {
       return this.$store.jog(cmd, this.$store.preferences.xy_feedrate);

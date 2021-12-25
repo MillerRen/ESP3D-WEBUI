@@ -45,6 +45,8 @@ export default {
         fn(ctx, next)
       }
     })
+
     return ctx
+
   }
 }
