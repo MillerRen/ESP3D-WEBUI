@@ -39,16 +39,12 @@
 </template>
 
 <script>
-import Settings from "../Settings/Settings.vue";
 import SPIFFSModal from "../Settings/SPIFFSModal.vue";
 import UpdateModal from "../Settings/UpdateModal.vue";
 import StatusModal from "../Settings/StatusModal.vue";
 import RestartModal from "../Settings/RestartModal.vue";
 
 export default {
-  components: {
-    Settings,
-  },
   data() {
     return {
       tab: "settings",

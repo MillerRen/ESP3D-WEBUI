@@ -1,5 +1,12 @@
 import Vue from 'vue'
 
-import GrblPanel from './GrblPanel.vue'
+const basename = (path, extension = '') => path.split('/').reverse()[0].replace(extension, '')
+const globalComponentsContext = require.context('./', true, /[a-zA-Z0-9-]+\.vue/)
 
-Vue.component('GrblPanel', GrblPanel)
+
+globalComponentsContext.keys().map(path => {
+    const name = basename(path, '.vue')
+    const component = globalComponentsContext(path)
+
+    Vue.component(name, component.default || component)
+})
