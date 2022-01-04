@@ -1,11 +1,6 @@
-// import './commands'
-// import './spiffs'
-// import './upload'
-// import './login'
-// import './firmware'
+const target = process.env.VUE_APP_TARGET_ENV
 
 module.exports = function (app) {
-  require('./commands')(app)
-  require('./spiffs')(app)
-  require('./upload')(app)
+  require('./'+target)(app)
+  require('./common/notfound')
 }

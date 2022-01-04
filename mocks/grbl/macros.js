@@ -73,6 +73,8 @@ const response = [
   }
  ]
 
-module.exports = function (req, res, next) {
-  res.json(response)
+module.exports = function (app) {
+  app.get('/macrocfg.json', function (req, res, next) {
+    res.json(response)
+  })
 }
