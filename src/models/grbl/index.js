@@ -388,20 +388,8 @@ export default class Grbl {
     }, 1000)
   }
 
-  homeAll () {
-    return this.sendCommandText('$H').then(() => this.getPosition)
-  }
-
-  homeX () {
-    return this.sendCommandText('$HX').then(() => this.getPosition)
-  }
-
-  homeY () {
-    return this.sendCommandText('$HY').then(() => this.getPosition)
-  }
-
-  homeZ () {
-    return this.sendCommandText('$HZ').then(() => this.getPosition)
+  home (axis) {
+    return this.sendCommandText('$H' + axis).then(() => this.getPosition)
   }
 
   jog (cmd, feedrate) {
