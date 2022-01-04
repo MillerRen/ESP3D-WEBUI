@@ -1,4 +1,4 @@
-const target = process.env.VUE_APP_TARGET_ENV
+const target = process.env.VUE_APP_SUBTARGET_ENV
 
 module.exports = function (app) {
   require('./'+target)(app)

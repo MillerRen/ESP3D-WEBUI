@@ -1,35 +1,20 @@
 <template>
   <div class="container-fluid">
     <center>
-      <span
-        v-if="
-          fwData.target_firmware != 'grbl-embedded' &&
-          fwData.target_firmware != 'marlin-embedded'
-        "
+      <div v-for="t in tabs"
+        :key="t"
+        class="radio-inline"
       >
-        <div class="radio-inline">
-          <label>
-            <input
-              type="radio"
-              name="setting_filter"
-              v-model="settingsType"
-              value="network"
-            />
-            <span v-t>Network</span>
-          </label>
-        </div>
-        <div class="radio-inline">
-          <label>
-            <input
-              type="radio"
-              name="setting_filter"
-              v-model="settingsType"
-              value="printer"
-            />
-            <span v-t>Printer</span>
-          </label>
-        </div>
-      </span>
+        <label>
+          <input
+            type="radio"
+            name="setting_filter"
+            v-model="settingsType"
+            value="network"
+          />
+          <span v-t>{{t}}</span>
+        </label>
+      </div>
       <!-- <div class="settings-status" v-if="errmsg">{{ errmsg }}</div> -->
       <div class="loader" v-if="loading"></div>
       <table
@@ -117,7 +102,9 @@
                       :disabled="setting.defaultvalue == setting.value"
                       type="submit"
                       v-t
-                    >Set</button>
+                    >
+                      Set
+                    </button>
                   </span>
                 </div>
               </form>
@@ -130,6 +117,10 @@
 </template>
 
 <script>
+const tabsMap = {
+  network: 'Network',
+  tree: 'Config'
+}
 export default {
   data() {
     return {
@@ -145,6 +136,13 @@ export default {
     fwData() {
       return this.$store.fwData;
     },
+    tabs () {
+      var tabs = {}
+      this.$store.settings.map((item) => {
+        tabs[tabsMap[item.F]||item.F] = item
+      })
+      return Object.keys(tabs)
+    }
   },
   methods: {
     setValue(setting) {
