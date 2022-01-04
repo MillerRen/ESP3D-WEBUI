@@ -1,7 +1,7 @@
 <template>
   <div class="container-fluid">
     <center>
-      <div v-for="t in tabs"
+      <div v-for="(t, k) in tabs"
         :key="t"
         class="radio-inline"
       >
@@ -10,7 +10,7 @@
             type="radio"
             name="setting_filter"
             v-model="settingsType"
-            value="network"
+            :value="k"
           />
           <span v-t>{{t}}</span>
         </label>
@@ -119,12 +119,13 @@
 <script>
 const tabsMap = {
   network: 'Network',
-  tree: 'Config'
+  tree: 'Configuration',
+  nvs: 'Flash'
 }
 export default {
   data() {
     return {
-      settingsType: "network",
+      settingsType: "",
       loading: false,
       errmsg: "",
     };
@@ -138,10 +139,13 @@ export default {
     },
     tabs () {
       var tabs = {}
-      this.$store.settings.map((item) => {
-        tabs[tabsMap[item.F]||item.F] = item
+      this.$store.settings.map((item, index) => {
+        if(!this.settingsType && index == 0) {
+          this.settingsType = item.F
+        }
+        tabs[item.F] = tabsMap[item.F]
       })
-      return Object.keys(tabs)
+      return tabs
     }
   },
   methods: {
