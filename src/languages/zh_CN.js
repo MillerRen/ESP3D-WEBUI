@@ -450,5 +450,7 @@ export default {
   'X Max travel, mm': 'X轴最大行程，毫米',
   'Y Max travel, mm': 'Y轴最大行程，毫米',
   'Z Max travel, mm': 'Z轴最大行程，毫米',
-  'File extensions (use ; to separate)': '文件扩展名 (使用 ; 分隔)'
+  'File extensions (use ; to separate)': '文件扩展名 (使用 ; 分隔)',
+  'True': '是',
+  'False': '否'
 }
