@@ -447,22 +447,26 @@ export default class Grbl {
     return this.sendCustomCommand(cmd)
       .then(() => {
         return new Promise((resolve, reject) => {
-          this.resolveProbe = resolve
+          this.resolveProbe = (res) => {
+            clearTimeout(timer)
+            resolve(res)
+          }
           var timer = setTimeout(() => {
             clearTimeout(timer)
-            this.message = 'Probe failed'
             reject()
           }, 60 * 1000)
         })
       })
       .then(report => {
         if (!report.success) {
-          this.message = 'Probe failed'
-          throw new Error(this.message)
+          throw new Error('Probe failed !')
         }
         return this.sendCommandText(`G53 G0 Z${report.location[2]}
       G10 L20 P0 Z${this.preferences.probetouchplatethickness}
       G90`)
+      })
+      .catch(err => {
+        this.message = err.message
       })
   }
 }
