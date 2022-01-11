@@ -321,24 +321,6 @@
                   </tr>
                 </table>
                 <hr />
-                <table class="table">
-                  <tr>
-                    <td class="text-center clearfix">
-                      <label
-                        class="label"
-                        :class="{
-                          'label-warning': pins[key],
-                          'label-default': !pins[key]
-                        }"
-                        v-for="(pin, key) in pins"
-                        :key="key"
-                        style="margin: 2px; display:inline-block"
-                      >
-                        P{{ key.toLowerCase() }}
-                      </label>
-                    </td>
-                  </tr>
-                </table>
               </div>
               <div
                 v-if="tab == 'probe'"
@@ -550,6 +532,24 @@
             </div>
           </div>
         </div>
+        <table class="table">
+                  <tr>
+                    <td class="text-center clearfix">
+                      <label
+                        class="label"
+                        :class="{
+                          'label-warning': pins[key],
+                          'label-default': !pins[key]
+                        }"
+                        v-for="(pin, key) in pins"
+                        :key="key"
+                        style="margin: 2px; display:inline-block"
+                      >
+                        P{{ key.toLowerCase() }}
+                      </label>
+                    </td>
+                  </tr>
+                </table>
       </div>
     </div>
     <div class="panel-footer">
@@ -582,69 +582,68 @@
 </template>
 
 <script>
-const axis = 'XYZABCPDHRS'.split('')
+const axis = "XYZABCPDHRS".split("");
 export default {
   props: {
     preferences: {
       type: Object,
-      default () {
-        return {}
-      }
-    }
+      default() {
+        return {};
+      },
+    },
   },
-  data () {
+  data() {
     return {
-      tab: 'override',
+      tab: "override",
       spindleOn: false,
-      probebing: false
-    }
+      probebing: false,
+    };
   },
   computed: {
-    pins () {
-      var map = {}
-      axis.map(a => {
-        map[a] = false
-      })
+    pins() {
+      var map = {};
+      axis.map((a) => {
+        map[a] = false;
+      });
       this.$store.report.Pn &&
-        this.$store.report.Pn.map(v => {
-          map[v] = true
-        })
-      return map
+        this.$store.report.Pn.map((v) => {
+          map[v] = true;
+        });
+      return map;
     },
-    report () {
-      return this.$store.report
-    }
+    report() {
+      return this.$store.report;
+    },
   },
   methods: {
-    disableAlarm () {
-      this.probebing = false
-      this.$store.disableAlarm()
+    disableAlarm() {
+      this.probebing = false;
+      this.$store.disableAlarm();
     },
-    resetGrbl () {
-      this.probebing = false
-      this.$store.resetGrbl()
+    resetGrbl() {
+      this.probebing = false;
+      this.$store.resetGrbl();
     },
-    startProbeProcess () {
-      this.probebing = true
-      this.$store.startProbeProcess()
-        .finally(() => {
-          this.probebing = false
-        })
+    startProbeProcess() {
+      this.probebing = true;
+      this.$store.startProbeProcess().finally(() => {
+        this.probebing = false;
+      });
     },
-    opentab (tab) {
-      this.tab = tab
+    opentab(tab) {
+      this.tab = tab;
     },
-    autoCheckPosition () {
-      this.$store.autoCheckPosition()
+    autoCheckPosition() {
+      this.$store.autoCheckPosition();
     },
-    toggleSpindle () {
-      if (this.grblStatus.state == 'Hold') {
-        this.$store.sendRealtimeCommand(String.fromCharCode(0x9e, 0x0))
+    toggleSpindle() {
+      if (this.grblStatus.state == "Hold") {
+        this.$store.sendRealtimeCommand(String.fromCharCode(0x9e, 0x0));
       } else {
-        this.spindleOn = !this.spindleOn
-        this.$store.toggleSpindle(this.spindleOn)
+        this.spindleOn = !this.spindleOn;
+        this.$store.toggleSpindle(this.spindleOn);
       }
-    }
-  }
-}
+    },
+  },
+};
 </script>
