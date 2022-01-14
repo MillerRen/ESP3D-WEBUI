@@ -637,7 +637,8 @@ export default {
       this.$store.autoCheckPosition();
     },
     toggleSpindle() {
-      if (this.grblStatus.state == "Hold") {
+      console.log(this.report)
+      if (this.report.status == "Hold") {
         this.$store.sendRealtimeCommand(String.fromCharCode(0x9e, 0x0));
       } else {
         this.spindleOn = !this.spindleOn;

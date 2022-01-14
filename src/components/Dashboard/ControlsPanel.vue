@@ -72,7 +72,7 @@
                       : axes.toUpperCase()
                   }}</span
                   >:
-                  <span v-if="report.WPos">{{
+                  <span v-if="report.WPos&&report.WPos[index]">{{
                     report.WPos[index].toFixed(3)
                   }}</span>
                 </span>
@@ -91,7 +91,7 @@
                         style="padding: 5px 5px 3px 5px"
                       >
                         <span>{{ axes.toUpperCase() }}m</span>:
-                        <span v-if="report.MPos">{{
+                        <span v-if="report.MPos&&report.Mpos[index]">{{
                           report.MPos[index].toFixed(3)
                         }}</span>
                       </span>
